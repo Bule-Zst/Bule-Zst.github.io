@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Bule-Zst个人博客">
+<meta name="description" content="">
+<meta name="theme-color" content="#000">
+<title>Bule-Zst</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1608448216945">
+<link rel="stylesheet" href="/media/css/gemini.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/main.css">
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?52033379f884b28a50e8ebc12b7743f9";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="gemini">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Bule-Zst</span>
+            </a>  
+          
+        </div>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-home"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags/" target="_self">
+                  <i class="fa fa-tags"></i> 标签
+                </a>
+              
+            </li>
+          
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout  gemini">
+      <div class="section-layout-wrapper">
+        <div id="sidebarMeta" class="sidebar">
+    
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name">Bule-Zst</p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-name language" data-lan="category">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://Bule-Zst.github.io/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
+    
+  
+  
+    <div class="sidebar-item sidebar-item-social">
+      <div class="social-item">
+        
+          
+            <a href="https://github.com/Bule-Zst">
+              <i class="fa fa-github-alt" title="Github"></i>
+            </a>
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1583245158&amp;site=qq&amp;menu=yes">
+              <i class="fa fa-qq" title="QQ"></i>
+            </a>
+          
+        
+        
+      </div>
+    </div>
+  
+
+  
+
+
+
+</div>
+</div>
+<script>
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'gemini';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
+      }
+    });
+  }
+  </script>
+        <div class="section-box tag-line box-shadow-wrapper">
+          <section class="section tags-section posts-expand bg-color">
+            <div class="padding-wrapper">
+  <div class="tag-timeline-box">
+    <div class="tag-timeline-wrapper">
+      <div class="tag-timeline-title">
+        <h2>
+          搭建博客
+          <small class="language" data-lan="tag">标签</small>
+        </h2>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://Bule-Zst.github.io/wan-quan-xiao-bai-jiao-cheng-shi-yong-coding-pages-he-gridea-da-jian-ge-ren-bo-ke/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-18
+              <small>完全小白教程：使用Coding Pages和Gridea搭建个人博客</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+      <a href="https://Bule-Zst.github.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              12-18
+              <small>基于Gridea+github/coding搭建静态博客</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By <a
+        href="https://github.com/hsxyhao/gridea-theme-next" target="_blank">HsxyHao</a>
+    </div>
+    <div class="poweredby">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank"> Gridea</a>
+    </div>
+  </footer>
+  
+  
+  <div class="gemini back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+<link rel="stylesheet" href="/media/live2d/css/live2d.css" />
+<div class="box-scale">
+  <div id="landlord" style="left: -10px;bottom: -23px;"
+    data-key="65029773e7e94d1986196a5c0a08cb91">
+    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
+    
+
+      <div class="message" style="opacity:0"></div>
+      <div class="live_talk_input_body">
+        <div class="live_talk_input_name_body">
+          <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off"
+            placeholder="你的名字" />
+        </div>
+        <div class="live_talk_input_text_body">
+          <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off"
+            placeholder="要和我聊什么呀？" />
+          <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
+        </div>
+      </div>
+      <input name="live_talk" id="live_talk" value="1" type="hidden" />
+      <div class="live_ico_box">
+        <div class="live_ico_item type_info" id="showInfoBtn"></div>
+        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
+        
+        <div class="live_ico_item type_youdu" id="youduButton"></div>
+        <div class="live_ico_item type_quit" id="hideButton"></div>
+        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
+        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
+        <input id="duType" value="douqilai" type="hidden">
+        
+      </div>
+    
+  </div>
+</div>
+<div id="open_live2d">召唤看板娘</div>
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+  var message_Path = 'https://cdn.jsdelivr.net/gh/hsxyhao/live2d.github.io@master/';
+  let landlord = document.querySelector('#landlord');
+  var apiKey = landlord.dataset.key;
+</script>
+<script type="text/javascript" src="/media/live2d/js/live2d.js"></script>
+<script>
+	var home_Path = document.location.protocol + '//' + window.document.location.hostname + ":" + window.document.location.port + '/';
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	var norunAI = ["android", "iphone", "ipod", "ipad", "windows phone", "mqqbrowser", "msie", "trident/7.0"];
+	var norunFlag = false;
+
+	for (var i = 0; i < norunAI.length; i++) {
+		if (userAgent.indexOf(norunAI[i]) > -1) {
+			norunFlag = true;
+			break;
+		}
+	}
+
+	if (!window.WebGLRenderingContext) {
+		norunFlag = true;
+	}
+
+	if (!norunFlag) {
+		var hitFlag = false;
+		var AIFadeFlag = false;
+		var liveTlakTimer = null;
+		var sleepTimer_ = null;
+		var AITalkFlag = false;
+		var talkNum = 0;
+		(function () {
+			function renderTip(template, context) {
+				var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
+				return template.replace(tokenReg, function (word, slash1, token, slash2) {
+					if (slash1 || slash2) {
+						return word.replace('\\', '');
+					}
+					var variables = token.replace(/\s/g, '').split('.');
+					var currentObject = context;
+					var i, length, variable;
+					for (i = 0, length = variables.length; i < length; ++i) {
+						variable = variables[i];
+						currentObject = currentObject[variable];
+						if (currentObject === undefined || currentObject === null) return '';
+					}
+					return currentObject;
+				});
+			}
+
+			String.prototype.renderTip = function (context) {
+				return renderTip(this, context);
+			};
+
+			var re = /x/;
+			re.toString = function () {
+				showMessage('哈哈，你打开了控制台，是想要看看我的秘密吗？', 5000);
+				return '';
+			};
+
+			$(document).on('copy', function () {
+				showMessage('你都复制了些什么呀，转载要记得加上出处哦~~', 5000);
+			});
+
+			function initTips() {
+				$.ajax({
+					cache: true,
+					url: message_Path + 'message.json',
+					dataType: "json",
+					success: function (result) {
+						$.each(result.mouseover, function (index, tips) {
+							$(tips.selector).mouseover(function () {
+								var text = tips.text;
+								if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1) - 1];
+								text = text.renderTip({ text: $(this).text() });
+								showMessage(text, 3000);
+								talkValTimer();
+								clearInterval(liveTlakTimer);
+								liveTlakTimer = null;
+							});
+							$(tips.selector).mouseout(function () {
+								showHitokoto();
+								if (liveTlakTimer == null) {
+									liveTlakTimer = window.setInterval(function () {
+										showHitokoto();
+									}, 15000);
+								};
+							});
+						});
+						$.each(result.click, function (index, tips) {
+							$(tips.selector).click(function () {
+								if (hitFlag) {
+									return false
+								}
+								hitFlag = true;
+								setTimeout(function () {
+									hitFlag = false;
+								}, 8000);
+								var text = tips.text;
+								if (Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1) - 1];
+								text = text.renderTip({ text: $(this).text() });
+								showMessage(text, 3000);
+							});
+							clearInterval(liveTlakTimer);
+							liveTlakTimer = null;
+							if (liveTlakTimer == null) {
+								liveTlakTimer = window.setInterval(function () {
+									showHitokoto();
+								}, 15000);
+							};
+						});
+					}
+				});
+			}
+			initTips();
+
+			var text;
+			if (document.referrer !== '') {
+				var referrer = document.createElement('a');
+				referrer.href = document.referrer;
+				text = '嗨！来自 <span style="color:#0099cc;">' + referrer.hostname + '</span> 的朋友！';
+				var domain = referrer.hostname.split('.')[1];
+				if (domain == 'baidu') {
+					text = '嗨！ 来自 百度搜索 的朋友！<br>欢迎访问<span style="color:#0099cc;">「 ' + document.title.split(' - ')[0] + ' 」</span>';
+				} else if (domain == 'so') {
+					text = '嗨！ 来自 360搜索 的朋友！<br>欢迎访问<span style="color:#0099cc;">「 ' + document.title.split(' - ')[0] + ' 」</span>';
+				} else if (domain == 'google') {
+					text = '嗨！ 来自 谷歌搜索 的朋友！<br>欢迎访问<span style="color:#0099cc;">「 ' + document.title.split(' - ')[0] + ' 」</span>';
+				}
+			} else {
+				if (window.location.href == home_Path) { //主页URL判断，需要斜杠结尾
+					var now = (new Date()).getHours();
+					if (now > 23 || now <= 5) {
+						text = '你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？';
+					} else if (now > 5 && now <= 7) {
+						text = '早上好！一日之计在于晨，美好的一天就要开始了！';
+					} else if (now > 7 && now <= 11) {
+						text = '上午好！工作顺利嘛，不要久坐，多起来走动走动哦！';
+					} else if (now > 11 && now <= 14) {
+						text = '中午了，工作了一个上午，现在是午餐时间！';
+					} else if (now > 14 && now <= 17) {
+						text = '午后很容易犯困呢，今天的运动目标完成了吗？';
+					} else if (now > 17 && now <= 19) {
+						text = '傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红~~';
+					} else if (now > 19 && now <= 21) {
+						text = '晚上好，今天过得怎么样？';
+					} else if (now > 21 && now <= 23) {
+						text = '已经这么晚了呀，早点休息吧，晚安~~';
+					} else {
+						text = '嗨~ 快来逗我玩吧！';
+					}
+				} else {
+					text = '欢迎阅读<span style="color:#0099cc;">「 ' + document.title.split(' - ')[0] + ' 」</span>';
+				}
+			}
+			showMessage(text, 12000);
+		})();
+
+		liveTlakTimer = setInterval(function () {
+			showHitokoto();
+		}, 15000);
+
+		function showHitokoto() {
+			if (sessionStorage.getItem("Sleepy") !== "1") {
+				if (!AITalkFlag) {
+					$.getJSON('https://v1.hitokoto.cn/', function (result) {
+						talkValTimer();
+						showMessage(result.hitokoto, 0);
+					});
+				}
+			} else {
+				hideMessage(0);
+				if (sleepTimer_ == null) {
+					sleepTimer_ = setInterval(function () {
+						checkSleep();
+					}, 200);
+				}
+			}
+		}
+
+		function checkSleep() {
+			var sleepStatu = sessionStorage.getItem("Sleepy");
+			if (sleepStatu !== '1') {
+				talkValTimer();
+				showMessage('你回来啦~', 0);
+				clearInterval(sleepTimer_);
+				sleepTimer_ = null;
+			}
+		}
+
+		function showMessage(text, timeout) {
+			if (Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1) - 1];
+			$('.message').stop();
+			$('.message').html(text);
+			$('.message').fadeTo(200, 1);
+			//if (timeout === null) timeout = 5000;
+			//hideMessage(timeout);
+		}
+		function talkValTimer() {
+			$('#live_talk').val('1');
+		}
+
+		function hideMessage(timeout) {
+			//$('.message').stop().css('opacity',1);
+			if (timeout === null) timeout = 5000;
+			$('.message').delay(timeout).fadeTo(200, 0);
+		}
+
+		function initLive2d() {
+			$('#hideButton').on('click', function () {
+				if (AIFadeFlag) {
+					return false;
+				} else {
+					AIFadeFlag = true;
+					localStorage.setItem("live2dhidden", "0");
+					$('#landlord').fadeOut(200);
+					$('#open_live2d').delay(200).fadeIn(200);
+					setTimeout(function () {
+						AIFadeFlag = false;
+					}, 300);
+				}
+			});
+			$('#open_live2d').on('click', function () {
+				if (AIFadeFlag) {
+					return false;
+				} else {
+					AIFadeFlag = true;
+					localStorage.setItem("live2dhidden", "1");
+					$('#open_live2d').fadeOut(200);
+					$('#landlord').delay(200).fadeIn(200);
+					setTimeout(function () {
+						AIFadeFlag = false;
+					}, 300);
+				}
+			});
+			$('#youduButton').on('click', function () {
+				if ($('#youduButton').hasClass('doudong')) {
+					var typeIs = $('#youduButton').attr('data-type');
+					$('#youduButton').removeClass('doudong');
+					$('body').removeClass(typeIs);
+					$('#youduButton').attr('data-type', '');
+				} else {
+					var duType = $('#duType').val();
+					var duArr = duType.split(",");
+					var dataType = duArr[Math.floor(Math.random() * duArr.length)];
+
+					$('#youduButton').addClass('doudong');
+					$('#youduButton').attr('data-type', dataType);
+					$('body').addClass(dataType);
+				}
+			});
+			if (apiKey) {
+				$('#showInfoBtn').on('click', function () {
+					var live_statu = $('#live_statu_val').val();
+					if (live_statu == "0") {
+						return
+					} else {
+						$('#live_statu_val').val("0");
+						$('.live_talk_input_body').fadeOut(500);
+						AITalkFlag = false;
+						showHitokoto();
+						$('#showTalkBtn').show();
+						$('#showInfoBtn').hide();
+					}
+				});
+				$('#showTalkBtn').on('click', function () {
+					var live_statu = $('#live_statu_val').val();
+					if (live_statu == "1") {
+						return
+					} else {
+						$('#live_statu_val').val("1");
+						$('.live_talk_input_body').fadeIn(500);
+						AITalkFlag = true;
+						$('#showTalkBtn').hide();
+						$('#showInfoBtn').show();
+
+					}
+				});
+				$('#talk_send').on('click', function () {
+					var info_ = $('#AIuserText').val();
+					var userid_ = $('#AIuserName').val();
+					if (info_ == "") {
+						showMessage('写点什么吧！', 0);
+						return;
+					}
+					if (userid_ == "") {
+						showMessage('聊之前请告诉我你的名字吧！', 0);
+						return;
+					}
+					showMessage('思考中~', 0);
+					let protocol = window.location.protocol.indexOf("s") > 0 ? "https" : "http";
+					$.ajax({
+						type: "get",
+						url: `${protocol}://www.tuling123.com/openapi/api?key=${apiKey}&info=${info_}`,
+						dataType: "json",
+						success: function (res) {
+							talkValTimer();
+							showMessage(res.text, 0);
+							$('#AIuserText').val("");
+							sessionStorage.setItem("live2duser", userid_);
+						},
+						error: function (e) {
+							talkValTimer();
+							showMessage('似乎有什么错误，请和站长联系！', 0);
+						}
+					});
+				});
+			} else {
+				$('#showInfoBtn').hide();
+				$('#showTalkBtn').hide();
+			}
+			//获取音乐信息初始化
+			var bgmListInfo = $('input[name=live2dBGM]');
+			if (bgmListInfo.length == 0) {
+				$('#musicButton').hide();
+			} else {
+				var bgmPlayNow = parseInt($('#live2d_bgm').attr('data-bgm'));
+				var bgmPlayTime = 0;
+				var live2dBGM_Num = sessionStorage.getItem("live2dBGM_Num");
+				var live2dBGM_PlayTime = sessionStorage.getItem("live2dBGM_PlayTime");
+				if (live2dBGM_Num) {
+					if (live2dBGM_Num <= $('input[name=live2dBGM]').length - 1) {
+						bgmPlayNow = parseInt(live2dBGM_Num);
+					}
+				}
+				if (live2dBGM_PlayTime) {
+					bgmPlayTime = parseInt(live2dBGM_PlayTime);
+				}
+				var live2dBGMSrc = bgmListInfo.eq(bgmPlayNow).val();
+				$('#live2d_bgm').attr('data-bgm', bgmPlayNow);
+				$('#live2d_bgm').attr('src', live2dBGMSrc);
+				$('#live2d_bgm')[0].currentTime = bgmPlayTime;
+				$('#live2d_bgm')[0].volume = 0.5;
+				var live2dBGM_IsPlay = sessionStorage.getItem("live2dBGM_IsPlay");
+				var live2dBGM_WindowClose = sessionStorage.getItem("live2dBGM_WindowClose");
+				if (live2dBGM_IsPlay == '0' && live2dBGM_WindowClose == '0') {
+					$('#live2d_bgm')[0].play();
+					$('#musicButton').addClass('play');
+				}
+				sessionStorage.setItem("live2dBGM_WindowClose", '1');
+				$('#musicButton').on('click', function () {
+					if ($('#musicButton').hasClass('play')) {
+						$('#live2d_bgm')[0].pause();
+						$('#musicButton').removeClass('play');
+						sessionStorage.setItem("live2dBGM_IsPlay", '1');
+					} else {
+						$('#live2d_bgm')[0].play();
+						$('#musicButton').addClass('play');
+						sessionStorage.setItem("live2dBGM_IsPlay", '0');
+					}
+				});
+				window.onbeforeunload = function () {
+					sessionStorage.setItem("live2dBGM_WindowClose", '0');
+					if ($('#musicButton').hasClass('play')) {
+						sessionStorage.setItem("live2dBGM_IsPlay", '0');
+					}
+				}
+				document.getElementById('live2d_bgm').addEventListener("timeupdate", function () {
+					var live2dBgmPlayTimeNow = document.getElementById('live2d_bgm').currentTime;
+					sessionStorage.setItem("live2dBGM_PlayTime", live2dBgmPlayTimeNow);
+				});
+				document.getElementById('live2d_bgm').addEventListener("ended", function () {
+					var listNow = parseInt($('#live2d_bgm').attr('data-bgm'));
+					listNow++;
+					if (listNow > $('input[name=live2dBGM]').length - 1) {
+						listNow = 0;
+					}
+					var listNewSrc = $('input[name=live2dBGM]').eq(listNow).val();
+					sessionStorage.setItem("live2dBGM_Num", listNow);
+					$('#live2d_bgm').attr('src', listNewSrc);
+					$('#live2d_bgm')[0].play();
+					$('#live2d_bgm').attr('data-bgm', listNow);
+				});
+				document.getElementById('live2d_bgm').addEventListener("error", function () {
+					$('#live2d_bgm')[0].pause();
+					$('#musicButton').removeClass('play');
+					showMessage('音乐似乎加载不出来了呢！', 0);
+				});
+			}
+			//获取用户名
+			var live2dUser = sessionStorage.getItem("live2duser");
+			if (live2dUser !== null) {
+				$('#AIuserName').val(live2dUser);
+			}
+			//获取位置
+			var landL = sessionStorage.getItem("historywidth");
+			var landB = sessionStorage.getItem("historyheight");
+			if (landL == null || landB == null) {
+				landL = '5px'
+				landB = '0px'
+			}
+			$('#landlord').css('left', landL + 'px');
+			$('#landlord').css('bottom', landB + 'px');
+			//移动
+			function getEvent() {
+				return window.event || arguments.callee.caller.arguments[0];
+			}
+			var smcc = document.getElementById("landlord");
+			var moveX = 0;
+			var moveY = 0;
+			var moveBottom = 0;
+			var moveLeft = 0;
+			var moveable = false;
+			var docMouseMoveEvent = document.onmousemove;
+			var docMouseUpEvent = document.onmouseup;
+			smcc.onmousedown = function () {
+				var ent = getEvent();
+				moveable = true;
+				moveX = ent.clientX;
+				moveY = ent.clientY;
+				var obj = smcc;
+				moveBottom = parseInt(obj.style.bottom);
+				moveLeft = parseInt(obj.style.left);
+				if (isFirefox = navigator.userAgent.indexOf("Firefox") > 0) {
+					window.getSelection().removeAllRanges();
+				}
+				document.onmousemove = function () {
+					if (moveable) {
+						var ent = getEvent();
+						var x = moveLeft + ent.clientX - moveX;
+						var y = moveBottom + (moveY - ent.clientY);
+						obj.style.left = x + "px";
+						obj.style.bottom = y + "px";
+					}
+				};
+				document.onmouseup = function () {
+					if (moveable) {
+						var historywidth = obj.style.left;
+						var historyheight = obj.style.bottom;
+						historywidth = historywidth.replace('px', '');
+						historyheight = historyheight.replace('px', '');
+						sessionStorage.setItem("historywidth", historywidth);
+						sessionStorage.setItem("historyheight", historyheight);
+						document.onmousemove = docMouseMoveEvent;
+						document.onmouseup = docMouseUpEvent;
+						moveable = false;
+						moveX = 0;
+						moveY = 0;
+						moveBottom = 0;
+						moveLeft = 0;
+					}
+				};
+			};
+		}
+		$(document).ready(function () {
+			var AIimgSrc = [];
+			let chooseLive2d = 'tororo'
+			if (chooseLive2d === 'histoire') {
+				AIimgSrc.push(message_Path + "model/histoire/histoire.1024/texture_00.png");
+				AIimgSrc.push(message_Path + "model/histoire/histoire.1024/texture_01.png");
+				AIimgSrc.push(message_Path + "model/histoire/histoire.1024/texture_02.png");
+				AIimgSrc.push(message_Path + "model/histoire/histoire.1024/texture_03.png");
+			} else if (chooseLive2d === 'rem') {
+				AIimgSrc.push(message_Path + "model/rem/remu2048/texture_00.png");
+			} else if (chooseLive2d === 'aoba') {
+				AIimgSrc.push(message_Path + "model/aoba/textures/texture_00.png");
+			} else if (chooseLive2d === 'hijiki') {
+				AIimgSrc.push(message_Path + "model/hijiki/moc/hijiki.2048/texture_00.png");
+			} else if (chooseLive2d === 'tororo') {
+				AIimgSrc.push(message_Path + "model/tororo/moc/tororo.2048/texture_00.png");
+			}
+			var images = [];
+			var imgLength = AIimgSrc.length;
+			var loadingNum = 0;
+			for (var i = 0; i < imgLength; i++) {
+				images[i] = new Image();
+				images[i].src = AIimgSrc[i];
+				images[i].onload = function () {
+					loadingNum++;
+					if (loadingNum === imgLength) {
+						var live2dhidden = localStorage.getItem("live2dhidden");
+						if (live2dhidden === "0") {
+							setTimeout(function () {
+								$('#open_live2d').fadeIn(200);
+							}, 1300);
+						} else {
+							setTimeout(function () {
+								$('#landlord').fadeIn(200);
+							}, 1300);
+						}
+						let model = '';
+						if (chooseLive2d === 'histoire') {
+							model = message_Path + "model/histoire/model.json";
+						} else if (chooseLive2d === 'rem') {
+							model = message_Path + "model/rem/model.json";
+						} else if (chooseLive2d === 'aoba') {
+							model = message_Path + "model/aoba/model.json";
+						} else if (chooseLive2d === 'hijiki') {
+							model = message_Path + "model/hijiki/hijiki.model.json";
+						} else if (chooseLive2d === 'tororo') {
+							model = message_Path + "model/tororo/tororo.model.json";
+						}
+						setTimeout(function () {
+							loadlive2d("live2d", model);
+						}, 1000);
+						initLive2d();
+						images = null;
+					}
+				}
+			}
+		});
+	}
+</script>
+  
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+    back2TopText = document.querySelector('#back_to_top_text'),
+    drawerBox = document.querySelector('#drawer_box'),
+    rightSideBar = document.querySelector('.sidebar'),
+    viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener('scroll', function (e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+
+  let hasCacu = false;
+  window.onresize = function () {
+    calcuHeight();
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function () {
+            window.Velocity(rightMotions, transitionDir, {});
+          }
+        })
+        window.Velocity(viewport, openProp, {
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function () {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 链接跳转
+  let newWindow = 'false'
+  if (newWindow === 'true') {
+    let links = document.querySelectorAll('.post-body a')
+    links.forEach(item => {
+      if (!item.classList.contains('btn')) {
+        item.setAttribute("target", "_blank");
+      }
+    })
+  }
+
+  let faSearch = document.querySelector('#fa_search');
+  faSearch.addEventListener('click', function () {
+    document.querySelector('#search_mask').style = ''
+  })
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+  
+  // 离开当前页title变化
+  var leaveTitle = "";
+  if (leaveTitle) {
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState == 'hidden') {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script>
+  let images = document.querySelectorAll('.section img');
+  console.log(images);
+  images.forEach(image => {
+    var parent = image.parentElement;
+    parent.removeChild(image);
+    var aelem = document.createElement('a');
+    aelem.href = image.src;
+    aelem.dataset['fancybox'] = '';
+    aelem.dataset['rel'] = 'fancybox-button';
+    aelem.classList.add('fancybox');
+    aelem.appendChild(image);
+    parent.appendChild(aelem);
+  })
+</script>
+  </div>
+</body>
+
+<div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/jtLxs4zLq/"" data-c="
+          &lt;h1 id=&#34;笔记的主要内容&#34;&gt;笔记的主要内容&lt;/h1&gt;
+&lt;p&gt;111这篇博客主要用于记录《高性能MySQL》这本书的读书笔记，篇幅可能很长，因为书的篇幅本身就不小。在书中，作者有提到，不同章节之间相对独立，因此我也会尽量保持独立性。如果大家对我的读书笔记感兴趣，欢迎选取大家感兴趣的章节进行阅读。&lt;/p&gt;
+&lt;p&gt;本笔记的主要内容有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对书中部分内容的摘抄&lt;/li&gt;
+&lt;li&gt;对精华内容的个人总结&lt;/li&gt;
+&lt;li&gt;相关基础知识的补充&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;笔记的目的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于我来说，本笔记希望能够取代书籍，当自己觉得有必要回顾《高性能MySQL》这本书时，只需要简单过一遍笔记即可。&lt;/li&gt;
+&lt;li&gt;对于大家来说，大家可以把我的读书笔记当成一个引言，先阅读我的笔记，之后，如果对于某些章节感兴趣，再去阅读书的相应章节，这样能节省大家的一些时间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;mysql全称&#34;&gt;MySQL全称&lt;/h1&gt;
+&lt;p&gt;这是一个最基本的问题，但惭愧的是，在读这本书之前，我竟然没有思考过这个问题。&lt;/p&gt;
+&lt;p&gt;“My” 是因为 Monty 的女儿叫做 My，而 “SQL” 就是 Structured Query Language（结构化查询语言），用于和数据库交互的语言。&lt;/p&gt;
+&lt;p&gt;因此，对于MySQL的读法，应该是My&lt;sub&gt;S&lt;/sub&gt;Q&lt;sub&gt;L，而不是My&lt;/sub&gt;Se~Cou。&lt;/p&gt;
+&lt;h1 id=&#34;译者序&#34;&gt;译者序&lt;/h1&gt;
+&lt;p&gt;MySQL的存储引擎主要使用的是InnoDB。&lt;/p&gt;
+&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;与第二版相比，本书更强调原因，而不是结果。作者希望告诉大家“为什么MySQL这么做”，而不仅仅是“MySQL做了什么”。&lt;/p&gt;
+&lt;p&gt;正如作者所说：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们希望能够尝试回到下面这样的问题：“给出MySQL 的内部结构和操作，对于实际应用能带来什么帮助？为什么能有这样的帮助？如何让MySQL 适合（或者不适合）特定的需求？”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;本书的结构&#34;&gt;本书的结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;第1章：基础
+&lt;ul&gt;
+&lt;li&gt;MySQL的架构及其存储引擎的关键设计&lt;/li&gt;
+&lt;li&gt;关系型数据库和事务的基础知识&lt;/li&gt;
+&lt;li&gt;MySQL的入门知识&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第2-7章：&lt;strong&gt;使用&lt;/strong&gt;MySQL前需要了解的基础知识，未特别标注的章节内容如章节标题所示。
+&lt;ul&gt;
+&lt;li&gt;第2章 MySQL 基准测试&lt;/li&gt;
+&lt;li&gt;第3章 服务器性能剖析：介绍了常用于故障诊断和服务器性能问题分析的一种面向响应时间的方法。&lt;/li&gt;
+&lt;li&gt;第4章 Schema 与数据类型优化：涵盖了不同数据类型的细节差别以及表设计的原则。&lt;/li&gt;
+&lt;li&gt;第5章 创建高性能的索引&lt;/li&gt;
+&lt;li&gt;第6章 查询性能优化&lt;/li&gt;
+&lt;li&gt;第7章 MySQL 高级特性
+&lt;ul&gt;
+&lt;li&gt;介绍了MySQL 的高级特性是如何工作的&lt;/li&gt;
+&lt;li&gt;包括分区、存储引擎、触发器，以及字符集&lt;/li&gt;
+&lt;li&gt;高级特性的实现可能有别于其他数据库，因此理解它们对于性能可能会带来新的收益&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第8-9章：如何让MySQL、应用程序及硬件一起很好地工作
+&lt;ul&gt;
+&lt;li&gt;第8章 优化服务器设置：介绍了如何配置MySQL, 以便更好地利用硬件，达到更好的可靠性和鲁棒性。&lt;/li&gt;
+&lt;li&gt;第9章 操作系统和硬件优化：解释了如何让操作系统和硬件工作得更好。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第10-15章：MySQL在实际应用场景中的相关知识
+&lt;ul&gt;
+&lt;li&gt;第10章 复制&lt;/li&gt;
+&lt;li&gt;第11章 可扩展的MySQL&lt;/li&gt;
+&lt;li&gt;第12章 高可用性：如何保障 MySQL 稳定而正确地持续运行&lt;/li&gt;
+&lt;li&gt;第13章 云端的MySQL&lt;/li&gt;
+&lt;li&gt;第14章 应用层优化：解释了什么是全方位的优化 (full-stack optimization) , 就是从前端到后端的整体优化，从用户体验开始直到数据库。&lt;/li&gt;
+&lt;li&gt;第15章 备份与恢复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用示例代码&#34;&gt;使用示例代码&lt;/h2&gt;
+&lt;p&gt;本书中的示例代码的获取：http://www.highperfmysql.com&lt;/p&gt;
+&lt;h1 id=&#34;第1章-mysql架构与历史&#34;&gt;第1章 MySQL架构与历史&lt;/h1&gt;
+&lt;p&gt;理解MySQL架构的好处在于能够充分发挥MySQL的性能，因此，就算对于开发人员，了解其架构也是很有必要的。&lt;/p&gt;
+&lt;p&gt;其中，最重要、最与众不同的特性是其存储引擎架构，在接下来的章节会具体介绍。&lt;/p&gt;
+&lt;h2 id=&#34;11-mysql逻辑架构&#34;&gt;1.1 MySQL逻辑架构&lt;/h2&gt;
+&lt;p&gt;MySQL的逻辑架构图如下：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;%E9%AB%98%E6%80%A7%E8%83%BDMySql%E7%AC%94%E8%AE%B0.assets/image-20201220092718896.png&#34; alt=&#34;image-20201220092718896&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;最上层（客户端）：大部分基于网络的服务都有这一层。&lt;/p&gt;
+&lt;p&gt;中间层：MySQL的核心层，大部分功能都是在这一层实现的。&lt;/p&gt;
+&lt;p&gt;最下层（存储引擎）：这一层包含了众多种类的存储引擎，不同存储引擎具有各自的优缺点，中间层通过API与存储引擎进行交互。&lt;/p&gt;
+&lt;h3 id=&#34;111-连接管理与安全性&#34;&gt;1.1.1 连接管理与安全性&lt;/h3&gt;
+&lt;h3 id=&#34;112-优化与执行&#34;&gt;1.1.2 优化与执行&lt;/h3&gt;
+&lt;p&gt;在MySQL内部，会对用户的查询进行优化，包括重写查询、决定表的读取顺序、选择合适的索引。同时，用户也可以使用特定的关键字 1、提示优化器，影响其决策过程；2、了解MySQL的优化过程。&lt;/p&gt;
+&lt;p&gt;对于Select语句，MySQL会优先检查&lt;em&gt;查询缓存&lt;/em&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;12-并发控制&#34;&gt;1.2 并发控制&lt;/h2&gt;
+">《高性能MySql》笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/wan-quan-xiao-bai-jiao-cheng-shi-yong-coding-pages-he-gridea-da-jian-ge-ren-bo-ke/"" data-c="
+          &lt;p&gt;from &lt;a href=&#34;https://zhuanlan.zhihu.com/p/166114376&#34;&gt;https://zhuanlan.zhihu.com/p/166114376&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class=&#34;RichText ztext Post-RichText&#34;&gt;&lt;p&gt;2020/07/14更新&lt;/p&gt;&lt;p&gt;如果严格按照教程步骤操作了，还是出现远程连接失败的问题，可以尝试修改仓库名，例如我的仓库名叫myblog，在Gridea配置里，把仓库名设为myblog/myblog。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-86b676984105e58d319c6d56293267ad_b.png&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;778&#34; data-rawheight=&#34;85&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;778&#34; data-original=&#34;https://pic2.zhimg.com/v2-86b676984105e58d319c6d56293267ad_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;hr&gt;&lt;p&gt;上一篇文章写了使用Github Pages和Gridea来搭建个人博客：&lt;/p&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://zhuanlan.zhihu.com/p/165948546&#34; data-draft-node=&#34;block&#34; data-draft-type=&#34;link-card&#34; data-image=&#34;https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg&#34; data-image-width=&#34;1280&#34; data-image-height=&#34;720&#34; class=&#34;LinkCard LinkCard--hasImage&#34; data-za-detail-view-id=&#34;172&#34;&gt;&lt;span class=&#34;LinkCard-backdrop&#34; style=&#34;background-image:url(https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg)&#34;&gt;&lt;/span&gt;&lt;span class=&#34;LinkCard-content&#34;&gt;&lt;span class=&#34;LinkCard-text&#34;&gt;&lt;span class=&#34;LinkCard-title&#34; data-text=&#34;true&#34;&gt;海边的卡夫卡：完全小白教程：使用Github Pages和Gridea搭建个人博客&lt;/span&gt;&lt;span class=&#34;LinkCard-meta&#34;&gt;&lt;span style=&#34;display:inline-flex;align-items:center&#34;&gt;&amp;#8203;&lt;svg class=&#34;Zi Zi--InsertLink&#34; fill=&#34;currentColor&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;17&#34; height=&#34;17&#34;&gt;&lt;path d=&#34;M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;zhuanlan.zhihu.com&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;LinkCard-imageCell&#34;&gt;&lt;img class=&#34;LinkCard-image LinkCard-image--horizontal&#34; alt=&#34;图标&#34; src=&#34;https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;p&gt;但Github毕竟是国外的服务器，访问速度很慢，如果你只是想要在国内访问你的博客，你完全可以使用国内的&lt;b&gt;Coding Pages&lt;/b&gt;来代替Github Pages。&lt;/p&gt;&lt;h2&gt;1 Coding Pages开通&lt;/h2&gt;&lt;h3&gt;1.1 Coding账号注册&lt;/h3&gt;&lt;p&gt;原来的Coding个人版合并到团队版了，所以这里我详细说下Coding的注册。&lt;/p&gt;&lt;p&gt;进入&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//e.coding.net/signup%3F_ga%3D2.238701378.316970461.1592676170-1921038398.1592620024&#34; class=&#34; wrap external&#34; target=&#34;_blank&#34; rel=&#34;nofollow noreferrer&#34;&gt;注册页面&lt;/a&gt;，创建新团队，这个团队名称要记住，后面要用到，然后创建用户，完成注册。&lt;/p&gt;&lt;h3&gt;1.2 创建项目&lt;/h3&gt;&lt;p&gt;登录后，点击项目，发现只有一个示例项目，我们新建一个项目。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-e02b20de76c8cb3cebe989a02e845056_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;939&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic3.zhimg.com/v2-e02b20de76c8cb3cebe989a02e845056_r.jpg&#34;/&gt;
+&lt;/figure&gt;&lt;p&gt;选择第一个——代码托管项目。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-ce10057d87cd37ff3bd0d857bc7666bd_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1550&#34; data-rawheight=&#34;689&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1550&#34; data-original=&#34;https://pic2.zhimg.com/v2-ce10057d87cd37ff3bd0d857bc7666bd_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;然后填写项目名称，往下拉点完成创建。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-df2b99864998ed5915beb1d86812a431_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1049&#34; data-rawheight=&#34;766&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1049&#34; data-original=&#34;https://pic2.zhimg.com/v2-df2b99864998ed5915beb1d86812a431_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;创建后是这样的，点左下角的项目设置。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-9acebc8db0556e623b24a60f27869aad_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;941&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic2.zhimg.com/v2-9acebc8db0556e623b24a60f27869aad_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点功能开关，把&lt;b&gt;持续集成&lt;/b&gt;和&lt;b&gt;持续部署&lt;/b&gt;开关打开。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-b3de37c60db4f79cd554a86af3564ba1_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;940&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic2.zhimg.com/v2-b3de37c60db4f79cd554a86af3564ba1_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;进入代码仓库，如果还没有初始化，就先初始化仓库，勾选那个readme，就可以初始化了。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-a9d5df2f76c172659faa07886ee3969a_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1917&#34; data-rawheight=&#34;941&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1917&#34; data-original=&#34;https://pic3.zhimg.com/v2-a9d5df2f76c172659faa07886ee3969a_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;h3&gt;1.3 实名认证&lt;/h3&gt;&lt;p&gt;点网页左上角猴子的图标回主页，点左下角团队设置。团队所有者在【团队管理】-&amp;gt;【团队设置】-&amp;gt;【实名认证】，可进行团队实名认证。实名认证后，团队将可以使用 Pages 部署等产品功能。&lt;/p&gt;&lt;h3&gt;1.4 使用静态网站服务&lt;/h3&gt;&lt;p&gt;回到myblog项目，点【持续部署】-&amp;gt;【静态网站】-&amp;gt;【立即发布静态网站】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-dfa3b7b7335df71b8e69d3b1f32b9f36_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1916&#34; data-rawheight=&#34;940&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1916&#34; data-original=&#34;https://pic3.zhimg.com/v2-dfa3b7b7335df71b8e69d3b1f32b9f36_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;名称还是叫myblog吧，保存。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-989fbb95852b5d2f717534e39b2676ce_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1916&#34; data-rawheight=&#34;941&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1916&#34; data-original=&#34;https://pic3.zhimg.com/v2-989fbb95852b5d2f717534e39b2676ce_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;这里就是你的博客访问地址了（我的有两个，是因为我已经绑定域名了），不过现在点开，会显示404，别急嘛。点右上角的设置，来绑定域名，毕竟他给的这个网址好难记QAQ&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic1.zhimg.com/v2-fd71c6210cca2b60f306abbc49f3ea10_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;940&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic1.zhimg.com/v2-fd71c6210cca2b60f306abbc49f3ea10_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点了设置后，往下拉，绑定域名，保存修改。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-0a7890a9a58c85f929cfe3e84c57df92_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1622&#34; data-rawheight=&#34;517&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1622&#34; data-original=&#34;https://pic3.zhimg.com/v2-0a7890a9a58c85f929cfe3e84c57df92_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;h3&gt;1.5 生成令牌&lt;/h3&gt;&lt;p&gt;右上角头像点开，点【个人设置】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-5b79df9c7eb537e614f982834bdc421e_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;458&#34; data-rawheight=&#34;347&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;458&#34; data-original=&#34;https://pic3.zhimg.com/v2-5b79df9c7eb537e614f982834bdc421e_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点【访问令牌】-&amp;gt;【新建令牌】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic1.zhimg.com/v2-94b281d3a536125870458e619390165c_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1403&#34; data-rawheight=&#34;625&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1403&#34; data-original=&#34;https://pic1.zhimg.com/v2-94b281d3a536125870458e619390165c_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;你可以把权限都勾上，然后点【创建令牌】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic4.zhimg.com/v2-e25e6fdab144b3ebb0726a7bda69688f_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1237&#34; data-rawheight=&#34;910&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1237&#34; data-original=&#34;https://pic4.zhimg.com/v2-e25e6fdab144b3ebb0726a7bda69688f_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点这个图标复制令牌，另外你的令牌用户名也是后面要用到的。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic4.zhimg.com/v2-58f6b015615a71de66727bd496e05e7b_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1097&#34; data-rawheight=&#34;262&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1097&#34; data-original=&#34;https://pic4.zhimg.com/v2-58f6b015615a71de66727bd496e05e7b_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;h2&gt;2 Gridea远程部署&lt;/h2&gt;&lt;p&gt;Gridea下载请参考我上一篇文章，运行Gridea，配置。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-802990ae28d0a396fdbfeb4e5b66f625_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1484&#34; data-rawheight=&#34;992&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1484&#34; data-original=&#34;https://pic2.zhimg.com/v2-802990ae28d0a396fdbfeb4e5b66f625_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;blockquote&gt;如果你没有绑定域名，就填他提供给你的网址，CNAME就不填。&lt;br&gt;仓库用户名为你的&lt;b&gt;团队名&lt;/b&gt;。&lt;/blockquote&gt;&lt;p&gt;保存后，点检测远程连接，如果没有问题就可以同步了。&lt;/p&gt;&lt;p&gt;OK，可以正常访问了~&lt;/p&gt;&lt;/div&gt;">完全小白教程：使用Coding Pages和Gridea搭建个人博客</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/"" data-c="
+          &lt;p&gt;from &lt;a href=&#34;https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/&#34;&gt;https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class=&#34;text &#34;&gt;
+                &lt;h3 id=&#34;写在开头&#34;&gt;写在开头&lt;/h3&gt;
+&lt;p&gt;为什么要写这篇博客呢，因为Gridea目前还处于未被发现的阶段，使用的用户很少。官方的文档里是使用视频进行介绍，配置过程中反复回调进度条比较麻烦，因此撰写该文章方便新加入的用户学习经验。同时将一些可能出现的问题总结在文章中，防止大家踩坑~&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;/p&gt;
+&lt;h3 id=&#34;前提&#34;&gt;前提&lt;/h3&gt;
+&lt;p&gt;拥有一个Github账号 / 拥有一个Coding账号（如果没有请前往注册）&lt;br&gt;
+Github地址：https://github.com/&lt;br&gt;
+Coding地址：https://coding.net/&lt;br&gt;
+&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;/p&gt;
+&lt;h3 id=&#34;1下载安装git工具&#34;&gt;1.下载安装Git工具&lt;/h3&gt;
+&lt;p&gt;该工具的用处本文不作介绍，毕竟是个“程序员”都知道。&lt;br&gt;
+下载地址：Git下载&lt;br&gt;
+选择适合自己的电脑版本下载安装即可。&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;/p&gt;
+&lt;h3 id=&#34;2gridea下载安装&#34;&gt;2.Gridea下载安装&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/1.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/1.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+选择适合自己的版本下载安装即可。&lt;br&gt;
+安装完后打开软件，如下图所示：&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/2.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/2.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+PS：这也是我为啥放弃hexo转用Gridea的原因，颜值高，还有专门的桌面端软件配套使用。另外平心而论，Gridea配置起来比hexo简单很多。&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;/p&gt;
+&lt;h3 id=&#34;3github静态pages配置&#34;&gt;3.GitHub静态Pages配置&lt;/h3&gt;
+&lt;p&gt;(1)进入Github新建一个仓库。&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/3.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/3.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+其中用户名尽量和Owner名字保持一致（不然可能会出现问题）&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+(2)新建完仓库后，访问 https:// + 你仓库的名字，如下图&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/4.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/4.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+如果访问404失败便是配置出现问题，请仔细查看自己的步骤。如果显示出来一个几乎空白的页面便是成功。&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+(3)打开个人设置&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/5.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/5.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/6.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/6.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/7.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/7.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/8.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/8.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+接下来会生成一串密钥，请把它们保存到一个文档里（因为之后可能就会找不到了）&lt;br&gt;
+接下来就基本OK啦，开始最终配置&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/9.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/9.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+当上方显示远程连接成功后，保存配置。&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+然后点击左侧同步。&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+接下来重新访问 用户名.github.io&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/10.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/10.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;/p&gt;
+&lt;h3 id=&#34;4-coding静态页面配置&#34;&gt;4. Coding静态页面配置&lt;/h3&gt;
+&lt;p&gt;为什么还需要配置Coding呢？&lt;br&gt;
+答：Coding和Github属于两个托管平台。即以上步骤便已经算配置好你的个人博客了。那为什么还需要如下步骤呢？第一.存储在两个平台较为安全 第二.Github静态页面访问起来速度较慢，同时会被一些搜索引擎屏蔽掉，即你的博客无法被百度搜到，写的文章只能自娱自乐。&lt;br&gt;
+ps:经过了以上步骤，这里我们快速讲解。大同小异。&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+首先在个人设置里修改自己的用户名（仅针对于刚刚注册的用户）&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/11.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/11.png&#34; style=&#34;&#34;&gt;&lt;br&gt;
+由于Coding平台版本更新，曾经的配置方法部分失效。&lt;br&gt;
+建议借鉴该文章：&lt;br&gt;
+&lt;a href=&#34;http://liyuanbo.top/post/grideacoding-page-ge-ren-wang-zhan-da-jian/&#34;&gt;Gridea+Coding Page个人网站搭建&lt;/a&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&lt;/p&gt;
+&lt;h3 id=&#34;可能出现的问题&#34;&gt;可能出现的问题&lt;/h3&gt;
+&lt;p&gt;1.在点击检测远程连接时，总是失败，但是自己步骤都做了。&lt;br&gt;
+答：检查自己是否成功安装Git。&lt;br&gt;
+2.Gridea软件&lt;br&gt;
+如果安装在其他文件夹时，请务必修改设置。&lt;br&gt;
+&lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/12.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/12.png&#34; style=&#34;&#34;&gt;&lt;/p&gt;
+">基于Gridea+github/coding搭建静态博客</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/about/"" data-c="
+          &lt;blockquote&gt;
+&lt;p&gt;欢迎来到我的小站呀，很高兴遇见你！🤝&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于本站&#34;&gt;🏠 关于本站&lt;/h2&gt;
+&lt;h2 id=&#34;博主是谁&#34;&gt;👨‍💻 博主是谁&lt;/h2&gt;
+&lt;h2 id=&#34;兴趣爱好&#34;&gt;⛹ 兴趣爱好&lt;/h2&gt;
+&lt;h2 id=&#34;联系我呀&#34;&gt;📬 联系我呀&lt;/h2&gt;
+">关于</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/hello-gridea/"" data-c="
+          &lt;p&gt;👏  欢迎使用 &lt;strong&gt;Gridea&lt;/strong&gt; ！&lt;br&gt;
+✍️  &lt;strong&gt;Gridea&lt;/strong&gt; 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/getgridea/gridea&#34;&gt;Github&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://gridea.dev/&#34;&gt;Gridea 主页&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;http://fehey.com/&#34;&gt;示例网站&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;特性&#34;&gt;特性👇&lt;/h2&gt;
+&lt;p&gt;📝  你可以使用最酷的 &lt;strong&gt;Markdown&lt;/strong&gt; 语法，进行快速创作&lt;/p&gt;
+&lt;p&gt;🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片&lt;/p&gt;
+&lt;p&gt;🏷️  你可以对文章进行标签分组&lt;/p&gt;
+&lt;p&gt;📋  你可以自定义菜单，甚至可以创建外部链接菜单&lt;/p&gt;
+&lt;p&gt;💻  你可以在 &lt;strong&gt;Windows&lt;/strong&gt;，&lt;strong&gt;MacOS&lt;/strong&gt; 或 &lt;strong&gt;Linux&lt;/strong&gt; 设备上使用此客户端&lt;/p&gt;
+&lt;p&gt;🌎  你可以使用 &lt;strong&gt;𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌&lt;/strong&gt; 或 &lt;strong&gt;Coding Pages&lt;/strong&gt; 向世界展示，未来将支持更多平台&lt;/p&gt;
+&lt;p&gt;💬  你可以进行简单的配置，接入 &lt;a href=&#34;https://github.com/gitalk/gitalk&#34;&gt;Gitalk&lt;/a&gt; 或 &lt;a href=&#34;https://github.com/SukkaW/DisqusJS&#34;&gt;DisqusJS&lt;/a&gt; 评论系统&lt;/p&gt;
+&lt;p&gt;🇬🇧  你可以使用&lt;strong&gt;中文简体&lt;/strong&gt;或&lt;strong&gt;英语&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力&lt;/p&gt;
+&lt;p&gt;🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步&lt;/p&gt;
+&lt;p&gt;🌱 当然 &lt;strong&gt;Gridea&lt;/strong&gt; 还很年轻，有很多不足，但请相信，它会不停向前 🏃&lt;/p&gt;
+&lt;p&gt;未来，它一定会成为你离不开的伙伴&lt;/p&gt;
+&lt;p&gt;尽情发挥你的才华吧！&lt;/p&gt;
+&lt;p&gt;😘 Enjoy~&lt;/p&gt;
+">Hello Gridea</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+  //拿来主义(真香)^_^，Clipboard 实现摘自掘金 https://juejin.im/post/5aefeb6e6fb9a07aa43c20af
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="/media/js/motion.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script>
+  var scroll = new SmoothScroll('a[href*="#"]', {
+    speed: 200
+  });
+</script>
+
+
+<script src="/media/js/mouse/love.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script>
+
+
+</html>

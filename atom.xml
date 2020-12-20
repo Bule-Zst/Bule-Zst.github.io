@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://Bule-Zst.github.io</id>
+    <title>Bule-Zst</title>
+    <updated>2020-12-20T07:11:54.846Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://Bule-Zst.github.io"/>
+    <link rel="self" href="https://Bule-Zst.github.io/atom.xml"/>
+    <logo>https://Bule-Zst.github.io/images/avatar.png</logo>
+    <icon>https://Bule-Zst.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, Bule-Zst</rights>
+    <entry>
+        <title type="html"><![CDATA[《高性能MySql》笔记]]></title>
+        <id>https://Bule-Zst.github.io/jtLxs4zLq/</id>
+        <link href="https://Bule-Zst.github.io/jtLxs4zLq/">
+        </link>
+        <updated>2020-12-20T01:00:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="笔记的主要内容">笔记的主要内容</h1>
+<p>111这篇博客主要用于记录《高性能MySQL》这本书的读书笔记，篇幅可能很长，因为书的篇幅本身就不小。在书中，作者有提到，不同章节之间相对独立，因此我也会尽量保持独立性。如果大家对我的读书笔记感兴趣，欢迎选取大家感兴趣的章节进行阅读。</p>
+<p>本笔记的主要内容有：</p>
+<ul>
+<li>对书中部分内容的摘抄</li>
+<li>对精华内容的个人总结</li>
+<li>相关基础知识的补充</li>
+</ul>
+<p>笔记的目的：</p>
+<ul>
+<li>对于我来说，本笔记希望能够取代书籍，当自己觉得有必要回顾《高性能MySQL》这本书时，只需要简单过一遍笔记即可。</li>
+<li>对于大家来说，大家可以把我的读书笔记当成一个引言，先阅读我的笔记，之后，如果对于某些章节感兴趣，再去阅读书的相应章节，这样能节省大家的一些时间。</li>
+</ul>
+<h1 id="mysql全称">MySQL全称</h1>
+<p>这是一个最基本的问题，但惭愧的是，在读这本书之前，我竟然没有思考过这个问题。</p>
+<p>“My” 是因为 Monty 的女儿叫做 My，而 “SQL” 就是 Structured Query Language（结构化查询语言），用于和数据库交互的语言。</p>
+<p>因此，对于MySQL的读法，应该是My<sub>S</sub>Q<sub>L，而不是My</sub>Se~Cou。</p>
+<h1 id="译者序">译者序</h1>
+<p>MySQL的存储引擎主要使用的是InnoDB。</p>
+<h1 id="前言">前言</h1>
+<p>与第二版相比，本书更强调原因，而不是结果。作者希望告诉大家“为什么MySQL这么做”，而不仅仅是“MySQL做了什么”。</p>
+<p>正如作者所说：</p>
+<blockquote>
+<p>我们希望能够尝试回到下面这样的问题：“给出MySQL 的内部结构和操作，对于实际应用能带来什么帮助？为什么能有这样的帮助？如何让MySQL 适合（或者不适合）特定的需求？”。</p>
+</blockquote>
+<h2 id="本书的结构">本书的结构</h2>
+<ul>
+<li>第1章：基础
+<ul>
+<li>MySQL的架构及其存储引擎的关键设计</li>
+<li>关系型数据库和事务的基础知识</li>
+<li>MySQL的入门知识</li>
+</ul>
+</li>
+<li>第2-7章：<strong>使用</strong>MySQL前需要了解的基础知识，未特别标注的章节内容如章节标题所示。
+<ul>
+<li>第2章 MySQL 基准测试</li>
+<li>第3章 服务器性能剖析：介绍了常用于故障诊断和服务器性能问题分析的一种面向响应时间的方法。</li>
+<li>第4章 Schema 与数据类型优化：涵盖了不同数据类型的细节差别以及表设计的原则。</li>
+<li>第5章 创建高性能的索引</li>
+<li>第6章 查询性能优化</li>
+<li>第7章 MySQL 高级特性
+<ul>
+<li>介绍了MySQL 的高级特性是如何工作的</li>
+<li>包括分区、存储引擎、触发器，以及字符集</li>
+<li>高级特性的实现可能有别于其他数据库，因此理解它们对于性能可能会带来新的收益</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第8-9章：如何让MySQL、应用程序及硬件一起很好地工作
+<ul>
+<li>第8章 优化服务器设置：介绍了如何配置MySQL, 以便更好地利用硬件，达到更好的可靠性和鲁棒性。</li>
+<li>第9章 操作系统和硬件优化：解释了如何让操作系统和硬件工作得更好。</li>
+</ul>
+</li>
+<li>第10-15章：MySQL在实际应用场景中的相关知识
+<ul>
+<li>第10章 复制</li>
+<li>第11章 可扩展的MySQL</li>
+<li>第12章 高可用性：如何保障 MySQL 稳定而正确地持续运行</li>
+<li>第13章 云端的MySQL</li>
+<li>第14章 应用层优化：解释了什么是全方位的优化 (full-stack optimization) , 就是从前端到后端的整体优化，从用户体验开始直到数据库。</li>
+<li>第15章 备份与恢复</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用示例代码">使用示例代码</h2>
+<p>本书中的示例代码的获取：http://www.highperfmysql.com</p>
+<h1 id="第1章-mysql架构与历史">第1章 MySQL架构与历史</h1>
+<p>理解MySQL架构的好处在于能够充分发挥MySQL的性能，因此，就算对于开发人员，了解其架构也是很有必要的。</p>
+<p>其中，最重要、最与众不同的特性是其存储引擎架构，在接下来的章节会具体介绍。</p>
+<h2 id="11-mysql逻辑架构">1.1 MySQL逻辑架构</h2>
+<p>MySQL的逻辑架构图如下：</p>
+<figure data-type="image" tabindex="1"><img src="%E9%AB%98%E6%80%A7%E8%83%BDMySql%E7%AC%94%E8%AE%B0.assets/image-20201220092718896.png" alt="image-20201220092718896" loading="lazy"></figure>
+<p>最上层（客户端）：大部分基于网络的服务都有这一层。</p>
+<p>中间层：MySQL的核心层，大部分功能都是在这一层实现的。</p>
+<p>最下层（存储引擎）：这一层包含了众多种类的存储引擎，不同存储引擎具有各自的优缺点，中间层通过API与存储引擎进行交互。</p>
+<h3 id="111-连接管理与安全性">1.1.1 连接管理与安全性</h3>
+<h3 id="112-优化与执行">1.1.2 优化与执行</h3>
+<p>在MySQL内部，会对用户的查询进行优化，包括重写查询、决定表的读取顺序、选择合适的索引。同时，用户也可以使用特定的关键字 1、提示优化器，影响其决策过程；2、了解MySQL的优化过程。</p>
+<p>对于Select语句，MySQL会优先检查<em>查询缓存</em>。</p>
+<h2 id="12-并发控制">1.2 并发控制</h2>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[完全小白教程：使用Coding Pages和Gridea搭建个人博客]]></title>
+        <id>https://Bule-Zst.github.io/wan-quan-xiao-bai-jiao-cheng-shi-yong-coding-pages-he-gridea-da-jian-ge-ren-bo-ke/</id>
+        <link href="https://Bule-Zst.github.io/wan-quan-xiao-bai-jiao-cheng-shi-yong-coding-pages-he-gridea-da-jian-ge-ren-bo-ke/">
+        </link>
+        <updated>2020-12-18T12:27:13.000Z</updated>
+        <content type="html"><![CDATA[<p>from <a href="https://zhuanlan.zhihu.com/p/166114376">https://zhuanlan.zhihu.com/p/166114376</a></p>
+<hr>
+<div class="RichText ztext Post-RichText"><p>2020/07/14更新</p><p>如果严格按照教程步骤操作了，还是出现远程连接失败的问题，可以尝试修改仓库名，例如我的仓库名叫myblog，在Gridea配置里，把仓库名设为myblog/myblog。</p><figure data-size="normal"><img src="https://pic2.zhimg.com/v2-86b676984105e58d319c6d56293267ad_b.png" data-caption="" data-size="normal" data-rawwidth="778" data-rawheight="85" class="origin_image zh-lightbox-thumb" width="778" data-original="https://pic2.zhimg.com/v2-86b676984105e58d319c6d56293267ad_r.jpg"/></figure><hr><p>上一篇文章写了使用Github Pages和Gridea来搭建个人博客：</p><a target="_blank" href="https://zhuanlan.zhihu.com/p/165948546" data-draft-node="block" data-draft-type="link-card" data-image="https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg" data-image-width="1280" data-image-height="720" class="LinkCard LinkCard--hasImage" data-za-detail-view-id="172"><span class="LinkCard-backdrop" style="background-image:url(https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg)"></span><span class="LinkCard-content"><span class="LinkCard-text"><span class="LinkCard-title" data-text="true">海边的卡夫卡：完全小白教程：使用Github Pages和Gridea搭建个人博客</span><span class="LinkCard-meta"><span style="display:inline-flex;align-items:center">&#8203;<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path></svg></span>zhuanlan.zhihu.com</span></span><span class="LinkCard-imageCell"><img class="LinkCard-image LinkCard-image--horizontal" alt="图标" src="https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg"></span></span></a><p>但Github毕竟是国外的服务器，访问速度很慢，如果你只是想要在国内访问你的博客，你完全可以使用国内的<b>Coding Pages</b>来代替Github Pages。</p><h2>1 Coding Pages开通</h2><h3>1.1 Coding账号注册</h3><p>原来的Coding个人版合并到团队版了，所以这里我详细说下Coding的注册。</p><p>进入<a href="https://link.zhihu.com/?target=https%3A//e.coding.net/signup%3F_ga%3D2.238701378.316970461.1592676170-1921038398.1592620024" class=" wrap external" target="_blank" rel="nofollow noreferrer">注册页面</a>，创建新团队，这个团队名称要记住，后面要用到，然后创建用户，完成注册。</p><h3>1.2 创建项目</h3><p>登录后，点击项目，发现只有一个示例项目，我们新建一个项目。</p><figure data-size="normal"><img src="https://pic3.zhimg.com/v2-e02b20de76c8cb3cebe989a02e845056_b.jpg" data-caption="" data-size="normal" data-rawwidth="1920" data-rawheight="939" class="origin_image zh-lightbox-thumb" width="1920" data-original="https://pic3.zhimg.com/v2-e02b20de76c8cb3cebe989a02e845056_r.jpg"/>
+</figure><p>选择第一个——代码托管项目。</p><figure data-size="normal"><img src="https://pic2.zhimg.com/v2-ce10057d87cd37ff3bd0d857bc7666bd_b.jpg" data-caption="" data-size="normal" data-rawwidth="1550" data-rawheight="689" class="origin_image zh-lightbox-thumb" width="1550" data-original="https://pic2.zhimg.com/v2-ce10057d87cd37ff3bd0d857bc7666bd_r.jpg"/></figure><p>然后填写项目名称，往下拉点完成创建。</p><figure data-size="normal"><img src="https://pic2.zhimg.com/v2-df2b99864998ed5915beb1d86812a431_b.jpg" data-caption="" data-size="normal" data-rawwidth="1049" data-rawheight="766" class="origin_image zh-lightbox-thumb" width="1049" data-original="https://pic2.zhimg.com/v2-df2b99864998ed5915beb1d86812a431_r.jpg"/></figure><p>创建后是这样的，点左下角的项目设置。</p><figure data-size="normal"><img src="https://pic2.zhimg.com/v2-9acebc8db0556e623b24a60f27869aad_b.jpg" data-caption="" data-size="normal" data-rawwidth="1920" data-rawheight="941" class="origin_image zh-lightbox-thumb" width="1920" data-original="https://pic2.zhimg.com/v2-9acebc8db0556e623b24a60f27869aad_r.jpg"/></figure><p>点功能开关，把<b>持续集成</b>和<b>持续部署</b>开关打开。</p><figure data-size="normal"><img src="https://pic2.zhimg.com/v2-b3de37c60db4f79cd554a86af3564ba1_b.jpg" data-caption="" data-size="normal" data-rawwidth="1920" data-rawheight="940" class="origin_image zh-lightbox-thumb" width="1920" data-original="https://pic2.zhimg.com/v2-b3de37c60db4f79cd554a86af3564ba1_r.jpg"/></figure><p>进入代码仓库，如果还没有初始化，就先初始化仓库，勾选那个readme，就可以初始化了。</p><figure data-size="normal"><img src="https://pic3.zhimg.com/v2-a9d5df2f76c172659faa07886ee3969a_b.jpg" data-caption="" data-size="normal" data-rawwidth="1917" data-rawheight="941" class="origin_image zh-lightbox-thumb" width="1917" data-original="https://pic3.zhimg.com/v2-a9d5df2f76c172659faa07886ee3969a_r.jpg"/></figure><h3>1.3 实名认证</h3><p>点网页左上角猴子的图标回主页，点左下角团队设置。团队所有者在【团队管理】-&gt;【团队设置】-&gt;【实名认证】，可进行团队实名认证。实名认证后，团队将可以使用 Pages 部署等产品功能。</p><h3>1.4 使用静态网站服务</h3><p>回到myblog项目，点【持续部署】-&gt;【静态网站】-&gt;【立即发布静态网站】。</p><figure data-size="normal"><img src="https://pic3.zhimg.com/v2-dfa3b7b7335df71b8e69d3b1f32b9f36_b.jpg" data-caption="" data-size="normal" data-rawwidth="1916" data-rawheight="940" class="origin_image zh-lightbox-thumb" width="1916" data-original="https://pic3.zhimg.com/v2-dfa3b7b7335df71b8e69d3b1f32b9f36_r.jpg"/></figure><p>名称还是叫myblog吧，保存。</p><figure data-size="normal"><img src="https://pic3.zhimg.com/v2-989fbb95852b5d2f717534e39b2676ce_b.jpg" data-caption="" data-size="normal" data-rawwidth="1916" data-rawheight="941" class="origin_image zh-lightbox-thumb" width="1916" data-original="https://pic3.zhimg.com/v2-989fbb95852b5d2f717534e39b2676ce_r.jpg"/></figure><p>这里就是你的博客访问地址了（我的有两个，是因为我已经绑定域名了），不过现在点开，会显示404，别急嘛。点右上角的设置，来绑定域名，毕竟他给的这个网址好难记QAQ</p><figure data-size="normal"><img src="https://pic1.zhimg.com/v2-fd71c6210cca2b60f306abbc49f3ea10_b.jpg" data-caption="" data-size="normal" data-rawwidth="1920" data-rawheight="940" class="origin_image zh-lightbox-thumb" width="1920" data-original="https://pic1.zhimg.com/v2-fd71c6210cca2b60f306abbc49f3ea10_r.jpg"/></figure><p>点了设置后，往下拉，绑定域名，保存修改。</p><figure data-size="normal"><img src="https://pic3.zhimg.com/v2-0a7890a9a58c85f929cfe3e84c57df92_b.jpg" data-caption="" data-size="normal" data-rawwidth="1622" data-rawheight="517" class="origin_image zh-lightbox-thumb" width="1622" data-original="https://pic3.zhimg.com/v2-0a7890a9a58c85f929cfe3e84c57df92_r.jpg"/></figure><h3>1.5 生成令牌</h3><p>右上角头像点开，点【个人设置】。</p><figure data-size="normal"><img src="https://pic3.zhimg.com/v2-5b79df9c7eb537e614f982834bdc421e_b.jpg" data-caption="" data-size="normal" data-rawwidth="458" data-rawheight="347" class="origin_image zh-lightbox-thumb" width="458" data-original="https://pic3.zhimg.com/v2-5b79df9c7eb537e614f982834bdc421e_r.jpg"/></figure><p>点【访问令牌】-&gt;【新建令牌】。</p><figure data-size="normal"><img src="https://pic1.zhimg.com/v2-94b281d3a536125870458e619390165c_b.jpg" data-caption="" data-size="normal" data-rawwidth="1403" data-rawheight="625" class="origin_image zh-lightbox-thumb" width="1403" data-original="https://pic1.zhimg.com/v2-94b281d3a536125870458e619390165c_r.jpg"/></figure><p>你可以把权限都勾上，然后点【创建令牌】。</p><figure data-size="normal"><img src="https://pic4.zhimg.com/v2-e25e6fdab144b3ebb0726a7bda69688f_b.jpg" data-caption="" data-size="normal" data-rawwidth="1237" data-rawheight="910" class="origin_image zh-lightbox-thumb" width="1237" data-original="https://pic4.zhimg.com/v2-e25e6fdab144b3ebb0726a7bda69688f_r.jpg"/></figure><p>点这个图标复制令牌，另外你的令牌用户名也是后面要用到的。</p><figure data-size="normal"><img src="https://pic4.zhimg.com/v2-58f6b015615a71de66727bd496e05e7b_b.jpg" data-caption="" data-size="normal" data-rawwidth="1097" data-rawheight="262" class="origin_image zh-lightbox-thumb" width="1097" data-original="https://pic4.zhimg.com/v2-58f6b015615a71de66727bd496e05e7b_r.jpg"/></figure><h2>2 Gridea远程部署</h2><p>Gridea下载请参考我上一篇文章，运行Gridea，配置。</p><figure data-size="normal"><img src="https://pic2.zhimg.com/v2-802990ae28d0a396fdbfeb4e5b66f625_b.jpg" data-caption="" data-size="normal" data-rawwidth="1484" data-rawheight="992" class="origin_image zh-lightbox-thumb" width="1484" data-original="https://pic2.zhimg.com/v2-802990ae28d0a396fdbfeb4e5b66f625_r.jpg"/></figure><blockquote>如果你没有绑定域名，就填他提供给你的网址，CNAME就不填。<br>仓库用户名为你的<b>团队名</b>。</blockquote><p>保存后，点检测远程连接，如果没有问题就可以同步了。</p><p>OK，可以正常访问了~</p></div>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于Gridea+github/coding搭建静态博客]]></title>
+        <id>https://Bule-Zst.github.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/</id>
+        <link href="https://Bule-Zst.github.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/">
+        </link>
+        <updated>2020-12-18T12:02:07.000Z</updated>
+        <content type="html"><![CDATA[<p>from <a href="https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/">https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/</a></p>
+<hr>
+<div class="text ">
+                <h3 id="写在开头">写在开头</h3>
+<p>为什么要写这篇博客呢，因为Gridea目前还处于未被发现的阶段，使用的用户很少。官方的文档里是使用视频进行介绍，配置过程中反复回调进度条比较麻烦，因此撰写该文章方便新加入的用户学习经验。同时将一些可能出现的问题总结在文章中，防止大家踩坑~<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;</p>
+<h3 id="前提">前提</h3>
+<p>拥有一个Github账号 / 拥有一个Coding账号（如果没有请前往注册）<br>
+Github地址：https://github.com/<br>
+Coding地址：https://coding.net/<br>
+&nbsp;<br>
+&nbsp;&nbsp;</p>
+<h3 id="1下载安装git工具">1.下载安装Git工具</h3>
+<p>该工具的用处本文不作介绍，毕竟是个“程序员”都知道。<br>
+下载地址：Git下载<br>
+选择适合自己的电脑版本下载安装即可。<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;</p>
+<h3 id="2gridea下载安装">2.Gridea下载安装</h3>
+<p><img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/1.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/1.png" style=""><br>
+选择适合自己的版本下载安装即可。<br>
+安装完后打开软件，如下图所示：<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/2.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/2.png" style=""><br>
+PS：这也是我为啥放弃hexo转用Gridea的原因，颜值高，还有专门的桌面端软件配套使用。另外平心而论，Gridea配置起来比hexo简单很多。<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;</p>
+<h3 id="3github静态pages配置">3.GitHub静态Pages配置</h3>
+<p>(1)进入Github新建一个仓库。<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/3.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/3.png" style=""><br>
+其中用户名尽量和Owner名字保持一致（不然可能会出现问题）<br>
+&nbsp;&nbsp;<br>
+(2)新建完仓库后，访问 https:// + 你仓库的名字，如下图<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/4.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/4.png" style=""><br>
+如果访问404失败便是配置出现问题，请仔细查看自己的步骤。如果显示出来一个几乎空白的页面便是成功。<br>
+&nbsp;&nbsp;<br>
+(3)打开个人设置<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/5.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/5.png" style=""><br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/6.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/6.png" style=""><br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/7.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/7.png" style=""><br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/8.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/8.png" style=""><br>
+接下来会生成一串密钥，请把它们保存到一个文档里（因为之后可能就会找不到了）<br>
+接下来就基本OK啦，开始最终配置<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/9.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/9.png" style=""><br>
+当上方显示远程连接成功后，保存配置。<br>
+&nbsp;&nbsp;<br>
+然后点击左侧同步。<br>
+&nbsp;&nbsp;<br>
+接下来重新访问 用户名.github.io<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/10.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/10.png" style=""><br>
+&nbsp;&nbsp;</p>
+<h3 id="4-coding静态页面配置">4. Coding静态页面配置</h3>
+<p>为什么还需要配置Coding呢？<br>
+答：Coding和Github属于两个托管平台。即以上步骤便已经算配置好你的个人博客了。那为什么还需要如下步骤呢？第一.存储在两个平台较为安全 第二.Github静态页面访问起来速度较慢，同时会被一些搜索引擎屏蔽掉，即你的博客无法被百度搜到，写的文章只能自娱自乐。<br>
+ps:经过了以上步骤，这里我们快速讲解。大同小异。<br>
+&nbsp;&nbsp;<br>
+首先在个人设置里修改自己的用户名（仅针对于刚刚注册的用户）<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/11.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/11.png" style=""><br>
+由于Coding平台版本更新，曾经的配置方法部分失效。<br>
+建议借鉴该文章：<br>
+<a href="http://liyuanbo.top/post/grideacoding-page-ge-ren-wang-zhan-da-jian/">Gridea+Coding Page个人网站搭建</a><br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;</p>
+<h3 id="可能出现的问题">可能出现的问题</h3>
+<p>1.在点击检测远程连接时，总是失败，但是自己步骤都做了。<br>
+答：检查自己是否成功安装Git。<br>
+2.Gridea软件<br>
+如果安装在其他文件夹时，请务必修改设置。<br>
+<img src="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/12.png" alt="" loading="lazy" class="lazyload" data-original="https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/12.png" style=""></p>
+]]></content>
+    </entry>
+</feed>
