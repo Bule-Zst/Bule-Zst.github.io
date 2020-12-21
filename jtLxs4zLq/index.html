@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>《高性能MySql》笔记 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1608466771810">
+<link rel="shortcut icon" href="/favicon.ico?v=1608560648892">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -171,7 +171,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-count">4</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1684,6 +1684,100 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/hxfRZLp5C/"" data-c="
+          &lt;p&gt;from &lt;a href=&#34;https://www.nhtzj.com/3315416634/&#34;&gt;https://www.nhtzj.com/3315416634/&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;今天无意间看到很久之前写的一篇文章有新的评论，而评论时间呢也是10天以前的。这就有点伤了啊，别人兴致冲冲地提了疑惑，而我却10天后才看到。经过这一茬，意识到评论提醒功能的重要性。由于我使用的是hexo+NexT主题+Valine评论系统，自然而然地就去&lt;a href=&#34;https://valine.js.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Valine官网&lt;/a&gt;看了看，没想到还真有提醒的功能「&lt;a href=&#34;https://valine.js.org/notify.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;邮件提醒&lt;/a&gt;」。&lt;/p&gt;
+&lt;p&gt;这里就给大家讲讲Valine中如何配置邮件提醒功能。&lt;/p&gt;
+&lt;h2 id=&#34;Valine邮件提醒&#34;&gt;&lt;a href=&#34;#Valine邮件提醒&#34; class=&#34;headerlink&#34; title=&#34;Valine邮件提醒&#34;&gt;&lt;/a&gt;Valine邮件提醒&lt;/h2&gt;&lt;p&gt;Valine评论功能是基于&lt;a href=&#34;https://leancloud.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leancloud&lt;/a&gt;的，Valine评论功能还不能跑起来的可以看看我之前写的文章《&lt;a href=&#34;/2345860311#comment_system&#34;&gt;Hexo使用NexT主题及配置&lt;/a&gt;》，其中就有详细的使用说明，这里就不展开了。&lt;/p&gt;
+&lt;p&gt;Valine官方提供的邮件提醒功能是基于&lt;code&gt;Leancloud的密码重置邮件提醒&lt;/code&gt;，操作步骤如下：&lt;/p&gt;
+&lt;p&gt;进入&lt;code&gt;Leancloud&lt;/code&gt;&amp;gt;选择你的评论所存放的&lt;code&gt;应用&lt;/code&gt;&amp;gt;&lt;code&gt;设置&lt;/code&gt;&amp;gt;&lt;code&gt;邮件模板&lt;/code&gt;，按下图设置好用于&lt;code&gt;重置密码&lt;/code&gt;的邮件主题&amp;gt;然后保存:&lt;/p&gt;
+![](https://Bule-Zst.github.io/post-images/1608560201989.jpg)
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;修改邮件主题：&lt;code&gt;你在  的评论收到了新的评论&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改内容：将下面的代码复制到“内容”中，并将其中的&lt;code&gt;你的网址首页链接&lt;/code&gt;改为你的网址首页链接。&lt;/p&gt;
+&lt;figure class=&#34;highlight html&#34;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;Hi, {{username}}&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;你在 {{appname}} 的评论收到了新的回复，请点击查看：&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;href&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&#34;你的网址首页链接&#34;&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;style&lt;/span&gt;=&lt;span class=&#34;string&#34;&gt;&#34;display: inline-block; padding: 10px 20px; border-radius: 4px; background-color: #3090e4; color: #fff; text-decoration: none;&#34;&lt;/span&gt;&amp;gt;&lt;/span&gt;马上查看&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;点击“保存”按钮&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改&lt;span class=&#34;label label-info&#34;&gt;NexT主题配置文件&lt;/span&gt;，搜索&lt;code&gt;valine&lt;/code&gt;（快速定位），将其中的&lt;code&gt;notify&lt;/code&gt;改为&lt;code&gt;true&lt;/code&gt;。&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# Valine.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# You can get your appid and appkey from https://leancloud.cn&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# more info please open https://valine.js.org&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;valine:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  enable: true&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  appid:  gaKW5SWAvf7NBolU9wFbxN8O-gzGxoHsz&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  appkey: susRJyHS8Fq1SyKXg0r9ad65&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  notify: true # mail notifier , https://github.com/xCss/Valine/wiki&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  verify: false # Verification code&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  placeholder: 您的评论可以一针见血 (*^ω^*)~~ # comment box placeholder&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  avatar: mm # gravatar style&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  guest_info: nick,mail,link # custom comment header&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  pageSize: 10 # pagination size&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;&lt;a href=&#34;#注意事项&#34; class=&#34;headerlink&#34; title=&#34;注意事项&#34;&gt;&lt;/a&gt;注意事项&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;发送次数过多，可能会暂时被Leancloud 屏蔽邮件发送功能  &lt;/li&gt;
+&lt;li&gt;由于&lt;code&gt;邮件提醒&lt;/code&gt;功能使用的&lt;code&gt;Leancloud的密码重置邮件提醒&lt;/code&gt;，只能传递&lt;code&gt;昵称&lt;/code&gt;、&lt;code&gt;邮箱&lt;/code&gt;两个属性，所以邮件提醒链接&lt;code&gt;无法直达指定文章页&lt;/code&gt;。&lt;strong&gt;请悉知&lt;/strong&gt;。  &lt;/li&gt;
+&lt;li&gt;开启&lt;code&gt;邮件提醒&lt;/code&gt;会默认开启&lt;code&gt;验证码&lt;/code&gt;选项。  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;该功能目前还在测试阶段，谨慎使用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;目前&lt;code&gt;邮件提醒&lt;/code&gt;正处于测试阶段，仅在&lt;code&gt;子级&lt;/code&gt;对存在邮件地址的&lt;code&gt;父级&lt;/code&gt;发表评论时发送邮件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第三方支持&#34;&gt;&lt;a href=&#34;#第三方支持&#34; class=&#34;headerlink&#34; title=&#34;第三方支持&#34;&gt;&lt;/a&gt;第三方支持&lt;/h2&gt;&lt;p&gt;这里重点讲一下第三方&lt;code&gt;邮件提醒&lt;/code&gt;：&lt;a href=&#34;https://github.com/zhaojun1998/Valine-Admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Valine-Admin&lt;/a&gt; (by &lt;a href=&#34;https://github.com/zhaojun1998/Valine-Admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@zhaojun1998&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;这也先需要将Valine的评论功能成功跑起来。&lt;/p&gt;
+&lt;p&gt;然后进入 &lt;a href=&#34;https://leancloud.cn/dashboard/applist.html#/apps&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leancloud&lt;/a&gt; 对应的 Valine 应用中。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;点击 &lt;code&gt;云引擎 -&amp;gt; 设置&lt;/code&gt; 填写代码库并保存：&lt;code&gt;https://github.com/zhaojun1998/Valine-Admin&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1608560645315.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;p&gt;切换到部署标签页，分支使用 master，点击部署即可：&lt;br&gt;&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1608560340962.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1608560360122.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置云引擎的环境变量&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1608560540352.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;必选参数&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SITE_NAME&lt;/code&gt; : 网站名称。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SITE_URL&lt;/code&gt; : 网站地址, &lt;strong&gt;最后不要加 &lt;code&gt;/&lt;/code&gt; 。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMTP_USER&lt;/code&gt; : SMTP 服务用户名，一般为邮箱地址。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMTP_PASS&lt;/code&gt; : SMTP 密码，一般为授权码，而不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMTP_SERVICE&lt;/code&gt; : 邮件服务提供商，支持 &lt;code&gt;QQ&lt;/code&gt;、&lt;code&gt;163&lt;/code&gt;、&lt;code&gt;126&lt;/code&gt;、&lt;code&gt;Gmail&lt;/code&gt;、&lt;code&gt;&#34;Yahoo&#34;&lt;/code&gt;、&lt;code&gt;......&lt;/code&gt;  ，全部支持请参考 : &lt;a href=&#34;https://nodemailer.com/smtp/well-known/#supported-services&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nodemailer Supported services&lt;/a&gt;。 — &lt;em&gt;如这里没有你使用的邮件提供商，请查看&lt;a href=&#34;/高级配置.md#自定义邮件服务器&#34;&gt;自定义邮件服务器&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SENDER_NAME&lt;/code&gt; : 寄件人名称。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于我使用的是我自己的企业邮箱，所以这边的&lt;code&gt;SMTP_SERVICE&lt;/code&gt;就不适用了，需要用这三个参数替换：&lt;code&gt;SMTP_HOST&lt;/code&gt;、&lt;code&gt;SMTP_PORT&lt;/code&gt;、&lt;code&gt;SMTP_SECURE&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;详细说明如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SMTP_HOST&lt;/code&gt; : 邮件服务提供商 SMTP 地址，如 qq : &lt;code&gt;smtp.qq.com&lt;/code&gt;，&lt;em&gt;此项需要自行查询或询问其服务商&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMTP_PORT&lt;/code&gt; : 邮件服务提供商 SMTP 端口, &lt;em&gt;此项需要自行查询或询问其服务商&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMTP_SECURE&lt;/code&gt; : 是否启用加密, 默认为 &lt;code&gt;true&lt;/code&gt;，一般不需要设置，如有特殊请自行配置。 &lt;em&gt;此项需要自行查询或询问其服务商&lt;/em&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果也同我一样使用阿里云企业邮箱，&lt;code&gt;SMTP_HOST&lt;/code&gt;、&lt;code&gt;SMTP_PORT&lt;/code&gt;、&lt;code&gt;SMTP_SECURE&lt;/code&gt;可以照我的写。&lt;/p&gt;
+&lt;p&gt;可以看到上图中，我的自定义环境变量还多了2个，分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;TO_EMAIL&lt;/code&gt;：这个是填收邮件提醒的邮箱地址，若没有这个字段，则将邮件发到&lt;code&gt;SMTP_USER&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TEMPLATE_NAME&lt;/code&gt;：设置提醒邮件的主题，目前内置了两款主题，分别为 &lt;code&gt;default&lt;/code&gt; 与 &lt;code&gt;rainbow&lt;/code&gt;。默认为 &lt;code&gt;default&lt;/code&gt; 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;Web-评论管理&#34;&gt;&lt;a href=&#34;#Web-评论管理&#34; class=&#34;headerlink&#34; title=&#34;Web 评论管理&#34;&gt;&lt;/a&gt;Web 评论管理&lt;/h3&gt;&lt;p&gt;此项目还为 Valine 提供了更方便的评论管理功能，可以在 web 端对评论进行查看与删除操作。配置方式如下。&lt;/p&gt;
+![](https://Bule-Zst.github.io/post-images/1608560421062.png)
+&lt;p&gt;后台登录需要账号密码，需要在这里设置，只需要填写 &lt;code&gt;email&lt;/code&gt;、&lt;code&gt;password&lt;/code&gt;、&lt;code&gt;username&lt;/code&gt;，这三个字段即可, 使用  &lt;code&gt;email&lt;/code&gt; 作为账号登陆即可。（为了安全考虑，此 &lt;code&gt;email&lt;/code&gt; 必须为配置中的 &lt;code&gt;SMTP_USER&lt;/code&gt; 或 &lt;code&gt;TO_EMAIL&lt;/code&gt;， 否则不允许登录）&lt;br&gt;&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1608560447539.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Web 后台目前仅有 &lt;code&gt;查看&lt;/code&gt; 与 &lt;code&gt;删除&lt;/code&gt; 功能&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;LeanCloud-休眠策略&#34;&gt;&lt;a href=&#34;#LeanCloud-休眠策略&#34; class=&#34;headerlink&#34; title=&#34;LeanCloud 休眠策略&#34;&gt;&lt;/a&gt;LeanCloud 休眠策略&lt;/h3&gt;&lt;p&gt;免费版的 LeanCloud 容器，是有强制性休眠策略的，不能 24 小时运行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每天必须休眠 6 个小时&lt;/li&gt;
+&lt;li&gt;30 分钟内没有外部请求，则休眠。&lt;/li&gt;
+&lt;li&gt;休眠后如果有新的外部请求实例则马上启动（但激活时此次发送邮件会失败）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;分析了一下上方的策略，如果不想付费的话，最佳使用方案就设置定时器，每天 7 - 23 点每 20 分钟访问一次，这样可以保持每天的绝大多数时间邮件服务是正常的。&lt;/p&gt;
+&lt;p&gt;附 &lt;code&gt;Linux crontab&lt;/code&gt; 定时器代码：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;*/20 7-23 * * * curl https://你配置的域名前缀.leanapp.cn&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注 : 此 &lt;code&gt;crontab&lt;/code&gt; 不是 &lt;code&gt;LeanCloud&lt;/code&gt; 后台的定时任务，如果你没有 &lt;code&gt;Linux&lt;/code&gt; 服务器来配置此定时器，那么可以在此 &lt;a href=&#34;https://github.com/zhaojun1998/Valine-Admin/issues/1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issues&lt;/a&gt; 中回复&lt;strong&gt;zhaojun1998&lt;/strong&gt;，让他帮你加上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;注&#34;&gt;&lt;a href=&#34;#注&#34; class=&#34;headerlink&#34; title=&#34;注&#34;&gt;&lt;/a&gt;注&lt;/h3&gt;&lt;p&gt;&lt;strong class=&#34;lable-red&#34;&gt;更新新版本与更改环境变量均需要重启容器后生效。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;重启容器&#34;&gt;&lt;a href=&#34;#重启容器&#34; class=&#34;headerlink&#34; title=&#34;重启容器&#34;&gt;&lt;/a&gt;重启容器&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1608560469789.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">NexT主题设置Valine评论系统邮件提醒</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Bule-Zst.github.io/dU5GQhPud/"" data-c="
