@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bule-Zst.github.io</id>
     <title>Bule-Zst</title>
-    <updated>2020-12-23T07:29:07.300Z</updated>
+    <updated>2020-12-23T15:02:08.243Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bule-Zst.github.io"/>
     <link rel="self" href="https://Bule-Zst.github.io/atom.xml"/>
@@ -500,6 +500,99 @@ private func createEmergencyCoordinate(_ latitude: Float,_ longitude: Float,_ el
 <li><a href="https://nshipster.cn/" target="_blank" rel="nofollow">NSHipster 关注被忽略的 Objective-C、Swift 和 Cocoa 特性。每周更新。</a></li>
 <li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocExceptionHandling.html#//apple_ref/doc/uid/TP30001163-CH13-TPXREF168" target="_blank" rel="nofollow">苹果对于Exception Handling介绍</a></li>
 </ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《高性能MySql》笔记]]></title>
+        <id>https://Bule-Zst.github.io/jtLxs4zLq/</id>
+        <link href="https://Bule-Zst.github.io/jtLxs4zLq/">
+        </link>
+        <updated>2020-12-20T01:00:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="笔记的主要内容">笔记的主要内容</h1>
+<p>这篇博客主要用于记录《高性能MySQL》这本书的读书笔记，篇幅可能很长，因为书的篇幅本身就不小。在书中，作者有提到，不同章节之间相对独立，因此我也会尽量保持独立性。如果大家对我的读书笔记感兴趣，欢迎选取大家感兴趣的章节进行阅读。</p>
+<p>本笔记的主要内容有：</p>
+<ul>
+<li>对书中部分内容的摘抄</li>
+<li>对精华内容的个人总结</li>
+<li>相关基础知识的补充</li>
+</ul>
+<p>笔记的目的：</p>
+<ul>
+<li>对于我来说，本笔记希望能够取代书籍，当自己觉得有必要回顾《高性能MySQL》这本书时，只需要简单过一遍笔记即可。</li>
+<li>对于大家来说，大家可以把我的读书笔记当成一个引言，先阅读我的笔记，之后，如果对于某些章节感兴趣，再去阅读书的相应章节，这样能节省大家的一些时间。</li>
+</ul>
+<h1 id="mysql全称">MySQL全称</h1>
+<p>这是一个最基本的问题，但惭愧的是，在读这本书之前，我竟然没有思考过这个问题。</p>
+<p>“My” 是因为 Monty 的女儿叫做 My，而 “SQL” 就是 Structured Query Language（结构化查询语言），用于和数据库交互的语言。</p>
+<p>因此，对于MySQL的读法，应该是My<sub>S</sub>Q<sub>L，而不是My</sub>Se~Cou。</p>
+<h1 id="译者序">译者序</h1>
+<p>MySQL的存储引擎主要使用的是InnoDB。</p>
+<h1 id="前言">前言</h1>
+<p>与第二版相比，本书更强调原因，而不是结果。作者希望告诉大家“为什么MySQL这么做”，而不仅仅是“MySQL做了什么”。</p>
+<p>正如作者所说：</p>
+<blockquote>
+<p>我们希望能够尝试回到下面这样的问题：“给出MySQL 的内部结构和操作，对于实际应用能带来什么帮助？为什么能有这样的帮助？如何让MySQL 适合（或者不适合）特定的需求？”。</p>
+</blockquote>
+<h2 id="本书的结构">本书的结构</h2>
+<ul>
+<li>第1章：基础
+<ul>
+<li>MySQL的架构及其存储引擎的关键设计</li>
+<li>关系型数据库和事务的基础知识</li>
+<li>MySQL的入门知识</li>
+</ul>
+</li>
+<li>第2-7章：<strong>使用</strong>MySQL前需要了解的基础知识，未特别标注的章节内容如章节标题所示。
+<ul>
+<li>第2章 MySQL 基准测试</li>
+<li>第3章 服务器性能剖析：介绍了常用于故障诊断和服务器性能问题分析的一种面向响应时间的方法。</li>
+<li>第4章 Schema 与数据类型优化：涵盖了不同数据类型的细节差别以及表设计的原则。</li>
+<li>第5章 创建高性能的索引</li>
+<li>第6章 查询性能优化</li>
+<li>第7章 MySQL 高级特性
+<ul>
+<li>介绍了MySQL 的高级特性是如何工作的</li>
+<li>包括分区、存储引擎、触发器，以及字符集</li>
+<li>高级特性的实现可能有别于其他数据库，因此理解它们对于性能可能会带来新的收益</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第8-9章：如何让MySQL、应用程序及硬件一起很好地工作
+<ul>
+<li>第8章 优化服务器设置：介绍了如何配置MySQL, 以便更好地利用硬件，达到更好的可靠性和鲁棒性。</li>
+<li>第9章 操作系统和硬件优化：解释了如何让操作系统和硬件工作得更好。</li>
+</ul>
+</li>
+<li>第10-15章：MySQL在实际应用场景中的相关知识
+<ul>
+<li>第10章 复制</li>
+<li>第11章 可扩展的MySQL</li>
+<li>第12章 高可用性：如何保障 MySQL 稳定而正确地持续运行</li>
+<li>第13章 云端的MySQL</li>
+<li>第14章 应用层优化：解释了什么是全方位的优化 (full-stack optimization) , 就是从前端到后端的整体优化，从用户体验开始直到数据库。</li>
+<li>第15章 备份与恢复</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用示例代码">使用示例代码</h2>
+<p>本书中的示例代码的获取：http://www.highperfmysql.com</p>
+<h1 id="第1章-mysql架构与历史">第1章 MySQL架构与历史</h1>
+<p>理解MySQL架构的好处在于能够充分发挥MySQL的性能，因此，就算对于开发人员，了解其架构也是很有必要的。</p>
+<p>其中，最重要、最与众不同的特性是其存储引擎架构，在接下来的章节会具体介绍。</p>
+<h2 id="11-mysql逻辑架构">1.1 MySQL逻辑架构</h2>
+<p>MySQL的逻辑架构图如下：</p>
+<figure data-type="image" tabindex="1"><img src="%E9%AB%98%E6%80%A7%E8%83%BDMySql%E7%AC%94%E8%AE%B0.assets/image-20201220092718896.png" alt="image-20201220092718896" loading="lazy"></figure>
+<p>最上层（客户端）：大部分基于网络的服务都有这一层。</p>
+<p>中间层：MySQL的核心层，大部分功能都是在这一层实现的。</p>
+<p>最下层（存储引擎）：这一层包含了众多种类的存储引擎，不同存储引擎具有各自的优缺点，中间层通过API与存储引擎进行交互。</p>
+<h3 id="111-连接管理与安全性">1.1.1 连接管理与安全性</h3>
+<h3 id="112-优化与执行">1.1.2 优化与执行</h3>
+<p>在MySQL内部，会对用户的查询进行优化，包括重写查询、决定表的读取顺序、选择合适的索引。同时，用户也可以使用特定的关键字 1、提示优化器，影响其决策过程；2、了解MySQL的优化过程。</p>
+<p>对于Select语句，MySQL会优先检查<em>查询缓存</em>。</p>
+<h2 id="12-并发控制">1.2 并发控制</h2>
+<p>解决多线程的一个方法是加锁，保证同一时刻只有一个线程对数据进行修改，但这种处理方式本质上其实不是<strong>并发</strong>。</p>
+<h3 id="121-读写锁">1.2.1 读写锁</h3>
 ]]></content>
     </entry>
     <entry>
