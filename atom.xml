@@ -2,13 +2,61 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bule-Zst.github.io</id>
     <title>Bule-Zst</title>
-    <updated>2020-12-26T03:35:46.158Z</updated>
+    <updated>2020-12-29T10:19:58.828Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bule-Zst.github.io"/>
     <link rel="self" href="https://Bule-Zst.github.io/atom.xml"/>
     <logo>https://Bule-Zst.github.io/images/avatar.png</logo>
     <icon>https://Bule-Zst.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Bule-Zst</rights>
+    <entry>
+        <title type="html"><![CDATA[Linux->Ubuntu下配置telnet环境]]></title>
+        <id>https://Bule-Zst.github.io/Grj96uz3p/</id>
+        <link href="https://Bule-Zst.github.io/Grj96uz3p/">
+        </link>
+        <updated>2020-12-29T10:12:33.000Z</updated>
+        <content type="html"><![CDATA[<p>from <a href="https://www.cnblogs.com/taomylife/p/7552424.html">https://www.cnblogs.com/taomylife/p/7552424.html</a></p>
+<hr>
+<p>1、首先查看telnet运行状态</p>
+<p><code>netstat -a | grep telnet</code></p>
+<p>输出为空，表示没有开启该服务</p>
+<p>2、安装openbsd-inetd</p>
+<p><code>apt-get install openbsd-inetd</code></p>
+<p>如果已经安装过了，会提示已经安装过了，直接执行下面的步骤就可以了。</p>
+<p>3、安装telnetd</p>
+<p><code>apt-get install telnetd</code></p>
+<p>安装完之后，查看/etc/inetd.conf的内容会多了一行telnet stream tcp nowait telnetd /usr/sbin/tcpd /usr/sbin/in.telnetd</p>
+<p><code>cat /etc/inetd.conf | grep telnet</code></p>
+<p>输出： telnet stream tcp nowait telnetd /usr/sbin/tcpd /usr/sbin/in.telnetd</p>
+<p>4、重启openbsd-inetd</p>
+<p><code>/etc/init.d/openbsd-inetd restart</code></p>
+<p>输出：* Restarting internet superserver inetd</p>
+<p>5、查看telnet运行状态</p>
+<p><code>netstat -a | grep telnet</code></p>
+<p>输出：tcp　　0　　0 :telnet　　😗　　LISTEN</p>
+<p>此时表明已经开启了telnet服务。</p>
+<p>6、telnet登陆测试</p>
+<p><code>telnet 127.0.0.1</code></p>
+<p>输出： Trying 127.0.0.1… Connected to 127.0.0.1. Escape character is ‘^]’. （停在这里的时候要按Ctrl+] 然后回车）</p>
+<p>telnet&gt; （表示登陆成功）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[题库]]></title>
+        <id>https://Bule-Zst.github.io/xMppN_Qse/</id>
+        <link href="https://Bule-Zst.github.io/xMppN_Qse/">
+        </link>
+        <updated>2020-12-26T08:17:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="打表">打表</h1>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/UVA100">UVA100 The 3n + 1 problem</a></li>
+</ul>
+<h1 id="并查集">并查集</h1>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/P1111">P1111 修复公路</a></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[知识点汇总]]></title>
         <id>https://Bule-Zst.github.io/JhUrs-AEf/</id>
