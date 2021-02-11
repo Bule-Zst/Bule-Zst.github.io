@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bule-Zst.github.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-01-09T08:20:26.633Z</updated>
+    <updated>2021-02-11T00:41:36.049Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bule-Zst.github.io"/>
     <link rel="self" href="https://Bule-Zst.github.io/atom.xml"/>
@@ -224,6 +224,19 @@ public:
 <li><a href="https://leetcode-cn.com/problems/split-array-largest-sum/">410. 分割数组的最大值</a></li>
 <li><a href="https://leetcode-cn.com/problems/magnetic-force-between-two-balls/">1552. 两球之间的磁力</a></li>
 </ul>
+<h1 id="分治">分治</h1>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/P1257">P1257 平面上的最接近点对</a></li>
+</ul>
+<h1 id="栈">栈</h1>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
+</ul>
+<h1 id="计算几何">计算几何</h1>
+<h2 id="凸包">凸包</h2>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/erect-the-fence/">587. 安装栅栏</a></li>
+</ul>
 ]]></content>
     </entry>
     <entry>
@@ -240,6 +253,16 @@ public:
 <h1 id="python">Python</h1>
 <ul>
 <li><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">Python安装包大全</a></li>
+<li><a href="https://blog.csdn.net/weixin_45523851/article/details/110674141">Could not build wheels for cryptography which use PEP 517 and cannot be installed directly</a></li>
+<li><a href="https://blog.csdn.net/qm5132/article/details/105619531/">python和Microsoft Visual C++ Build Tools版本安装</a></li>
+<li><a href="https://blog.csdn.net/pyyong2011/article/details/105045883/">python: cookies 解密问题</a></li>
+</ul>
+<h1 id="算法">算法</h1>
+<ul>
+<li><a href="https://blog.csdn.net/qq_33935895/article/details/103261211">[算法]分治法解最近对问题</a></li>
+<li><a href="https://blog.csdn.net/q547550831/article/details/51541527">分治法——棋盘覆盖问题</a></li>
+<li><a href="https://www.cnblogs.com/l1l1/p/9432876.html">求凸包（安德鲁算法）</a></li>
+<li><a href="https://blog.csdn.net/peng0614/article/details/81193484">【计算几何/凸包】安德鲁算法（Andrew's Algorithm）详解</a></li>
 </ul>
 ]]></content>
     </entry>
