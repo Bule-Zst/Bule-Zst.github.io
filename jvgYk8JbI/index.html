@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>题库 | Bule-Zst</title>
+<title>B站讲的最好的MySQL数据库教程全集 2020最新版-图灵学院诸葛 | Bule-Zst</title>
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/favicon.ico?v=1617165024953">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/media/css/pisces.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/media/fonts/font-awesome.css">
@@ -49,8 +49,8 @@
 
 
 
-  <meta name="description" content="题库" />
-  <meta name="keywords" content="算法" />
+  <meta name="description" content="B站讲的最好的MySQL数据库教程全集 2020最新版-图灵学院诸葛" />
+  <meta name="keywords" content="数据库" />
 </head>
 
 <body>
@@ -175,8 +175,7 @@
       <div class="sidebar-body pisces" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/images/avatar.png"/>
@@ -240,207 +239,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number no_compress"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li><a href="#%E6%89%93%E8%A1%A8">打表</a></li>
-<li><a href="#%E5%B9%B6%E6%9F%A5%E9%9B%86">并查集</a></li>
-<li><a href="#%E4%BA%8C%E5%88%86">二分</a></li>
-<li><a href="#%E5%88%86%E6%B2%BB">分治</a></li>
-<li><a href="#%E6%A0%88">栈</a>
-<ul>
-<li><a href="#%E5%8D%95%E8%B0%83%E6%A0%88">单调栈</a></li>
-</ul>
-</li>
-<li><a href="#%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95">计算几何</a>
-<ul>
-<li><a href="#%E5%87%B8%E5%8C%85">凸包</a></li>
-</ul>
-</li>
-<li><a href="#%E9%93%BE%E8%A1%A8">链表</a></li>
-<li><a href="#dp">dp</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -528,8 +326,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Bule-Zst.github.io/ti_ku/">
-      题库
+    <a class="post-title-link" href="https://Bule-Zst.github.io/jvgYk8JbI/">
+      B站讲的最好的MySQL数据库教程全集 2020最新版-图灵学院诸葛
     </a>
   </h1>
   <div class="post-meta">
@@ -537,7 +335,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-12-26 16:17:20">2020-12-26</span>
+      <span class="publish-time" data-t="2021-03-31 11:10:34">2021-03-31</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -546,8 +344,8 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://Bule-Zst.github.io/7XVc1Ow9Q/">
-        <span>算法</span>
+      <a href="https://Bule-Zst.github.io/SCVZKCu1U/">
+        <span>数据库</span>
       </a>
       
       
@@ -556,61 +354,56 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>110<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>416<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h1 id="打表">打表</h1>
+              <p>from <a href="https://www.bilibili.com/video/BV1xh411Z79d?share_source=copy_web">https://www.bilibili.com/video/BV1xh411Z79d?share_source=copy_web</a></p>
+<hr>
+<p>MySQL慢查询 优化手段：</p>
 <ul>
-<li><a href="https://www.luogu.com.cn/problem/UVA100">UVA100 The 3n + 1 problem</a></li>
+<li>索引：使用MySQL工具，如explain，看一下查询有没有走索引。</li>
 </ul>
-<h1 id="并查集">并查集</h1>
+<p>索引是帮助MySQL高效获取数据的<strong>排好序</strong>的<strong>数据结构</strong>。<br>
+索引的常见数据结构：</p>
 <ul>
-<li><a href="https://www.luogu.com.cn/problem/P1111">P1111 修复公路</a></li>
+<li>Hash表</li>
+<li>二叉搜索树：
+<ul>
+<li>优化思路：使用二叉搜索树，降低IO操作次数。</li>
+<li>缺点-退化。当数据递增或递减时，会退化成链表，如，1, 2, 3, 4, 5</li>
 </ul>
-<h1 id="二分">二分</h1>
+</li>
+<li>二叉平衡树
 <ul>
-<li><a href="https://leetcode-cn.com/problems/split-array-largest-sum/">410. 分割数组的最大值</a></li>
-<li><a href="https://leetcode-cn.com/problems/magnetic-force-between-two-balls/">1552. 两球之间的磁力</a></li>
+<li>优化思路：减少二叉树层数，降低IO操作次数。</li>
+<li>红黑树：缺点-效率低。虽然会自平衡，但当数据量达到500w时，可能树的高度会达到20层，如果查询的数据在叶子结点，20次IO操作依旧很慢。</li>
 </ul>
-<h1 id="分治">分治</h1>
+</li>
+<li>多路平衡树
 <ul>
-<li><a href="https://www.luogu.com.cn/problem/P1257">P1257 平面上的最接近点对</a></li>
+<li>优化思路：扩展每个节点，使其包含多个索引元素，更进一步减少二叉树层数，降低IO操作次数。</li>
+<li>B-Tree</li>
+<li><strong>B+Tree</strong>
+<ul>
+<li>目前MySQL索引采用的数据结构</li>
+<li>MySQL中，默认情况下，每个节点可占用的空间大小为16KB。3层B+Tree，约可以存放2000w个索引元素。</li>
 </ul>
-<h1 id="栈">栈</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
+</li>
 </ul>
-<h2 id="单调栈">单调栈</h2>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
-<li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
+</li>
 </ul>
-<h1 id="计算几何">计算几何</h1>
-<h2 id="凸包">凸包</h2>
+<p>从二叉搜索树到二叉平衡术再到多路平衡树，本质上是逐步降低了磁盘IO次数，那为什么不把所有索引元素都放到一个节点中？这样，只需要一次IO操作就行了。</p>
 <ul>
-<li><a href="https://leetcode-cn.com/problems/erect-the-fence/">587. 安装栅栏</a></li>
-</ul>
-<h1 id="链表">链表</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/insertion-sort-list/147/">147. 对链表进行插入排序</a></li>
-</ul>
-<h1 id="dp">dp</h1>
-<ul>
-<li><a href="https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845">ZOJ 1346 Comparing Your Heroes</a></li>
-<li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
-<li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
-</ul>
-<h1 id="其他">其他</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/permutations-ii/">47. 全排列 II</a></li>
+<li>当数据量大的时候，太占内存了，并且有的时候，可能内存容量不允许这么做。</li>
+<li>当所有索引都读取到内存后，索引数量太多，可能500w，二分查找效率也会降低。</li>
 </ul>
 
             </div>
@@ -624,7 +417,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Bule-Zst.github.io/ti_ku/" title="题库">https://Bule-Zst.github.io/ti_ku/</a>
+      <a href="https://Bule-Zst.github.io/jvgYk8JbI/" title="B站讲的最好的MySQL数据库教程全集 2020最新版-图灵学院诸葛">https://Bule-Zst.github.io/jvgYk8JbI/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -633,21 +426,17 @@
   </ul>
   <div class="tags">
     
-      <a href="https://Bule-Zst.github.io/7XVc1Ow9Q/"># 算法</a>
+      <a href="https://Bule-Zst.github.io/SCVZKCu1U/"># 数据库</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Linux-&gt;Ubuntu下配置telnet环境" href="https://Bule-Zst.github.io/Grj96uz3p/">Linux-&gt;Ubuntu下配置telnet环境</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Linux-&gt;Ubuntu下配置telnet环境" href="https://Bule-Zst.github.io/Grj96uz3p/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="知识点汇总" href="https://Bule-Zst.github.io/zhi_shi_dian_hui_zong/">知识点汇总</a>
-        <a class="nav-mobile-next" title="知识点汇总" href="https://Bule-Zst.github.io/zhi_shi_dian_hui_zong/">下一篇</a>
+        <a class="nav-pc-next" title="Jetbrains系列产品重置试用方法" href="https://Bule-Zst.github.io/mQjLrKUHc/">Jetbrains系列产品重置试用方法</a>
+        <a class="nav-mobile-next" title="Jetbrains系列产品重置试用方法" href="https://Bule-Zst.github.io/mQjLrKUHc/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
