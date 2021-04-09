@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bule-Zst.github.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-03-31T04:33:41.531Z</updated>
+    <updated>2021-04-09T06:27:52.644Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bule-Zst.github.io"/>
     <link rel="self" href="https://Bule-Zst.github.io/atom.xml"/>
@@ -10,7 +10,7 @@
     <icon>https://Bule-Zst.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
     <entry>
-        <title type="html"><![CDATA[B站讲的最好的MySQL数据库教程全集 2020最新版-图灵学院诸葛]]></title>
+        <title type="html"><![CDATA[MySQL性能优化]]></title>
         <id>https://Bule-Zst.github.io/jvgYk8JbI/</id>
         <link href="https://Bule-Zst.github.io/jvgYk8JbI/">
         </link>
@@ -21,10 +21,13 @@
 <ul>
 <li>索引：使用MySQL工具，如explain，看一下查询有没有走索引。</li>
 </ul>
-<p>索引是帮助MySQL高效获取数据的<strong>排好序</strong>的<strong>数据结构</strong>。<br>
-索引的常见数据结构：</p>
+<h1 id="索引">索引</h1>
+<p>索引是帮助MySQL高效获取数据的<strong>排好序</strong>的<strong>数据结构</strong>。</p>
+<p>数据结构可视化网站：<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></p>
+<p>索引的常见数据结构：</p>
 <ul>
-<li>Hash表</li>
+<li>树
+<ul>
 <li>二叉搜索树：
 <ul>
 <li>优化思路：使用二叉搜索树，降低IO操作次数。</li>
@@ -47,6 +50,26 @@
 <li>MySQL中，默认情况下，每个节点可占用的空间大小为16KB。3层B+Tree，约可以存放2000w个索引元素。</li>
 </ul>
 </li>
+<li>B-Tree与B+Tree的比较
+<ul>
+<li>把数据统一存放在叶子结点中，好处是，非叶子结点可以包含更多的索引元素，因此树的高度更低。</li>
+<li>叶子结点之前的连接：更好地支持范围查找。B-树如果要做范围查询，则需要定位到第一个元素后，进行中序遍历。</li>
+<li>B+树，每次都会查到叶子结点才结束，因此查询时间较稳定。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hash表
+<ul>
+<li>Hash表的效率很多情况下优于B+树</li>
+<li>不选择Hash表的原因：
+<ul>
+<li>Hash冲突（次要）：当存在大量Hash冲突时，会导致链表变长，降低效率。但当链表过长时，MySQL会进行ReHash操作，降低链表长度。</li>
+<li>不支持范围查询（主要）</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -55,6 +78,67 @@
 <li>当数据量大的时候，太占内存了，并且有的时候，可能内存容量不允许这么做。</li>
 <li>当所有索引都读取到内存后，索引数量太多，可能500w，二分查找效率也会降低。</li>
 </ul>
+<p>为什么主键推荐用整型，而不是UUID？</p>
+<ul>
+<li>比较效率。在索引中，会进行多次比较，整形比较速度更快。</li>
+<li>存储空间。UUID是字符串，更占空间。</li>
+</ul>
+<p>为什么 MySQL 官方建议使用自增主键作为表的主键？</p>
+<blockquote>
+<p>因为自增主键是连续的，在插入过程中尽量减少页分裂，即使要进行页分裂，也只会分裂很少一部分；并且自增主键也能减少数据的移动，每次插入都是插入到最后，所以自增主键作为表的主键，对于表的操作来说性能是最高的。</p>
+<p><a href="https://www.jianshu.com/p/39e5b433bbaf">https://www.jianshu.com/p/39e5b433bbaf</a></p>
+</blockquote>
+<p>聚集索引：叶子结点包含完整的数据记录。例如，InnoDB的主键索引。对于每张表，聚集索引最多只有一个；对于InnoDB表，聚集索引有且仅有一个。<br>
+非聚集索引：索引文件和数据文件是分离的。<br>
+聚集索引效率高，因为非聚集索引拿到数据地址后，还需要一次IO操作，才能获取数据。</p>
+<p>联合索引：本质还是B+树，只是在比大小时，按字段顺序，依次进行比较</p>
+<h1 id="存储引擎">存储引擎</h1>
+<p>存储引擎是针对表的，不同表可以设置不同的存储引擎。</p>
+<p>数据库中存储的数据，默认放在安装目录下的data文件夹中。<br>
+一个数据库，对应一个文件夹。<br>
+<img src="https://Bule-Zst.github.io/post-images/1617329696374.png" alt="" loading="lazy"><br>
+一个数据表，对应文件夹中的多个同名文件，不同存储引擎对应的文件结构不一样。<br>
+<img src="https://Bule-Zst.github.io/post-images/1617330056948.png" alt="" loading="lazy"></p>
+<ul>
+<li>.frm：frame，表结构的相关信息</li>
+<li>InnoDB
+<ul>
+<li>.ibd：表中的数据及索引。InnoDB的数据和索引，是存储在一起的。</li>
+<li>主键索引：
+<ul>
+<li>索引用B+数的结构存储，数据存储在B+数的叶子结点上。</li>
+<li><img src="https://Bule-Zst.github.io/post-images/1617331007626.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>二级索引（普通索引）
+<ul>
+<li>索引用B+树存储，叶子结点存放<strong>主键</strong>信息，获取到主键后，需要再次从主键索引中获取数据信息（回表操作）。</li>
+<li>二级索引存主键信息：
+<ul>
+<li>优点：因为表数据是存在索引中的，伴随索引节点的分裂，表数据的磁盘地址会发生改变，存主键信息避免了二级索引的维护工作。</li>
+<li>缺点：1、回表操作，比较耗时；2、存主键，导致二级索引更占空间。</li>
+</ul>
+</li>
+<li><img src="https://Bule-Zst.github.io/post-images/1617331631874.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>若表中没有主键，存储引擎会先在表中寻找，看是否存在非空唯一索引，若存在，则对该列或该索引建立聚集索引，若不存在，则维护一个额外的隐藏列（6字节的rowid），用于建立聚集索引。</li>
+</ul>
+</li>
+<li>MyISAM
+<ul>
+<li>.MYD：MyISAM Data，表中的数据</li>
+<li>.MYI：MyISAM Index，索引的相关信息</li>
+<li><img src="https://Bule-Zst.github.io/post-images/1617330872488.jpg" alt="" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+<h1 id="索引优化原则">索引优化原则</h1>
+<ul>
+<li>最左前缀原则：对于联合索引，如果要用，那么必须按照建索引时字段的先后顺序去用，不能跳过任何一个字段。</li>
+</ul>
+<h1 id="简历">简历</h1>
+<p>不要光罗列会的技术，要深入地写，写技术细节。</p>
 ]]></content>
     </entry>
     <entry>
@@ -278,12 +362,21 @@ public:
 </ul>
 <h1 id="栈">栈</h1>
 <ul>
+<li><a href="https://leetcode-cn.com/problems/valid-parentheses/">20. 有效的括号</a></li>
+<li><a href="https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/">150. 逆波兰表达式求值</a></li>
 <li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
 </ul>
 <h2 id="单调栈">单调栈</h2>
 <ul>
-<li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
+<li><a href="https://leetcode-cn.com/problems/daily-temperatures/">739. 每日温度</a></li>
+<li><a href="https://leetcode-cn.com/problems/next-greater-element-i/">496. 下一个更大元素 I</a></li>
 <li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
+<li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
+</ul>
+<h3 id="中缀转后缀">中缀转后缀</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/basic-calculator/">224. 基本计算器</a></li>
+<li><a href="https://leetcode-cn.com/problems/basic-calculator-ii/">227. 基本计算器 II</a></li>
 </ul>
 <h1 id="计算几何">计算几何</h1>
 <h2 id="凸包">凸包</h2>
@@ -299,6 +392,10 @@ public:
 <li><a href="https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845">ZOJ 1346 Comparing Your Heroes</a></li>
 <li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
 <li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
+</ul>
+<h1 id="模拟">模拟</h1>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
 </ul>
 <h1 id="其他">其他</h1>
 <ul>

@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>空文章 | Bule-Zst</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/favicon.ico?v=1617165198196">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/favicon.ico?v=1617949415454">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/media/css/pisces.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Bule-Zst/Bule-Zst.github.io@master/media/fonts/font-awesome.css">
 <link
@@ -1424,10 +1424,13 @@
 &lt;ul&gt;
 &lt;li&gt;索引：使用MySQL工具，如explain，看一下查询有没有走索引。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;索引是帮助MySQL高效获取数据的&lt;strong&gt;排好序&lt;/strong&gt;的&lt;strong&gt;数据结构&lt;/strong&gt;。&lt;br&gt;
-索引的常见数据结构：&lt;/p&gt;
+&lt;h1 id=&#34;索引&#34;&gt;索引&lt;/h1&gt;
+&lt;p&gt;索引是帮助MySQL高效获取数据的&lt;strong&gt;排好序&lt;/strong&gt;的&lt;strong&gt;数据结构&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;数据结构可视化网站：&lt;a href=&#34;https://www.cs.usfca.edu/~galles/visualization/Algorithms.html&#34;&gt;https://www.cs.usfca.edu/~galles/visualization/Algorithms.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;索引的常见数据结构：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Hash表&lt;/li&gt;
+&lt;li&gt;树
+&lt;ul&gt;
 &lt;li&gt;二叉搜索树：
 &lt;ul&gt;
 &lt;li&gt;优化思路：使用二叉搜索树，降低IO操作次数。&lt;/li&gt;
@@ -1450,6 +1453,26 @@
 &lt;li&gt;MySQL中，默认情况下，每个节点可占用的空间大小为16KB。3层B+Tree，约可以存放2000w个索引元素。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;B-Tree与B+Tree的比较
+&lt;ul&gt;
+&lt;li&gt;把数据统一存放在叶子结点中，好处是，非叶子结点可以包含更多的索引元素，因此树的高度更低。&lt;/li&gt;
+&lt;li&gt;叶子结点之前的连接：更好地支持范围查找。B-树如果要做范围查询，则需要定位到第一个元素后，进行中序遍历。&lt;/li&gt;
+&lt;li&gt;B+树，每次都会查到叶子结点才结束，因此查询时间较稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Hash表
+&lt;ul&gt;
+&lt;li&gt;Hash表的效率很多情况下优于B+树&lt;/li&gt;
+&lt;li&gt;不选择Hash表的原因：
+&lt;ul&gt;
+&lt;li&gt;Hash冲突（次要）：当存在大量Hash冲突时，会导致链表变长，降低效率。但当链表过长时，MySQL会进行ReHash操作，降低链表长度。&lt;/li&gt;
+&lt;li&gt;不支持范围查询（主要）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1458,7 +1481,68 @@
 &lt;li&gt;当数据量大的时候，太占内存了，并且有的时候，可能内存容量不允许这么做。&lt;/li&gt;
 &lt;li&gt;当所有索引都读取到内存后，索引数量太多，可能500w，二分查找效率也会降低。&lt;/li&gt;
 &lt;/ul&gt;
-">B站讲的最好的MySQL数据库教程全集 2020最新版-图灵学院诸葛</a>
+&lt;p&gt;为什么主键推荐用整型，而不是UUID？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;比较效率。在索引中，会进行多次比较，整形比较速度更快。&lt;/li&gt;
+&lt;li&gt;存储空间。UUID是字符串，更占空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为什么 MySQL 官方建议使用自增主键作为表的主键？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因为自增主键是连续的，在插入过程中尽量减少页分裂，即使要进行页分裂，也只会分裂很少一部分；并且自增主键也能减少数据的移动，每次插入都是插入到最后，所以自增主键作为表的主键，对于表的操作来说性能是最高的。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.jianshu.com/p/39e5b433bbaf&#34;&gt;https://www.jianshu.com/p/39e5b433bbaf&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;聚集索引：叶子结点包含完整的数据记录。例如，InnoDB的主键索引。对于每张表，聚集索引最多只有一个；对于InnoDB表，聚集索引有且仅有一个。&lt;br&gt;
+非聚集索引：索引文件和数据文件是分离的。&lt;br&gt;
+聚集索引效率高，因为非聚集索引拿到数据地址后，还需要一次IO操作，才能获取数据。&lt;/p&gt;
+&lt;p&gt;联合索引：本质还是B+树，只是在比大小时，按字段顺序，依次进行比较&lt;/p&gt;
+&lt;h1 id=&#34;存储引擎&#34;&gt;存储引擎&lt;/h1&gt;
+&lt;p&gt;存储引擎是针对表的，不同表可以设置不同的存储引擎。&lt;/p&gt;
+&lt;p&gt;数据库中存储的数据，默认放在安装目录下的data文件夹中。&lt;br&gt;
+一个数据库，对应一个文件夹。&lt;br&gt;
+&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1617329696374.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+一个数据表，对应文件夹中的多个同名文件，不同存储引擎对应的文件结构不一样。&lt;br&gt;
+&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1617330056948.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.frm：frame，表结构的相关信息&lt;/li&gt;
+&lt;li&gt;InnoDB
+&lt;ul&gt;
+&lt;li&gt;.ibd：表中的数据及索引。InnoDB的数据和索引，是存储在一起的。&lt;/li&gt;
+&lt;li&gt;主键索引：
+&lt;ul&gt;
+&lt;li&gt;索引用B+数的结构存储，数据存储在B+数的叶子结点上。&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1617331007626.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;二级索引（普通索引）
+&lt;ul&gt;
+&lt;li&gt;索引用B+树存储，叶子结点存放&lt;strong&gt;主键&lt;/strong&gt;信息，获取到主键后，需要再次从主键索引中获取数据信息（回表操作）。&lt;/li&gt;
+&lt;li&gt;二级索引存主键信息：
+&lt;ul&gt;
+&lt;li&gt;优点：因为表数据是存在索引中的，伴随索引节点的分裂，表数据的磁盘地址会发生改变，存主键信息避免了二级索引的维护工作。&lt;/li&gt;
+&lt;li&gt;缺点：1、回表操作，比较耗时；2、存主键，导致二级索引更占空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1617331631874.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;若表中没有主键，存储引擎会先在表中寻找，看是否存在非空唯一索引，若存在，则对该列或该索引建立聚集索引，若不存在，则维护一个额外的隐藏列（6字节的rowid），用于建立聚集索引。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;MyISAM
+&lt;ul&gt;
+&lt;li&gt;.MYD：MyISAM Data，表中的数据&lt;/li&gt;
+&lt;li&gt;.MYI：MyISAM Index，索引的相关信息&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://Bule-Zst.github.io/post-images/1617330872488.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;索引优化原则&#34;&gt;索引优化原则&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;最左前缀原则：对于联合索引，如果要用，那么必须按照建索引时字段的先后顺序去用，不能跳过任何一个字段。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;简历&#34;&gt;简历&lt;/h1&gt;
+&lt;p&gt;不要光罗列会的技术，要深入地写，写技术细节。&lt;/p&gt;
+">MySQL性能优化</a>
       </div>
       
       <div class="item">
@@ -1669,12 +1753,21 @@ public:
 &lt;/ul&gt;
 &lt;h1 id=&#34;栈&#34;&gt;栈&lt;/h1&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/valid-parentheses/&#34;&gt;20. 有效的括号&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/&#34;&gt;150. 逆波兰表达式求值&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/tag-validator/&#34;&gt;591. 标签验证器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;单调栈&#34;&gt;单调栈&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;85. 最大矩形&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/daily-temperatures/&#34;&gt;739. 每日温度&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/next-greater-element-i/&#34;&gt;496. 下一个更大元素 I&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/&#34;&gt;42. 接雨水&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;85. 最大矩形&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;中缀转后缀&#34;&gt;中缀转后缀&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/basic-calculator/&#34;&gt;224. 基本计算器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/basic-calculator-ii/&#34;&gt;227. 基本计算器 II&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;计算几何&#34;&gt;计算几何&lt;/h1&gt;
 &lt;h2 id=&#34;凸包&#34;&gt;凸包&lt;/h2&gt;
@@ -1690,6 +1783,10 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845&#34;&gt;ZOJ 1346 Comparing Your Heroes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;85. 最大矩形&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/&#34;&gt;42. 接雨水&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;模拟&#34;&gt;模拟&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/tag-validator/&#34;&gt;591. 标签验证器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;其他&#34;&gt;其他&lt;/h1&gt;
 &lt;ul&gt;
