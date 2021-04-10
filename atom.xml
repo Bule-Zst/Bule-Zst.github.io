@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-10T04:49:32.942Z</updated>
+    <updated>2021-04-10T05:10:34.906Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -46,8 +46,7 @@
 <p>我们将码云中创建的项目也添加到remote中<br>
 <img src="http://Bule-Zst.gitee.io/post-images/1618029472492.png" alt="" loading="lazy"></p>
 <p>然后，点击Gridea中的同步，将本地博客项目同步到github项目中。</p>
-<p>之后点击push按钮，将本地项目推送到码云项目中。</p>
-<p>在点击push按钮后，可能会让我们选择需要推送的目标仓库，注意要选择码云中的项目。</p>
+<p>之后点击push按钮，将本地项目推送到码云项目中。在点击push按钮后，可能会让我们选择需要推送的目标仓库，注意要选择码云中的项目。</p>
 <p>在推送完成后，回到码云项目中，点击Gitee Pages按钮，进入pages管理界面<br>
 <img src="http://Bule-Zst.gitee.io/post-images/1618029658643.png" alt="" loading="lazy"></p>
 <p>点击更新按钮</p>

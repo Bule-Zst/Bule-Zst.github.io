@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>Jetbrains系列产品重置试用方法 | Bule-Zst</title>
+<title>Valine | Bule-Zst</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1618030534667">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -49,8 +49,8 @@
 
 
 
-  <meta name="description" content="Jetbrains系列产品重置试用方法" />
-  <meta name="keywords" content="编程工具" />
+  <meta name="description" content="Valine" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -175,8 +175,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -240,207 +239,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number no_compress"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li><a href="#0x0-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF">0x0. 项目背景</a></li>
-<li><a href="#0x1-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85">0x1. 如何安装</a>
-<ul>
-<li><a href="#1-%E6%8F%92%E4%BB%B6%E5%B8%82%E5%9C%BA%E5%AE%89%E8%A3%85">1). 插件市场安装：</a></li>
-<li><a href="#2-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85">2). 下载安装：</a></li>
-</ul>
-</li>
-<li><a href="#0x2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">0x2. 如何使用</a></li>
-<li><a href="#0x3-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0">0x3. 如何更新</a>
-<ul>
-<li><a href="#1-%E6%8F%92%E4%BB%B6%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6%E6%8E%A8%E8%8D%90">1). 插件更新机制（推荐）：</a></li>
-<li><a href="#2-%E6%89%8B%E5%8A%A8%E6%9B%B4%E6%96%B0">2). 手动更新：</a></li>
-</ul>
-</li>
-<li><a href="#0x4-%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E">0x4. 一些说明</a></li>
-<li><a href="#0x5-%E5%BC%80%E6%BA%90%E4%BF%A1%E6%81%AF">0x5. 开源信息</a></li>
-<li><a href="#0x6-%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%A7%E5%93%81">0x6. 支持的产品</a></li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -528,8 +326,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="http://Bule-Zst.gitee.io/mQjLrKUHc/">
-      Jetbrains系列产品重置试用方法
+    <a class="post-title-link" href="http://Bule-Zst.gitee.io/valine/">
+      Valine
     </a>
   </h1>
   <div class="post-meta">
@@ -537,36 +335,23 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-01-06 11:17:53">2021-01-06</span>
+      <span class="publish-time" data-t="2020-12-23 16:05:07">2020-12-23</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="http://Bule-Zst.gitee.io/waU6_4ip5/">
-        <span>编程工具</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>5<span class="language" data-lan="minute">分钟</span></span>
+      <span>1<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1364<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>19<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/mQjLrKUHc/" data-flag-title="Jetbrains系列产品重置试用方法" class="meta-item pc-show leancloud_visitors">
+    <span id="/valine/" data-flag-title="Valine" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -575,95 +360,7 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>本站惯例：本文假定你知道Jetbrains家的产品。不知道可以问问搜索引擎。</p>
-<p>没错，jetbrains-agent这个项目停止了。市面上漫天飞的各种最新都是其他大神的魔改版本。<br>
-我不是要专门写个博文来说明jetbrains-agent项目已经停止，然后缅怀感叹一番。这篇文章是想和大家聊聊另一种思路。</p>
-<h1 id="0x0-项目背景">0x0. 项目背景</h1>
-<p>Jetbrains家的产品有一个很良心的地方，他会允许你试用30天（这个数字写死在代码里了）以评估是否你真的需要为它而付费。<br>
-但很多时候会出现一种情况：IDE并不能按照我们实际的试用时间来计算。<br>
-我举个例子：如果我们开始了试用，然后媳妇生孩子要你回去陪产！陪产时我们并无空闲对IDE试用评估，它依旧算试用时间。（只是举个例子，或许你并没有女朋友）<br>
-发现了吗？你未能真的有30天来对它进行全面的试用评估，你甚至无法作出是否付费的决定。此时你会想要延长试用时间，然而Jetbrains并未提供相关功能，该怎么办？</p>
-<p>事实上有一款插件可以实现这个功能，你或许可以用它来重置一下试用时间。但切记不要无休止的一直试用，这并不是这个插件的本意！</p>
-<h1 id="0x1-如何安装">0x1. 如何安装</h1>
-<h2 id="1-插件市场安装">1). 插件市场安装：</h2>
-<ul>
-<li>在Settings/Preferences... -&gt; Plugins 内手动添加第三方插件仓库地址：https://plugins.zhile.io</li>
-<li>搜索：<code>IDE Eval Reset</code>插件进行安装。如果搜索不到请注意是否做好了上一步？网络是否通畅？</li>
-<li>插件会提示安装成功。</li>
-</ul>
-<h2 id="2-下载安装">2). 下载安装：</h2>
-<ul>
-<li>点击这个<a href="https://plugins.zhile.io/files/ide-eval-resetter-2.1.6.zip">链接(v2.1.6)</a>下载插件的zip包（macOS可能会自动解压，然后把zip包丢进回收站）</li>
-<li>通常可以直接把zip包拖进IDE的窗口来进行插件的安装。如果无法拖动安装，你可以在Settings/Preferences... -&gt; Plugins 里手动安装插件（Install Plugin From Disk...）</li>
-<li>插件会提示安装成功。</li>
-</ul>
-<h1 id="0x2-如何使用">0x2. 如何使用</h1>
-<ul>
-<li>一般来说，在IDE窗口切出去或切回来时（窗口失去/得到焦点）会触发事件，检测是否长时间（25天）没有重置，给通知让你选择。（初次安装因为无法获取上次重置时间，会直接给予提示）</li>
-<li>也可以手动唤出插件的主界面：
-<ul>
-<li>如果IDE没有打开项目，在Welcome界面点击菜单：Get Help -&gt; Eval Reset</li>
-<li>如果IDE打开了项目，点击菜单：Help -&gt; Eval Reset</li>
-</ul>
-</li>
-<li>唤出的插件主界面中包含了一些显示信息，2个按钮，1个勾选项：
-<ul>
-<li>按钮：Reload 用来刷新界面上的显示信息。</li>
-<li>按钮：Reset 点击会询问是否重置试用信息并重启IDE。选择Yes则执行重置操作并重启IDE生效，选择No则什么也不做。（此为手动重置方式）</li>
-<li>勾选项：Auto reset before per restart 如果勾选了，则自勾选后每次重启/退出IDE时会自动重置试用信息，你无需做额外的事情。（此为自动重置方式）</li>
-</ul>
-</li>
-</ul>
-<h1 id="0x3-如何更新">0x3. 如何更新</h1>
-<h2 id="1-插件更新机制推荐">1). 插件更新机制（推荐）：</h2>
-<ul>
-<li>IDE会自行检测其自身和所安装插件的更新并给予提示。如果本插件有更新，你会收到提示看到更新日志，自行选择是否更新。</li>
-<li>点击IDE的<code>Check for Updates...</code>菜单手动检测IDE和所安装插件的更新。如果本插件有更新，你会收到提示看到更新日志，自行选择是否更新。</li>
-<li>插件更新可能会需要重启IDE。</li>
-</ul>
-<h2 id="2-手动更新">2). 手动更新：</h2>
-<ul>
-<li>从本页面下载最新的插件zip包安装更新。参考本文：<code>下载安装</code>小节。</li>
-<li>插件更新需要重启IDE。</li>
-</ul>
-<h1 id="0x4-一些说明">0x4. 一些说明</h1>
-<ul>
-<li>本插件默认不会显示其主界面，如果你需要，参考本文：<code>如何使用</code>小节。</li>
-<li>市场付费插件的试用信息也会一并重置。</li>
-<li>对于某些付费插件（如: Iedis 2, MinBatis）来说，你可能需要去取掉javaagent配置（如果有）后重启IDE：
-<ul>
-<li>如果IDE没有打开项目，在Welcome界面点击菜单：Configure -&gt; Edit Custom VM Options... -&gt; 移除 -javaagent: 开头的行。</li>
-<li>如果IDE打开了项目，点击菜单：Help -&gt; Edit Custom VM Options... -&gt; 移除 -javaagent: 开头的行。</li>
-</ul>
-</li>
-<li>重置需要重启IDE生效！</li>
-<li>重置后并不弹出Licenses对话框让你选择输入License或试用，这和之前的重置脚本/插件不同（省去这烦人的一步）。</li>
-<li>如果长达25天不曾有任何重置动作，IDE会有通知询问你是否进行重置。</li>
-<li>如果勾选：Auto reset before per restart ，重置是静默无感知的。</li>
-<li>简单来说：勾选了Auto reset before per restart则无需再管，一劳永逸。</li>
-</ul>
-<h1 id="0x5-开源信息">0x5. 开源信息</h1>
-<ul>
-<li>插件是学习研究项目，源代码是开放的。源码仓库地址：<a href="https://gitee.com/pengzhile/ide-eval-resetter">Gitee</a>。</li>
-<li>如果你有更好的想法，欢迎给我提Pull Request来共同研究完善。</li>
-<li>插件源码使用：GPL-2.0开源协议发布。</li>
-<li>插件使用PHP编写，毕竟PHP是世界上最好的编程语言！</li>
-</ul>
-<h1 id="0x6-支持的产品">0x6. 支持的产品</h1>
-<ul>
-<li>IntelliJ IDEA</li>
-<li>AppCode</li>
-<li>CLion</li>
-<li>DataGrip</li>
-<li>GoLand</li>
-<li>PhpStorm</li>
-<li>PyCharm</li>
-<li>Rider</li>
-<li>RubyMine</li>
-<li>WebStorm</li>
-</ul>
-<hr>
-<p>from <a href="https://zhile.io/2020/11/18/jetbrains-eval-reset.html">https://zhile.io/2020/11/18/jetbrains-eval-reset.html</a></p>
+              <p>这篇文章主要用于让python脚本定时评论，唤醒Valine。</p>
 
             </div>
             
@@ -676,7 +373,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="http://Bule-Zst.gitee.io/mQjLrKUHc/" title="Jetbrains系列产品重置试用方法">http://Bule-Zst.gitee.io/mQjLrKUHc/</a>
+      <a href="http://Bule-Zst.gitee.io/valine/" title="Valine">http://Bule-Zst.gitee.io/valine/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -685,22 +382,12 @@
   </ul>
   <div class="tags">
     
-      <a href="http://Bule-Zst.gitee.io/waU6_4ip5/"># 编程工具</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="MySQL性能优化" href="http://Bule-Zst.gitee.io/jvgYk8JbI/">MySQL性能优化</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="MySQL性能优化" href="http://Bule-Zst.gitee.io/jvgYk8JbI/">上一篇</a>
-      
     </div>
     <div class="nav-next">
-      
-        <a class="nav-pc-next" title="LeetCode 410. 分割数组的最大值" href="http://Bule-Zst.gitee.io/vus3sqCc8/">LeetCode 410. 分割数组的最大值</a>
-        <a class="nav-mobile-next" title="LeetCode 410. 分割数组的最大值" href="http://Bule-Zst.gitee.io/vus3sqCc8/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
