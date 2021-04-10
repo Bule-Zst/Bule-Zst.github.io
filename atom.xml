@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-10T04:44:27.449Z</updated>
+    <updated>2021-04-10T04:49:32.942Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -32,8 +32,8 @@
 <li>第二，在创建完项目后，需要开启pages服务。</li>
 <li>第三，记得要往项目中添加index.html文件，这一步主要用于测试。</li>
 </ul>
-<p>完成参考文章中的步骤后，访问网址（用户名.gitee.io），看看能不能加载出内容。<br>
-<img src="http://Bule-Zst.gitee.io/post-images/1618028959506.png" alt="" loading="lazy"></p>
+<p>完成参考文章中的步骤后，访问网址（用户名.gitee.io），看看能不能加载出内容。</p>
+<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/1618028959506.png" alt="" loading="lazy"></figure>
 <h2 id="修改gridea配置">修改Gridea配置</h2>
 <p>第二步，需要修改Gridea中的配置<br>
 <img src="http://Bule-Zst.gitee.io/post-images/1618029063220.png" alt="" loading="lazy"><br>
@@ -45,16 +45,17 @@
 打开后会发现，有一个remote，这个就是之前我们配置的github仓库</p>
 <p>我们将码云中创建的项目也添加到remote中<br>
 <img src="http://Bule-Zst.gitee.io/post-images/1618029472492.png" alt="" loading="lazy"></p>
-<p>然后，点击Gridea中的同步，将本地博客项目同步到github项目中，之后点击push按钮，将本地项目推送到码云项目中。</p>
+<p>然后，点击Gridea中的同步，将本地博客项目同步到github项目中。</p>
+<p>之后点击push按钮，将本地项目推送到码云项目中。</p>
 <p>在点击push按钮后，可能会让我们选择需要推送的目标仓库，注意要选择码云中的项目。</p>
 <p>在推送完成后，回到码云项目中，点击Gitee Pages按钮，进入pages管理界面<br>
 <img src="http://Bule-Zst.gitee.io/post-images/1618029658643.png" alt="" loading="lazy"></p>
-<p>点击更新按钮<br>
-<img src="http://Bule-Zst.gitee.io/post-images/1618029730998.png" alt="" loading="lazy"></p>
-<p>在更新完成后，访问博客网址（用户名.gitee.io），就能看到博客的内容了<br>
-<img src="http://Bule-Zst.gitee.io/post-images/1618029790776.png" alt="" loading="lazy"><br>
-大功告成！</p>
-<p>最后还需要说一点，就是，每次推送博客更新到码云项目后，都需要点击pages中的更新按钮进行更新，这是因为对于免费版的码云，不支持自动更新。</p>
+<p>点击更新按钮</p>
+<figure data-type="image" tabindex="2"><img src="http://Bule-Zst.gitee.io/post-images/1618029730998.png" alt="" loading="lazy"></figure>
+<p>在更新完成后，访问博客网址（用户名.gitee.io），就能看到博客的内容了</p>
+<figure data-type="image" tabindex="3"><img src="http://Bule-Zst.gitee.io/post-images/1618029790776.png" alt="" loading="lazy"></figure>
+<p>大功告成！</p>
+<p>最后还需要说一点，就是，每次推送博客更新到码云项目后，都需要点击pages中的更新按钮进行更新，这是因为对于免费版的码云，不支持pages的自动更新。</p>
 <p>虽然这样好像有点麻烦，对我觉得，相对于github的访问速度来说，我还是更偏向于码云一些。</p>
 ]]></content>
     </entry>
