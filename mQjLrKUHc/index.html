@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>Jetbrains系列产品重置试用方法 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1618024213974">
+<link rel="shortcut icon" href="/favicon.ico?v=1618029863911">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1731,8 +1731,47 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/cRC2jYBGG/"" data-c="
-          &lt;p&gt;之前写过文章，通过Gridea+github&lt;/p&gt;
+          &lt;p&gt;之前写过文章，通过Gridea+github搭建个人博客 &lt;a href=&#34;https://bule-zst.gitee.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/&#34;&gt;基于Gridea+github/coding搭建静态博客&lt;/a&gt;，但使用了一段时间后，发现加载速度实在是太慢了，而且cdn更新也不太稳定。&lt;/p&gt;
+&lt;p&gt;今天突发奇想，可以使用码云部署自己的个人博客，说干就干。&lt;/p&gt;
 &lt;hr&gt;
+&lt;h1 id=&#34;gridea个人博客搭建的原理&#34;&gt;Gridea个人博客搭建的原理&lt;/h1&gt;
+&lt;p&gt;首先，和大家讲一下Gridea个人博客的搭建原理，如果只想看操作步骤的话，可以跳过这一节。&lt;/p&gt;
+&lt;p&gt;Github为我们提供了一个功能，叫github pages，可以用于展示&lt;strong&gt;静态&lt;/strong&gt;网页，Gridea正是利用了github pages这一功能来搭建博客的。&lt;/p&gt;
+&lt;p&gt;我们在github上创建项目后，可以为项目开启github pages功能，开启后，访问对应的网址，就会加载项目中的静态网页，例如在项目根目录下放入index.html文件，当访问项目时，就会展示index.html中的内容。&lt;/p&gt;
+&lt;p&gt;而，只要是git系列的产品，理论上都有pages的功能，码云也不例外，因此，我们可以将Gridea生成的博客项目推送到码云项目中，然后开启码云项目的pages功能，就可以利用码云来搭建博客了。&lt;/p&gt;
+&lt;h1 id=&#34;具体操作步骤&#34;&gt;具体操作步骤&lt;/h1&gt;
+&lt;h2 id=&#34;码云&#34;&gt;码云&lt;/h2&gt;
+&lt;p&gt;首先，需要在码云上创建项目，并开启pages功能，具体可参考&lt;a href=&#34;https://gitee.com/help/articles/4136#article-header0&#34;&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这里提一些容易忽略的细节：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先，和github不一样，在码云中创建的项目的项目名，需要和用户名一样。&lt;/li&gt;
+&lt;li&gt;第二，在创建完项目后，需要开启pages服务。&lt;/li&gt;
+&lt;li&gt;第三，记得要往项目中添加index.html文件，这一步主要用于测试。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完成参考文章中的步骤后，访问网址（用户名.gitee.io），看看能不能加载出内容。&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618028959506.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;修改gridea配置&#34;&gt;修改Gridea配置&lt;/h2&gt;
+&lt;p&gt;第二步，需要修改Gridea中的配置&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618029063220.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+其余地方都不变，只需要修改图中红色框框出来的域名，改成码云对应的网址（用户名.gitee.io）&lt;/p&gt;
+&lt;h2 id=&#34;推送项目到码云并更新pages服务&#34;&gt;推送项目到码云，并更新pages服务&lt;/h2&gt;
+&lt;p&gt;第三步，需要将Gridea生成的个人博客项目推送到码云上，在这一步中，我用的是git可视化管理工具-gtikraken，如果git基本功比较好的，也可以在git bash中进行操作。&lt;/p&gt;
+&lt;p&gt;首先用gitkraken打开本地个人博客项目，目录是：/个人博客项目根目录/output&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618029373237.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+打开后会发现，有一个remote，这个就是之前我们配置的github仓库&lt;/p&gt;
+&lt;p&gt;我们将码云中创建的项目也添加到remote中&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618029472492.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后，点击Gridea中的同步，将本地博客项目同步到github项目中，之后点击push按钮，将本地项目推送到码云项目中。&lt;/p&gt;
+&lt;p&gt;在点击push按钮后，可能会让我们选择需要推送的目标仓库，注意要选择码云中的项目。&lt;/p&gt;
+&lt;p&gt;在推送完成后，回到码云项目中，点击Gitee Pages按钮，进入pages管理界面&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618029658643.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击更新按钮&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618029730998.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在更新完成后，访问博客网址（用户名.gitee.io），就能看到博客的内容了&lt;br&gt;
+&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618029790776.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+大功告成！&lt;/p&gt;
+&lt;p&gt;最后还需要说一点，就是，每次推送博客更新到码云项目后，都需要点击pages中的更新按钮进行更新，这是因为对于免费版的码云，不支持自动更新。&lt;/p&gt;
+&lt;p&gt;虽然这样好像有点麻烦，对我觉得，相对于github的访问速度来说，我还是更偏向于码云一些。&lt;/p&gt;
 ">使用码云（gitee）提升博客访问速度</a>
       </div>
       
