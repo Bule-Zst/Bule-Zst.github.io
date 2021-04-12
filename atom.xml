@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-10T05:10:34.906Z</updated>
+    <updated>2021-04-12T13:46:27.957Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -388,8 +388,8 @@ public:
     </entry>
     <entry>
         <title type="html"><![CDATA[题库]]></title>
-        <id>http://Bule-Zst.gitee.io/ti_ku/</id>
-        <link href="http://Bule-Zst.gitee.io/ti_ku/">
+        <id>http://Bule-Zst.gitee.io/2020-12-26-题库/</id>
+        <link href="http://Bule-Zst.gitee.io/2020-12-26-题库/">
         </link>
         <updated>2020-12-26T08:17:20.000Z</updated>
         <content type="html"><![CDATA[<h1 id="打表">打表</h1>
@@ -419,13 +419,20 @@ public:
 <ul>
 <li><a href="https://leetcode-cn.com/problems/daily-temperatures/">739. 每日温度</a></li>
 <li><a href="https://leetcode-cn.com/problems/next-greater-element-i/">496. 下一个更大元素 I</a></li>
+<li><a href="https://leetcode-cn.com/problems/remove-k-digits/">402. 移掉K位数字</a></li>
+<li><a href="https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/">581. 最短无序连续子数组</a></li>
 <li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
+<li><a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84. 柱状图中最大的矩形</a></li>
 <li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
 </ul>
 <h3 id="中缀转后缀">中缀转后缀</h3>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/basic-calculator/">224. 基本计算器</a></li>
 <li><a href="https://leetcode-cn.com/problems/basic-calculator-ii/">227. 基本计算器 II</a></li>
+</ul>
+<h1 id="单调队列">单调队列</h1>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></li>
 </ul>
 <h1 id="计算几何">计算几何</h1>
 <h2 id="凸包">凸包</h2>
@@ -441,14 +448,36 @@ public:
 <li><a href="https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845">ZOJ 1346 Comparing Your Heroes</a></li>
 <li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
 <li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
+<li><a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">416. 分割等和子集</a></li>
+<li><a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">300. 最长递增子序列</a></li>
+</ul>
+<h2 id="旅行商问题">旅行商问题</h2>
+<ul>
+<li><a href="https://www.nowcoder.com/questionTerminal/3d1adf0f16474c90b27a9954b71d125d">毕业旅行问题</a></li>
 </ul>
 <h1 id="模拟">模拟</h1>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
 </ul>
-<h1 id="其他">其他</h1>
+<h1 id="全排列生成算法">全排列生成算法</h1>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/permutations-ii/">47. 全排列 II</a></li>
+</ul>
+<h1 id="快速幂">快速幂</h1>
+<h2 id="矩阵快速幂">矩阵快速幂</h2>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/P1962">P1962 斐波那契数列</a></li>
+</ul>
+<h1 id="图论">图论</h1>
+<h2 id="最短路">最短路</h2>
+<h3 id="dijkstra">Dijkstra</h3>
+<ul>
+<li><a href="https://practice.geeksforgeeks.org/problems/minimum-cost-path3833/1">Minimum Cost Path</a></li>
+</ul>
+<h1 id="思维">思维</h1>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/">Pairs with same Manhattan and Euclidean distance</a></li>
+<li><a href="https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1">Geek collects the balls</a></li>
 </ul>
 ]]></content>
     </entry>
