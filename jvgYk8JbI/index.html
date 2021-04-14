@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>MySQL性能优化 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1618370283176">
+<link rel="shortcut icon" href="/favicon.ico?v=1618370792531">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1759,7 +1759,7 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-04-13-南京大学-高级算法课程-复习笔记/"" data-c="
-          &lt;h1 id=&#34;迭代改进&#34;&gt;迭代改进&lt;/h1&gt;
+          &lt;h2 id=&#34;迭代改进&#34;&gt;迭代改进&lt;/h2&gt;
 &lt;p&gt;算法思想：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;贪婪：采用每步最优策略，逐步构造问题的解。最终生成的解，不一定是最优解。&lt;/li&gt;
@@ -1772,10 +1772,10 @@
 &lt;li&gt;如何判断局部最优解是全局最优解？&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;算法实例：遗传算法、蚁群算法、梯度下降算法。&lt;/p&gt;
-&lt;h2 id=&#34;线性规划&#34;&gt;线性规划&lt;/h2&gt;
+&lt;h3 id=&#34;线性规划&#34;&gt;线性规划&lt;/h3&gt;
 &lt;p&gt;线性规划问题：在一系列线性约束下，求一个包含若干变量的线性方程的最优解。&lt;br&gt;
 &lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618313856251.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;极值定理&#34;&gt;极值定理&lt;/h3&gt;
+&lt;h4 id=&#34;极值定理&#34;&gt;极值定理&lt;/h4&gt;
 &lt;p&gt;极值定理：可行区域非空的任意线性规划问题有最优解，且最优解总能够在其可行区域的一个&lt;strong&gt;极点&lt;/strong&gt;上找到。&lt;/p&gt;
 &lt;p&gt;利用极值定理解决线性规划问题：&lt;/p&gt;
 &lt;ul&gt;
@@ -1787,7 +1787,7 @@
 &lt;li&gt;无法生成所有的极点&lt;/li&gt;
 &lt;li&gt;无法遍历所有的极点（当问题规模变大，极点个数呈爆炸式增长，无法全部遍历）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;单纯形法&#34;&gt;单纯形法&lt;/h3&gt;
+&lt;h4 id=&#34;单纯形法&#34;&gt;单纯形法&lt;/h4&gt;
 &lt;p&gt;单纯形法：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;算法思想：先在可行区域中找到一个极点，然后检查在邻接极点处是否能够优化，如果能，则继续处理该邻接极点；如果不能，则当前极点即为最优解。&lt;/li&gt;
@@ -1806,7 +1806,7 @@
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/ECJTUACM-873284962/p/7097864.html&#34;&gt;线性规划之单纯形法【超详解+图解】&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/xvshu/article/details/23288787&#34;&gt;运筹学·单纯形法——原理剖析&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;为什么基本可行解与可行区域的极点一一对应&#34;&gt;为什么基本可行解与可行区域的极点一一对应？&lt;/h4&gt;
+&lt;h5 id=&#34;为什么基本可行解与可行区域的极点一一对应&#34;&gt;为什么基本可行解与可行区域的极点一一对应？&lt;/h5&gt;
 &lt;p&gt;我们从二维来理解这个问题，对于高维，也是同样的道理，只是二维比较好描述、且比较好理解。&lt;/p&gt;
 &lt;p&gt;要解答这个问题，我们先尝试理解另一个问题，为什么基本解与图上的交点一一对应？&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/1618367158808.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
@@ -1824,7 +1824,7 @@
 &lt;p&gt;那么如何将线性约束方程与单纯性表结合起来呢，如果看了之前&lt;a href=&#34;https://www.cnblogs.com/ECJTUACM-873284962/p/7097864.html&#34;&gt;讲原理的博客&lt;/a&gt;，我们就会知道，每一张单纯性表，其实本质上都是将n-m个非基本变量的值设为0，然后算出原约束方程中n-m个变量的值，从而求出目标表达式的值。&lt;/p&gt;
 &lt;p&gt;那么，我们将n-m个非基本变量的值设为0，其实就是选择了n-m个不等式。如上所述，当我们选择了n-m个不等式，就能确定原约束方程中n-m个变量的值，也就相当于确定了一个交点。&lt;/p&gt;
 &lt;p&gt;如果这个交点又是可行区域内的交点，那么其就是可行区域的极点，在单纯形表中的体现就是，基本解的值非负。&lt;/p&gt;
-&lt;h4 id=&#34;参考资料&#34;&gt;参考资料&lt;/h4&gt;
+&lt;h5 id=&#34;参考资料&#34;&gt;参考资料&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/39071505/answer/131945180&#34;&gt;怎么用简单的语言理解基变量与非基变量？&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/26840528/answer/34257469&#34;&gt;如何理解线性规划中的单纯形法和单纯形表？&lt;/a&gt;&lt;/li&gt;
