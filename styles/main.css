@@ -144,16 +144,6 @@ blockquote {
   width: 100%;
   height: 100%;
 }
-@media (max-width: 991px) and (min-width: 768px) {
-  .bg-img {
-    display: none;
-  }
-}
-@media (max-width: 767px) {
-  .bg-img {
-    display: none;
-  }
-}
 .aplayer-title,
 .aplayer-list-title {
   color: #000;
@@ -2125,23 +2115,7 @@ body {
     .nav-item:hover {
       background: #f9f9f9fe;
       color: rgba(0, 0, 0, 0.98);
-    }.site-author-image {
-      border-radius: 50%;
-    }
-    .site-author-image:hover {
-      transform: rotate(666turn);
-      transition-delay: 1s;
-      transition-property: all;
-      transition-duration: 59s;
-      transition-timing-function: cubic-bezier(.34,0,.84,1);
-    }.pisces .blog-header, .gemini .blog-header {
-        right: 0;
-      }
-      .pisces .section-layout-wrapper, .gemini .section-layout-wrapper {
-        flex-direction: row-reverse !important;
-      }.pisces .sidebar, .gemini .sidebar {
-        right: 0;
-      }.markdownIt-TOC a {
+    }.markdownIt-TOC a {
       color: #868e96;
       border-bottom-color: #868e96;
     }.markdownIt-TOC a:hover {
