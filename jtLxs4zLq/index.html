@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>《高性能MySql》笔记 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1618370792531">
+<link rel="shortcut icon" href="/favicon.ico?v=1618370964622">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1769,17 +1769,11 @@
 &lt;li&gt;无法遍历所有的极点（当问题规模变大，极点个数呈爆炸式增长，无法全部遍历）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;单纯形法&#34;&gt;单纯形法&lt;/h4&gt;
-&lt;p&gt;单纯形法：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;算法思想：先在可行区域中找到一个极点，然后检查在邻接极点处是否能够优化，如果能，则继续处理该邻接极点；如果不能，则当前极点即为最优解。&lt;/li&gt;
-&lt;li&gt;局限性：
-&lt;ul&gt;
-&lt;li&gt;只能解决最大化问题&lt;/li&gt;
-&lt;li&gt;所有变量都非负&lt;/li&gt;
-&lt;li&gt;除非负约束外，其余约束都必须为等式。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;算法思想：先在可行区域中找到一个极点，然后检查在邻接极点处是否能够优化，如果能，则继续处理该邻接极点；如果不能，则当前极点即为最优解。&lt;/p&gt;
+&lt;p&gt;局限性：&lt;br&gt;
+- 只能解决最大化问题&lt;br&gt;
+- 所有变量都非负&lt;br&gt;
+- 除非负约束外，其余约束都必须为等式。&lt;/p&gt;
 &lt;p&gt;单纯性&lt;strong&gt;表&lt;/strong&gt;：解决线性规划问题的一种方法、工具，其中，蕴含了单纯形法的思想。&lt;/p&gt;
 &lt;p&gt;单纯形表的计算过程：&lt;a href=&#34;https://www.bilibili.com/video/BV16t411F7Zu?t=697&#34;&gt;十分钟带你学单纯形法&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;单纯形表原理：&lt;/p&gt;

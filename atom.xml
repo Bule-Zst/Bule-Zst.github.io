@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-14T03:28:02.102Z</updated>
+    <updated>2021-04-14T03:29:29.113Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -44,17 +44,11 @@
 <li>无法遍历所有的极点（当问题规模变大，极点个数呈爆炸式增长，无法全部遍历）</li>
 </ul>
 <h4 id="单纯形法">单纯形法</h4>
-<p>单纯形法：</p>
-<ul>
-<li>算法思想：先在可行区域中找到一个极点，然后检查在邻接极点处是否能够优化，如果能，则继续处理该邻接极点；如果不能，则当前极点即为最优解。</li>
-<li>局限性：
-<ul>
-<li>只能解决最大化问题</li>
-<li>所有变量都非负</li>
-<li>除非负约束外，其余约束都必须为等式。</li>
-</ul>
-</li>
-</ul>
+<p>算法思想：先在可行区域中找到一个极点，然后检查在邻接极点处是否能够优化，如果能，则继续处理该邻接极点；如果不能，则当前极点即为最优解。</p>
+<p>局限性：<br>
+- 只能解决最大化问题<br>
+- 所有变量都非负<br>
+- 除非负约束外，其余约束都必须为等式。</p>
 <p>单纯性<strong>表</strong>：解决线性规划问题的一种方法、工具，其中，蕴含了单纯形法的思想。</p>
 <p>单纯形表的计算过程：<a href="https://www.bilibili.com/video/BV16t411F7Zu?t=697">十分钟带你学单纯形法</a></p>
 <p>单纯形表原理：</p>
