@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>防御式编程（Defensive Programming） | Bule-Zst</title>
+<title>南京大学-高级数据库开发技术-复习笔记 | Bule-Zst</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1618493562283">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -62,8 +62,8 @@
 </script>
 
 
-  <meta name="description" content="防御式编程（Defensive Programming）" />
-  <meta name="keywords" content="编程思想" />
+  <meta name="description" content="南京大学-高级数据库开发技术-复习笔记" />
+  <meta name="keywords" content="复习笔记,数据库" />
 </head>
 
 <body>
@@ -257,18 +257,38 @@
   <div class="toc-wrapper auto-number no_compress"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li><a href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2">写在前面</a></li>
-<li><a href="#defensive-programming">Defensive Programming</a>
+<li>
 <ul>
-<li><a href="#%E4%BF%9D%E6%8A%A4%E7%A8%8B%E5%BA%8F%E5%85%8D%E9%81%AD%E9%9D%9E%E6%B3%95%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E7%A0%B4%E5%9D%8F">保护程序免遭非法输入数据的破坏</a></li>
-<li><a href="#%E6%96%AD%E8%A8%80">断言</a></li>
-<li><a href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF">错误处理技术</a></li>
-<li><a href="#%E5%BC%82%E5%B8%B8">异常</a></li>
-<li><a href="#%E9%9A%94%E6%A0%8F">隔栏</a></li>
-<li><a href="#%E8%BE%85%E5%8A%A9%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81">辅助调试代码</a></li>
-<li><a href="#%E5%AF%B9%E9%98%B2%E5%BE%A1%E5%BC%8F%E7%BC%96%E7%A8%8B%E9%87%87%E5%8F%96%E9%98%B2%E5%BE%A1%E7%9A%84%E5%A7%BF%E6%80%81">对防御式编程采取防御的姿态</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#%E6%8E%A8%E8%8D%90">推荐</a></li>
+<li><a href="#b%E6%A0%91-b%E6%A0%91%E7%B4%A2%E5%BC%95">B树、B+树索引</a>
+<ul>
+<li><a href="#%E9%98%B6%E7%9A%84%E5%90%AB%E4%B9%89">阶的含义</a></li>
+<li><a href="#%E7%94%BB%E7%BB%93%E6%9E%84">画结构</a></li>
+<li><a href="#b%E6%A0%91%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">B+树使用场景</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E5%8C%BA">分区</a>
+<ul>
+<li><a href="#%E5%88%86%E5%8C%BA%E6%98%AF%E5%B9%B2%E5%98%9B%E7%94%A8%E7%9A%84">分区是干嘛用的</a></li>
+<li><a href="#%E6%A0%B9%E6%8D%AE%E5%88%86%E5%8C%BA%E9%94%AEpartition-key%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%86%E7%B1%BB%E5%88%86%E5%8C%BA%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B">根据分区键（Partition Key）的类型分类，分区有哪几种类型？</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%88%86%E5%8C%BA%E9%94%AE-%E9%80%89%E6%8B%A9%E5%8E%9F%E5%88%99%E6%98%AF%E4%BB%80%E4%B9%88">如何选择分区键、选择原则是什么</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99">设计原则</a>
+<ul>
+<li><a href="#%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%BC%8F%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E5%AE%9E%E6%97%B6%E7%B3%BB%E7%BB%9F">操作模式：批处理与实时系统</a></li>
+<li><a href="#%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F%E9%9B%86%E4%B8%AD%E5%BC%8F%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F">存储模式：集中式与分布式</a></li>
+</ul>
+</li>
+<li><a href="#sql">SQL</a>
+<ul>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C">查询优化器如何工作</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1">数据库设计</a>
+<ul>
+<li><a href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">层次结构</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -536,8 +556,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="http://Bule-Zst.gitee.io/dU5GQhPud/">
-      防御式编程（Defensive Programming）
+    <a class="post-title-link" href="http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/">
+      南京大学-高级数据库开发技术-复习笔记
     </a>
   </h1>
   <div class="post-meta">
@@ -545,7 +565,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-12-20 16:34:55">2020-12-20</span>
+      <span class="publish-time" data-t="2021-04-15 15:35:25">2021-04-15</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -554,8 +574,14 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="http://Bule-Zst.gitee.io/QfpF2izVU/">
-        <span>编程思想</span>
+      <a href="http://Bule-Zst.gitee.io/复习笔记/">
+        <span>复习笔记</span>
+      </a>、
+      
+      
+      
+      <a href="http://Bule-Zst.gitee.io/SCVZKCu1U/">
+        <span>数据库</span>
       </a>
       
       
@@ -564,17 +590,17 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>27<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>7390<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>699<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/dU5GQhPud/" data-flag-title="防御式编程（Defensive Programming）" class="meta-item pc-show leancloud_visitors">
+    <span id="/2021-04-15-南京大学-高级数据库开发技术-复习笔记/" data-flag-title="南京大学-高级数据库开发技术-复习笔记" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -583,394 +609,77 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h1 id="写在前面">写在前面</h1>
-<p>新的一年开始了，大家都立下了什么新年flag呢？好久没有更新简书了，最近在看《代码大全》对于第八章的防御式编程颇有感慨，正好最近又是在准备公司的技术分享，索性用<code>md</code>写了篇博文，总结了一下又增加了一些我个人的理解，在这里跟各位分享一下。</p>
-<h1 id="defensive-programming">Defensive Programming</h1>
-<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/1608456004690.webp" alt="" loading="lazy"></figure>
-<p><strong>防御式编程（Defensive Programming）</strong>是提高软件质量技术的有益辅助手段</p>
-<p>怎么理解呢？防御式编程思想的理解可以参考防御式驾驶：</p>
-<p>在防御式驾驶中要建立这样一种思维，那就是你水远也不能确定另一位司机将要做什么。这样才能确保在其他人做出危险动作时你也不会受到伤害。你要承担起保护自己的责任，哪怕是其他司机犯的错误。</p>
-<figure data-type="image" tabindex="2"><img src="http://Bule-Zst.gitee.io/post-images/1608456590306.png" alt="" loading="lazy"></figure>
-<p>防御式编程的主要思想是：</p>
-<p><strong>子程序应该不因传入错误数据而被破坏，哪怕是由其他子程序产生的错误数据。</strong></p>
-<p>更一般地说，其核心想法是要承认程序都会有问题，都需要被修改，聪明的程序员应该根据这一点来编程序，这种思想是将可能出现的错误造成的影响控制在有限的范围内。</p>
-<h2 id="保护程序免遭非法输入数据的破坏">保护程序免遭非法输入数据的破坏</h2>
-<p>计算机领域有着一句<code>GIGO(Garbage In Garbage Out)</code>俗语，翻译过来就是<code>垃圾进，垃圾出</code>，意思就是<code>有垃圾数据进来后，出来的也是垃圾数据</code>。</p>
-<figure data-type="image" tabindex="3"><img src="http://Bule-Zst.gitee.io/post-images/1608456659523.png" alt="" loading="lazy"></figure>
-<p>而就目前而言，对于已经成型的产品可能单单是这种原则并不适用，而是应该做到<code>垃圾进，什么也不出</code>、<code>垃圾进，出去的是错误提示</code>、<code>垃圾进，经过筛选提取，出去的是有用信息</code>或是<code>不许垃圾进来</code>。换句话说，<code>GIGO</code>于今天的标准看来已然是差劲程序的标志了。</p>
-<p>防御式编程针对垃圾进这种情况，有以下三种方法处理：</p>
-<h4> 1、检查所有来源于外部的数据</h4>
-<p>当从文件、用户、网络或其他外部接口中获取数据时，应检查所获得的数据值，以确保它在允许的范围内。</p>
-<h4> 2、检查子程序所有输入参数的值</h4>
-<p>检查子程序输入参数的值，事实上和检查来源于外部的数据一样，只不过数据来源于其他子程序而非外部接口。</p>
-<h4> 3、决定如何处理错误的输入数据</h4>
-<p>一旦检测到非法的参数，你该如何处理它呢？根据情况的不同，你可以选择适合你的<code>错误处理技术</code>或<code>断言</code>来处理。</p>
-<p>接下来我们将针对以上所说的情况讲解防御式编程中需要掌握的方式：</p>
-<h2 id="断言">断言</h2>
-<figure data-type="image" tabindex="4"><img src="http://Bule-Zst.gitee.io/post-images/1608456704145.webp" alt="" loading="lazy"></figure>
-<p>断言是指在开发期间使用的、让程序在运行时进行自检的代码（通常为宏或一个子程序）。断言为真则程序正常运行，断言为假则意味着代码中发生了错误。</p>
-<p>举个例子：一份客户信息程序要求包含记录数不超过10，我们加一个断言。当记录数小于10，断言会默默无语两眼泪，当超过10，断言就会大声的说程序中存在一个错误！</p>
-<p>断言对于大型复杂程序或可靠性要求极高的程序来说尤为重要。通过使用断言，程序员能更快速排查出因修改代码或者别的原因，而弄进程序里不匹配的接口和错误等。</p>
-<p>OC中内置的断言：（<strong>iOS每个线程都可以指定断言处理器。想设置一个 NSAssertionHandler 的子类来处理失败的断言，在线程的 threadDictionary 对象中设置 NSAssertionHandlerKey 字段即可</strong>）</p>
-<p>对NSAssertionHandler有兴趣的童鞋请移步：<a href="https://nshipster.cn/nsassertionhandler/" target="_blank" rel="nofollow">传送门</a></p>
-<pre><code>#define NSAssert(condition, desc, ...)  \
-    do {                \
-    __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-    if (__builtin_expect(!(condition), 0)) {        \
-            NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
-            __assert_file__ = __assert_file__ ? __assert_file__ : @&quot;&lt;Unknown File&gt;&quot;; \
-        [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
-        object:self file:__assert_file__ \
-            lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
-    }               \
-        __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
-    } while(0)
-#endif
-</code></pre>
-<p>下面将介绍一下断言使用时的建议：</p>
-<h4> 1、建立自己的断言机制</h4>
-<p>很多时候，系统自带的断言无法满足我们的需求，比如iOS断言在release模式下会失效，那么我们可以自定义断言来适应我们的项目</p>
-<p>下面是C++的断言宏示例：</p>
-<pre><code>
-#define ASSERT(condition, message) {    \
-    if (!condition) {                   \
-        Log(&quot;ERROR &quot;,condition,message);\
-        exit( EXIT_FAILURE );           \
-    }                                   \
-}                                       \
-
-</code></pre>
-<p>OC中示例：</p>
-<pre><code>#define WYHAssert(condition, desc)  \
-if (DEBUG) {                        \
-   NSAssert(condition, desc);       \
-}else {                             \
-   NSString *app_build = [[NSBundle mainBundle].infoDictionary objectForKey:@&quot;CFBundleVersion&quot;]; \
-NSLog(@&quot;Assert Error condition:%@ (desc: %@) \n Occur in &lt;%s&gt;&lt;第%d行&gt; , AppBuildVersion:%@&quot;,condition,desc,__FILE__,__LINE__,app_build); \
-   [LogModule postLog];                            \
-} \
-</code></pre>
-<h4> 2、用错误处理代码处理预期发生的状况，用断言去处理那些不可发生的错误！</h4>
-<p>断言和错误处理代码的区别：</p>
-<p>断言是用来检查永远不该发生的情况，而错误处理代码(error-handling code)是用来检查不太可能经常发生的情况，这些情况是能在写代码时被预料的，且在产品正式上线时也要处理这些情况，因而说错误处理通常用来检查有害的输入数据，而断言是用于检查代码中的bug ！</p>
-<p>有种方式可以让你更好理解断言：</p>
-<blockquote>
-<p>把断言看做是可执行的注解，你不能依赖它来让代码正常工作，但与编程语言中的注解相比，它更能主动地对程序中的假定做出说明。</p>
-</blockquote>
-<h4> 3、利用断言来注解前条件和后条件</h4>
-<p>前条件（先验条件）和后条件(后验条件)专有名词最初来自于<a href="https://baike.baidu.com/item/%E5%A5%91%E7%BA%A6%E5%BC%8F%E8%AE%BE%E8%AE%A1/2180000?fr=aladdin" target="_blank" rel="nofollow">契约式设计(Design by Contract)(DbC)</a>，使用契约式设计时，每个子程序或类与程序的其余部分都形成了一份契约。</p>
-<blockquote>
-<p>很多语言都有对这种断言的支持。然而DbC认为这些契约对于软件的正确性至关重要，它们应当是设计过程的一部分。实际上，DbC提倡首先写断言。（百度百科）</p>
-</blockquote>
-<p>前条件：子程序或类的调用方代码再调用子程序或实例化对象之前要确保为真的属性。前条件是调用方对其所调用的代码要承担的义务。</p>
-<p>后条件：子程序或类在执行结束后要确保为真的属性，后条件是子程序或类对调用方代码所承担的责任。</p>
-<p>而断言是用来说明前后条件的有利工具。</p>
-<p>下面举个例子说明：</p>
-<pre><code>/// 警报站坐标
-private class EStationCoordinate: NSObject {
-
-    var latitude: Float?
-    
-    var longitude: Float?
-    
-    var elevation: Float = 0.0
-    
-    init(_ latitude: Float,_ longitude: Float,_ elevation: Float) {
-        super.init()
-        
-        self.latitude = latitude
-        self.longitude = longitude
-        self.elevation = elevation
-    }
-}
-
-
-/// 取得报警站坐标
-///
-/// - Parameters:
-///   - latitude: &lt;#latitude description#&gt;
-///   - longitude: &lt;#longitude description#&gt;
-///   - elevation: &lt;#elevation description#&gt;
-/// - Returns: &lt;#return value description#&gt;
-private func createEmergencyCoordinate(_ latitude: Float,_ longitude: Float,_ elevation: Float) -&gt; EStationCoordinate {
-    
-    // precondition
-    assert(-90 &lt;= latitude &amp;&amp; latitude &lt;= 90, &quot;latitude must within range !&quot;);
-    
-    assert(0 &lt;= longitude &amp;&amp; longitude &lt; 360, &quot;longitude must within range !&quot;);
-    
-    assert(100 &lt;= elevation &amp;&amp; elevation &lt; 500, &quot;elevation must within range !&quot;);
-    
-    // handle .... searching in local
-    
-    // postcondition
-    assert(isContain, &quot;local not contain this coordinate !&quot;)
-    
-    var coordinate = EStationCoordinate(latitude,longitude,elevation)
-    
-    return coordinate
-    
-}
-</code></pre>
-<p>如果变量latitude、longitude和elevation都是来源于系统外部，那么就应该用错误处理代码来检查和处理非法的数值，而如果变量的值是源于可信的系统内部，并且这段程序是基于这些值不会超出合法范围的假定而设计，使用断言则是非常合适的。</p>
-<h4> 4、避免将需要执行的子程序放到断言中</h4>
-<p>如果把需要执行的子程序代码写在断言的codition条件里，那么当你关闭断言功能时，编译器很可能就把这些代码排除在外了，下面举一个例子：</p>
-<pre><code>- (void)postFileToServer {
-    
-    // .... make file
-    
-    NSAssert([self compressFileToZip], @&quot;File can't be compressed !&quot;);
-    
-    // ... post to server 
-}
-
-- (BOOL)compressFileToZip {
-    
-    //... compress file and create a zip path !
-    if (zipPath.length &gt; 0) {
-        
-        return YES;
-    }
-    return NO;
-}
-</code></pre>
-<p>这样如果未编译断言，则condition语句的子程序也将不会执行，应修改为以下：</p>
-<pre><code>- (void)postFileToServer {
-    
-    // .... make file
-    BOOL isCompressSuccess = [self compressFileToZip];
-    
-    NSAssert(isCompressSuccess, @&quot;File can't be compressed !&quot;);
-    
-    // ... post to server
-}
-</code></pre>
-<h2 id="错误处理技术">错误处理技术</h2>
-<figure data-type="image" tabindex="5"><img src="http://Bule-Zst.gitee.io/post-images/1608456741675.webp" alt="" loading="lazy"></figure>
-<p>前面我们提过了，断言是处理程序代码中那些不应发生的错误，那么又如何处理那些我们预料之内的可能发生的错误呢？</p>
-<p>首先我们要明确对于程序而言，处理错误最恰当的方式是要根据程序软件的类别而定，进而言之就是对于程序的两个概念：<em>健壮性与正确性</em></p>
-<h4> 程序的健壮性 </h4></h4>
-<p>定义：健壮性具体指的是系统在不正常的输入或不正常的外部环境下仍能表现出正常的程度。</p>
-<p>健壮性的原则：</p>
+              <h2 id="b树-b树索引">B树、B+树索引</h2>
+<h3 id="阶的含义">阶的含义</h3>
 <ul>
-<li>不断尝试采取措施来包容错误的输入以此让程序正常运转（对自己的代码要保守，对用户的行为要开放）</li>
-<li>考虑各种各样的极端情况，没有impossible</li>
-<li>即使终止执行，也要准确/无歧义的向用户展示全面的错误信息</li>
-<li>错误信息有助于进行debug</li>
+<li>上限：每个节点最多有 M 个子树</li>
+<li>下限：
+<ul>
+<li>根节点至少2个子树</li>
+<li>非根节点至少有⌈M /2⌉个子树</li>
 </ul>
-<p>例如：视频游戏中的绘图子程序接收到了一个错误的颜色输入，那么在设计的时候可以针对这种情况，采用它的默认背景色或前景色继续绘制，而不是让程序崩溃或退出。</p>
-<h4> 程序的正确性</h4>
-<p>定义：正确性意味着程序永不返回不准确的结果，即使这样做会不返回结果或是直接退出程序。</p>
-<p>例如：在设计控制治疗癌症病人的放疗设备的软件时，当软件接收到错误的放射剂量，那么也许直接关闭程序就是最佳的选择，哪怕重启也比冒险施放错误的放射剂量要好的多。</p>
-<p>总结，两者之间的区别在于：</p>
-<ul>
-<li>正确性：永不给用户错误的结果，哪怕是退出程序</li>
-<li>健壮性：尽可能的保持软件运行而不是总是退出</li>
-</ul>
-<p>了解了程序的健壮性与正确性，我们就可以采用以下几种手段，或结合起来使用错误处理技术：</p>
-<p><strong>1、返回中立值：</strong></p>
-<p>有时，处理错误的最佳做法就是继续执行操作并简单的返回一个没有危害的值。</p>
-<p>比如，一个基于输入颜色的绘图子程序接收到了一个错误的颜色输入，它可以忽略这个错误的颜色，而是采用默认的底色或前景色继续进行绘制，而不是直接崩溃。</p>
-<p><strong>2、换用下一个正确的数据</strong></p>
-<p>在处理轮询查询状态的子程序时，如果某次查询出的输出数据错误或有误，大可以忽略本次错误的数据，继续等待下一次轮询时读取正确的数据<br>
-<p>（例如，如果你以每秒100次的速度读取体温计的数据，如果某一次得到的数据有误，我们可以再等上1/100秒后继续读取正确的数据）</p>
-<p><strong>3、返回与前次相同的数据</strong></p>
-<p>还是举上一个例子，如果体温计在1/100秒读取到的是一个错误数据，那么大可以返回上一次正确的数据，因为温度在1/100秒内变化不会太大。</p>
-<p><strong>4、换用最接近的合法值</strong></p>
-<p>比如，当我们在编写一个滑块在规定区域内滑动的程序时，如果滑块超过规定区域，我们可以取最接近于超过区域的安全数值返回。</p>
-<p><strong>5、把警告信息记录到日志文件中</strong></p>
-<p>在检测到错误数据时，可以选择在日志文件中记录一条警告信息，然后继续执行。</p>
-<p><strong>6、返回一个错误状态码</strong></p>
-<p>可以决定只让徐彤的某些部分处理错误，其他部分则不在局部处理错误，而是简单的返回一个错误码。</p>
-<p>比如在用户信息编辑页面有一个保存按钮，当某些信息填写错误时，这时只是记录一个错误码，当点击保存按钮时才去判断验证这个错误码是否存在，决定是否允许用户执行下一步操作</p>
-<p><strong>7、调用错误处理子程序或对象</strong></p>
-<p>把错误处理都集中在一个全局的错误处理子程序或对象中，这种方法优点在于能把错误处理的职责集中到一起，从而让调试变得更简单。而代价则是整个程序都要知道这个集中点，并与之紧密耦合。</p>
-<p>什么意思呢？比如在一系列有上下文关系的请求中，针对所有的请求错误，我们只封装一个错误管理类来集中管理这些错误。</p>
-<p><strong>8、当错误发生时显示出错消息</strong></p>
-<p>这种方法可以把错误处理的开销减到最小，然而你需要衡量此时的错误消息对于用户而言是否是友善的，相反对于攻击者而言，尽量不要让他们利用错误信息来发现如何攻击这个系统。</p>
-<p><strong>9、关闭程序</strong></p>
-<p>有一些更偏向于<code>正确性</code>的程序，当检测到错误发生时，也许关闭程序是最佳的选择。</p>
-<p>如上面谈到的<code>癌症病人的放疗设备的软件</code></p>
-<h2 id="异常">异常</h2>
-<figure data-type="image" tabindex="6"><img src="http://Bule-Zst.gitee.io/post-images/1608456771734.webp" alt="" loading="lazy"></figure>
-<p>异常是把代码中的错误或异常事件传递给调用方代码的一种特殊手段。</p>
-<blockquote>
-<p>异常处理，英文名为exceptional handling, 是代替日渐衰落的error code方法的新法，提供error code 所未能具体的优势。异常处理分离了接收和处理错误代码。这个功能理清了编程者的思绪，也帮助代码增强了可读性，方便了维护者的阅读和理解。 异常处理（又称为错误处理）功能提供了处理程序运行时出现的任何意外或异常情况的方法。异常处理使用 try、catch 和 finally 关键字来尝试可能未成功的操作，处理失败，以及在事后清理资源。(百度百科)</p>
-</blockquote>
-<p>如果在一个子程序中遇到了预料之外的情况，但并不知道如何处理的话，你就可以选择抛出一个异常。</p>
-<p>异常的基本结构是：子程序使用throw抛出一个异常对象，再被调用链上层其他子程序的try-catch语句捕获。(<strong>内建的异常机制都是沿着函数调用栈的函数调用逆向搜索，直到遇到异常处理代码为止</strong>)</p>
-<p>我知道听到这，肯定有人懵逼了，我们来看下面的例子：</p>
-<pre><code>+ (void)tryFirstException {
-    @try {
-        // 1
-        [self trySecondException];
-        
-    } @catch (NSException *exception) {
-        //2
-        NSLog(@&quot;First reason:%@&quot;,exception.reason);
-        
-    } @finally {
-        //3
-    }
-    //4
-}
-
-+ (void)trySecondException {
-    @try {
-        //5
-        [self tryThirldException];
-        
-    } @catch (NSException *exception) {
-        //6
-        @throw exception; //如果将这段代码注释后又会怎样？
-        NSLog(@&quot;Second reason:%@&quot;,exception.reason);
-    } @finally {
-        //7
-    }
-    //8
-}
-
-+ (void)tryThirldException {
-    //9
-    @throw [NSException exceptionWithName:@&quot;Exc&quot; reason:@&quot;no reason!&quot; userInfo:nil];
-}
-</code></pre>
-<p>有人知道程序应该怎么执行吗？</p>
-<blockquote>
-<p>许多常见的程序设计语言，包括Actionscript，Ada，BlitzMax，C++，C#，D，ECMAScript，Eiffel，Java，ML，Object Pascal（如Delphi，Free Pascal等），Objective-C，Ocaml，PHP（version 5），PL/1，Prolog，Python，REALbasic，Ruby，Visual Prolog以及大多数.NET程序设计语言，内建的异常机制都是沿着函数调用栈的函数调用逆向搜索，直到遇到异常处理代码为止。一般在这个异常处理代码的搜索过程中逐级完成栈卷回（stack unwinding）。但Common Lisp是个例外，它不采取栈卷回，因此允许异常处理完后在抛出异常的代码处原地恢复执行。</p>
-</blockquote>
-<p>下面将给予一些使用异常的建议：</p>
-<h4> 1、用异常通知程序的其他部分，发生了不可忽略的错误</h4>
-<p>异常机制的优越之处，在于它能提供一种无法被忽略的错误通知机制。其他错误处理技术有可能会导致错误在不知不觉中向外扩散，而异常则消除了这种可能性。</p>
-<h4> 2、只在真正例外的情况下才抛出异常</h4>
-<p>仅在真正例外的情况下才使用异常————换句话说，就是仅在其他编码实践方法无法解决的情况下才使用异常。这种情况跟断言相似————都是用来处理那些不仅罕见甚至永远不该发生的情况。</p>
-<h4> 3、不能用异常来推卸责任</h4>
-<p>如果某种错误情况可以在局部处理，那就应该在局部处理它。不要把本可以处理的错误当成一个未被捕获的异常抛出去。</p>
-<h4> 4、避免在构造函数和析构函数中抛出异常，除非你在同一个地方把它们捕获</h4>
-<p>如果尝试在构造函数或析构函数中抛出异常，则处理异常将变得非常复杂。<br>
-<p>比如在C++中，只有对象在完全构造之后才能调用析构函数，也就是说如果再构造函数中抛出异常，就不会调用析构函数，从而造成潜在的资源泄漏。</p></p>
-<h4> 5、在恰当的抽象层次抛出异常</h4>
-<p>当你决定把一个异常传给调用方时，请确保异常的抽象层次与子程序的接口抽象层次一致。<br>
-<p>（比如在A类的某一子程序中，有一个getDefenseId的方法，在方法中的某些步骤中，我们抛出了一个文件读写错误的异常，这本应由层次更低的内部类F专职去做的事，却错误的在A类中抛出异常，破坏了封装性，也暴露了一些私有的实现细节，这显然不是我们想要的）</p></p>
-<h4> 6、在异常消息中加入关于导致异常发生的全部信息</h4>
-<p>比如因为一个索引值错误而抛出的，就应该在异常消息中包含索引的上下界限一级非法的索引下标值等信息。</p>
-<h4> 7、避免使用空的catch语句</h4>
-<p>不要视图敷衍一个不知该如何处理的异常</p>
-<h4> 8、考虑创建一个集中的异常报告机制</h4>
-<p>封装一个异常报告的子程序（或基类）专门快速方便的报告程序中需要主动抛出的异常（异常处理器），将对于异常的使用更加标准化</p>
-<h4> 9、考虑异常的替换机制</h4>
-<p>虽然一些编程语言对于异常的支持已有5~10年甚至更久的历史，但关于如何安全使用异常的经验仍然还是很少。</p>
-<p>拿iOS举例，<code>Apple.inc</code>虽然同时提供了错误处理（<code>NSError</code>）和异常处理（<code>Exception</code>）两种机制，但是Apple不建议我们主动去使用Exception，更加提倡开发者使用NSError来处理程序运行中可恢复的错误。而异常被推荐用来处理不可恢复的错误。</p>
-<blockquote>
-<p>Important: In many environments, use of exceptions is fairly commonplace. For example, you might throw an exception to signal that a routine could not execute normally—such as when a file is missing or data could not be parsed correctly. Exceptions are resource-intensive in Objective-C. You should not use exceptions for general flow-control, or simply to signify errors. Instead you should use the return value of a method or function to indicate that an error has occurred, and provide information about the problem in an error object. For more information, see Error Handling Programming Guide.</p>
-<p>(developer.apple.com)</p>
-</blockquote>
-<p>感兴趣的童鞋请移步苹果官网 <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocExceptionHandling.html#//apple_ref/doc/uid/TP30001163-CH13-TPXREF168" target="_blank" rel="nofollow">传送门</a></p>
-<p>多说一句，虽然apple不推荐我们经常主动使用Exception，但针对于crash的异常捕捉，iOS是可以通过<code>NSSetUncaughtExceptionHandler</code>来捕获大部分crash的，但值得注意的是无法捕获那些由于<code>内存溢出</code>、<code>野指针BAD_ACCESS</code>导致的crash，比如<code>Flurry</code>中对<code>crash</code>处理就是这么运作的。</p>
-<pre><code>    - (void) uncaughtExceptionHandler(NSException *exception) 
-    {
-        [Flurry logError:@&quot;Uncaught&quot; message:@&quot;Crash!&quot; exception:exception];
-    }
- 
-    - (void)applicationDidFinishLaunching:(UIApplication *)application
-    {
-        NSSetUncaughtExceptionHandler(&amp;uncaughtExceptionHandler);
-        [Flurry startSession:@&quot;YOUR_API_KEY&quot;];
-        // ....
-    }
-</code></pre>
-<h2 id="隔栏">隔栏</h2>
-<figure data-type="image" tabindex="7"><img src="http://Bule-Zst.gitee.io/post-images/1608456801568.webp" alt="" loading="lazy"></figure>
-<p>隔栏是防御式编程中的一种容损策略，举个例子，大家可以这样来理解：</p>
-<p>船体外壳上装备隔离舱，如果船只与冰山相撞导致船体破裂，隔离舱就会被封闭起来，从而保护船体的其余部分不会受到影响。<br>
-<p>（<code>隔栏</code>过去叫<code>防火墙</code>，但现在<code>防火墙</code>这一术语常用来代指阻止恶意网络攻击）</p></p>
-<p>如下图：</p>
-<figure data-type="image" tabindex="8"><img src="http://Bule-Zst.gitee.io/post-images/1608456820092.webp" alt="" loading="lazy"></figure>
-<p> </p>
-<p><code>5毛钱特效</code>翻译过来就是：</p>
-<figure data-type="image" tabindex="9"><img src="http://Bule-Zst.gitee.io/post-images/1608457186869.webp" alt="" loading="lazy"></figure>
-<p>左侧外部接口数据假定是肮脏的不可信的，中间这些类（子程序）构成<code>隔栏</code>，负责清理和验证数据并返回可信的数据，最右侧的类（子程序）全部在假定数据干净（安全）的基础上工作，这样可以让大部分的代码无须再担负检查错误数据的职责！</p>
-<p>这种策略可以拟一个比较生动的例子，可以看做是手术室里使用的一种策略。<br>
-<p>任何东西在允许进入手术室之前都要经过消毒处理，因此手术室里的任何东西都可以认为是安全的。这其中最核心的设计决策是<code>规定什么可以进入手术室，什么不可以，还有把手术室的门设在哪里</code></p></p>
-<p>在编程中也是如此，约定哪些子程序可认为是在安全区域里的，哪些又是在安全区域外的，哪些负责清理数据（完成这一工作最简单的方法是在得到外部数据时，立即进行清理，不过数据往往需要经过一层以上的清理，因此多层清理有时也是必须的）</p>
-<p>隔栏的应用：<br>
-<p>隔栏的使用使断言和错误处理有了清晰的区分，隔栏外部的程序应该使用错误处理技术，在那里对数据做的任何处理假定都是不安全的。而隔栏内部的程序里就应该使用断言技术，因为传进来的数据应该已在通过隔栏时被清理过了。如果隔栏内部的子程序检测到了错误的数据，那么应该是程序里的错误而不是程序外的错误。</p></p>
-<h2 id="辅助调试代码">辅助调试代码</h2>
-<p>防御式编程的另一重要方面就是使用调试助手（辅助调试代码），调试助手非常之强大👍，可以帮助我们快速检查错误。</p>
-<p>应用在开发期间应牺牲一些速度和对资源的使用，来换取一些可以让开发更顺畅的内置工具。</p>
-<h4> 1、应尽早的引入辅助调试代码</h4>
-<p>越早进入辅助调试代码，它能够提供的帮助也越大。如果你经常遇到某些问题，尝试自己编写或引入一些<code>辅助调试代码</code>，它就会自始至终在项目中帮助你。</p>
-<h4> 2、采用进攻式编程</h4>
-<figure data-type="image" tabindex="10"><img src="http://Bule-Zst.gitee.io/post-images/1608456836309.webp" alt="" loading="lazy"></figure>
-<p>什么又是进攻式编程，其实这也是防御式编程中的一种习惯，其思想在于：</p>
-<blockquote>
-<p>尽量让异常的情况在开发期间暴露出来，而在产品上线时自我恢复。</p>
-</blockquote>
-<p>比如你有一段switch case语句用来处理事件，在开发期间应尽量考虑所有你能预料得到的情况并作出处理，另外在default case语句中，如果是开发阶段可以采用<code>进攻式编程处理</code>，而在产品正式上线期间，针对default case应更稳妥一些，比如记录错误日志。</p>
-<p>下面列举一下进攻式编程的方法：</p>
-<ul>
-<li>确保断言语句使程序终止运行</li>
-<li>完全填充分配到的所有内存</li>
-<li>完全填充己分配到的所有文件或流</li>
-<li>确保每一个case 语句中的default分支或else 分支都能产生严重错误（如终止程序）</li>
-<li>在删除一个对象之前把它填满垃圾数据</li>
-<li>让程序将错误日志主动用电子邮件或推送发送给开发者（安防目前采用）</li>
-</ul>
-<h4> 3、计划移除调试辅助的代码</h4>
-<p>如果是商用软件，调试用的代码有时会使软件的体积变大且速度变慢，从而给程序造成巨大的性能影响。要事先做好准备计划，避免调试用的代码和程序原代码纠缠不清，下面列举一些可以选择的移除方法：</p>
-<ul>
-<li>
-<p>使用类似ant和make这样的版本控制工具</p>
-<p>（可以从同一套源码编译出不同版本的程序。在开发模式下，你可以让make工具把所有的调试代码都包含进来一起编译。而在产品上线期间，把那些调试代码排除在外。）</p>
-</li>
-<li>
-<p>使用内置的预处理器（<code>C++ #字符为预处理器指令，包含#if、#warning、#include、#define等</code>）</p>
-<p>（如果你所用的编程环境里有预处理器，你可以用预处理器来包含或排除调试的代码）</p>
 </li>
 </ul>
-<pre><code>- (void)handleSomething {
-    
-#ifdef DEBUG
-    
-    [self debugF];//通常为一些debug用的耗时操作
-#else
-    
-    [self releaseF];
-#endif
-    
-}
-</code></pre>
+<h3 id="画结构">画结构</h3>
+<p>B树</p>
+<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/image-20210415160000065.png" alt="image-20210415160000065" loading="lazy"></figure>
+<p>B+树</p>
+<figure data-type="image" tabindex="2"><img src="http://Bule-Zst.gitee.io/post-images/image-20210415160910412.png" alt="image-20210415160910412" loading="lazy"></figure>
+<h3 id="b树使用场景">B+树使用场景</h3>
+<p>能做的：</p>
 <ul>
-<li>为应用增加调试模式的入口</li>
+<li>全键值：Where x=123</li>
+<li>键值范围：Where 45&lt;x&lt;123</li>
+<li>键前缀查找：where x LIKE ‘J%’</li>
 </ul>
-<p>如果你的应用需要同时支持两种模式（发布和调试），那么我们可以自定义进入调试模式的入口，而不是针对编译层次的DEBUG，我们的调试代码的嵌入也依赖于这个调试模式是否开启，下面将演示安防app内定义的调试模式。</p>
-<h2 id="对防御式编程采取防御的姿态">对防御式编程采取防御的姿态</h2>
-<p>说了这么多，那么是不是防御式代码越多越好呢？</p>
-<p>其实也不是，多度的防御式编程也会引起问题，如果你在每一个能想到的地方都用每一种能想到的方法来检查参数、处理错误，那么你的程序会变得臃肿而缓慢，更糟的事，多度的防御式代码换来的是软件的复杂度。</p>
-<p>这说明，防御式编程引入的代码也并非不会有缺陷，和其他代码一样，你同样能轻而易举的在防御式编程添加的代码中找到错误，尤其是当你随手编写这些代时更是如此。</p>
-<p>因此，要考虑好什么地方需要进行防御，然后因地制宜地调整你进行防御式编程的优先级。</p>
-<h2 id="总结">总结</h2>
+<p>什么时候能用，什么时候不能用：</p>
 <ul>
-<li>程序代码中对错误处理的方式远比<code>GIGO</code>复杂的多。</li>
-<li>防御式编程技术可以让错误更容易发现问题、更容易修改，并减少错误对产品代码的破坏。</li>
-<li>遵从防御式编程的思想去开发，会让你在开发阶段就提前处理了许多问题，提高代码质量，降低测试周期，要做到主动去发现错误并做出处理（<strong>千万不要存侥幸心理，明明可以多考虑几种情况，偏偏却要忽略它们的可能性</strong>），而不是等到bug隐式的出现所带来的未曾预料的灾难。</li>
-<li>错误处理技术更适用于暴露的接口程序或类，而断言则更强调不可允许的错误，多适用于不暴露在外的私有方法（或内部类）。</li>
-<li>处理错误最恰当的方式是要根据程序软件的类别而定，更倾向于<strong>正确性</strong>还是<strong>健壮性</strong>。</li>
-<li>异常提供了一种与代码正常流程角度不同的错误处理手段，但同时也应该在异常和其他错误处理手段之间进行权衡比较，比如iOS中就很少采用异常处理机制。</li>
-<li>合理的运用辅助调试代码，会让你不管是在开发还是发布阶段都能更快速定位问题，并从容地解决问题。（预处理器就是个很好的选择）</li>
+<li>对于一般索引，都能用</li>
+<li>对于复合索引，如果违反最左匹配原则，则不能用。例如，对(x,y)建立索引，但对y进行查询，则不能用。</li>
 </ul>
-<p>最后，我对于防御式编程的理解是，我认为程序的好坏与其健壮性（和正确性）有很大的联系，所有的程序开发人员都要对它有足够的重视，主动去迎战错误，从一点一滴开始做起，不要忽视任何的细节，不能盲目依赖测试去发现bug，而是以测试驱动编程，不断地思考可能发生的问题以进行预防，做一个聪明的程序员。这才是防御式编程所告诉我们的事 ！</p>
-<h2 id="推荐">推荐</h2>
-<p>最后列举一下文中出现的引用来源及一些推荐看的文章或书籍：</p>
+<p>什么时候应该用：</p>
 <ul>
-<li>《代码大全第2版》第八章防御式编程</li>
-<li><a href="https://pan.baidu.com/s/1yfmqkf84CJ6Zpbj4-_TlUQ" target="_blank" rel="nofollow">《Writing Solid Code》断言的使用</a></li>
-<li><a href="https://pan.baidu.com/s/1DYNOJrl7AJLhlRCY4gCnDQ" target="_blank" rel="nofollow">《Object-Oriented Software Construction》中有关于契约式设计的前置条件、后置条件、不变式的权威概述。</a></li>
-<li><a href="https://nshipster.cn/" target="_blank" rel="nofollow">NSHipster 关注被忽略的 Objective-C、Swift 和 Cocoa 特性。每周更新。</a></li>
-<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjectiveC/Chapters/ocExceptionHandling.html#//apple_ref/doc/uid/TP30001163-CH13-TPXREF168" target="_blank" rel="nofollow">苹果对于Exception Handling介绍</a></li>
+<li>仅当要通过索引访问表中很少一部分行</li>
+<li>虽然查询行数比较多，当索引包含多个字段，而要访问的字段全部包含在索引中时，查找只需通过索引而不用访问全表时</li>
 </ul>
-<hr>
-<p>from <a href="https://www.jianshu.com/p/34f1dfa3aa8e">https://www.jianshu.com/p/34f1dfa3aa8e</a></p>
+<p>什么时候不应该用（没找到答案，自己的理解）：</p>
+<ul>
+<li>数据量较小时：因为使用索引拿到rowid后，需要额外一次磁盘IO，所以增加了时间开销。</li>
+<li>写密集型事务：频繁修改索引，增加开销</li>
+</ul>
+<h2 id="分区">分区</h2>
+<h3 id="分区是干嘛用的">分区是干嘛用的</h3>
+<p>分区就是将一个大表根据条件分割成若干个小表，是一种数据分组方式。</p>
+<h3 id="根据分区键partition-key的类型分类分区有哪几种类型">根据分区键（Partition Key）的类型分类，分区有哪几种类型？</h3>
+<ul>
+<li>哈希分区：把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。</li>
+<li>范围分区：把字段的值分布到一个物理范围，这个范围是你在创建分区时指定的分区键决定的。这种分区方式是最为常用的。</li>
+<li>列表分区：把不同的列存到不同的分区中。</li>
+</ul>
+<h3 id="如何选择分区键-选择原则是什么">如何选择分区键、选择原则是什么</h3>
+<ul>
+<li>哈希分区：根据分区键，可以快速找到记录，但对范围检索没有任何帮助。更接近于非数据驱动的循环分区，用于负载均衡，提高并发的能力。</li>
+<li>范围分区：比较常用，非常适合处理历史数据。</li>
+<li>列表分区：查询时，通常只查询某几个字段，或者，某几个字段通常一起被查询。但，每个分区都必须有主键，因此会造成冗余。</li>
+</ul>
+<h2 id="设计原则">设计原则</h2>
+<p>9.2 为性能设计（下）.mp4，17:09</p>
+<h3 id="操作模式批处理与实时系统">操作模式：批处理与实时系统</h3>
+<h3 id="存储模式集中式与分布式">存储模式：集中式与分布式</h3>
+<h2 id="sql">SQL</h2>
+<h3 id="查询优化器如何工作">查询优化器如何工作</h3>
+<p>4.1 SQL优化.mp4，13:38</p>
+<ul>
+<li>
+<p>基于成本的优化器</p>
+</li>
+<li>
+<p>基于规则的优化器</p>
+</li>
+</ul>
+<h2 id="数据库设计">数据库设计</h2>
+<h3 id="层次结构">层次结构</h3>
+<p>6.1 处理层次结构.mp4，12:17</p>
 
             </div>
             
@@ -983,7 +692,7 @@ private func createEmergencyCoordinate(_ latitude: Float,_ longitude: Float,_ el
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="http://Bule-Zst.gitee.io/dU5GQhPud/" title="防御式编程（Defensive Programming）">http://Bule-Zst.gitee.io/dU5GQhPud/</a>
+      <a href="http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/" title="南京大学-高级数据库开发技术-复习笔记">http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -992,21 +701,19 @@ private func createEmergencyCoordinate(_ latitude: Float,_ longitude: Float,_ el
   </ul>
   <div class="tags">
     
-      <a href="http://Bule-Zst.gitee.io/QfpF2izVU/"># 编程思想</a>
+      <a href="http://Bule-Zst.gitee.io/复习笔记/"># 复习笔记</a>
+    
+      <a href="http://Bule-Zst.gitee.io/SCVZKCu1U/"># 数据库</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="NexT主题设置Valine评论系统邮件提醒" href="http://Bule-Zst.gitee.io/hxfRZLp5C/">NexT主题设置Valine评论系统邮件提醒</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="NexT主题设置Valine评论系统邮件提醒" href="http://Bule-Zst.gitee.io/hxfRZLp5C/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="《高性能MySql》笔记" href="http://Bule-Zst.gitee.io/jtLxs4zLq/">《高性能MySql》笔记</a>
-        <a class="nav-mobile-next" title="《高性能MySql》笔记" href="http://Bule-Zst.gitee.io/jtLxs4zLq/">下一篇</a>
+        <a class="nav-pc-next" title="南京大学-高级算法课程-复习笔记" href="http://Bule-Zst.gitee.io/2021-04-13-南京大学-高级算法课程-复习笔记/">南京大学-高级算法课程-复习笔记</a>
+        <a class="nav-mobile-next" title="南京大学-高级算法课程-复习笔记" href="http://Bule-Zst.gitee.io/2021-04-13-南京大学-高级算法课程-复习笔记/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
