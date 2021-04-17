@@ -2,13 +2,235 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-15T13:34:06.611Z</updated>
+    <updated>2021-04-17T09:29:25.382Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
     <logo>http://Bule-Zst.gitee.io/images/avatar.png</logo>
     <icon>http://Bule-Zst.gitee.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
+    <entry>
+        <title type="html"><![CDATA[南京大学-软件过程改进-复习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/">
+        </link>
+        <updated>2021-04-16T01:53:00.000Z</updated>
+        <content type="html"><![CDATA[<p>本文主要是对 <a href="https://wym0120.github.io/2021/04/12/cmmi/">[课堂笔记] 软件过程改进 </a>这篇文章的一些个人补充</p>
+<hr>
+<p>[TOC]</p>
+<h2 id="过程的定义">过程的定义</h2>
+<ul>
+<li>IEEE: Sequence of steps performed for a given purpose.
+<ul>
+<li>为给定目的执行的步骤顺序。</li>
+</ul>
+</li>
+<li>PALL: Logical organization of people, materials, energy, equipment, and procedures into work activities designed to produce a SP ecified end result.
+<ul>
+<li>人员、材料、能源、设备和程序 在工作活动中的逻辑组织，旨在产生SP（特定实践）确认的最终结果。</li>
+</ul>
+</li>
+<li>CMMI GLOSSARY: A set of interrelated activities, which transform inputs into outputs, to achieve a given purpose (These activities can be mapped to one or more practices in CMMI process areas to allow a model to be useful for process improvement and process appraisal.)
+<ul>
+<li>一组相互关联的活动，这些活动将输入转化为输出，以实现给定的目的（这些活动可以映射到CMMI过程域中的一个或多个实践，以使模型可用于流程改进和流程评估。）</li>
+</ul>
+</li>
+</ul>
+<h2 id="过程和过程域的关系">过程和过程域的关系</h2>
+<h2 id="连续式表示法与阶段式表示法">连续式表示法与阶段式表示法</h2>
+<ul>
+<li>连续式表示法：选择一个特定的过程域进行改进。</li>
+<li>阶段式表示法：选择某一成熟度级别下的多个过程域进行改进。</li>
+</ul>
+<h2 id="等价阶段式定级">等价阶段式定级</h2>
+<ul>
+<li>CL：capability level 能力等级</li>
+<li>ML：maturity level 成熟度级别</li>
+</ul>
+<h2 id="过程模型">过程模型</h2>
+<p>过程模型是一种开发策略，这种策略针对软件工程的各个阶段提供了一套范形，使工程的进展达到预期的目的。</p>
+<p>CMMI 开发模型就是一种过程模型。</p>
+<h2 id="cmmi来源于哪三个模型-研究机构">CMMI来源于哪三个模型 ，研究机构</h2>
+<ul>
+<li>软件工程 sw-cmm</li>
+<li>系统工程 EIA/IS</li>
+<li>集成化产品和过程开发 IPD-CMM</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/image-20210416144801516.png" alt="image-20210416144801516" loading="lazy"></figure>
+<h2 id="已管理和已定义的区别">已管理和已定义的区别</h2>
+<p>已管理：标准、过程描述与规程在过程的每个特定实例中（如在某一特定项目中）都可能有很大的不同。</p>
+<p>已定义：项目的标准、过程描述与规程是从组织的标准过程集中裁剪得来，以适应特定的项目或组织级单位，因而就更为一致，除非是裁剪指南所允许的差别。</p>
+<h2 id="过程域">过程域</h2>
+<h3 id="工程类">工程类</h3>
+<h4 id="确认与验证的区别">确认与验证的区别</h4>
+<p>确认：确认产品实际的用途是否符合其预期的用途；做了正确的事。</p>
+<p>验证：验证工作产品（or 产品）的功能是否符合需求；正确地做了事。</p>
+<h3 id="支持类">支持类</h3>
+<h4 id="度量与分析-and-过程与产品质量保证">度量与分析 and 过程与产品质量保证</h4>
+<p>PPQA专注于质量，而MA则是对一切过程提供度量与分析。当对质量进行度量与分析时，个人认为MA与PPQA是等价的，因此，MA的范围更广，而PPQA则专注于质量方面。</p>
+<h2 id="ppt中问题整理">PPT中问题整理</h2>
+<ul>
+<li>
+<p>requirements traceability：需求可追溯性</p>
+</li>
+<li>
+<p>A to B and vice versa：A符合B，反之亦然</p>
+</li>
+<li>
+<p>Budget and funding：预算和资金</p>
+</li>
+<li>
+<p>Staff：职员</p>
+</li>
+<li>
+<p>Facilities：设施</p>
+</li>
+<li>
+<p>peer review meetings：同行评审会议</p>
+</li>
+<li>
+<p>delinquent：拖欠的</p>
+</li>
+<li>
+<p>People are not meeting schedules.：人们没有遵守时间表。</p>
+</li>
+<li>
+<p>likelihood：可能性</p>
+</li>
+<li>
+<p>motion sensors：运动传感器</p>
+</li>
+<li>
+<p>contract：合同</p>
+</li>
+<li>
+<p>COTS were used for the keypad; sensors were secured from suppliers; and the controller consists of re-used PASS in-house software.：键盘上使用了COTS； 传感器由供应商提供保护； 控制器由重复使用的PASS内部软件组成。</p>
+</li>
+<li>
+<p>incorporating experiences：整合经验</p>
+</li>
+<li>
+<p>appraisal metrics：评估指标</p>
+</li>
+<li>
+<p>align with：对齐</p>
+</li>
+<li>
+<p>All PASS projects follow the standard process exactly as is.：所有PASS项目都完全按照标准流程进行。</p>
+</li>
+<li>
+<p>trace：追溯</p>
+</li>
+<li>
+<p>tailoring：裁剪</p>
+</li>
+<li>
+<p>Spiral lifecycle：螺旋生命周期</p>
+</li>
+</ul>
+<h2 id="简答题列表">简答题列表</h2>
+<h3 id="过程域相关">过程域相关</h3>
+<p>Lv4组织级过程性能(OPP)</p>
+<ul>
+<li>x.y.z代表着什么</li>
+</ul>
+<p>Lv2项目监督与控制(PMC)</p>
+<ul>
+<li>项目监控点选择的原则？原因</li>
+<li>SG2中的相关实践约定，需要采取纠偏措施的问题来源</li>
+<li>纠偏行动的先决条件</li>
+</ul>
+<p>Lv2项目计划(PP)</p>
+<ul>
+<li>PP过程域在项目中的作用域</li>
+<li>计划制定的原则？</li>
+<li>一般的估算方法有哪几个？区别</li>
+<li>什么是承诺管理？承诺的分类</li>
+<li>PP中“建立”和“维护”两个活动的解释？</li>
+<li>估算目标: 不是尽可能客观描述代码行/工作量（永远不可能实现估算），而是得到一个数字<strong>数字对不对不重要，重要的是大家认可</strong></li>
+</ul>
+<p>Lv2需求管理(REQM)</p>
+<ul>
+<li>(需求跟踪的方法) 需求跟踪矩阵的使用</li>
+<li>(获得需求承诺) 应该获得那些人的承诺</li>
+<li>识别需求不一致性的最有效方法</li>
+<li>敏捷对于需求的态度是拥抱变更，但这是不正确的，大部分开发人员还是希望能够close开发</li>
+<li>Scrum对于需求的态度是不响应一个SP rint中的需求变更(目标不变)，只是记录到backlog，可能会在下一个迭代响应变更</li>
+<li>理解双向可跟踪</li>
+</ul>
+<p>Lv4量化项目管理(QPM)</p>
+<ul>
+<li>OPP 和 QPM 的关联</li>
+<li>QPM SP1.2 和之前过程定义的区别 （和 IPM 的区别）</li>
+<li>QPM 和 OPM 的关系</li>
+</ul>
+<p>Lv3产品集成(PI)</p>
+<ul>
+<li>假设你是产品集成的负责人，拒绝那些不合格的产品组件。定义哪些验收标准</li>
+</ul>
+<p>Lv3验证 (VER)</p>
+<ul>
+<li>VAL 和 VER的关键区别</li>
+</ul>
+<p>Lv2度量与分析(MA)</p>
+<ul>
+<li>度量分析的作用体现在哪些方面？(从项目和组织两个角度分析)</li>
+<li>度量的目的要支持质量的目标</li>
+<li>如何满足度量的可追踪性(哪些工作产品可以满足)</li>
+</ul>
+<p>Lv2配置管理(CM)</p>
+<ul>
+<li>一个软件开发过程中会产生很多工作产品artifacts/work product，但是并不是所有产品都是值得管理的，要去掉一些不那么重要的产品，确保重要的（为了让交付有完整性的）工作产品被管理。其实就是为了减少工作量。</li>
+<li>CCB: Change Control Board</li>
+<li>配置管理员的主要职责</li>
+<li>配置项标示的规则，什么情况下改写Vx.y.z中的x和y？什么说情况下改写z？规则是怎样的</li>
+<li>配置管理系统的等级？三个概念库如何体现配置库的等级？配置库需要注意什么</li>
+<li>基线的定义和特点</li>
+</ul>
+<p>Lv2过程与产品质量保证(PPQA)</p>
+<ul>
+<li>软件项目质量的分类</li>
+<li>QA行使的角色</li>
+<li>解释 PPQA QA SQA NC QC</li>
+<li>QA 和 QC差别？</li>
+<li>执行PPQA的工具方法</li>
+<li>简述评审一般过程、审计一般过程</li>
+<li>QA人员以及PPQA过程的质量保证如何实现</li>
+<li>如何评价&quot;测试驱动开发TDD可以显著提升质量&quot;这一说法</li>
+</ul>
+<p>Lv3决策分析与解决(DAR)</p>
+<ul>
+<li>如何评价 &quot;CMMI 是官僚、重文档的&quot;这一说法</li>
+</ul>
+<p>Lv5原因分析与解决(CAR)</p>
+<ul>
+<li>CAR 在本质上做的是什么</li>
+<li>CAR 一定是选坏的吗</li>
+<li>CAR 实际上是依赖于 OPM 进行执行的</li>
+<li>CAR 的理念是不犯错比犯了错再改正更好</li>
+<li>CAR 在4级和5级的不同</li>
+<li>CAR 为什么需要和 OPM 配合</li>
+</ul>
+<h3 id="ppt">ppt</h3>
+<ul>
+<li>Which of the following examples of requirements traceability are adequate?</li>
+<li>PASS is planning their resources. What project resources should be included?</li>
+<li>Project Management and Control</li>
+<li>Risk Management</li>
+<li>Supplier Agreement Management</li>
+<li>Which CM SPs could have prevented the problem?</li>
+<li>Which are process evaluations? Which are product evaluations?</li>
+<li>Which of the following are adequate for verification procedures and criteria?</li>
+<li>Which are verification and which are validation?</li>
+<li>Which of the following show incorporating experiences?</li>
+<li>Which PASS scenarios align with IPM?</li>
+<li>Organizational Process Definition</li>
+<li>Organizational Training</li>
+<li>VER SG2 SG3: SG3包含SG2</li>
+<li>持续集成 vs 大爆炸集成</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[南京大学-高级数据库开发技术-复习笔记]]></title>
         <id>http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/</id>
@@ -864,103 +1086,6 @@ public:
 <li><a href="https://www.cnblogs.com/l1l1/p/9432876.html">求凸包（安德鲁算法）</a></li>
 <li><a href="https://blog.csdn.net/peng0614/article/details/81193484">【计算几何/凸包】安德鲁算法（Andrew's Algorithm）详解</a></li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[NexT主题设置Valine评论系统邮件提醒]]></title>
-        <id>http://Bule-Zst.gitee.io/hxfRZLp5C/</id>
-        <link href="http://Bule-Zst.gitee.io/hxfRZLp5C/">
-        </link>
-        <updated>2020-12-21T14:08:40.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天无意间看到很久之前写的一篇文章有新的评论，而评论时间呢也是10天以前的。这就有点伤了啊，别人兴致冲冲地提了疑惑，而我却10天后才看到。经过这一茬，意识到评论提醒功能的重要性。由于我使用的是hexo+NexT主题+Valine评论系统，自然而然地就去<a href="https://valine.js.org/" target="_blank" rel="noopener">Valine官网</a>看了看，没想到还真有提醒的功能「<a href="https://valine.js.org/notify.html" target="_blank" rel="noopener">邮件提醒</a>」。</p>
-<p>这里就给大家讲讲Valine中如何配置邮件提醒功能。</p>
-<h2 id="Valine邮件提醒"><a href="#Valine邮件提醒" class="headerlink" title="Valine邮件提醒"></a>Valine邮件提醒</h2><p>Valine评论功能是基于<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud</a>的，Valine评论功能还不能跑起来的可以看看我之前写的文章《<a href="/2345860311#comment_system">Hexo使用NexT主题及配置</a>》，其中就有详细的使用说明，这里就不展开了。</p>
-<p>Valine官方提供的邮件提醒功能是基于<code>Leancloud的密码重置邮件提醒</code>，操作步骤如下：</p>
-<p>进入<code>Leancloud</code>&gt;选择你的评论所存放的<code>应用</code>&gt;<code>设置</code>&gt;<code>邮件模板</code>，按下图设置好用于<code>重置密码</code>的邮件主题&gt;然后保存:</p>
-![](http://Bule-Zst.gitee.io/post-images/1608560201989.jpg)
-<ol>
-<li><p>修改邮件主题：<code>你在  的评论收到了新的评论</code></p>
-</li>
-<li><p>修改内容：将下面的代码复制到“内容”中，并将其中的<code>你的网址首页链接</code>改为你的网址首页链接。</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hi, {{username}}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">你在 {{appname}} 的评论收到了新的回复，请点击查看：</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"你的网址首页链接"</span> <span class="attr">style</span>=<span class="string">"display: inline-block; padding: 10px 20px; border-radius: 4px; background-color: #3090e4; color: #fff; text-decoration: none;"</span>&gt;</span>马上查看<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>点击“保存”按钮</p>
-</li>
-<li><p>修改<span class="label label-info">NexT主题配置文件</span>，搜索<code>valine</code>（快速定位），将其中的<code>notify</code>改为<code>true</code>。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Valine.</span><br><span class="line"># You can get your appid and appkey from https://leancloud.cn</span><br><span class="line"># more info please open https://valine.js.org</span><br><span class="line">valine:</span><br><span class="line">  enable: true</span><br><span class="line">  appid:  gaKW5SWAvf7NBolU9wFbxN8O-gzGxoHsz</span><br><span class="line">  appkey: susRJyHS8Fq1SyKXg0r9ad65</span><br><span class="line">  notify: true # mail notifier , https://github.com/xCss/Valine/wiki</span><br><span class="line">  verify: false # Verification code</span><br><span class="line">  placeholder: 您的评论可以一针见血 (*^ω^*)~~ # comment box placeholder</span><br><span class="line">  avatar: mm # gravatar style</span><br><span class="line">  guest_info: nick,mail,link # custom comment header</span><br><span class="line">  pageSize: 10 # pagination size</span><br></pre></td></tr></tbody></table></figure>
-</li>
-</ol>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
-<li>发送次数过多，可能会暂时被Leancloud 屏蔽邮件发送功能  </li>
-<li>由于<code>邮件提醒</code>功能使用的<code>Leancloud的密码重置邮件提醒</code>，只能传递<code>昵称</code>、<code>邮箱</code>两个属性，所以邮件提醒链接<code>无法直达指定文章页</code>。<strong>请悉知</strong>。  </li>
-<li>开启<code>邮件提醒</code>会默认开启<code>验证码</code>选项。  </li>
-<li><p>该功能目前还在测试阶段，谨慎使用。</p>
-</li>
-<li><p>目前<code>邮件提醒</code>正处于测试阶段，仅在<code>子级</code>对存在邮件地址的<code>父级</code>发表评论时发送邮件</p>
-</li>
-</ul>
-<h2 id="第三方支持"><a href="#第三方支持" class="headerlink" title="第三方支持"></a>第三方支持</h2><p>这里重点讲一下第三方<code>邮件提醒</code>：<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener">Valine-Admin</a> (by <a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener">@zhaojun1998</a>)</p>
-<p>这也先需要将Valine的评论功能成功跑起来。</p>
-<p>然后进入 <a href="https://leancloud.cn/dashboard/applist.html#/apps" target="_blank" rel="noopener">Leancloud</a> 对应的 Valine 应用中。</p>
-<ol>
-<li>点击 <code>云引擎 -&gt; 设置</code> 填写代码库并保存：<code>https://github.com/zhaojun1998/Valine-Admin</code></li>
-</ol>
-<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/1608560645315.png" alt="" loading="lazy"></figure>
-<ol start="2">
-<li><p>切换到部署标签页，分支使用 master，点击部署即可：<br></p>
-<figure data-type="image" tabindex="2"><img src="http://Bule-Zst.gitee.io/post-images/1608560340962.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="3"><img src="http://Bule-Zst.gitee.io/post-images/1608560360122.png" alt="" loading="lazy"></figure>
-</li>
-<li><p>设置云引擎的环境变量</p>
-<figure data-type="image" tabindex="4"><img src="http://Bule-Zst.gitee.io/post-images/1608560540352.png" alt="" loading="lazy"></figure>
-<p><strong>必选参数</strong></p>
-<ul>
-<li><code>SITE_NAME</code> : 网站名称。</li>
-<li><code>SITE_URL</code> : 网站地址, <strong>最后不要加 <code>/</code> 。</strong></li>
-<li><code>SMTP_USER</code> : SMTP 服务用户名，一般为邮箱地址。</li>
-<li><code>SMTP_PASS</code> : SMTP 密码，一般为授权码，而不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式</li>
-<li><code>SMTP_SERVICE</code> : 邮件服务提供商，支持 <code>QQ</code>、<code>163</code>、<code>126</code>、<code>Gmail</code>、<code>"Yahoo"</code>、<code>......</code>  ，全部支持请参考 : <a href="https://nodemailer.com/smtp/well-known/#supported-services" target="_blank" rel="noopener">Nodemailer Supported services</a>。 — <em>如这里没有你使用的邮件提供商，请查看<a href="/高级配置.md#自定义邮件服务器">自定义邮件服务器</a></em></li>
-<li><code>SENDER_NAME</code> : 寄件人名称。</li>
-</ul>
-<p>由于我使用的是我自己的企业邮箱，所以这边的<code>SMTP_SERVICE</code>就不适用了，需要用这三个参数替换：<code>SMTP_HOST</code>、<code>SMTP_PORT</code>、<code>SMTP_SECURE</code>。</p>
-<p>详细说明如下：</p>
-<ul>
-<li><code>SMTP_HOST</code> : 邮件服务提供商 SMTP 地址，如 qq : <code>smtp.qq.com</code>，<em>此项需要自行查询或询问其服务商</em>。</li>
-<li><code>SMTP_PORT</code> : 邮件服务提供商 SMTP 端口, <em>此项需要自行查询或询问其服务商</em>。</li>
-<li><code>SMTP_SECURE</code> : 是否启用加密, 默认为 <code>true</code>，一般不需要设置，如有特殊请自行配置。 <em>此项需要自行查询或询问其服务商</em>。</li>
-</ul>
-<p>如果也同我一样使用阿里云企业邮箱，<code>SMTP_HOST</code>、<code>SMTP_PORT</code>、<code>SMTP_SECURE</code>可以照我的写。</p>
-<p>可以看到上图中，我的自定义环境变量还多了2个，分别是：</p>
-<ul>
-<li><code>TO_EMAIL</code>：这个是填收邮件提醒的邮箱地址，若没有这个字段，则将邮件发到<code>SMTP_USER</code>。</li>
-<li><code>TEMPLATE_NAME</code>：设置提醒邮件的主题，目前内置了两款主题，分别为 <code>default</code> 与 <code>rainbow</code>。默认为 <code>default</code> 。</li>
-</ul>
-<h3 id="Web-评论管理"><a href="#Web-评论管理" class="headerlink" title="Web 评论管理"></a>Web 评论管理</h3><p>此项目还为 Valine 提供了更方便的评论管理功能，可以在 web 端对评论进行查看与删除操作。配置方式如下。</p>
-![](http://Bule-Zst.gitee.io/post-images/1608560421062.png)
-<p>后台登录需要账号密码，需要在这里设置，只需要填写 <code>email</code>、<code>password</code>、<code>username</code>，这三个字段即可, 使用  <code>email</code> 作为账号登陆即可。（为了安全考虑，此 <code>email</code> 必须为配置中的 <code>SMTP_USER</code> 或 <code>TO_EMAIL</code>， 否则不允许登录）<br></p>
-<figure data-type="image" tabindex="5"><img src="http://Bule-Zst.gitee.io/post-images/1608560447539.png" alt="" loading="lazy"></figure>
-<blockquote>
-<p>Web 后台目前仅有 <code>查看</code> 与 <code>删除</code> 功能</p>
-</blockquote>
-<h3 id="LeanCloud-休眠策略"><a href="#LeanCloud-休眠策略" class="headerlink" title="LeanCloud 休眠策略"></a>LeanCloud 休眠策略</h3><p>免费版的 LeanCloud 容器，是有强制性休眠策略的，不能 24 小时运行：</p>
-<ul>
-<li>每天必须休眠 6 个小时</li>
-<li>30 分钟内没有外部请求，则休眠。</li>
-<li>休眠后如果有新的外部请求实例则马上启动（但激活时此次发送邮件会失败）。</li>
-</ul>
-<p>分析了一下上方的策略，如果不想付费的话，最佳使用方案就设置定时器，每天 7 - 23 点每 20 分钟访问一次，这样可以保持每天的绝大多数时间邮件服务是正常的。</p>
-<p>附 <code>Linux crontab</code> 定时器代码：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/20 7-23 * * * curl https://你配置的域名前缀.leanapp.cn</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>注 : 此 <code>crontab</code> 不是 <code>LeanCloud</code> 后台的定时任务，如果你没有 <code>Linux</code> 服务器来配置此定时器，那么可以在此 <a href="https://github.com/zhaojun1998/Valine-Admin/issues/1" target="_blank" rel="noopener">issues</a> 中回复<strong>zhaojun1998</strong>，让他帮你加上。</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p><strong class="lable-red">更新新版本与更改环境变量均需要重启容器后生效。</strong></p>
-<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4>
-<figure data-type="image" tabindex="6"><img src="http://Bule-Zst.gitee.io/post-images/1608560469789.png" alt="" loading="lazy"></figure>
-<hr>
-<p>from <a href="https://www.nhtzj.com/3315416634/">https://www.nhtzj.com/3315416634/</a></p>
 ]]></content>
     </entry>
 </feed>

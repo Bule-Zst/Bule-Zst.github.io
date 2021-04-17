@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>Jetbrains系列产品重置试用方法 | Bule-Zst</title>
+<title>南京大学-软件过程改进-复习笔记 | Bule-Zst</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1618651761718">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -62,8 +62,8 @@
 </script>
 
 
-  <meta name="description" content="Jetbrains系列产品重置试用方法" />
-  <meta name="keywords" content="编程工具" />
+  <meta name="description" content="南京大学-软件过程改进-复习笔记" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -257,23 +257,38 @@
   <div class="toc-wrapper auto-number no_compress"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li><a href="#0x0-%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF">0x0. 项目背景</a></li>
-<li><a href="#0x1-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85">0x1. 如何安装</a>
+<li>
 <ul>
-<li><a href="#1-%E6%8F%92%E4%BB%B6%E5%B8%82%E5%9C%BA%E5%AE%89%E8%A3%85">1). 插件市场安装：</a></li>
-<li><a href="#2-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85">2). 下载安装：</a></li>
+<li><a href="#%E8%BF%87%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89">过程的定义</a></li>
+<li><a href="#%E8%BF%87%E7%A8%8B%E5%92%8C%E8%BF%87%E7%A8%8B%E5%9F%9F%E7%9A%84%E5%85%B3%E7%B3%BB">过程和过程域的关系</a></li>
+<li><a href="#%E8%BF%9E%E7%BB%AD%E5%BC%8F%E8%A1%A8%E7%A4%BA%E6%B3%95%E4%B8%8E%E9%98%B6%E6%AE%B5%E5%BC%8F%E8%A1%A8%E7%A4%BA%E6%B3%95">连续式表示法与阶段式表示法</a></li>
+<li><a href="#%E7%AD%89%E4%BB%B7%E9%98%B6%E6%AE%B5%E5%BC%8F%E5%AE%9A%E7%BA%A7">等价阶段式定级</a></li>
+<li><a href="#%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B">过程模型</a></li>
+<li><a href="#cmmi%E6%9D%A5%E6%BA%90%E4%BA%8E%E5%93%AA%E4%B8%89%E4%B8%AA%E6%A8%A1%E5%9E%8B-%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84">CMMI来源于哪三个模型 ，研究机构</a></li>
+<li><a href="#%E5%B7%B2%E7%AE%A1%E7%90%86%E5%92%8C%E5%B7%B2%E5%AE%9A%E4%B9%89%E7%9A%84%E5%8C%BA%E5%88%AB">已管理和已定义的区别</a></li>
+<li><a href="#%E8%BF%87%E7%A8%8B%E5%9F%9F">过程域</a>
+<ul>
+<li><a href="#%E5%B7%A5%E7%A8%8B%E7%B1%BB">工程类</a>
+<ul>
+<li><a href="#%E7%A1%AE%E8%AE%A4%E4%B8%8E%E9%AA%8C%E8%AF%81%E7%9A%84%E5%8C%BA%E5%88%AB">确认与验证的区别</a></li>
 </ul>
 </li>
-<li><a href="#0x2-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">0x2. 如何使用</a></li>
-<li><a href="#0x3-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0">0x3. 如何更新</a>
+<li><a href="#%E6%94%AF%E6%8C%81%E7%B1%BB">支持类</a>
 <ul>
-<li><a href="#1-%E6%8F%92%E4%BB%B6%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6%E6%8E%A8%E8%8D%90">1). 插件更新机制（推荐）：</a></li>
-<li><a href="#2-%E6%89%8B%E5%8A%A8%E6%9B%B4%E6%96%B0">2). 手动更新：</a></li>
+<li><a href="#%E5%BA%A6%E9%87%8F%E4%B8%8E%E5%88%86%E6%9E%90-and-%E8%BF%87%E7%A8%8B%E4%B8%8E%E4%BA%A7%E5%93%81%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81">度量与分析 and 过程与产品质量保证</a></li>
 </ul>
 </li>
-<li><a href="#0x4-%E4%B8%80%E4%BA%9B%E8%AF%B4%E6%98%8E">0x4. 一些说明</a></li>
-<li><a href="#0x5-%E5%BC%80%E6%BA%90%E4%BF%A1%E6%81%AF">0x5. 开源信息</a></li>
-<li><a href="#0x6-%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%A7%E5%93%81">0x6. 支持的产品</a></li>
+</ul>
+</li>
+<li><a href="#ppt%E4%B8%AD%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86">PPT中问题整理</a></li>
+<li><a href="#%E7%AE%80%E7%AD%94%E9%A2%98%E5%88%97%E8%A1%A8">简答题列表</a>
+<ul>
+<li><a href="#%E8%BF%87%E7%A8%8B%E5%9F%9F%E7%9B%B8%E5%85%B3">过程域相关</a></li>
+<li><a href="#ppt">ppt</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
   </div>
@@ -539,8 +554,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="http://Bule-Zst.gitee.io/mQjLrKUHc/">
-      Jetbrains系列产品重置试用方法
+    <a class="post-title-link" href="http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/">
+      南京大学-软件过程改进-复习笔记
     </a>
   </h1>
   <div class="post-meta">
@@ -548,36 +563,23 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-01-06 11:17:53">2021-01-06</span>
+      <span class="publish-time" data-t="2021-04-16 09:53:00">2021-04-16</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="http://Bule-Zst.gitee.io/waU6_4ip5/">
-        <span>编程工具</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>5<span class="language" data-lan="minute">分钟</span></span>
+      <span>8<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1364<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1844<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/mQjLrKUHc/" data-flag-title="Jetbrains系列产品重置试用方法" class="meta-item pc-show leancloud_visitors">
+    <span id="/2021-04-16-南京大学-软件过程改进-复习笔记/" data-flag-title="南京大学-软件过程改进-复习笔记" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -586,95 +588,220 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>本站惯例：本文假定你知道Jetbrains家的产品。不知道可以问问搜索引擎。</p>
-<p>没错，jetbrains-agent这个项目停止了。市面上漫天飞的各种最新都是其他大神的魔改版本。<br>
-我不是要专门写个博文来说明jetbrains-agent项目已经停止，然后缅怀感叹一番。这篇文章是想和大家聊聊另一种思路。</p>
-<h1 id="0x0-项目背景">0x0. 项目背景</h1>
-<p>Jetbrains家的产品有一个很良心的地方，他会允许你试用30天（这个数字写死在代码里了）以评估是否你真的需要为它而付费。<br>
-但很多时候会出现一种情况：IDE并不能按照我们实际的试用时间来计算。<br>
-我举个例子：如果我们开始了试用，然后媳妇生孩子要你回去陪产！陪产时我们并无空闲对IDE试用评估，它依旧算试用时间。（只是举个例子，或许你并没有女朋友）<br>
-发现了吗？你未能真的有30天来对它进行全面的试用评估，你甚至无法作出是否付费的决定。此时你会想要延长试用时间，然而Jetbrains并未提供相关功能，该怎么办？</p>
-<p>事实上有一款插件可以实现这个功能，你或许可以用它来重置一下试用时间。但切记不要无休止的一直试用，这并不是这个插件的本意！</p>
-<h1 id="0x1-如何安装">0x1. 如何安装</h1>
-<h2 id="1-插件市场安装">1). 插件市场安装：</h2>
-<ul>
-<li>在Settings/Preferences... -&gt; Plugins 内手动添加第三方插件仓库地址：https://plugins.zhile.io</li>
-<li>搜索：<code>IDE Eval Reset</code>插件进行安装。如果搜索不到请注意是否做好了上一步？网络是否通畅？</li>
-<li>插件会提示安装成功。</li>
-</ul>
-<h2 id="2-下载安装">2). 下载安装：</h2>
-<ul>
-<li>点击这个<a href="https://plugins.zhile.io/files/ide-eval-resetter-2.1.6.zip">链接(v2.1.6)</a>下载插件的zip包（macOS可能会自动解压，然后把zip包丢进回收站）</li>
-<li>通常可以直接把zip包拖进IDE的窗口来进行插件的安装。如果无法拖动安装，你可以在Settings/Preferences... -&gt; Plugins 里手动安装插件（Install Plugin From Disk...）</li>
-<li>插件会提示安装成功。</li>
-</ul>
-<h1 id="0x2-如何使用">0x2. 如何使用</h1>
-<ul>
-<li>一般来说，在IDE窗口切出去或切回来时（窗口失去/得到焦点）会触发事件，检测是否长时间（25天）没有重置，给通知让你选择。（初次安装因为无法获取上次重置时间，会直接给予提示）</li>
-<li>也可以手动唤出插件的主界面：
-<ul>
-<li>如果IDE没有打开项目，在Welcome界面点击菜单：Get Help -&gt; Eval Reset</li>
-<li>如果IDE打开了项目，点击菜单：Help -&gt; Eval Reset</li>
-</ul>
-</li>
-<li>唤出的插件主界面中包含了一些显示信息，2个按钮，1个勾选项：
-<ul>
-<li>按钮：Reload 用来刷新界面上的显示信息。</li>
-<li>按钮：Reset 点击会询问是否重置试用信息并重启IDE。选择Yes则执行重置操作并重启IDE生效，选择No则什么也不做。（此为手动重置方式）</li>
-<li>勾选项：Auto reset before per restart 如果勾选了，则自勾选后每次重启/退出IDE时会自动重置试用信息，你无需做额外的事情。（此为自动重置方式）</li>
-</ul>
-</li>
-</ul>
-<h1 id="0x3-如何更新">0x3. 如何更新</h1>
-<h2 id="1-插件更新机制推荐">1). 插件更新机制（推荐）：</h2>
-<ul>
-<li>IDE会自行检测其自身和所安装插件的更新并给予提示。如果本插件有更新，你会收到提示看到更新日志，自行选择是否更新。</li>
-<li>点击IDE的<code>Check for Updates...</code>菜单手动检测IDE和所安装插件的更新。如果本插件有更新，你会收到提示看到更新日志，自行选择是否更新。</li>
-<li>插件更新可能会需要重启IDE。</li>
-</ul>
-<h2 id="2-手动更新">2). 手动更新：</h2>
-<ul>
-<li>从本页面下载最新的插件zip包安装更新。参考本文：<code>下载安装</code>小节。</li>
-<li>插件更新需要重启IDE。</li>
-</ul>
-<h1 id="0x4-一些说明">0x4. 一些说明</h1>
-<ul>
-<li>本插件默认不会显示其主界面，如果你需要，参考本文：<code>如何使用</code>小节。</li>
-<li>市场付费插件的试用信息也会一并重置。</li>
-<li>对于某些付费插件（如: Iedis 2, MinBatis）来说，你可能需要去取掉javaagent配置（如果有）后重启IDE：
-<ul>
-<li>如果IDE没有打开项目，在Welcome界面点击菜单：Configure -&gt; Edit Custom VM Options... -&gt; 移除 -javaagent: 开头的行。</li>
-<li>如果IDE打开了项目，点击菜单：Help -&gt; Edit Custom VM Options... -&gt; 移除 -javaagent: 开头的行。</li>
-</ul>
-</li>
-<li>重置需要重启IDE生效！</li>
-<li>重置后并不弹出Licenses对话框让你选择输入License或试用，这和之前的重置脚本/插件不同（省去这烦人的一步）。</li>
-<li>如果长达25天不曾有任何重置动作，IDE会有通知询问你是否进行重置。</li>
-<li>如果勾选：Auto reset before per restart ，重置是静默无感知的。</li>
-<li>简单来说：勾选了Auto reset before per restart则无需再管，一劳永逸。</li>
-</ul>
-<h1 id="0x5-开源信息">0x5. 开源信息</h1>
-<ul>
-<li>插件是学习研究项目，源代码是开放的。源码仓库地址：<a href="https://gitee.com/pengzhile/ide-eval-resetter">Gitee</a>。</li>
-<li>如果你有更好的想法，欢迎给我提Pull Request来共同研究完善。</li>
-<li>插件源码使用：GPL-2.0开源协议发布。</li>
-<li>插件使用PHP编写，毕竟PHP是世界上最好的编程语言！</li>
-</ul>
-<h1 id="0x6-支持的产品">0x6. 支持的产品</h1>
-<ul>
-<li>IntelliJ IDEA</li>
-<li>AppCode</li>
-<li>CLion</li>
-<li>DataGrip</li>
-<li>GoLand</li>
-<li>PhpStorm</li>
-<li>PyCharm</li>
-<li>Rider</li>
-<li>RubyMine</li>
-<li>WebStorm</li>
-</ul>
+              <p>本文主要是对 <a href="https://wym0120.github.io/2021/04/12/cmmi/">[课堂笔记] 软件过程改进 </a>这篇文章的一些个人补充</p>
 <hr>
-<p>from <a href="https://zhile.io/2020/11/18/jetbrains-eval-reset.html">https://zhile.io/2020/11/18/jetbrains-eval-reset.html</a></p>
+<p>[TOC]</p>
+<h2 id="过程的定义">过程的定义</h2>
+<ul>
+<li>IEEE: Sequence of steps performed for a given purpose.
+<ul>
+<li>为给定目的执行的步骤顺序。</li>
+</ul>
+</li>
+<li>PALL: Logical organization of people, materials, energy, equipment, and procedures into work activities designed to produce a SP ecified end result.
+<ul>
+<li>人员、材料、能源、设备和程序 在工作活动中的逻辑组织，旨在产生SP（特定实践）确认的最终结果。</li>
+</ul>
+</li>
+<li>CMMI GLOSSARY: A set of interrelated activities, which transform inputs into outputs, to achieve a given purpose (These activities can be mapped to one or more practices in CMMI process areas to allow a model to be useful for process improvement and process appraisal.)
+<ul>
+<li>一组相互关联的活动，这些活动将输入转化为输出，以实现给定的目的（这些活动可以映射到CMMI过程域中的一个或多个实践，以使模型可用于流程改进和流程评估。）</li>
+</ul>
+</li>
+</ul>
+<h2 id="过程和过程域的关系">过程和过程域的关系</h2>
+<h2 id="连续式表示法与阶段式表示法">连续式表示法与阶段式表示法</h2>
+<ul>
+<li>连续式表示法：选择一个特定的过程域进行改进。</li>
+<li>阶段式表示法：选择某一成熟度级别下的多个过程域进行改进。</li>
+</ul>
+<h2 id="等价阶段式定级">等价阶段式定级</h2>
+<ul>
+<li>CL：capability level 能力等级</li>
+<li>ML：maturity level 成熟度级别</li>
+</ul>
+<h2 id="过程模型">过程模型</h2>
+<p>过程模型是一种开发策略，这种策略针对软件工程的各个阶段提供了一套范形，使工程的进展达到预期的目的。</p>
+<p>CMMI 开发模型就是一种过程模型。</p>
+<h2 id="cmmi来源于哪三个模型-研究机构">CMMI来源于哪三个模型 ，研究机构</h2>
+<ul>
+<li>软件工程 sw-cmm</li>
+<li>系统工程 EIA/IS</li>
+<li>集成化产品和过程开发 IPD-CMM</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/image-20210416144801516.png" alt="image-20210416144801516" loading="lazy"></figure>
+<h2 id="已管理和已定义的区别">已管理和已定义的区别</h2>
+<p>已管理：标准、过程描述与规程在过程的每个特定实例中（如在某一特定项目中）都可能有很大的不同。</p>
+<p>已定义：项目的标准、过程描述与规程是从组织的标准过程集中裁剪得来，以适应特定的项目或组织级单位，因而就更为一致，除非是裁剪指南所允许的差别。</p>
+<h2 id="过程域">过程域</h2>
+<h3 id="工程类">工程类</h3>
+<h4 id="确认与验证的区别">确认与验证的区别</h4>
+<p>确认：确认产品实际的用途是否符合其预期的用途；做了正确的事。</p>
+<p>验证：验证工作产品（or 产品）的功能是否符合需求；正确地做了事。</p>
+<h3 id="支持类">支持类</h3>
+<h4 id="度量与分析-and-过程与产品质量保证">度量与分析 and 过程与产品质量保证</h4>
+<p>PPQA专注于质量，而MA则是对一切过程提供度量与分析。当对质量进行度量与分析时，个人认为MA与PPQA是等价的，因此，MA的范围更广，而PPQA则专注于质量方面。</p>
+<h2 id="ppt中问题整理">PPT中问题整理</h2>
+<ul>
+<li>
+<p>requirements traceability：需求可追溯性</p>
+</li>
+<li>
+<p>A to B and vice versa：A符合B，反之亦然</p>
+</li>
+<li>
+<p>Budget and funding：预算和资金</p>
+</li>
+<li>
+<p>Staff：职员</p>
+</li>
+<li>
+<p>Facilities：设施</p>
+</li>
+<li>
+<p>peer review meetings：同行评审会议</p>
+</li>
+<li>
+<p>delinquent：拖欠的</p>
+</li>
+<li>
+<p>People are not meeting schedules.：人们没有遵守时间表。</p>
+</li>
+<li>
+<p>likelihood：可能性</p>
+</li>
+<li>
+<p>motion sensors：运动传感器</p>
+</li>
+<li>
+<p>contract：合同</p>
+</li>
+<li>
+<p>COTS were used for the keypad; sensors were secured from suppliers; and the controller consists of re-used PASS in-house software.：键盘上使用了COTS； 传感器由供应商提供保护； 控制器由重复使用的PASS内部软件组成。</p>
+</li>
+<li>
+<p>incorporating experiences：整合经验</p>
+</li>
+<li>
+<p>appraisal metrics：评估指标</p>
+</li>
+<li>
+<p>align with：对齐</p>
+</li>
+<li>
+<p>All PASS projects follow the standard process exactly as is.：所有PASS项目都完全按照标准流程进行。</p>
+</li>
+<li>
+<p>trace：追溯</p>
+</li>
+<li>
+<p>tailoring：裁剪</p>
+</li>
+<li>
+<p>Spiral lifecycle：螺旋生命周期</p>
+</li>
+</ul>
+<h2 id="简答题列表">简答题列表</h2>
+<h3 id="过程域相关">过程域相关</h3>
+<p>Lv4组织级过程性能(OPP)</p>
+<ul>
+<li>x.y.z代表着什么</li>
+</ul>
+<p>Lv2项目监督与控制(PMC)</p>
+<ul>
+<li>项目监控点选择的原则？原因</li>
+<li>SG2中的相关实践约定，需要采取纠偏措施的问题来源</li>
+<li>纠偏行动的先决条件</li>
+</ul>
+<p>Lv2项目计划(PP)</p>
+<ul>
+<li>PP过程域在项目中的作用域</li>
+<li>计划制定的原则？</li>
+<li>一般的估算方法有哪几个？区别</li>
+<li>什么是承诺管理？承诺的分类</li>
+<li>PP中“建立”和“维护”两个活动的解释？</li>
+<li>估算目标: 不是尽可能客观描述代码行/工作量（永远不可能实现估算），而是得到一个数字<strong>数字对不对不重要，重要的是大家认可</strong></li>
+</ul>
+<p>Lv2需求管理(REQM)</p>
+<ul>
+<li>(需求跟踪的方法) 需求跟踪矩阵的使用</li>
+<li>(获得需求承诺) 应该获得那些人的承诺</li>
+<li>识别需求不一致性的最有效方法</li>
+<li>敏捷对于需求的态度是拥抱变更，但这是不正确的，大部分开发人员还是希望能够close开发</li>
+<li>Scrum对于需求的态度是不响应一个SP rint中的需求变更(目标不变)，只是记录到backlog，可能会在下一个迭代响应变更</li>
+<li>理解双向可跟踪</li>
+</ul>
+<p>Lv4量化项目管理(QPM)</p>
+<ul>
+<li>OPP 和 QPM 的关联</li>
+<li>QPM SP1.2 和之前过程定义的区别 （和 IPM 的区别）</li>
+<li>QPM 和 OPM 的关系</li>
+</ul>
+<p>Lv3产品集成(PI)</p>
+<ul>
+<li>假设你是产品集成的负责人，拒绝那些不合格的产品组件。定义哪些验收标准</li>
+</ul>
+<p>Lv3验证 (VER)</p>
+<ul>
+<li>VAL 和 VER的关键区别</li>
+</ul>
+<p>Lv2度量与分析(MA)</p>
+<ul>
+<li>度量分析的作用体现在哪些方面？(从项目和组织两个角度分析)</li>
+<li>度量的目的要支持质量的目标</li>
+<li>如何满足度量的可追踪性(哪些工作产品可以满足)</li>
+</ul>
+<p>Lv2配置管理(CM)</p>
+<ul>
+<li>一个软件开发过程中会产生很多工作产品artifacts/work product，但是并不是所有产品都是值得管理的，要去掉一些不那么重要的产品，确保重要的（为了让交付有完整性的）工作产品被管理。其实就是为了减少工作量。</li>
+<li>CCB: Change Control Board</li>
+<li>配置管理员的主要职责</li>
+<li>配置项标示的规则，什么情况下改写Vx.y.z中的x和y？什么说情况下改写z？规则是怎样的</li>
+<li>配置管理系统的等级？三个概念库如何体现配置库的等级？配置库需要注意什么</li>
+<li>基线的定义和特点</li>
+</ul>
+<p>Lv2过程与产品质量保证(PPQA)</p>
+<ul>
+<li>软件项目质量的分类</li>
+<li>QA行使的角色</li>
+<li>解释 PPQA QA SQA NC QC</li>
+<li>QA 和 QC差别？</li>
+<li>执行PPQA的工具方法</li>
+<li>简述评审一般过程、审计一般过程</li>
+<li>QA人员以及PPQA过程的质量保证如何实现</li>
+<li>如何评价&quot;测试驱动开发TDD可以显著提升质量&quot;这一说法</li>
+</ul>
+<p>Lv3决策分析与解决(DAR)</p>
+<ul>
+<li>如何评价 &quot;CMMI 是官僚、重文档的&quot;这一说法</li>
+</ul>
+<p>Lv5原因分析与解决(CAR)</p>
+<ul>
+<li>CAR 在本质上做的是什么</li>
+<li>CAR 一定是选坏的吗</li>
+<li>CAR 实际上是依赖于 OPM 进行执行的</li>
+<li>CAR 的理念是不犯错比犯了错再改正更好</li>
+<li>CAR 在4级和5级的不同</li>
+<li>CAR 为什么需要和 OPM 配合</li>
+</ul>
+<h3 id="ppt">ppt</h3>
+<ul>
+<li>Which of the following examples of requirements traceability are adequate?</li>
+<li>PASS is planning their resources. What project resources should be included?</li>
+<li>Project Management and Control</li>
+<li>Risk Management</li>
+<li>Supplier Agreement Management</li>
+<li>Which CM SPs could have prevented the problem?</li>
+<li>Which are process evaluations? Which are product evaluations?</li>
+<li>Which of the following are adequate for verification procedures and criteria?</li>
+<li>Which are verification and which are validation?</li>
+<li>Which of the following show incorporating experiences?</li>
+<li>Which PASS scenarios align with IPM?</li>
+<li>Organizational Process Definition</li>
+<li>Organizational Training</li>
+<li>VER SG2 SG3: SG3包含SG2</li>
+<li>持续集成 vs 大爆炸集成</li>
+</ul>
 
             </div>
             
@@ -687,7 +814,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="http://Bule-Zst.gitee.io/mQjLrKUHc/" title="Jetbrains系列产品重置试用方法">http://Bule-Zst.gitee.io/mQjLrKUHc/</a>
+      <a href="http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/" title="南京大学-软件过程改进-复习笔记">http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -696,21 +823,15 @@
   </ul>
   <div class="tags">
     
-      <a href="http://Bule-Zst.gitee.io/waU6_4ip5/"># 编程工具</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="MySQL性能优化" href="http://Bule-Zst.gitee.io/jvgYk8JbI/">MySQL性能优化</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="MySQL性能优化" href="http://Bule-Zst.gitee.io/jvgYk8JbI/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="LeetCode 410. 分割数组的最大值" href="http://Bule-Zst.gitee.io/vus3sqCc8/">LeetCode 410. 分割数组的最大值</a>
-        <a class="nav-mobile-next" title="LeetCode 410. 分割数组的最大值" href="http://Bule-Zst.gitee.io/vus3sqCc8/">下一篇</a>
+        <a class="nav-pc-next" title="南京大学-高级数据库开发技术-复习笔记" href="http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/">南京大学-高级数据库开发技术-复习笔记</a>
+        <a class="nav-mobile-next" title="南京大学-高级数据库开发技术-复习笔记" href="http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
