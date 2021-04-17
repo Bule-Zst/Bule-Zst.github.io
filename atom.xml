@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-17T09:29:25.382Z</updated>
+    <updated>2021-04-17T10:03:03.175Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -37,6 +37,7 @@
 </li>
 </ul>
 <h2 id="过程和过程域的关系">过程和过程域的关系</h2>
+<p>过程域中包含若干过程。</p>
 <h2 id="连续式表示法与阶段式表示法">连续式表示法与阶段式表示法</h2>
 <ul>
 <li>连续式表示法：选择一个特定的过程域进行改进。</li>
