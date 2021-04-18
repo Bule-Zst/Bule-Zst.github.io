@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>Valine | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1618653777811">
+<link rel="shortcut icon" href="/favicon.ico?v=1618715339691">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1670,10 +1670,8 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;画结构&#34;&gt;画结构&lt;/h3&gt;
-&lt;p&gt;B树&lt;/p&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/image-20210415160000065.png&#34; alt=&#34;image-20210415160000065&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;p&gt;B+树&lt;/p&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/image-20210415160910412.png&#34; alt=&#34;image-20210415160910412&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/image-20210415160910412.png&#34; alt=&#34;image-20210415160910412&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;h3 id=&#34;b树使用场景&#34;&gt;B+树使用场景&lt;/h3&gt;
 &lt;p&gt;能做的：&lt;/p&gt;
 &lt;ul&gt;
@@ -1683,22 +1681,23 @@
 &lt;/ul&gt;
 &lt;p&gt;什么时候能用，什么时候不能用：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;对于一般索引，都能用&lt;/li&gt;
+&lt;li&gt;对于一般索引，都能用，除非查询优化器发现用了索引后，会导致性能降低，则不会使用索引。&lt;/li&gt;
 &lt;li&gt;对于复合索引，如果违反最左匹配原则，则不能用。例如，对(x,y)建立索引，但对y进行查询，则不能用。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;什么时候应该用：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;仅当要通过索引访问表中很少一部分行&lt;/li&gt;
-&lt;li&gt;虽然查询行数比较多，当索引包含多个字段，而要访问的字段全部包含在索引中时，查找只需通过索引而不用访问全表时&lt;/li&gt;
+&lt;li&gt;虽然查询行数比较多，但索引包含多个字段，而要访问的字段全部包含在索引中时，查找只需通过索引而不用访问全表时&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;什么时候不应该用（没找到答案，自己的理解）：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;数据量较小时：因为使用索引拿到rowid后，需要额外一次磁盘IO，所以增加了时间开销。&lt;/li&gt;
+&lt;li&gt;当需要查询的数据占表总数据的比重很大时，不应该使用索引，因为查询优化器会发现，使用索引的效率不如全表遍历。&lt;/li&gt;
 &lt;li&gt;写密集型事务：频繁修改索引，增加开销&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;分区&#34;&gt;分区&lt;/h2&gt;
 &lt;h3 id=&#34;分区是干嘛用的&#34;&gt;分区是干嘛用的&lt;/h3&gt;
-&lt;p&gt;分区就是将一个大表根据条件分割成若干个小表，是一种数据分组方式。&lt;/p&gt;
+&lt;p&gt;分区就是将一个大表根据条件分割成若干个小表，是一种数据分组方式，能够提高并发性和并行性。&lt;/p&gt;
+&lt;p&gt;表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个表空间（物理文件）上&lt;/p&gt;
 &lt;h3 id=&#34;根据分区键partition-key的类型分类分区有哪几种类型&#34;&gt;根据分区键（Partition Key）的类型分类，分区有哪几种类型？&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;哈希分区：把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。&lt;/li&gt;
@@ -1710,25 +1709,193 @@
 &lt;li&gt;哈希分区：根据分区键，可以快速找到记录，但对范围检索没有任何帮助。更接近于非数据驱动的循环分区，用于负载均衡，提高并发的能力。&lt;/li&gt;
 &lt;li&gt;范围分区：比较常用，非常适合处理历史数据。&lt;/li&gt;
 &lt;li&gt;列表分区：查询时，通常只查询某几个字段，或者，某几个字段通常一起被查询。但，每个分区都必须有主键，因此会造成冗余。&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;按什么字段进行分区要整体考虑，因为：更新分区键会引起移动数据，应该避免这么做。当数据分区键均匀分布时，分区表查询收益最大。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;设计原则&#34;&gt;设计原则&lt;/h2&gt;
+&lt;h3 id=&#34;处理模式操作模式批处理与实时系统&#34;&gt;处理模式（操作模式）：批处理与实时系统&lt;/h3&gt;
 &lt;p&gt;9.2 为性能设计（下）.mp4，17:09&lt;/p&gt;
-&lt;h3 id=&#34;操作模式批处理与实时系统&#34;&gt;操作模式：批处理与实时系统&lt;/h3&gt;
-&lt;h3 id=&#34;存储模式集中式与分布式&#34;&gt;存储模式：集中式与分布式&lt;/h3&gt;
-&lt;h2 id=&#34;sql&#34;&gt;SQL&lt;/h2&gt;
-&lt;h3 id=&#34;查询优化器如何工作&#34;&gt;查询优化器如何工作&lt;/h3&gt;
-&lt;p&gt;4.1 SQL优化.mp4，13:38&lt;/p&gt;
+&lt;h4 id=&#34;基本逻辑&#34;&gt;基本逻辑&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;基于成本的优化器&lt;/p&gt;
+&lt;p&gt;异步处理模式：可以允许用户发出操作之后去做其他工作，数据库进行集中的批处理，当处理完毕后通知用户，但是实时性不好&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;基于规则的优化器&lt;/p&gt;
+&lt;p&gt;同步处理时模式：用户必须等待数据库操作并返回结果，期间不能做其它操作。适合数据库进行实时交易。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;数据库设计&#34;&gt;数据库设计&lt;/h2&gt;
-&lt;h3 id=&#34;层次结构&#34;&gt;层次结构&lt;/h3&gt;
+&lt;h4 id=&#34;好坏&#34;&gt;好坏&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;当操作过于复杂，需要横跨很多系统、物理环境，实时系统中不可控的因素就会变多，此时就需要采用异步处理模式。&lt;/li&gt;
+&lt;li&gt;异步处理模式：健壮性、稳定性更强。&lt;/li&gt;
+&lt;li&gt;同步处理模式：满足实时性的要求，在某些特定业务下，这是必须的，比如银行转账业务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;选择&#34;&gt;选择&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;由系统需求和所需处理的数据的物理结构决定的，大部分情况下，同步和异步是共存的，不能先入为主得认为业务必须同步。&lt;/li&gt;
+&lt;li&gt;从性能的角度，如果对实时性没有要求，则可以考虑尝试使用批处理模式&lt;/li&gt;
+&lt;li&gt;在批处理模式下，更容易暴露性能问题，因为批处理需要压榨硬件资源，而实时系统只有在高并发或大数据量的情况下才可能暴露性能问题，而当实时系统暴露出性能问题后，可能会极大影响正常业务的开展。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;存储模式集中式与分布式&#34;&gt;存储模式：集中式与分布式&lt;/h3&gt;
+&lt;p&gt;9.2 为性能设计（下）.mp4，11:31&lt;/p&gt;
+&lt;h4 id=&#34;基本逻辑-2&#34;&gt;基本逻辑&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分布式数据存储：将数据分散存储在多台独立的设备上，一般情况下，多台设备在地理位置上相对分散。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;集中式数据存储：将数据集中存储在一台或多台设备上，一般情况下，存储设备在地理位置上相对集中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;好坏-2&#34;&gt;好坏&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;分布式数据系统：
+&lt;ul&gt;
+&lt;li&gt;缺点
+&lt;ul&gt;
+&lt;li&gt;复杂度高、健壮性低、管理成本高&lt;/li&gt;
+&lt;li&gt;保密性不易控制&lt;/li&gt;
+&lt;li&gt;多个副本的一致性难以保证&lt;/li&gt;
+&lt;li&gt;远程数据的透明访问代价高&lt;/li&gt;
+&lt;li&gt;不同数据源数据的结合极为困难
+&lt;ul&gt;
+&lt;li&gt;数据传输开销大&lt;/li&gt;
+&lt;li&gt;脱离数据源的环境，数据源无法从数据规划中获益（物理结构、索引）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;优点
+&lt;ul&gt;
+&lt;li&gt;单一节点的负担低&lt;/li&gt;
+&lt;li&gt;具有更灵活的体系结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;集中式
+&lt;ul&gt;
+&lt;li&gt;缺点：单点故障，会带来很大损失，因此常常需要热备份或灾难备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;选择-2&#34;&gt;选择&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;平衡、折中
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;全球性的数据若集中存储则跨大陆的访问速度将大幅降低离数据越近访问越快但从另一个角度看因为集中式避免了分布式中的数据传输并可以利用数据规划因此查询速度快&#34;&gt;全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。&lt;/h2&gt;
+&lt;/li&gt;
+&lt;li&gt;集中式存储的访问吞吐量有上限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sql-查询优化器是如何工作的&#34;&gt;SQL-查询优化器是如何工作的&lt;/h2&gt;
+&lt;p&gt;4.1 SQL优化.mp4，13:38&lt;/p&gt;
+&lt;p&gt;优化是在数据处理的真正被执行的时候发生&lt;/p&gt;
+&lt;p&gt;不同结果的关系表达式在实际环境下执行的效率千差万别&lt;/p&gt;
+&lt;p&gt;查询优化器如何权衡哪种优化更好&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于成本的优化器 CBO：综合考虑所有的情况。现在最常用的优化器类型。&lt;/li&gt;
+&lt;li&gt;基于规则的优化器 RBO：根据预定义的规则进行优化，例如加减的权重是1，乘除的权重是2。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SQL的执行顺序：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQL、语义语法检查、解析（软解析+硬解析）、执行计划、执行引擎、存储引擎、数据库&lt;/li&gt;
+&lt;li&gt;解析是整个SQL优化最消耗资源的环节，其中硬解析是最重要的一部分。&lt;/li&gt;
+&lt;li&gt;执行计划：Plan，二进制的执行代码&lt;/li&gt;
+&lt;li&gt;解析+生成执行计划是查询优化器最重要的工作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;优化器只能对关系领域进行优化&lt;/p&gt;
+&lt;p&gt;优化器的有效范围：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优化器需要借助数据库中找到的信息&lt;/li&gt;
+&lt;li&gt;能进行数学意义上的等价变换&lt;/li&gt;
+&lt;li&gt;优化器考虑整体响应时间&lt;/li&gt;
+&lt;li&gt;优化器改善的是独立的查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;数据库设计-层次结构&#34;&gt;数据库设计-层次结构&lt;/h2&gt;
 &lt;p&gt;6.1 处理层次结构.mp4，12:17&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;邻接模型：id、pid&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;兄弟节点是无序的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;物化路径模型：1、1.1、1.1.2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;兄弟节点是有序的&lt;/li&gt;
+&lt;li&gt;方便扩展：3层结构扩展层4层&lt;/li&gt;
+&lt;li&gt;查询语句编写简单，找出适当的记录并缩排显示比较容易&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;嵌套集合模型：left_num、right_num，所有子节点都在left_num和right_num之间&lt;/p&gt;
+&lt;p&gt;上述3种树状表结构设计都满足三范式&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;两种查询方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自顶向下（Vandamme查询）
+&lt;ul&gt;
+&lt;li&gt;邻接模型
+&lt;ul&gt;
+&lt;li&gt;connect by current = &lt;em&gt;prior&lt;/em&gt; previous&lt;/li&gt;
+&lt;li&gt;利用with as，首先定义起始点，之后对两个select语句进行union all，通过递归查询不断根据父记录生成子记录。&lt;/li&gt;
+&lt;li&gt;mysql不支持connect by，也不支持with as，因此只能事先知道树的深度，然后手动union&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;物化路径模型
+&lt;ul&gt;
+&lt;li&gt;计算深度：path字符串长度 减去 去掉点之后的path字符串长度&lt;/li&gt;
+&lt;li&gt;指定需要查询的path前缀，之后使用模糊查询获取结果，然后对path进行排序，即可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;自底向上（Hignland查询）
+&lt;ul&gt;
+&lt;li&gt;邻接模型
+&lt;ul&gt;
+&lt;li&gt;connect by previous = &lt;em&gt;prior&lt;/em&gt; current&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;物化路径模型
+&lt;ul&gt;
+&lt;li&gt;指定需要查询的叶子结点，之后使用模糊查询获取父节点&lt;/li&gt;
+&lt;li&gt;会存在重复记录，因此需要使用distinct&lt;/li&gt;
+&lt;li&gt;排序问题：对distinct的结果进行select，并按path进行排序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;性能对比&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自顶向下
+&lt;ul&gt;
+&lt;li&gt;邻接模型
+&lt;ul&gt;
+&lt;li&gt;性能最好，每秒返回的查询记录数最多，只需要处理数值关系，但性能会收到迭代操作的影响&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;物化路径模型
+&lt;ul&gt;
+&lt;li&gt;中等，因为涉及到字符串操作&lt;/li&gt;
+&lt;li&gt;计算深度、缩排函数 比较费时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;自底向上
+&lt;ul&gt;
+&lt;li&gt;和自顶向下类似，邻接最好，物化路径中等&lt;/li&gt;
+&lt;li&gt;当不能用connect by和with as时，可以使用物化路径模型作为替代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 ">南京大学-高级数据库开发技术-复习笔记</a>
       </div>
       
