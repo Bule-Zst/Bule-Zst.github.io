@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>南京大学-高级数据库开发技术-复习笔记 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1618804494647">
+<link rel="shortcut icon" href="/favicon.ico?v=1618893413790">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -291,7 +291,6 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E5%85%A8%E7%90%83%E6%80%A7%E7%9A%84%E6%95%B0%E6%8D%AE%E8%8B%A5%E9%9B%86%E4%B8%AD%E5%AD%98%E5%82%A8%E5%88%99%E8%B7%A8%E5%A4%A7%E9%99%86%E7%9A%84%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6%E5%B0%86%E5%A4%A7%E5%B9%85%E9%99%8D%E4%BD%8E%E7%A6%BB%E6%95%B0%E6%8D%AE%E8%B6%8A%E8%BF%91%E8%AE%BF%E9%97%AE%E8%B6%8A%E5%BF%AB%E4%BD%86%E4%BB%8E%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%9B%A0%E4%B8%BA%E9%9B%86%E4%B8%AD%E5%BC%8F%E9%81%BF%E5%85%8D%E4%BA%86%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%B9%B6%E5%8F%AF%E4%BB%A5%E5%88%A9%E7%94%A8%E6%95%B0%E6%8D%AE%E8%A7%84%E5%88%92%E5%9B%A0%E6%AD%A4%E6%9F%A5%E8%AF%A2%E9%80%9F%E5%BA%A6%E5%BF%AB">全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。</a></li>
 <li><a href="#sql-%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84">SQL-查询优化器是如何工作的</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1-%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">数据库设计-层次结构</a></li>
 </ul>
@@ -595,12 +594,12 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>9<span class="language" data-lan="minute">分钟</span></span>
+      <span>10<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>2520<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>2686<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
@@ -620,8 +619,11 @@
 <li>上限：每个节点最多有 M 个子树</li>
 <li>下限：
 <ul>
-<li>根节点至少2个子树</li>
+<li>根节点至少2个子树
+<ul>
 <li>非根节点至少有⌈M /2⌉个子树</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -642,7 +644,7 @@
 <li>对于一般索引，都能用，除非查询优化器发现用了索引后，会导致性能降低，则不会使用索引，例如因为索引占用空间太大，导致IO操作耗时较高。</li>
 <li>对于复合索引，如果违反最左匹配原则，则不能用。例如，对(x,y)建立索引，但对y进行查询，则不能用。</li>
 <li>对于一个有索引的列作出函数查询，Select * from t where f(indexed_col) = value</li>
-<li>隐形函数查询，比如查询SQL中存在隐式类型转换比如no为VARCHAR类型，但是查询时把该字段当做INT类型查询：SELECT * FROM T WHERE no = 2124</li>
+<li>隐形函数查询，比如查询SQL中存在隐式类型转换，比如no为VARCHAR类型，但是查询时把该字段当做INT类型查询：SELECT * FROM T WHERE no = 2124</li>
 <li>没有正确的统计信息，造成查询优化器无法做出正确的选择</li>
 <li>含前导模糊查询的Like语法不能使用索引（”%XXX”）</li>
 <li>B-TREE索引里不保存字段为NULL值记录，因此IS NULL不能使用索引</li>
@@ -663,8 +665,8 @@
 <p>表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个表空间（物理文件）上</p>
 <h3 id="根据分区键partition-key的类型分类分区有哪几种类型">根据分区键（Partition Key）的类型分类，分区有哪几种类型？</h3>
 <ul>
-<li>哈希分区：把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。</li>
-<li>范围分区：把字段的值分布到一个物理范围，这个范围是你在创建分区时指定的分区键决定的。这种分区方式是最为常用的。</li>
+<li>哈希分区：对分区键进行哈希运算，根据运算结果进行分区。 <s>把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。</s></li>
+<li>范围分区：根据连续数据的范围对数据进行分区~~。把字段的值分布到一个物理范围~~，这个范围是你在创建分区时指定的分区键决定的。这种分区方式是最为常用的。</li>
 <li>列表分区：把不同的列存到不同的分区中。</li>
 </ul>
 <h3 id="如何选择分区键-选择原则是什么">如何选择分区键、选择原则是什么</h3>
@@ -719,7 +721,6 @@
 <li>复杂度高、健壮性低、管理成本高</li>
 <li>保密性不易控制</li>
 <li>多个副本的一致性难以保证</li>
-<li>远程数据的透明访问代价高</li>
 <li>不同数据源数据的结合极为困难
 <ul>
 <li>数据传输开销大</li>
@@ -746,9 +747,7 @@
 <ul>
 <li>平衡、折中
 <ul>
-<li>
-<h2 id="全球性的数据若集中存储则跨大陆的访问速度将大幅降低离数据越近访问越快但从另一个角度看因为集中式避免了分布式中的数据传输并可以利用数据规划因此查询速度快">全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。</h2>
-</li>
+<li>全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。</li>
 <li>集中式存储的访问吞吐量有上限</li>
 </ul>
 </li>
@@ -764,11 +763,15 @@
 </ul>
 <p>SQL的执行顺序：</p>
 <ul>
-<li>SQL、语义语法检查、解析（软解析+硬解析）、执行计划、执行引擎、存储引擎、数据库</li>
+<li>SQL、语法语义检查、解析（软解析+硬解析）、执行计划、执行引擎、存储引擎、数据库</li>
 <li>解析是整个SQL优化最消耗资源的环节，其中硬解析是最重要的一部分。</li>
 <li>执行计划：Plan，二进制的执行代码</li>
 <li>解析+生成执行计划是查询优化器最重要的工作</li>
 <li>生成执行计划后，抛入执行引擎，从数据库中读取数据，然后返回。</li>
+<li>语法分析：判断一条SQL语句的语法是否符合SQL的规范，代价小</li>
+<li>语义分析：判断该SQL语句所访问的对象是否准确，且用户是否有相应的权限，代价小</li>
+<li>硬解析：对提交的sql完全重新从头进行解析(当在共享池中找不到已解析好的结果时将会进行此操作)</li>
+<li>软解析：如果在共享池中找到了与之完全相同的sql解析好的结果后，会跳过硬解析的后两步，代价小</li>
 </ul>
 <p>优化器只能对关系领域进行优化</p>
 <p>优化器的有效范围：</p>
@@ -806,15 +809,28 @@
 <ul>
 <li>邻接模型
 <ul>
-<li>connect by current = <em>prior</em> previous，非关系型查询方式</li>
-<li>利用with as，首先定义起始点，之后对两个select语句进行union all，通过递归查询不断根据父记录生成子记录。</li>
-<li>mysql不支持connect by，也不支持with as，因此只能事先知道树的深度，然后手动union</li>
+<li>
+<p>connect by current = <em>prior</em> previous，非关系型查询方式</p>
+<figure data-type="image" tabindex="4"><img src="http://Bule-Zst.gitee.io/post-images/image-20210420103050088.png" alt="image-20210420103050088" loading="lazy"></figure>
+</li>
+<li>
+<p>利用with as，首先定义起始点，之后对两个select语句进行union all，通过递归查询不断根据父记录生成子记录。</p>
+<figure data-type="image" tabindex="5"><img src="http://Bule-Zst.gitee.io/post-images/image-20210420103019003.png" alt="image-20210420103019003" loading="lazy"></figure>
+</li>
+<li>
+<p>mysql不支持connect by，也不支持with as，因此只能事先知道树的深度，然后手动union</p>
+</li>
 </ul>
 </li>
 <li>物化路径模型
 <ul>
-<li>计算深度：path字符串长度 减去 去掉点之后的path字符串长度</li>
-<li>指定需要查询的path前缀，之后使用模糊查询获取结果，然后对path进行排序，即可</li>
+<li>
+<p>计算深度：path字符串长度 减去 去掉点之后的path字符串长度</p>
+</li>
+<li>
+<p>指定需要查询的path前缀，之后使用模糊查询获取结果，然后对path进行排序，即可</p>
+<figure data-type="image" tabindex="6"><img src="http://Bule-Zst.gitee.io/post-images/image-20210420103422776.png" alt="image-20210420103422776" loading="lazy"></figure>
+</li>
 </ul>
 </li>
 </ul>
@@ -2164,8 +2180,11 @@
 &lt;li&gt;上限：每个节点最多有 M 个子树&lt;/li&gt;
 &lt;li&gt;下限：
 &lt;ul&gt;
-&lt;li&gt;根节点至少2个子树&lt;/li&gt;
+&lt;li&gt;根节点至少2个子树
+&lt;ul&gt;
 &lt;li&gt;非根节点至少有⌈M /2⌉个子树&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2186,7 +2205,7 @@
 &lt;li&gt;对于一般索引，都能用，除非查询优化器发现用了索引后，会导致性能降低，则不会使用索引，例如因为索引占用空间太大，导致IO操作耗时较高。&lt;/li&gt;
 &lt;li&gt;对于复合索引，如果违反最左匹配原则，则不能用。例如，对(x,y)建立索引，但对y进行查询，则不能用。&lt;/li&gt;
 &lt;li&gt;对于一个有索引的列作出函数查询，Select * from t where f(indexed_col) = value&lt;/li&gt;
-&lt;li&gt;隐形函数查询，比如查询SQL中存在隐式类型转换比如no为VARCHAR类型，但是查询时把该字段当做INT类型查询：SELECT * FROM T WHERE no = 2124&lt;/li&gt;
+&lt;li&gt;隐形函数查询，比如查询SQL中存在隐式类型转换，比如no为VARCHAR类型，但是查询时把该字段当做INT类型查询：SELECT * FROM T WHERE no = 2124&lt;/li&gt;
 &lt;li&gt;没有正确的统计信息，造成查询优化器无法做出正确的选择&lt;/li&gt;
 &lt;li&gt;含前导模糊查询的Like语法不能使用索引（”%XXX”）&lt;/li&gt;
 &lt;li&gt;B-TREE索引里不保存字段为NULL值记录，因此IS NULL不能使用索引&lt;/li&gt;
@@ -2207,8 +2226,8 @@
 &lt;p&gt;表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个表空间（物理文件）上&lt;/p&gt;
 &lt;h3 id=&#34;根据分区键partition-key的类型分类分区有哪几种类型&#34;&gt;根据分区键（Partition Key）的类型分类，分区有哪几种类型？&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;哈希分区：把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。&lt;/li&gt;
-&lt;li&gt;范围分区：把字段的值分布到一个物理范围，这个范围是你在创建分区时指定的分区键决定的。这种分区方式是最为常用的。&lt;/li&gt;
+&lt;li&gt;哈希分区：对分区键进行哈希运算，根据运算结果进行分区。 &lt;s&gt;把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。&lt;/s&gt;&lt;/li&gt;
+&lt;li&gt;范围分区：根据连续数据的范围对数据进行分区~~。把字段的值分布到一个物理范围~~，这个范围是你在创建分区时指定的分区键决定的。这种分区方式是最为常用的。&lt;/li&gt;
 &lt;li&gt;列表分区：把不同的列存到不同的分区中。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;如何选择分区键-选择原则是什么&#34;&gt;如何选择分区键、选择原则是什么&lt;/h3&gt;
@@ -2263,7 +2282,6 @@
 &lt;li&gt;复杂度高、健壮性低、管理成本高&lt;/li&gt;
 &lt;li&gt;保密性不易控制&lt;/li&gt;
 &lt;li&gt;多个副本的一致性难以保证&lt;/li&gt;
-&lt;li&gt;远程数据的透明访问代价高&lt;/li&gt;
 &lt;li&gt;不同数据源数据的结合极为困难
 &lt;ul&gt;
 &lt;li&gt;数据传输开销大&lt;/li&gt;
@@ -2290,9 +2308,7 @@
 &lt;ul&gt;
 &lt;li&gt;平衡、折中
 &lt;ul&gt;
-&lt;li&gt;
-&lt;h2 id=&#34;全球性的数据若集中存储则跨大陆的访问速度将大幅降低离数据越近访问越快但从另一个角度看因为集中式避免了分布式中的数据传输并可以利用数据规划因此查询速度快&#34;&gt;全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。&lt;/h2&gt;
-&lt;/li&gt;
+&lt;li&gt;全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。&lt;/li&gt;
 &lt;li&gt;集中式存储的访问吞吐量有上限&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -2308,11 +2324,15 @@
 &lt;/ul&gt;
 &lt;p&gt;SQL的执行顺序：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;SQL、语义语法检查、解析（软解析+硬解析）、执行计划、执行引擎、存储引擎、数据库&lt;/li&gt;
+&lt;li&gt;SQL、语法语义检查、解析（软解析+硬解析）、执行计划、执行引擎、存储引擎、数据库&lt;/li&gt;
 &lt;li&gt;解析是整个SQL优化最消耗资源的环节，其中硬解析是最重要的一部分。&lt;/li&gt;
 &lt;li&gt;执行计划：Plan，二进制的执行代码&lt;/li&gt;
 &lt;li&gt;解析+生成执行计划是查询优化器最重要的工作&lt;/li&gt;
 &lt;li&gt;生成执行计划后，抛入执行引擎，从数据库中读取数据，然后返回。&lt;/li&gt;
+&lt;li&gt;语法分析：判断一条SQL语句的语法是否符合SQL的规范，代价小&lt;/li&gt;
+&lt;li&gt;语义分析：判断该SQL语句所访问的对象是否准确，且用户是否有相应的权限，代价小&lt;/li&gt;
+&lt;li&gt;硬解析：对提交的sql完全重新从头进行解析(当在共享池中找不到已解析好的结果时将会进行此操作)&lt;/li&gt;
+&lt;li&gt;软解析：如果在共享池中找到了与之完全相同的sql解析好的结果后，会跳过硬解析的后两步，代价小&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;优化器只能对关系领域进行优化&lt;/p&gt;
 &lt;p&gt;优化器的有效范围：&lt;/p&gt;
@@ -2350,15 +2370,28 @@
 &lt;ul&gt;
 &lt;li&gt;邻接模型
 &lt;ul&gt;
-&lt;li&gt;connect by current = &lt;em&gt;prior&lt;/em&gt; previous，非关系型查询方式&lt;/li&gt;
-&lt;li&gt;利用with as，首先定义起始点，之后对两个select语句进行union all，通过递归查询不断根据父记录生成子记录。&lt;/li&gt;
-&lt;li&gt;mysql不支持connect by，也不支持with as，因此只能事先知道树的深度，然后手动union&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;connect by current = &lt;em&gt;prior&lt;/em&gt; previous，非关系型查询方式&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/image-20210420103050088.png&#34; alt=&#34;image-20210420103050088&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;利用with as，首先定义起始点，之后对两个select语句进行union all，通过递归查询不断根据父记录生成子记录。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/image-20210420103019003.png&#34; alt=&#34;image-20210420103019003&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mysql不支持connect by，也不支持with as，因此只能事先知道树的深度，然后手动union&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;物化路径模型
 &lt;ul&gt;
-&lt;li&gt;计算深度：path字符串长度 减去 去掉点之后的path字符串长度&lt;/li&gt;
-&lt;li&gt;指定需要查询的path前缀，之后使用模糊查询获取结果，然后对path进行排序，即可&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算深度：path字符串长度 减去 去掉点之后的path字符串长度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;指定需要查询的path前缀，之后使用模糊查询获取结果，然后对path进行排序，即可&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;http://Bule-Zst.gitee.io/post-images/image-20210420103422776.png&#34; alt=&#34;image-20210420103422776&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
