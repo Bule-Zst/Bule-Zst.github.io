@@ -2,13 +2,31 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-20T04:36:58.863Z</updated>
+    <updated>2021-04-25T10:35:35.752Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
     <logo>http://Bule-Zst.gitee.io/images/avatar.png</logo>
     <icon>http://Bule-Zst.gitee.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
+    <entry>
+        <title type="html"><![CDATA[NOJ部署]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-04-25-NOJ部署/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-04-25-NOJ部署/">
+        </link>
+        <updated>2021-04-25T09:12:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章，主要介绍一下NOJ的部署。</p>
+<p>主要参考这篇文章：https://njuptaaa.github.io/docs/#/noj/guide/deploy</p>
+<hr>
+<h2 id="安装环境">安装环境</h2>
+<p>需要安装的环境有：Apache、PHP、Composer、MySQL、Redis</p>
+<p>Apache和MySQL在我本地已经有了，直接跳过。</p>
+<p>对于PHP和Composer，直接在官网下载，需要注意的是，对于Composer，直接下载可执行的安装包就行；对于PHP，需要下载的是zip，而不是source code，如下图：</p>
+<figure data-type="image" tabindex="1"><img src="E:%5CGridea%5C%E7%AB%99%E7%82%B9%E6%BA%90%E6%96%87%E4%BB%B61%5Cpost-images%5Cimage-20210425175856818.png" alt="image-20210425175856818" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="E:%5CGridea%5C%E7%AB%99%E7%82%B9%E6%BA%90%E6%96%87%E4%BB%B61%5Cpost-images%5Cimage-20210425175552450.png" alt="image-20210425175552450" loading="lazy"></figure>
+<p>PHP压缩包下载完，解压到任意文件夹中，然后运行Composer的安装程序，在安装过程中，需要指定php的路径，选择解压后文件夹中的php.exe：</p>
+<!-- ![image-20210425175722912](E:%5CGridea%5C%E7%AB%99%E7%82%B9%E6%BA%90%E6%96%87%E4%BB%B61%5Cpost-images%5Cimage-20210425175722912.png) -->]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[南京大学-软件过程改进-复习笔记]]></title>
         <id>http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/</id>
@@ -1355,33 +1373,6 @@ public:
 <ul>
 <li><a href="https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/">Pairs with same Manhattan and Euclidean distance</a></li>
 <li><a href="https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1">Geek collects the balls</a></li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[知识点汇总]]></title>
-        <id>http://Bule-Zst.gitee.io/zhi_shi_dian_hui_zong/</id>
-        <link href="http://Bule-Zst.gitee.io/zhi_shi_dian_hui_zong/">
-        </link>
-        <updated>2020-12-26T03:32:26.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要收藏一些平时工作学习中遇到的问题的解决方案，供大家参考。</p>
-<h1 id="windows子系统">WIndows子系统</h1>
-<ul>
-<li><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#step-6---install-your-linux-distribution-of-choice">适用于 Linux 的 Windows 子系统安装指南 (Windows 10)</a></li>
-</ul>
-<h1 id="python">Python</h1>
-<ul>
-<li><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">Python安装包大全</a></li>
-<li><a href="https://blog.csdn.net/weixin_45523851/article/details/110674141">Could not build wheels for cryptography which use PEP 517 and cannot be installed directly</a></li>
-<li><a href="https://blog.csdn.net/qm5132/article/details/105619531/">python和Microsoft Visual C++ Build Tools版本安装</a></li>
-<li><a href="https://blog.csdn.net/pyyong2011/article/details/105045883/">python: cookies 解密问题</a></li>
-</ul>
-<h1 id="算法">算法</h1>
-<ul>
-<li><a href="https://blog.csdn.net/qq_33935895/article/details/103261211">[算法]分治法解最近对问题</a></li>
-<li><a href="https://blog.csdn.net/q547550831/article/details/51541527">分治法——棋盘覆盖问题</a></li>
-<li><a href="https://www.cnblogs.com/l1l1/p/9432876.html">求凸包（安德鲁算法）</a></li>
-<li><a href="https://blog.csdn.net/peng0614/article/details/81193484">【计算几何/凸包】安德鲁算法（Andrew's Algorithm）详解</a></li>
 </ul>
 ]]></content>
     </entry>
