@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1619347151707">
+<link rel="shortcut icon" href="/favicon.ico?v=1620484697787">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -180,19 +180,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-count">18</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">9</span>
+        <span class="site-item-stat-count">12</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">9</span>
+        <span class="site-item-stat-count">12</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -259,6 +259,16 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       
       
@@ -1143,19 +1153,156 @@
     <div class="result" id="result">
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-04-25-NOJ部署/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习redis过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/2Fg2Arj1Doe&#34;&gt;双十一秒杀系统后端Redis高并发架构实战&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/N7WiV8Wgjm9&#34;&gt;亿级流量新浪微博与微信Redis架构实战&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;分布式并发场景中可能存在的问题&#34;&gt;分布式并发场景中可能存在的问题&lt;/h2&gt;
+&lt;p&gt;使用synchronized对代码块加锁，但因为是分布式，多个应用同时访问redis，依旧无法解决并发冲突问题&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210508160113749.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;redis实现分布式锁&#34;&gt;Redis实现分布式锁&lt;/h2&gt;
+&lt;p&gt;使用SETNX实现分布式锁&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;存在的问题：因为某些原因，锁在用完后没有成功释放，如，功能代码块抛异常、系统宕机&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加过期时间：&lt;/li&gt;
+&lt;li&gt;存在的问题：
+&lt;ul&gt;
+&lt;li&gt;实际业务执行时间可能会大于过期时间：进程A执行过慢，导致锁自动被释放，之后进程B进行加锁，开始处理业务，然后进程A执行完，释放B的锁，又导致进程C进行加锁，无限循环，最终导致锁永久失效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;解决方案：自己的锁只有自己可以释放（或者过期自动释放）
+&lt;ul&gt;
+&lt;li&gt;存在的问题：
+&lt;ul&gt;
+&lt;li&gt;还是&lt;strong&gt;过期时间&lt;/strong&gt;的锅：当进程A需要释放锁的时候，从redis获取锁的value，发现是自己加的锁，但随后，锁因为过期时间，自动失效，进程B随即进行加锁，然后进程A释放锁，就导致会把进程B的锁释放掉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;解决方案：
+&lt;ul&gt;
+&lt;li&gt;锁续命：另开一个线程，持续进行加锁操作，例如过期时间是30s，则每10s加一次锁，保证业务执行过程中，锁不会自动失效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;性能问题&#34;&gt;性能问题&lt;/h2&gt;
+&lt;p&gt;使用分布式锁，本质上是让所有web请求串行化执行，执行效率较低。&lt;/p&gt;
+&lt;p&gt;解决方案：分段加锁&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;举例：秒杀场景下，为了防止超卖，需要使用分布式锁，例如商品数量为200个，那么可以划分成10分，分别进行加锁，这样可以提高约10倍的效率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;redis主从架构&#34;&gt;Redis主从架构&lt;/h2&gt;
+&lt;p&gt;防止单点redis宕机，对业务造成影响&lt;/p&gt;
+&lt;p&gt;使用主从架构，子节点同步父节点信息，当父节点宕机后，用子节点代替父节点继续提供服务&lt;/p&gt;
+&lt;p&gt;主从节点切换导致锁丢失：使用zookeeper代替redis&lt;/p&gt;
+&lt;p&gt;redis vs zookeeper：redis性能更好；zookeeper一致性更好。&lt;/p&gt;
+&lt;h2 id=&#34;缓存-数据库双写不一致问题&#34;&gt;缓存、数据库双写不一致问题&lt;/h2&gt;
+&lt;p&gt;场景1：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213252468.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;场景2：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213547682.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;不一致&lt;/strong&gt;：数据库里数据为6，缓存为10&lt;/p&gt;
+&lt;h3 id=&#34;解决方案&#34;&gt;解决方案&lt;/h3&gt;
+&lt;p&gt;比较不推荐的做法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;延迟双删&lt;/li&gt;
+&lt;li&gt;内存队列&lt;/li&gt;
+&lt;li&gt;分布式锁&lt;/li&gt;
+&lt;/ul&gt;
+">redis学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-07-docker学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习docker过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://ke.qq.com/course/3385294?taid=11066554472179662&#34;&gt;Docker部署微服务实战&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# 设置yum源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+# 安装docker
+yum -y install docker-ce # ce为社区版
+# 启动docker
+service docker start
+# 验证
+docker version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;h3 id=&#34;镜像相关&#34;&gt;镜像相关&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 搜索镜像
+docker search java
+# 下载镜像
+docker pull java:8
+docker pull nginx:1.14
+# 列出本地镜像
+docker images
+# 删除镜像
+docker rmi java:8
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;容器相关&#34;&gt;容器相关&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 新建并启动容器
+docker run -d -p 91:80 -net=bridge(default)/host nginx
+# 列出容器
+docker ps
+# 启动/停止容器
+docker start/stop container_id
+# 查看容器信息
+docker inspect container_id
+# 进入容器
+docker container exec -it container_id /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;好处&#34;&gt;好处&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;将主流的中间件打包成docker，可实现快速部署。因为docker的使用，如启动和关闭，命令都是相同的，所以可以使用脚本实现自动化的部署。而如果不使用docker，不同的中间件都有一套对应的运维命令，运维工作的效率将会降低很多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;构建镜像&#34;&gt;构建镜像&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# 指定基础镜像
+FROM nginx
+# 执行命令
+RUN echo &amp;quot;hello, world!&amp;quot; &amp;gt; hello.html
+# 复制文件到容器
+ADD a.jar /app.jar
+# 声明需要暴露的端口
+EXPOSE 8761
+# 配置容器启动后执行的命令
+ENTRYPOINT[&amp;quot;java&amp;quot;,&amp;quot;-jar&amp;quot;,&amp;quot;/app.jar&amp;quot;]
+
+docker build -t nginx:hello .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;virtual-machines-vs-docker&#34;&gt;Virtual Machines VS Docker&lt;/h2&gt;
+&lt;p&gt;OS：虚拟机有实实在在的操作系统；Docker通过引擎虚拟操作系统&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210507193822675.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">docker学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-04-25-NOJ优化-PHP-Laravel/"" data-c="
           &lt;p&gt;这篇文章，主要介绍一下NOJ的部署。&lt;/p&gt;
 &lt;p&gt;主要参考这篇文章：https://njuptaaa.github.io/docs/#/noj/guide/deploy&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;安装环境&#34;&gt;安装环境&lt;/h2&gt;
+&lt;h2 id=&#34;部署&#34;&gt;部署&lt;/h2&gt;
+&lt;h3 id=&#34;安装环境&#34;&gt;安装环境&lt;/h3&gt;
 &lt;p&gt;需要安装的环境有：Apache、PHP、Composer、MySQL、Redis&lt;/p&gt;
 &lt;p&gt;Apache和MySQL在我本地已经有了，直接跳过。&lt;/p&gt;
 &lt;p&gt;对于PHP和Composer，直接在官网下载，需要注意的是，对于Composer，直接下载可执行的安装包就行；对于PHP，需要下载的是zip，而不是source code，如下图：&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210425175552450.png&#34; alt=&#34;image-20210425175552450&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;p&gt;PHP压缩包下载完，解压到任意文件夹中，然后运行Composer的安装程序，在安装过程中，需要指定php的路径，选择解压后文件夹中的php.exe：&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210425175722912.png&#34; alt=&#34;image-20210425175722912&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
-&lt;h2 id=&#34;composer-install&#34;&gt;composer install&lt;/h2&gt;
-&lt;p&gt;环境配置好后，就可以开始安装项目了，使用&lt;code&gt;composer install --ignore-platform-reqs&lt;/code&gt;进行安装，但我本地报错：&lt;/p&gt;
+&lt;h3 id=&#34;git-clone&#34;&gt;git-clone&lt;/h3&gt;
+&lt;p&gt;在这一步，需要注意的是，需要把noj项目克隆到apache或者nginx的文件夹下，并将其中的public文件夹设置成根目录。&lt;/p&gt;
+&lt;h3 id=&#34;composer-install&#34;&gt;composer install&lt;/h3&gt;
+&lt;h4 id=&#34;your-lock-file-does-not-contain-a-compatible-set-of-packages-please-run-composer-update&#34;&gt;Your lock file does not contain a compatible set of packages. Please run composer update.&lt;/h4&gt;
+&lt;p&gt;环境配置好后，就可以开始安装项目了，使用&lt;code&gt;composer install&lt;/code&gt;进行安装，但我本地报错：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;E:\NOJ&amp;gt;composer install
 Installing dependencies from lock file (including require-dev)
 Verifying lock file contents can be installed on current platform.
@@ -1186,7 +1333,38 @@ To enable extensions, verify that they are enabled in your .ini files:
 You can also run `php --ini` inside terminal to see which files are used by PHP in CLI mode.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;使用&lt;code&gt;composer install --ignore-platform-reqs&lt;/code&gt;就不会报错了。&lt;/p&gt;
-">NOJ部署</a>
+&lt;h4 id=&#34;the-process-class-relies-on-proc_open-which-is-not-available-on-your-php-installation&#34;&gt;The Process class relies on proc_open, which is not available on your PHP installation.&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/lw545034502/article/details/96450335&#34;&gt;（亲测可用）The Process class relies on proc_open, which is not available on your PHP installation.解决方案！&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;php-routes的使用&#34;&gt;php routes的使用&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/yaoliuyang/p/12298780.html&#34;&gt;thinkphp中路由的基本使用&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;nginx配置&#34;&gt;nginx配置&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/96149578&#34;&gt;PHP]深度解析Nginx下的PHP框架路由实现&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;项目信息&#34;&gt;项目信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;submit：提交到后台&lt;/li&gt;
+&lt;li&gt;pedding：队列中准备提交&lt;/li&gt;
+&lt;li&gt;waiting：已提交，等待结果&lt;/li&gt;
+&lt;li&gt;submitting -&amp;gt; pedding -&amp;gt; waiting -&amp;gt; accept&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优化&#34;&gt;优化&lt;/h2&gt;
+&lt;p&gt;01:08开始&lt;/p&gt;
+&lt;p&gt;前面，主要是介绍项目&lt;/p&gt;
+&lt;h3 id=&#34;优化1实时更新榜单&#34;&gt;优化1：实时更新榜单&lt;/h3&gt;
+&lt;p&gt;06:00&lt;/p&gt;
+&lt;p&gt;目前是一分钟更新一次，从数据库读取到redis中&lt;/p&gt;
+&lt;p&gt;优化思路：1、使用增量更新，当有新的AC事件发生时，更新内存中的redis缓存；2、客户端，对于提交记录，循环查询结果，查询操作为异步，循环间隔为5s，使用内存锁避免查询冲突&lt;/p&gt;
+&lt;p&gt;目前的问题：对于每个提交记录，被更新了10几次。&lt;/p&gt;
+&lt;h3 id=&#34;优化2容器化&#34;&gt;优化2：容器化&lt;/h3&gt;
+&lt;p&gt;将各个功能点封装成docker容器&lt;/p&gt;
+&lt;h3 id=&#34;优化3管理功能界面&#34;&gt;优化3：管理功能界面&lt;/h3&gt;
+&lt;p&gt;74:28&lt;/p&gt;
+&lt;h2 id=&#34;phpstore&#34;&gt;PhpStore&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/ljh101/article/details/112549860&#34;&gt;composer require --dev barryvdh/laravel-ide-helper报错解决&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[&lt;a href=&#34;https://my.oschina.net/anziguoer/blog/647367&#34;&gt;Phpstorm 安装 laravel扩展，laravel代码提示插件&lt;/a&gt;](https://my.oschina.net/anziguoer/blog/647367)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;后台参考这里的代码https://github.com/ZsgsDesign/HASAAOSE/tree/main/app/Admin&lt;/p&gt;
+">NOJ优化-PHP-Laravel</a>
       </div>
       
       <div class="item">
@@ -2479,6 +2657,7 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/&#34;&gt;42. 接雨水&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/partition-equal-subset-sum/&#34;&gt;416. 分割等和子集&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/longest-increasing-subsequence/&#34;&gt;300. 最长递增子序列&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/interleaving-string/&#34;&gt;97. 交错字符串&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;旅行商问题&#34;&gt;旅行商问题&lt;/h2&gt;
 &lt;ul&gt;
@@ -2507,6 +2686,7 @@ public:
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ">刷题记录</a>
       </div>
@@ -2514,18 +2694,26 @@ public:
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/zhi_shi_dian_hui_zong/"" data-c="
           &lt;p&gt;这篇文章主要收藏一些平时工作学习中遇到的问题的解决方案，供大家参考。&lt;/p&gt;
-&lt;h1 id=&#34;windows子系统&#34;&gt;WIndows子系统&lt;/h1&gt;
+&lt;h2 id=&#34;springboot&#34;&gt;SpringBoot&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://start.spring.io/&#34;&gt;快速创建SpringBoot项目-Spring Initializr&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;windows子系统&#34;&gt;Windows子系统&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#step-6---install-your-linux-distribution-of-choice&#34;&gt;适用于 Linux 的 Windows 子系统安装指南 (Windows 10)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;python&#34;&gt;Python&lt;/h1&gt;
+&lt;h2 id=&#34;linux&#34;&gt;Linux&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href=&#34;https://www.cnblogs.com/wulaa/p/7943550.html&#34;&gt;linux改变apt-get安装源&lt;/a&gt;](https://www.cnblogs.com/wulaa/p/7943550.html)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.lfd.uci.edu/~gohlke/pythonlibs/&#34;&gt;Python安装包大全&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_45523851/article/details/110674141&#34;&gt;Could not build wheels for cryptography which use PEP 517 and cannot be installed directly&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qm5132/article/details/105619531/&#34;&gt;python和Microsoft Visual C++ Build Tools版本安装&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/pyyong2011/article/details/105045883/&#34;&gt;python: cookies 解密问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;算法&#34;&gt;算法&lt;/h1&gt;
+&lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_33935895/article/details/103261211&#34;&gt;[算法]分治法解最近对问题&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/q547550831/article/details/51541527&#34;&gt;分治法——棋盘覆盖问题&lt;/a&gt;&lt;/li&gt;

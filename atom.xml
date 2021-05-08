@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-04-25T10:39:16.619Z</updated>
+    <updated>2021-05-08T14:39:41.842Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -10,23 +10,166 @@
     <icon>http://Bule-Zst.gitee.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
     <entry>
-        <title type="html"><![CDATA[NOJ部署]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-04-25-NOJ部署/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-04-25-NOJ部署/">
+        <title type="html"><![CDATA[redis学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/">
+        </link>
+        <updated>2021-05-08T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习redis过程中的笔记，学习资料为视频，链接如下：</p>
+<ul>
+<li><a href="https://www.aliyundrive.com/s/2Fg2Arj1Doe">双十一秒杀系统后端Redis高并发架构实战</a></li>
+<li><a href="https://www.aliyundrive.com/s/N7WiV8Wgjm9">亿级流量新浪微博与微信Redis架构实战</a></li>
+</ul>
+<hr>
+<h2 id="分布式并发场景中可能存在的问题">分布式并发场景中可能存在的问题</h2>
+<p>使用synchronized对代码块加锁，但因为是分布式，多个应用同时访问redis，依旧无法解决并发冲突问题</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210508160113749.png" alt="" loading="lazy"></figure>
+<h2 id="redis实现分布式锁">Redis实现分布式锁</h2>
+<p>使用SETNX实现分布式锁</p>
+<ul>
+<li>
+<p>存在的问题：因为某些原因，锁在用完后没有成功释放，如，功能代码块抛异常、系统宕机</p>
+</li>
+<li>
+<p>解决方案：</p>
+<ul>
+<li>增加过期时间：</li>
+<li>存在的问题：
+<ul>
+<li>实际业务执行时间可能会大于过期时间：进程A执行过慢，导致锁自动被释放，之后进程B进行加锁，开始处理业务，然后进程A执行完，释放B的锁，又导致进程C进行加锁，无限循环，最终导致锁永久失效。</li>
+</ul>
+</li>
+<li>解决方案：自己的锁只有自己可以释放（或者过期自动释放）
+<ul>
+<li>存在的问题：
+<ul>
+<li>还是<strong>过期时间</strong>的锅：当进程A需要释放锁的时候，从redis获取锁的value，发现是自己加的锁，但随后，锁因为过期时间，自动失效，进程B随即进行加锁，然后进程A释放锁，就导致会把进程B的锁释放掉。</li>
+</ul>
+</li>
+<li>解决方案：
+<ul>
+<li>锁续命：另开一个线程，持续进行加锁操作，例如过期时间是30s，则每10s加一次锁，保证业务执行过程中，锁不会自动失效。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="性能问题">性能问题</h2>
+<p>使用分布式锁，本质上是让所有web请求串行化执行，执行效率较低。</p>
+<p>解决方案：分段加锁</p>
+<ul>
+<li>举例：秒杀场景下，为了防止超卖，需要使用分布式锁，例如商品数量为200个，那么可以划分成10分，分别进行加锁，这样可以提高约10倍的效率。</li>
+</ul>
+<h2 id="redis主从架构">Redis主从架构</h2>
+<p>防止单点redis宕机，对业务造成影响</p>
+<p>使用主从架构，子节点同步父节点信息，当父节点宕机后，用子节点代替父节点继续提供服务</p>
+<p>主从节点切换导致锁丢失：使用zookeeper代替redis</p>
+<p>redis vs zookeeper：redis性能更好；zookeeper一致性更好。</p>
+<h2 id="缓存-数据库双写不一致问题">缓存、数据库双写不一致问题</h2>
+<p>场景1：</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213252468.png" alt="" loading="lazy"></figure>
+<p>场景2：</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213547682.png" alt="" loading="lazy"></figure>
+<p><strong>不一致</strong>：数据库里数据为6，缓存为10</p>
+<h3 id="解决方案">解决方案</h3>
+<p>比较不推荐的做法：</p>
+<ul>
+<li>延迟双删</li>
+<li>内存队列</li>
+<li>分布式锁</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[docker学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-05-07-docker学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-05-07-docker学习笔记/">
+        </link>
+        <updated>2021-05-07T01:19:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习docker过程中的笔记，学习资料为视频，链接如下：</p>
+<p><a href="https://ke.qq.com/course/3385294?taid=11066554472179662">Docker部署微服务实战</a></p>
+<hr>
+<h2 id="安装">安装</h2>
+<pre><code># 设置yum源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+# 安装docker
+yum -y install docker-ce # ce为社区版
+# 启动docker
+service docker start
+# 验证
+docker version
+</code></pre>
+<h2 id="使用">使用</h2>
+<h3 id="镜像相关">镜像相关</h3>
+<pre><code># 搜索镜像
+docker search java
+# 下载镜像
+docker pull java:8
+docker pull nginx:1.14
+# 列出本地镜像
+docker images
+# 删除镜像
+docker rmi java:8
+</code></pre>
+<h3 id="容器相关">容器相关</h3>
+<pre><code># 新建并启动容器
+docker run -d -p 91:80 -net=bridge(default)/host nginx
+# 列出容器
+docker ps
+# 启动/停止容器
+docker start/stop container_id
+# 查看容器信息
+docker inspect container_id
+# 进入容器
+docker container exec -it container_id /bin/bash
+</code></pre>
+<h2 id="好处">好处</h2>
+<ul>
+<li>将主流的中间件打包成docker，可实现快速部署。因为docker的使用，如启动和关闭，命令都是相同的，所以可以使用脚本实现自动化的部署。而如果不使用docker，不同的中间件都有一套对应的运维命令，运维工作的效率将会降低很多。</li>
+</ul>
+<h2 id="构建镜像">构建镜像</h2>
+<pre><code># 指定基础镜像
+FROM nginx
+# 执行命令
+RUN echo &quot;hello, world!&quot; &gt; hello.html
+# 复制文件到容器
+ADD a.jar /app.jar
+# 声明需要暴露的端口
+EXPOSE 8761
+# 配置容器启动后执行的命令
+ENTRYPOINT[&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+
+docker build -t nginx:hello .
+</code></pre>
+<h2 id="virtual-machines-vs-docker">Virtual Machines VS Docker</h2>
+<p>OS：虚拟机有实实在在的操作系统；Docker通过引擎虚拟操作系统</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210507193822675.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[NOJ优化-PHP-Laravel]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-04-25-NOJ优化-PHP-Laravel/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-04-25-NOJ优化-PHP-Laravel/">
         </link>
         <updated>2021-04-25T09:12:53.000Z</updated>
         <content type="html"><![CDATA[<p>这篇文章，主要介绍一下NOJ的部署。</p>
 <p>主要参考这篇文章：https://njuptaaa.github.io/docs/#/noj/guide/deploy</p>
 <hr>
-<h2 id="安装环境">安装环境</h2>
+<h2 id="部署">部署</h2>
+<h3 id="安装环境">安装环境</h3>
 <p>需要安装的环境有：Apache、PHP、Composer、MySQL、Redis</p>
 <p>Apache和MySQL在我本地已经有了，直接跳过。</p>
 <p>对于PHP和Composer，直接在官网下载，需要注意的是，对于Composer，直接下载可执行的安装包就行；对于PHP，需要下载的是zip，而不是source code，如下图：</p>
 <figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210425175552450.png" alt="image-20210425175552450" loading="lazy"></figure>
 <p>PHP压缩包下载完，解压到任意文件夹中，然后运行Composer的安装程序，在安装过程中，需要指定php的路径，选择解压后文件夹中的php.exe：</p>
 <figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210425175722912.png" alt="image-20210425175722912" loading="lazy"></figure>
-<h2 id="composer-install">composer install</h2>
-<p>环境配置好后，就可以开始安装项目了，使用<code>composer install --ignore-platform-reqs</code>进行安装，但我本地报错：</p>
+<h3 id="git-clone">git-clone</h3>
+<p>在这一步，需要注意的是，需要把noj项目克隆到apache或者nginx的文件夹下，并将其中的public文件夹设置成根目录。</p>
+<h3 id="composer-install">composer install</h3>
+<h4 id="your-lock-file-does-not-contain-a-compatible-set-of-packages-please-run-composer-update">Your lock file does not contain a compatible set of packages. Please run composer update.</h4>
+<p>环境配置好后，就可以开始安装项目了，使用<code>composer install</code>进行安装，但我本地报错：</p>
 <pre><code>E:\NOJ&gt;composer install
 Installing dependencies from lock file (including require-dev)
 Verifying lock file contents can be installed on current platform.
@@ -57,6 +200,37 @@ To enable extensions, verify that they are enabled in your .ini files:
 You can also run `php --ini` inside terminal to see which files are used by PHP in CLI mode.
 </code></pre>
 <p>使用<code>composer install --ignore-platform-reqs</code>就不会报错了。</p>
+<h4 id="the-process-class-relies-on-proc_open-which-is-not-available-on-your-php-installation">The Process class relies on proc_open, which is not available on your PHP installation.</h4>
+<p><a href="https://blog.csdn.net/lw545034502/article/details/96450335">（亲测可用）The Process class relies on proc_open, which is not available on your PHP installation.解决方案！</a></p>
+<h3 id="php-routes的使用">php routes的使用</h3>
+<p><a href="https://www.cnblogs.com/yaoliuyang/p/12298780.html">thinkphp中路由的基本使用</a></p>
+<h3 id="nginx配置">nginx配置</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/96149578">PHP]深度解析Nginx下的PHP框架路由实现</a></p>
+<h2 id="项目信息">项目信息</h2>
+<ul>
+<li>submit：提交到后台</li>
+<li>pedding：队列中准备提交</li>
+<li>waiting：已提交，等待结果</li>
+<li>submitting -&gt; pedding -&gt; waiting -&gt; accept</li>
+</ul>
+<h2 id="优化">优化</h2>
+<p>01:08开始</p>
+<p>前面，主要是介绍项目</p>
+<h3 id="优化1实时更新榜单">优化1：实时更新榜单</h3>
+<p>06:00</p>
+<p>目前是一分钟更新一次，从数据库读取到redis中</p>
+<p>优化思路：1、使用增量更新，当有新的AC事件发生时，更新内存中的redis缓存；2、客户端，对于提交记录，循环查询结果，查询操作为异步，循环间隔为5s，使用内存锁避免查询冲突</p>
+<p>目前的问题：对于每个提交记录，被更新了10几次。</p>
+<h3 id="优化2容器化">优化2：容器化</h3>
+<p>将各个功能点封装成docker容器</p>
+<h3 id="优化3管理功能界面">优化3：管理功能界面</h3>
+<p>74:28</p>
+<h2 id="phpstore">PhpStore</h2>
+<ul>
+<li><a href="https://blog.csdn.net/ljh101/article/details/112549860">composer require --dev barryvdh/laravel-ide-helper报错解决</a></li>
+<li>[<a href="https://my.oschina.net/anziguoer/blog/647367">Phpstorm 安装 laravel扩展，laravel代码提示插件</a>](https://my.oschina.net/anziguoer/blog/647367)</li>
+</ul>
+<p>后台参考这里的代码https://github.com/ZsgsDesign/HASAAOSE/tree/main/app/Admin</p>
 ]]></content>
     </entry>
     <entry>
@@ -1279,133 +1453,6 @@ public:
 </code></pre>
 <hr>
 <p>from <a href="https://www.cnblogs.com/ygh1229/p/10637504.html">https://www.cnblogs.com/ygh1229/p/10637504.html</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Linux->Ubuntu下配置telnet环境]]></title>
-        <id>http://Bule-Zst.gitee.io/Grj96uz3p/</id>
-        <link href="http://Bule-Zst.gitee.io/Grj96uz3p/">
-        </link>
-        <updated>2020-12-29T10:12:33.000Z</updated>
-        <content type="html"><![CDATA[<p>1、首先查看telnet运行状态</p>
-<p><code>netstat -a | grep telnet</code></p>
-<p>输出为空，表示没有开启该服务</p>
-<p>2、安装openbsd-inetd</p>
-<p><code>apt-get install openbsd-inetd</code></p>
-<p>如果已经安装过了，会提示已经安装过了，直接执行下面的步骤就可以了。</p>
-<p>3、安装telnetd</p>
-<p><code>apt-get install telnetd</code></p>
-<p>安装完之后，查看/etc/inetd.conf的内容会多了一行telnet stream tcp nowait telnetd /usr/sbin/tcpd /usr/sbin/in.telnetd</p>
-<p><code>cat /etc/inetd.conf | grep telnet</code></p>
-<p>输出： telnet stream tcp nowait telnetd /usr/sbin/tcpd /usr/sbin/in.telnetd</p>
-<p>4、重启openbsd-inetd</p>
-<p><code>/etc/init.d/openbsd-inetd restart</code></p>
-<p>输出：* Restarting internet superserver inetd</p>
-<p>5、查看telnet运行状态</p>
-<p><code>netstat -a | grep telnet</code></p>
-<p>输出：tcp　　0　　0 :telnet　　😗　　LISTEN</p>
-<p>此时表明已经开启了telnet服务。</p>
-<p>6、telnet登陆测试</p>
-<p><code>telnet 127.0.0.1</code></p>
-<p>输出： Trying 127.0.0.1… Connected to 127.0.0.1. Escape character is ‘^]’. （停在这里的时候要按Ctrl+] 然后回车）</p>
-<p>telnet&gt; （表示登陆成功）</p>
-<hr>
-<p>from <a href="https://www.cnblogs.com/taomylife/p/7552424.html">https://www.cnblogs.com/taomylife/p/7552424.html</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[刷题记录]]></title>
-        <id>http://Bule-Zst.gitee.io/2020-12-26-刷题记录/</id>
-        <link href="http://Bule-Zst.gitee.io/2020-12-26-刷题记录/">
-        </link>
-        <updated>2020-12-26T08:17:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="打表">打表</h1>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/UVA100">UVA100 The 3n + 1 problem</a></li>
-</ul>
-<h1 id="并查集">并查集</h1>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/P1111">P1111 修复公路</a></li>
-</ul>
-<h1 id="二分">二分</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/split-array-largest-sum/">410. 分割数组的最大值</a></li>
-<li><a href="https://leetcode-cn.com/problems/magnetic-force-between-two-balls/">1552. 两球之间的磁力</a></li>
-</ul>
-<h1 id="分治">分治</h1>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/P1257">P1257 平面上的最接近点对</a></li>
-</ul>
-<h1 id="栈">栈</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/valid-parentheses/">20. 有效的括号</a></li>
-<li><a href="https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/">150. 逆波兰表达式求值</a></li>
-<li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
-</ul>
-<h2 id="单调栈">单调栈</h2>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/daily-temperatures/">739. 每日温度</a></li>
-<li><a href="https://leetcode-cn.com/problems/next-greater-element-i/">496. 下一个更大元素 I</a></li>
-<li><a href="https://leetcode-cn.com/problems/remove-k-digits/">402. 移掉K位数字</a></li>
-<li><a href="https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/">581. 最短无序连续子数组</a></li>
-<li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
-<li><a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84. 柱状图中最大的矩形</a></li>
-<li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
-</ul>
-<h3 id="中缀转后缀">中缀转后缀</h3>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/basic-calculator/">224. 基本计算器</a></li>
-<li><a href="https://leetcode-cn.com/problems/basic-calculator-ii/">227. 基本计算器 II</a></li>
-</ul>
-<h1 id="单调队列">单调队列</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></li>
-</ul>
-<h1 id="计算几何">计算几何</h1>
-<h2 id="凸包">凸包</h2>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/erect-the-fence/">587. 安装栅栏</a></li>
-</ul>
-<h1 id="链表">链表</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/insertion-sort-list/147/">147. 对链表进行插入排序</a></li>
-</ul>
-<h1 id="dp">dp</h1>
-<ul>
-<li><a href="https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845">ZOJ 1346 Comparing Your Heroes</a></li>
-<li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
-<li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
-<li><a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">416. 分割等和子集</a></li>
-<li><a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">300. 最长递增子序列</a></li>
-</ul>
-<h2 id="旅行商问题">旅行商问题</h2>
-<ul>
-<li><a href="https://www.nowcoder.com/questionTerminal/3d1adf0f16474c90b27a9954b71d125d">毕业旅行问题</a></li>
-</ul>
-<h1 id="模拟">模拟</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/tag-validator/">591. 标签验证器</a></li>
-</ul>
-<h1 id="全排列生成算法">全排列生成算法</h1>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/permutations-ii/">47. 全排列 II</a></li>
-</ul>
-<h1 id="快速幂">快速幂</h1>
-<h2 id="矩阵快速幂">矩阵快速幂</h2>
-<ul>
-<li><a href="https://www.luogu.com.cn/problem/P1962">P1962 斐波那契数列</a></li>
-</ul>
-<h1 id="图论">图论</h1>
-<h2 id="最短路">最短路</h2>
-<h3 id="dijkstra">Dijkstra</h3>
-<ul>
-<li><a href="https://practice.geeksforgeeks.org/problems/minimum-cost-path3833/1">Minimum Cost Path</a></li>
-</ul>
-<h1 id="思维">思维</h1>
-<ul>
-<li><a href="https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/">Pairs with same Manhattan and Euclidean distance</a></li>
-<li><a href="https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1">Geek collects the balls</a></li>
-</ul>
 ]]></content>
     </entry>
 </feed>
