@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>南京大学-软件过程改进-复习笔记 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1620484970845">
+<link rel="shortcut icon" href="/favicon.ico?v=1621214018687">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -200,19 +200,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">18</span>
+        <span class="site-item-stat-count">22</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">12</span>
+        <span class="site-item-stat-count">16</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">12</span>
+        <span class="site-item-stat-count">16</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -1893,6 +1893,93 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习Zabbix过程中的笔记&lt;/p&gt;
+&lt;p&gt;学习资料来源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://restheart.org/docs/try/&#34;&gt;Try RESTHeart Online&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/rongfengliang/p/9584470.html&#34;&gt;restheart 基本使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;PS：在RESTHeart中，如果要更新的item不存在，则会自动进行创建。&lt;/p&gt;
+&lt;h2 id=&#34;创建&#34;&gt;创建&lt;/h2&gt;
+&lt;h3 id=&#34;创建文档&#34;&gt;创建文档&lt;/h3&gt;
+&lt;p&gt;POST&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id -d &amp;quot;{&#39;from&#39;:&#39;you&#39;,&#39;message&#39;:&#39;create document&#39;}&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;获取&#34;&gt;获取&lt;/h2&gt;
+&lt;h3 id=&#34;获取集合中所有文档&#34;&gt;获取集合中所有文档&lt;/h3&gt;
+&lt;p&gt;GET&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;获取特定文档&#34;&gt;获取特定文档&lt;/h3&gt;
+&lt;p&gt;GET&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id/document_id&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;指定过滤条件获取集合中的部分文档&#34;&gt;指定过滤条件，获取集合中的部分文档&lt;/h3&gt;
+&lt;p&gt;GET&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id?filter={&#39;from&#39;:&#39;you&#39;}&amp;amp;pagesize=2&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;更新&#34;&gt;更新&lt;/h2&gt;
+&lt;h3 id=&#34;更新数据库&#34;&gt;更新数据库&lt;/h3&gt;
+&lt;p&gt;PUT&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;更新集合&#34;&gt;更新集合&lt;/h3&gt;
+&lt;p&gt;PUT&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;更新整个文档&#34;&gt;更新整个文档&lt;/h3&gt;
+&lt;p&gt;PUT&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id/document_id -d &amp;quot;{&#39;from&#39;:&#39;you&#39;,&#39;message&#39;:&#39;create document&#39;}&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;更新文档中的部分内容&#34;&gt;更新文档中的部分内容&lt;/h3&gt;
+&lt;p&gt;PATCH&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;host_url/db_id/collection_id/document_id -d &amp;quot;{&#39;from&#39;:&#39;you&#39;,&#39;message&#39;:&#39;create document&#39;}&amp;quot;&lt;/code&gt;&lt;/p&gt;
+">RESTHeart学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-14-Zabbix学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习Zabbix过程中的笔记&lt;/p&gt;
+&lt;p&gt;学习资料来源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zsythink.net/archives/790&#34;&gt;zabbix从放弃到入门&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+">Zabbix学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-13-Celery学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习Celery过程中的笔记&lt;/p&gt;
+&lt;p&gt;学习资料来源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/22304455&#34;&gt;使用Celery-小明&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;架构&#34;&gt;架构&lt;/h2&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210513101505012.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">Celery学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-12-MongoDB学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习MongoDB过程中的笔记&lt;/p&gt;
+&lt;p&gt;学习资料来源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xiaohuiduan/p/11403891.html&#34;&gt;Mongodb最基础入门教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.aliyun.com/article/64352&#34;&gt;什么场景应该用 MongoDB ？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/32071167&#34;&gt;MongoDB 应用场景?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;mongodb使用场景&#34;&gt;MongoDB使用场景&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用方便
+&lt;ul&gt;
+&lt;li&gt;增加字段不用改表结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可进行地理位置查询&lt;/li&gt;
+&lt;li&gt;方便扩展&lt;/li&gt;
+&lt;/ul&gt;
+">MongoDB学习笔记</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/"" data-c="
           &lt;p&gt;这篇文章主要记录了学习redis过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -1946,6 +2033,9 @@
 &lt;p&gt;使用主从架构，子节点同步父节点信息，当父节点宕机后，用子节点代替父节点继续提供服务&lt;/p&gt;
 &lt;p&gt;主从节点切换导致锁丢失：使用zookeeper代替redis&lt;/p&gt;
 &lt;p&gt;redis vs zookeeper：redis性能更好；zookeeper一致性更好。&lt;/p&gt;
+&lt;h2 id=&#34;lua脚本&#34;&gt;Lua脚本&lt;/h2&gt;
+&lt;p&gt;Lua脚本可以植入redis内部进行运行&lt;/p&gt;
+&lt;p&gt;Lua脚本的优势在于，具有一些独特的特性，例如原子性等&lt;/p&gt;
 &lt;h2 id=&#34;缓存-数据库双写不一致问题&#34;&gt;缓存、数据库双写不一致问题&lt;/h2&gt;
 &lt;p&gt;场景1：&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213252468.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
@@ -1957,7 +2047,25 @@
 &lt;ul&gt;
 &lt;li&gt;延迟双删&lt;/li&gt;
 &lt;li&gt;内存队列&lt;/li&gt;
-&lt;li&gt;分布式锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;推荐做法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;读多写少
+&lt;ul&gt;
+&lt;li&gt;分布式锁：通过读写锁进行优化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;读多写多，对一致性要求不高
+&lt;ul&gt;
+&lt;li&gt;给缓存设置过期时间，保证双写不一致的最大时长。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;读多写多，对一致性要求高
+&lt;ul&gt;
+&lt;li&gt;不要用缓存：因为缓存更新后，可能过了几秒，就又要进行更新。这种情况下，不如不用缓存。&lt;/li&gt;
+&lt;li&gt;使用canal中间件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 ">redis学习笔记</a>
       </div>
@@ -3432,8 +3540,12 @@ public:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/zhi_shi_dian_hui_zong/"" data-c="
-          &lt;p&gt;这篇文章主要收藏一些平时工作学习中遇到的问题的解决方案，供大家参考。&lt;/p&gt;
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-26-与技术相关的文章、博客、网站的汇总/"" data-c="
+          &lt;p&gt;这篇文章主要收藏了一些与技术相关的文章、博客、网站，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平时工作学习中遇到的问题的解决方案&lt;/li&gt;
+&lt;li&gt;学习资源网站&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;springboot&#34;&gt;SpringBoot&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://start.spring.io/&#34;&gt;快速创建SpringBoot项目-Spring Initializr&lt;/a&gt;&lt;/li&gt;
@@ -3444,7 +3556,7 @@ public:
 &lt;/ul&gt;
 &lt;h2 id=&#34;linux&#34;&gt;Linux&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;[&lt;a href=&#34;https://www.cnblogs.com/wulaa/p/7943550.html&#34;&gt;linux改变apt-get安装源&lt;/a&gt;](https://www.cnblogs.com/wulaa/p/7943550.html)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/wulaa/p/7943550.html&#34;&gt;linux改变apt-get安装源&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
 &lt;ul&gt;
@@ -3455,12 +3567,17 @@ public:
 &lt;/ul&gt;
 &lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_33935895/article/details/103261211&#34;&gt;[算法]分治法解最近对问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_33935895/article/details/103261211&#34;&gt;算法]分治法解最近对问题&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/q547550831/article/details/51541527&#34;&gt;分治法——棋盘覆盖问题&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/l1l1/p/9432876.html&#34;&gt;求凸包（安德鲁算法）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/peng0614/article/details/81193484&#34;&gt;【计算几何/凸包】安德鲁算法（Andrew&#39;s Algorithm）详解&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-">知识点汇总</a>
+&lt;h2 id=&#34;学习网站&#34;&gt;学习网站&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.aliyun.com/learning&#34;&gt;阿里云-开发者学院&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ke.qq.com/&#34;&gt;腾讯课堂&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">与技术相关的文章、博客、网站的汇总</a>
       </div>
       
       <div class="item">

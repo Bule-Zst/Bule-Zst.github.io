@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>Hello Gridea | Bule-Zst</title>
+<title>RESTHeart学习笔记 | Bule-Zst</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1621214018687">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -62,8 +62,8 @@
 </script>
 
 
-  <meta name="description" content="Hello Gridea" />
-  <meta name="keywords" content="" />
+  <meta name="description" content="RESTHeart学习笔记" />
+  <meta name="keywords" content="RESTHeart" />
 </head>
 
 <body>
@@ -261,7 +261,26 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA">创建</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3">创建文档</a></li>
+</ul>
+</li>
+<li><a href="#%E8%8E%B7%E5%8F%96">获取</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%E4%B8%AD%E6%89%80%E6%9C%89%E6%96%87%E6%A1%A3">获取集合中所有文档</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E7%89%B9%E5%AE%9A%E6%96%87%E6%A1%A3">获取特定文档</a></li>
+<li><a href="#%E6%8C%87%E5%AE%9A%E8%BF%87%E6%BB%A4%E6%9D%A1%E4%BB%B6%E8%8E%B7%E5%8F%96%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E6%96%87%E6%A1%A3">指定过滤条件，获取集合中的部分文档</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9B%B4%E6%96%B0">更新</a>
+<ul>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93">更新数据库</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E9%9B%86%E5%90%88">更新集合</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%95%B4%E4%B8%AA%E6%96%87%E6%A1%A3">更新整个文档</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9">更新文档中的部分内容</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -529,8 +548,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="http://Bule-Zst.gitee.io/hello-gridea/">
-      Hello Gridea
+    <a class="post-title-link" href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/">
+      RESTHeart学习笔记
     </a>
   </h1>
   <div class="post-meta">
@@ -538,23 +557,36 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2018-12-12 00:00:00">2018-12-12</span>
+      <span class="publish-time" data-t="2021-05-14 08:35:53">2021-05-14</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
+      
+      <a href="http://Bule-Zst.gitee.io/lzFz62Fay/">
+        <span>RESTHeart</span>
+      </a>
+      
+      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>1<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>298<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>184<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/hello-gridea/" data-flag-title="Hello Gridea" class="meta-item pc-show leancloud_visitors">
+    <span id="/2021-05-14-RESTHeart学习笔记/" data-flag-title="RESTHeart学习笔记" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -563,27 +595,41 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+              <p>这篇文章主要记录了学习Zabbix过程中的笔记</p>
+<p>学习资料来源：</p>
+<ul>
+<li><a href="https://restheart.org/docs/try/">Try RESTHeart Online</a></li>
+<li><a href="https://www.cnblogs.com/rongfengliang/p/9584470.html">restheart 基本使用</a></li>
+</ul>
+<hr>
+<p>PS：在RESTHeart中，如果要更新的item不存在，则会自动进行创建。</p>
+<h2 id="创建">创建</h2>
+<h3 id="创建文档">创建文档</h3>
+<p>POST</p>
+<p><code>host_url/db_id/collection_id -d &quot;{'from':'you','message':'create document'}&quot;</code></p>
+<h2 id="获取">获取</h2>
+<h3 id="获取集合中所有文档">获取集合中所有文档</h3>
+<p>GET</p>
+<p><code>host_url/db_id/collection_id</code></p>
+<h3 id="获取特定文档">获取特定文档</h3>
+<p>GET</p>
+<p><code>host_url/db_id/collection_id/document_id</code></p>
+<h3 id="指定过滤条件获取集合中的部分文档">指定过滤条件，获取集合中的部分文档</h3>
+<p>GET</p>
+<p><code>host_url/db_id/collection_id?filter={'from':'you'}&amp;pagesize=2</code></p>
+<h2 id="更新">更新</h2>
+<h3 id="更新数据库">更新数据库</h3>
+<p>PUT</p>
+<p><code>host_url/db_id</code></p>
+<h3 id="更新集合">更新集合</h3>
+<p>PUT</p>
+<p><code>host_url/db_id/collection_id</code></p>
+<h3 id="更新整个文档">更新整个文档</h3>
+<p>PUT</p>
+<p><code>host_url/db_id/collection_id/document_id -d &quot;{'from':'you','message':'create document'}&quot;</code></p>
+<h3 id="更新文档中的部分内容">更新文档中的部分内容</h3>
+<p>PATCH</p>
+<p><code>host_url/db_id/collection_id/document_id -d &quot;{'from':'you','message':'create document'}&quot;</code></p>
 
             </div>
             
@@ -596,7 +642,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="http://Bule-Zst.gitee.io/hello-gridea/" title="Hello Gridea">http://Bule-Zst.gitee.io/hello-gridea/</a>
+      <a href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/" title="RESTHeart学习笔记">http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -605,12 +651,18 @@
   </ul>
   <div class="tags">
     
+      <a href="http://Bule-Zst.gitee.io/lzFz62Fay/"># RESTHeart</a>
+    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
     </div>
     <div class="nav-next">
+      
+        <a class="nav-pc-next" title="Zabbix学习笔记" href="http://Bule-Zst.gitee.io/2021-05-14-Zabbix学习笔记/">Zabbix学习笔记</a>
+        <a class="nav-mobile-next" title="Zabbix学习笔记" href="http://Bule-Zst.gitee.io/2021-05-14-Zabbix学习笔记/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
