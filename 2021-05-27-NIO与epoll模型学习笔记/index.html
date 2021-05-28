@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>Bule-Zst</title>
+<title>NIO与epoll模型学习笔记 | Bule-Zst</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1622190899099">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -62,6 +62,8 @@
 </script>
 
 
+  <meta name="description" content="NIO与epoll模型学习笔记" />
+  <meta name="keywords" content="网络编程" />
 </head>
 
 <body>
@@ -168,10 +170,26 @@
   <div class="main-continer">
     
     <div
-      class="section-layout  gemini">
+      class="section-layout gemini ">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -235,144 +253,552 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number no_compress"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#io">IO</a>
+<ul>
+<li><a href="#bio">BIO</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%86%99%E6%B3%95">基本写法</a></li>
+<li><a href="#%E4%BC%98%E5%8C%961%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96">优化1：使用多线程进行优化</a></li>
+<li><a href="#%E4%BC%98%E5%8C%962%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96">优化2：使用线程池进行优化</a></li>
+<li><a href="#%E5%85%B1%E5%90%8C%E9%97%AE%E9%A2%98">共同问题</a></li>
+</ul>
+</li>
+<li><a href="#nio">NIO</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%86%99%E6%B3%95-2">基本写法</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E4%BD%BF%E7%94%A8selector%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96">优化：使用selector进行优化</a></li>
+<li><a href="#selector%E5%8E%9F%E7%90%86">Selector原理</a></li>
+<li><a href="#%E5%AF%B9selector%E7%9A%84%E7%90%86%E8%A7%A3">对Selector的理解</a></li>
+</ul>
+</li>
+<li><a href="#nio%E4%B8%8Eaio%E7%9A%84%E5%8C%BA%E5%88%AB">NIO与AIO的区别</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
 </div>
+
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'gemini';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
       }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
     });
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          Docker
-          <small class="language" data-lan="tag">标签</small>
-        </h2>
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
       </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/">
+      NIO与epoll模型学习笔记
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2021-05-27 15:13:53">2021-05-27</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <a href="http://Bule-Zst.gitee.io/2021-05-07-docker学习笔记/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              05-07
-              <small>docker学习笔记</small>
-            </h1>
-          </div>
-        </div>
+      <a href="http://Bule-Zst.gitee.io/网络编程/">
+        <span>网络编程</span>
       </a>
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>996<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+    
+    
+    <span id="/2021-05-27-NIO与epoll模型学习笔记/" data-flag-title="NIO与epoll模型学习笔记" class="meta-item pc-show leancloud_visitors">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
+    </span>
+    
+  </div>
+</section>
+            <div class="post-body next-md-body" id="post_body">
+              <p>这篇文章主要记录了学习NIO及Netty线程模型过程中的笔记，学习资料为视频，链接如下：</p>
+<ul>
+<li><a href="https://ke.qq.com/course/3293405?taid=11073426419761373">深入Hotspot源码与Linux内核理解NIO与Netty线程模型</a></li>
+</ul>
+<hr>
+<h2 id="io">IO</h2>
+<h3 id="bio">BIO</h3>
+<h4 id="基本写法">基本写法</h4>
+<pre><code class="language-java">ServerSocket serverSocket = new ServerSocket( 9000 );
+while( true ) {
+    Socket socket = serverSocket.accept();
+    BufferedReader reader = new BufferedReader( new InputStreamReader( socket.getInputStream()));
+    System.out.println( reader.readLine() );
+}
+</code></pre>
+<p>缺点：并发量为1</p>
+<h4 id="优化1使用多线程进行优化">优化1：使用多线程进行优化</h4>
+<pre><code class="language-java">ServerSocket serverSocket = new ServerSocket( 9000 );
+while( true ) {
+    Socket socket = serverSocket.accept();
+    new Thread() {
+        @Override
+        public void run() {
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader( new InputStreamReader( socket.getInputStream()));
+                System.out.println( reader.readLine() );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+        }
+    }.start();
+}
+</code></pre>
+<p>缺点：存在C10K问题，当并发量过大时，因为开的线程太多，会被内存挤爆。</p>
+<h4 id="优化2使用线程池进行优化">优化2：使用线程池进行优化</h4>
+<p>缺点：并发数会受到线程池中线程数的约束</p>
+<h4 id="共同问题">共同问题</h4>
+<p>可能会存在建立连接后不发数据的情况，导致该线程阻塞，降低系统性能</p>
+<h3 id="nio">NIO</h3>
+<h4 id="基本写法-2">基本写法</h4>
+<pre><code class="language-java">ServerSocketChannel serverChannel = ServerSocketChannel.open();
+serverChannel.bind( new InetSocketAddress(9000) );
+serverChannel.configureBlocking( false );
+List&lt;SocketChannel&gt; socketChannelList = new ArrayList&lt;&gt;();
+while( true ) {
+    SocketChannel socketChannel = serverChannel.accept();
+    if( socketChannel != null ) {
+        socketChannel.configureBlocking( false );
+        socketChannelList.add( socketChannel );
+    }
+    Iterator&lt;SocketChannel&gt; iterator = socketChannelList.iterator();
+    while( iterator.hasNext() ) {
+        SocketChannel socketChannel1 = iterator.next();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+        int len = socketChannel1.read( byteBuffer );
+        if( len &gt; 0 ) {
+            System.out.println( new String(byteBuffer.array()));
+        } else if( len == -1 ) {
+            iterator.remove();
+        }
+    }
+}
+</code></pre>
+<p>缺点：</p>
+<ul>
+<li>对所有连接进行轮询，判断是否发送数据，但可能大部分连接都没有发送数据（空轮询）</li>
+<li>C10K问题</li>
+</ul>
+<h4 id="优化使用selector进行优化">优化：使用selector进行优化</h4>
+<pre><code class="language-java">ServerSocketChannel serverChannel = ServerSocketChannel.open();
+serverChannel.bind( new InetSocketAddress(9000) );
+serverChannel.configureBlocking( false );
+Selector selector = Selector.open();
+serverChannel.register( selector, SelectionKey.OP_ACCEPT );
+while( true ) {
+    selector.select();
+    Set&lt;SelectionKey&gt; selectionKeys = selector.selectedKeys();
+    Iterator&lt;SelectionKey&gt; iterator = selectionKeys.iterator();
+    while( iterator.hasNext() ) {
+        SelectionKey selectionKey = iterator.next();
+        if( selectionKey.isAcceptable() ) {
+            ServerSocketChannel serverChannel1 = (ServerSocketChannel) selectionKey.channel();
+            SocketChannel socketChannel = serverChannel1.accept();
+            socketChannel.register( selector, SelectionKey.OP_READ );
+        } else if( selectionKey.isReadable() ) {
+            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+            int len = socketChannel.read( byteBuffer );
+            if( len &gt; 0 ) {
+                System.out.println( new String(byteBuffer.array()));
+            } else if( len == -1 ) {
+                iterator.remove();
+            }
+        }
+        iterator.remove();
+    }
+}
+</code></pre>
+<h4 id="selector原理">Selector原理</h4>
+<p>在linux环境下，selector基于epoll实现（在windows环境下，不基于epoll）。</p>
+<p>使用epoll_create创建epoll对象，使用epoll_ctl进行注册，使用epoll_wait进行阻塞监听。</p>
+<p>Java调用操作系统的内核函数来创建Socket，获取到Socket的文件描述符，再创建一个Selector对象，对应操作系统的Epoll描述符，将获取到的Socket连接的文件描述符的事件绑定到Selector对应的Epoll文件描述符上，进行事件的异步通知。</p>
+<p>epoll基于“回调”实现监听。</p>
+<p>在Selector中，连接建立、数据读取都依赖于系统函数，例如，连接建立依赖于accept函数。因此，Selector可以使用epoll监听系统函数的调用，从而实现对连接建立、数据读取的监听。</p>
+<p>本质上，epoll监听的事文件描述符的状态（可读、可写）</p>
+<h4 id="对selector的理解">对Selector的理解</h4>
+<p>在Selector的实现中，看似是存在阻塞的（<code>selector.select()</code>），但Selector依旧属于同步非阻塞IO的范畴，这是因为，这里所谓的阻塞，指的是当有多个连接希望建立时，因为正在处理某个连接的建立，导致其他连接无法被处理（连接被阻塞了），因此，这里所谓的阻塞，面向的对象是连接，当然，也可以是数据的读取，而不是程序的阻塞。</p>
+<p>对于<code>selector.select()</code>方法，当没有连接希望建立时，会阻塞，一旦有连接希望建立，则会立刻结束阻塞，且当有多个连接希望建立时，多个连接之间也不会有相互影响（即，因为线程A的建立，导致线程B建立请求的阻塞）。</p>
+<p>在<code>selector.select()</code>方法的内部，其实调用的是<code>epoll_wait</code>方法，这个方法是异步非阻塞的。</p>
+<h3 id="nio与aio的区别">NIO与AIO的区别</h3>
+<p>NIO为同步非阻塞IO，会在程序中进行轮询，当发现有事件发生后，会对事件进行处理。</p>
+<p>AIO为异步非阻塞IO，预先写好处理逻辑，当有事件发生后，处理函数会被调用，用于处理事件（观察者模式）。</p>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Bule-Zst
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/" title="NIO与epoll模型学习笔记">http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="http://Bule-Zst.gitee.io/网络编程/"># 网络编程</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="RESTHeart学习笔记" href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/">RESTHeart学习笔记</a>
+        <a class="nav-mobile-next" title="RESTHeart学习笔记" href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+            
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'icyVx6by4LtMh3OUkAxAV9Td-gzGzoHsz',
+    appKey: 'BjJojXprANUbtBlAXlKTqVD6',
+    avatar: 'mp',
+    placeholder: '填上邮箱可以收到我的回复哦 (*^ω^*)~~\n请尽量7点-23点给我评论哦~',
+    pageSize: '',
+    lang: 'zh-cn',
+    enableQQ: 'true' === 'false',
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+  });
+</script>
+
+          </div>
         </div>
       </div>
     </div>
@@ -1119,6 +1545,223 @@
     parent.insertBefore(aelem, next);
   })
 </script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        window.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        window.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        window.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        window.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      window.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
   </div>
 </body>
 
@@ -4054,6 +4697,5 @@ ps:经过了以上步骤，这里我们快速讲解。大同小异。&lt;br&gt;
 
 
 <script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script>
-
 
 </html>

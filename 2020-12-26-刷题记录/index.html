@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>刷题记录 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1621214018687">
+<link rel="shortcut icon" href="/favicon.ico?v=1622190899099">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -273,6 +273,7 @@
 </ul>
 </li>
 <li><a href="#%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97">单调队列</a></li>
+<li><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a></li>
 <li><a href="#%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95">计算几何</a>
 <ul>
 <li><a href="#%E5%87%B8%E5%8C%85">凸包</a></li>
@@ -291,6 +292,11 @@
 <li><a href="#%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82">矩阵快速幂</a></li>
 </ul>
 </li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a>
+<ul>
+<li><a href="#kmp">KMP</a></li>
+</ul>
+</li>
 <li><a href="#%E5%9B%BE%E8%AE%BA">图论</a>
 <ul>
 <li><a href="#%E6%9C%80%E7%9F%AD%E8%B7%AF">最短路</a>
@@ -301,6 +307,7 @@
 </ul>
 </li>
 <li><a href="#%E6%80%9D%E7%BB%B4">思维</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2">搜索</a></li>
 </ul>
 
   </div>
@@ -599,7 +606,7 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>288<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>337<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
@@ -645,6 +652,8 @@
 <li><a href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></li>
 <li><a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">84. 柱状图中最大的矩形</a></li>
 <li><a href="https://leetcode-cn.com/problems/maximal-rectangle/">85. 最大矩形</a></li>
+<li><a href="https://leetcode-cn.com/problems/remove-duplicate-letters/">316. 去除重复字母</a></li>
+<li><a href="https://leetcode-cn.com/problems/online-stock-span/">901. 股票价格跨度</a></li>
 </ul>
 <h3 id="中缀转后缀">中缀转后缀</h3>
 <ul>
@@ -654,6 +663,11 @@
 <h1 id="单调队列">单调队列</h1>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></li>
+<li><a href="https://www.acwing.com/problem/content/137/">135. 最大子序和</a></li>
+</ul>
+<h1 id="滑动窗口">滑动窗口</h1>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/subarrays-with-k-different-integers/">992. K 个不同整数的子数组</a></li>
 </ul>
 <h1 id="计算几何">计算几何</h1>
 <h2 id="凸包">凸包</h2>
@@ -690,6 +704,11 @@
 <ul>
 <li><a href="https://www.luogu.com.cn/problem/P1962">P1962 斐波那契数列</a></li>
 </ul>
+<h1 id="字符串">字符串</h1>
+<h2 id="kmp">KMP</h2>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/implement-strstr/">28. 实现 strStr()</a></li>
+</ul>
 <h1 id="图论">图论</h1>
 <h2 id="最短路">最短路</h2>
 <h3 id="dijkstra">Dijkstra</h3>
@@ -701,6 +720,10 @@
 <li><a href="https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/">Pairs with same Manhattan and Euclidean distance</a></li>
 <li><a href="https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1">Geek collects the balls</a></li>
 <li><a href="https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/">581. 最短无序连续子数组</a></li>
+</ul>
+<h1 id="搜索">搜索</h1>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/minimum-moves-to-move-a-box-to-their-target-location/">1263. 推箱子</a></li>
 </ul>
 
             </div>
@@ -730,8 +753,8 @@
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Linux-&gt;Ubuntu下配置telnet环境" href="http://Bule-Zst.gitee.io/Grj96uz3p/">Linux-&gt;Ubuntu下配置telnet环境</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Linux-&gt;Ubuntu下配置telnet环境" href="http://Bule-Zst.gitee.io/Grj96uz3p/">上一篇</a>
+        <a class="nav-pc-next" title="Ubuntu下配置telnet环境" href="http://Bule-Zst.gitee.io/2020-12-29-Ubuntu下配置telnet环境/">Ubuntu下配置telnet环境</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Ubuntu下配置telnet环境" href="http://Bule-Zst.gitee.io/2020-12-29-Ubuntu下配置telnet环境/">上一篇</a>
       
     </div>
     <div class="nav-next">
@@ -1777,6 +1800,125 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习NIO及Netty线程模型过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ke.qq.com/course/3293405?taid=11073426419761373&#34;&gt;深入Hotspot源码与Linux内核理解NIO与Netty线程模型&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;io&#34;&gt;IO&lt;/h2&gt;
+&lt;h3 id=&#34;bio&#34;&gt;BIO&lt;/h3&gt;
+&lt;h4 id=&#34;基本写法&#34;&gt;基本写法&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocket serverSocket = new ServerSocket( 9000 );
+while( true ) {
+    Socket socket = serverSocket.accept();
+    BufferedReader reader = new BufferedReader( new InputStreamReader( socket.getInputStream()));
+    System.out.println( reader.readLine() );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;缺点：并发量为1&lt;/p&gt;
+&lt;h4 id=&#34;优化1使用多线程进行优化&#34;&gt;优化1：使用多线程进行优化&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocket serverSocket = new ServerSocket( 9000 );
+while( true ) {
+    Socket socket = serverSocket.accept();
+    new Thread() {
+        @Override
+        public void run() {
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader( new InputStreamReader( socket.getInputStream()));
+                System.out.println( reader.readLine() );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+        }
+    }.start();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;缺点：存在C10K问题，当并发量过大时，因为开的线程太多，会被内存挤爆。&lt;/p&gt;
+&lt;h4 id=&#34;优化2使用线程池进行优化&#34;&gt;优化2：使用线程池进行优化&lt;/h4&gt;
+&lt;p&gt;缺点：并发数会受到线程池中线程数的约束&lt;/p&gt;
+&lt;h4 id=&#34;共同问题&#34;&gt;共同问题&lt;/h4&gt;
+&lt;p&gt;可能会存在建立连接后不发数据的情况，导致该线程阻塞，降低系统性能&lt;/p&gt;
+&lt;h3 id=&#34;nio&#34;&gt;NIO&lt;/h3&gt;
+&lt;h4 id=&#34;基本写法-2&#34;&gt;基本写法&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocketChannel serverChannel = ServerSocketChannel.open();
+serverChannel.bind( new InetSocketAddress(9000) );
+serverChannel.configureBlocking( false );
+List&amp;lt;SocketChannel&amp;gt; socketChannelList = new ArrayList&amp;lt;&amp;gt;();
+while( true ) {
+    SocketChannel socketChannel = serverChannel.accept();
+    if( socketChannel != null ) {
+        socketChannel.configureBlocking( false );
+        socketChannelList.add( socketChannel );
+    }
+    Iterator&amp;lt;SocketChannel&amp;gt; iterator = socketChannelList.iterator();
+    while( iterator.hasNext() ) {
+        SocketChannel socketChannel1 = iterator.next();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+        int len = socketChannel1.read( byteBuffer );
+        if( len &amp;gt; 0 ) {
+            System.out.println( new String(byteBuffer.array()));
+        } else if( len == -1 ) {
+            iterator.remove();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对所有连接进行轮询，判断是否发送数据，但可能大部分连接都没有发送数据（空轮询）&lt;/li&gt;
+&lt;li&gt;C10K问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;优化使用selector进行优化&#34;&gt;优化：使用selector进行优化&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocketChannel serverChannel = ServerSocketChannel.open();
+serverChannel.bind( new InetSocketAddress(9000) );
+serverChannel.configureBlocking( false );
+Selector selector = Selector.open();
+serverChannel.register( selector, SelectionKey.OP_ACCEPT );
+while( true ) {
+    selector.select();
+    Set&amp;lt;SelectionKey&amp;gt; selectionKeys = selector.selectedKeys();
+    Iterator&amp;lt;SelectionKey&amp;gt; iterator = selectionKeys.iterator();
+    while( iterator.hasNext() ) {
+        SelectionKey selectionKey = iterator.next();
+        if( selectionKey.isAcceptable() ) {
+            ServerSocketChannel serverChannel1 = (ServerSocketChannel) selectionKey.channel();
+            SocketChannel socketChannel = serverChannel1.accept();
+            socketChannel.register( selector, SelectionKey.OP_READ );
+        } else if( selectionKey.isReadable() ) {
+            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+            int len = socketChannel.read( byteBuffer );
+            if( len &amp;gt; 0 ) {
+                System.out.println( new String(byteBuffer.array()));
+            } else if( len == -1 ) {
+                iterator.remove();
+            }
+        }
+        iterator.remove();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;selector原理&#34;&gt;Selector原理&lt;/h4&gt;
+&lt;p&gt;在linux环境下，selector基于epoll实现（在windows环境下，不基于epoll）。&lt;/p&gt;
+&lt;p&gt;使用epoll_create创建epoll对象，使用epoll_ctl进行注册，使用epoll_wait进行阻塞监听。&lt;/p&gt;
+&lt;p&gt;Java调用操作系统的内核函数来创建Socket，获取到Socket的文件描述符，再创建一个Selector对象，对应操作系统的Epoll描述符，将获取到的Socket连接的文件描述符的事件绑定到Selector对应的Epoll文件描述符上，进行事件的异步通知。&lt;/p&gt;
+&lt;p&gt;epoll基于“回调”实现监听。&lt;/p&gt;
+&lt;p&gt;在Selector中，连接建立、数据读取都依赖于系统函数，例如，连接建立依赖于accept函数。因此，Selector可以使用epoll监听系统函数的调用，从而实现对连接建立、数据读取的监听。&lt;/p&gt;
+&lt;p&gt;本质上，epoll监听的事文件描述符的状态（可读、可写）&lt;/p&gt;
+&lt;h4 id=&#34;对selector的理解&#34;&gt;对Selector的理解&lt;/h4&gt;
+&lt;p&gt;在Selector的实现中，看似是存在阻塞的（&lt;code&gt;selector.select()&lt;/code&gt;），但Selector依旧属于同步非阻塞IO的范畴，这是因为，这里所谓的阻塞，指的是当有多个连接希望建立时，因为正在处理某个连接的建立，导致其他连接无法被处理（连接被阻塞了），因此，这里所谓的阻塞，面向的对象是连接，当然，也可以是数据的读取，而不是程序的阻塞。&lt;/p&gt;
+&lt;p&gt;对于&lt;code&gt;selector.select()&lt;/code&gt;方法，当没有连接希望建立时，会阻塞，一旦有连接希望建立，则会立刻结束阻塞，且当有多个连接希望建立时，多个连接之间也不会有相互影响（即，因为线程A的建立，导致线程B建立请求的阻塞）。&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;selector.select()&lt;/code&gt;方法的内部，其实调用的是&lt;code&gt;epoll_wait&lt;/code&gt;方法，这个方法是异步非阻塞的。&lt;/p&gt;
+&lt;h3 id=&#34;nio与aio的区别&#34;&gt;NIO与AIO的区别&lt;/h3&gt;
+&lt;p&gt;NIO为同步非阻塞IO，会在程序中进行轮询，当发现有事件发生后，会对事件进行处理。&lt;/p&gt;
+&lt;p&gt;AIO为异步非阻塞IO，预先写好处理逻辑，当有事件发生后，处理函数会被调用，用于处理事件（观察者模式）。&lt;/p&gt;
+">NIO与epoll模型学习笔记</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/"" data-c="
           &lt;p&gt;这篇文章主要记录了学习Zabbix过程中的笔记&lt;/p&gt;
 &lt;p&gt;学习资料来源：&lt;/p&gt;
@@ -1865,16 +2007,20 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/"" data-c="
-          &lt;p&gt;这篇文章主要记录了学习redis过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+          &lt;p&gt;这篇文章主要记录了学习redis过程中的笔记，学习资料为视频及pdf，链接如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/2Fg2Arj1Doe&#34;&gt;双十一秒杀系统后端Redis高并发架构实战&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/N7WiV8Wgjm9&#34;&gt;亿级流量新浪微博与微信Redis架构实战&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/e1jtR4D15kz&#34;&gt;Redis常见面试题汇总.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/CprZdykwNd2&#34;&gt;Redis持久化、主从与哨兵架构详解.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/1HdqGt4krK1&#34;&gt;Redis命令参考手册完整版.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;分布式并发场景中可能存在的问题&#34;&gt;分布式并发场景中可能存在的问题&lt;/h2&gt;
+&lt;h2 id=&#34;分布式&#34;&gt;分布式&lt;/h2&gt;
+&lt;h3 id=&#34;分布式并发场景中可能存在的问题&#34;&gt;分布式并发场景中可能存在的问题&lt;/h3&gt;
 &lt;p&gt;使用synchronized对代码块加锁，但因为是分布式，多个应用同时访问redis，依旧无法解决并发冲突问题&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210508160113749.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
-&lt;h2 id=&#34;redis实现分布式锁&#34;&gt;Redis实现分布式锁&lt;/h2&gt;
+&lt;h3 id=&#34;redis实现分布式锁&#34;&gt;Redis实现分布式锁&lt;/h3&gt;
 &lt;p&gt;使用SETNX实现分布式锁&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1906,20 +2052,12 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;性能问题&#34;&gt;性能问题&lt;/h2&gt;
+&lt;h3 id=&#34;分布式锁的性能问题&#34;&gt;分布式锁的性能问题&lt;/h3&gt;
 &lt;p&gt;使用分布式锁，本质上是让所有web请求串行化执行，执行效率较低。&lt;/p&gt;
 &lt;p&gt;解决方案：分段加锁&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;举例：秒杀场景下，为了防止超卖，需要使用分布式锁，例如商品数量为200个，那么可以划分成10分，分别进行加锁，这样可以提高约10倍的效率。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;redis主从架构&#34;&gt;Redis主从架构&lt;/h2&gt;
-&lt;p&gt;防止单点redis宕机，对业务造成影响&lt;/p&gt;
-&lt;p&gt;使用主从架构，子节点同步父节点信息，当父节点宕机后，用子节点代替父节点继续提供服务&lt;/p&gt;
-&lt;p&gt;主从节点切换导致锁丢失：使用zookeeper代替redis&lt;/p&gt;
-&lt;p&gt;redis vs zookeeper：redis性能更好；zookeeper一致性更好。&lt;/p&gt;
-&lt;h2 id=&#34;lua脚本&#34;&gt;Lua脚本&lt;/h2&gt;
-&lt;p&gt;Lua脚本可以植入redis内部进行运行&lt;/p&gt;
-&lt;p&gt;Lua脚本的优势在于，具有一些独特的特性，例如原子性等&lt;/p&gt;
 &lt;h2 id=&#34;缓存-数据库双写不一致问题&#34;&gt;缓存、数据库双写不一致问题&lt;/h2&gt;
 &lt;p&gt;场景1：&lt;/p&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213252468.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
@@ -1950,6 +2088,184 @@
 &lt;li&gt;使用canal中间件&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;redis&#34;&gt;Redis&lt;/h2&gt;
+&lt;p&gt;全称：Remote Dictionary Server&lt;/p&gt;
+&lt;h3 id=&#34;为什么性能高&#34;&gt;为什么性能高&lt;/h3&gt;
+&lt;p&gt;对性能的影响：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消极
+&lt;ul&gt;
+&lt;li&gt;单线程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;积极
+&lt;ul&gt;
+&lt;li&gt;内存操作&lt;/li&gt;
+&lt;li&gt;基于epoll的多路复用模型&lt;/li&gt;
+&lt;li&gt;高效的数据存储结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;数据存储结构&#34;&gt;数据存储结构&lt;/h4&gt;
+&lt;p&gt;redis使用哈希表存储key-value对&lt;/p&gt;
+&lt;p&gt;在redis中有对象和数据结构的概念，redis对象利用不同的数据结构进行存储，例如，String对象可以用int数据结构进行存储，也可以用SDS数据结构进行存储。&lt;/p&gt;
+&lt;p&gt;对不同类型的对象，内部存储逻辑不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;String对象：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;int数据结构&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SDS数据结构&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;embstr：小于等于44字节&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210528141323986.png&#34; alt=&#34;image-20210528141323986&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;raw：大于44字节&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210528141338577.png&#34; alt=&#34;image-20210528141338577&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;embstr与raw的区别是，embstr只会申请一次内存空间&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hash对象&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;压缩列表：空间占用小，查找慢。当数据个数较小或者数据所占内存空间较少（键和值的大小都小于 64 字节）时，使用压缩列表。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210525101358367.png&#34; alt=&#34;image-20210525101358367&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;哈希表：空间占用大，查找快&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;List对象&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;压缩列表：数据数量较少或所占空间较少时，使用压缩列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;链表：空间占用更多，但添加、删除元素时，效率高&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快速列表：Redis3.2之后，用快速列表代替压缩列表和链表&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210528150649602.png&#34; alt=&#34;image-20210528150649602&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set对象&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;整数集合&lt;/li&gt;
+&lt;li&gt;哈希表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ZSet对象：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;压缩列表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;跳表：查找快，但更占空间且更新性能低&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210524163213876.png&#34; alt=&#34;image-20210524163213876&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当元素个数超过&lt;code&gt;zset-max-ziplist-entries&lt;/code&gt;，切换成跳表。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;epoll多路复用模型&#34;&gt;epoll多路复用模型&lt;/h4&gt;
+&lt;h5 id=&#34;redis为什么要用epoll&#34;&gt;redis为什么要用epoll&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;redis是单线程的：redis是内存操作，虽然内存的速度比CPU慢，但依旧很快，CPU的利用率较高，无需使用多线程提高CPU的利用率。&lt;/li&gt;
+&lt;li&gt;对于单线程的应用，当用户进行网络请求后，该线程会被阻塞，等待用户输入。线程被阻塞，也就意味着整个进程、整个redis被阻塞。若等待用户输入时间较长，则在高并发场景下，会极大影响redis性能。&lt;/li&gt;
+&lt;li&gt;因此，redis需要将等待用户输入这一操作委托给系统去完成，即，redis基于系统提供的epoll实现了多路复用模型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;epoll的实现原理&#34;&gt;epoll的实现原理&lt;/h5&gt;
+&lt;h5 id=&#34;redis如何使用epoll&#34;&gt;redis如何使用epoll&lt;/h5&gt;
+&lt;p&gt;epoll_create&lt;/p&gt;
+&lt;p&gt;epoll_ctl&lt;/p&gt;
+&lt;p&gt;epoll_wait&lt;/p&gt;
+&lt;h3 id=&#34;不同数据类型的适用场景&#34;&gt;不同数据类型的适用场景&lt;/h3&gt;
+&lt;h4 id=&#34;string&#34;&gt;String&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;单值缓存&lt;/li&gt;
+&lt;li&gt;对象缓存：JSON字符串&lt;/li&gt;
+&lt;li&gt;分布式锁&lt;/li&gt;
+&lt;li&gt;计数器&lt;/li&gt;
+&lt;li&gt;分布式系统全局序列号
+&lt;ul&gt;
+&lt;li&gt;分库分表，用redis维护Id。优化思路：一次性让Id增加100，减少对redis的访问次数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;hash&#34;&gt;Hash&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;对象缓存
+&lt;ul&gt;
+&lt;li&gt;与string方式存储相比，其优势在于：对于局部频繁更新，效率更高，比如，只修改对象的某个属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;list&#34;&gt;List&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;实现栈、队列、拥塞队列&lt;/li&gt;
+&lt;li&gt;消息流：当大V发消息后，将消息id添加到每个关注用户的消息List中，使用LPUSH，用户获取消息使用LRANGE。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;set&#34;&gt;Set&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;抽奖功能：因为set有srandmember、spop方法&lt;/li&gt;
+&lt;li&gt;点赞功能：频繁添加、删除、比较元素，用set效率比list好&lt;/li&gt;
+&lt;li&gt;关注模型（共同关注、我关注的人关注了谁、可能认识的人）：集合操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;zset&#34;&gt;ZSet&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;排行榜&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;备份策略&#34;&gt;备份策略&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;每小时都copy一份rdb或aof的备份到一个目录中去，仅仅保留最近48小时的备份&lt;/li&gt;
+&lt;li&gt;每天都保留一份当日的数据备份到一个目录中去，保留最近1个月的备份&lt;/li&gt;
+&lt;li&gt;每天晚上将当前机器上的备份复制一份到其他机器上，以防机器损坏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;主从架构&#34;&gt;主从架构&lt;/h3&gt;
+&lt;p&gt;防止单点redis宕机，对业务造成影响&lt;/p&gt;
+&lt;p&gt;使用主从架构，子节点同步父节点信息，当父节点宕机后，用子节点代替父节点继续提供服务&lt;/p&gt;
+&lt;p&gt;主从节点切换导致锁丢失：使用zookeeper代替redis&lt;/p&gt;
+&lt;p&gt;redis vs zookeeper：redis性能更好；zookeeper一致性更好。&lt;/p&gt;
+&lt;h3 id=&#34;哨兵机制&#34;&gt;哨兵机制&lt;/h3&gt;
+&lt;p&gt;1、故障节点主观下线&lt;/p&gt;
+&lt;p&gt;2、故障节点客观下线&lt;/p&gt;
+&lt;p&gt;3、Sentinel集群选举Leader&lt;/p&gt;
+&lt;p&gt;4、Sentinel Leader决定新主节点&lt;/p&gt;
+&lt;p&gt;详细资料：&lt;a href=&#34;https://blog.csdn.net/weixin_28871885/article/details/113315639&#34;&gt;redis 从节点如何选举从节点升级为主节点_redis sentinel集群选举机制剖析&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;lua脚本&#34;&gt;Lua脚本&lt;/h3&gt;
+&lt;p&gt;Lua脚本可以植入redis内部进行运行&lt;/p&gt;
+&lt;p&gt;Lua脚本的优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;减少网络开销：本来5次网络请求的操作，可以用一个请求完成，原先5次请求的逻辑放在redis服务器上完成。使用脚本，减少了网络往返时延。这点跟管道类似。&lt;/li&gt;
+&lt;li&gt;原子操作：Redis会将整个脚本作为一个整体执行，中间不会被其他命令插入。管道不是原子的，不过redis的批量操作命令(类似mset)是原子的。&lt;/li&gt;
+&lt;li&gt;替代redis的事务功能：redis自带的事务功能很鸡肋，报错不支持回滚，而redis的lua脚本几乎实现了常规的事务功能，支持报错回滚操作，官方推荐如果要使用redis的事务功能可以用redis lua替代。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/hunternet/p/11306690.html&#34;&gt;Redis数据结构——压缩列表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_45401061/article/details/107382276&#34;&gt;面试官：Redis 为什么这么快？除了基于内存操作还有其他原因吗？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/u011663149/article/details/85307615&#34;&gt;Redis为什么是单线程、及高并发快的大原因详解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/yyoc97/article/details/85804654&#34;&gt;从redis为什么单线程还那么快到epoll的设计原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/weixin_28871885/article/details/113315639&#34;&gt;redis 从节点如何选举从节点升级为主节点_redis sentinel集群选举机制剖析&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ">redis学习笔记</a>
       </div>
@@ -2968,7 +3284,7 @@ Algorithm bag:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/cRC2jYBGG/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-04-10-使用码云（gitee）提升博客访问速度/"" data-c="
           &lt;p&gt;之前写过文章，通过Gridea+github搭建个人博客 &lt;a href=&#34;https://bule-zst.gitee.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/&#34;&gt;基于Gridea+github/coding搭建静态博客&lt;/a&gt;，但使用了一段时间后，发现加载速度实在是太慢了，而且cdn更新也不太稳定。&lt;/p&gt;
 &lt;p&gt;今天突发奇想，可以使用码云部署自己的个人博客，说干就干。&lt;/p&gt;
 &lt;hr&gt;
@@ -3014,7 +3330,7 @@ Algorithm bag:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/jvgYk8JbI/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-03-31-MySQL性能优化/"" data-c="
           &lt;p&gt;from &lt;a href=&#34;https://www.bilibili.com/video/BV1xh411Z79d?share_source=copy_web&#34;&gt;https://www.bilibili.com/video/BV1xh411Z79d?share_source=copy_web&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;MySQL慢查询 优化手段：&lt;/p&gt;
@@ -3143,7 +3459,7 @@ Algorithm bag:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/mQjLrKUHc/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-01-06-Jetbrains系列产品重置试用方法/"" data-c="
           &lt;p&gt;本站惯例：本文假定你知道Jetbrains家的产品。不知道可以问问搜索引擎。&lt;/p&gt;
 &lt;p&gt;没错，jetbrains-agent这个项目停止了。市面上漫天飞的各种最新都是其他大神的魔改版本。&lt;br&gt;
 我不是要专门写个博文来说明jetbrains-agent项目已经停止，然后缅怀感叹一番。这篇文章是想和大家聊聊另一种思路。&lt;/p&gt;
@@ -3237,7 +3553,7 @@ Algorithm bag:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/vus3sqCc8/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-30-LeetCode 410. 分割数组的最大值/"" data-c="
           &lt;h1 id=&#34;题意&#34;&gt;题意&lt;/h1&gt;
 &lt;p&gt;给定一个数组，和一个值k，数组分成k段。要求这k段子段和最大值最小。求出这个值。&lt;/p&gt;
 &lt;h1 id=&#34;解题思路&#34;&gt;解题思路&lt;/h1&gt;
@@ -3301,7 +3617,7 @@ public:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/Grj96uz3p/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-29-Ubuntu下配置telnet环境/"" data-c="
           &lt;p&gt;1、首先查看telnet运行状态&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;netstat -a | grep telnet&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;输出为空，表示没有开启该服务&lt;/p&gt;
@@ -3326,7 +3642,7 @@ public:
 &lt;p&gt;telnet&amp;gt; （表示登陆成功）&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;from &lt;a href=&#34;https://www.cnblogs.com/taomylife/p/7552424.html&#34;&gt;https://www.cnblogs.com/taomylife/p/7552424.html&lt;/a&gt;&lt;/p&gt;
-">Linux->Ubuntu下配置telnet环境</a>
+">Ubuntu下配置telnet环境</a>
       </div>
       
       <div class="item">
@@ -3363,6 +3679,8 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/&#34;&gt;42. 接雨水&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/largest-rectangle-in-histogram/&#34;&gt;84. 柱状图中最大的矩形&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;85. 最大矩形&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/remove-duplicate-letters/&#34;&gt;316. 去除重复字母&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/online-stock-span/&#34;&gt;901. 股票价格跨度&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;中缀转后缀&#34;&gt;中缀转后缀&lt;/h3&gt;
 &lt;ul&gt;
@@ -3372,6 +3690,11 @@ public:
 &lt;h1 id=&#34;单调队列&#34;&gt;单调队列&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/sliding-window-maximum/&#34;&gt;239. 滑动窗口最大值&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.acwing.com/problem/content/137/&#34;&gt;135. 最大子序和&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;滑动窗口&#34;&gt;滑动窗口&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/subarrays-with-k-different-integers/&#34;&gt;992. K 个不同整数的子数组&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;计算几何&#34;&gt;计算几何&lt;/h1&gt;
 &lt;h2 id=&#34;凸包&#34;&gt;凸包&lt;/h2&gt;
@@ -3408,6 +3731,11 @@ public:
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P1962&#34;&gt;P1962 斐波那契数列&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;字符串&#34;&gt;字符串&lt;/h1&gt;
+&lt;h2 id=&#34;kmp&#34;&gt;KMP&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/implement-strstr/&#34;&gt;28. 实现 strStr()&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;图论&#34;&gt;图论&lt;/h1&gt;
 &lt;h2 id=&#34;最短路&#34;&gt;最短路&lt;/h2&gt;
 &lt;h3 id=&#34;dijkstra&#34;&gt;Dijkstra&lt;/h3&gt;
@@ -3419,6 +3747,10 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;搜索&#34;&gt;搜索&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/minimum-moves-to-move-a-box-to-their-target-location/&#34;&gt;1263. 推箱子&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ">刷题记录</a>
       </div>
@@ -3450,11 +3782,19 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/pyyong2011/article/details/105045883/&#34;&gt;python: cookies 解密问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
+&lt;h3 id=&#34;分治&#34;&gt;分治&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_33935895/article/details/103261211&#34;&gt;算法]分治法解最近对问题&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/q547550831/article/details/51541527&#34;&gt;分治法——棋盘覆盖问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;凸包&#34;&gt;凸包&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/l1l1/p/9432876.html&#34;&gt;求凸包（安德鲁算法）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/peng0614/article/details/81193484&#34;&gt;【计算几何/凸包】安德鲁算法（Andrew&#39;s Algorithm）详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;字符串&#34;&gt;字符串&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/21923021&#34;&gt;如何更好地理解和掌握 KMP 算法?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;学习网站&#34;&gt;学习网站&lt;/h2&gt;
 &lt;ul&gt;
@@ -3471,7 +3811,7 @@ public:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/hxfRZLp5C/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-21-NexT主题设置Valine评论系统邮件提醒/"" data-c="
           &lt;h2 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;今天无意间看到很久之前写的一篇文章有新的评论，而评论时间呢也是10天以前的。这就有点伤了啊，别人兴致冲冲地提了疑惑，而我却10天后才看到。经过这一茬，意识到评论提醒功能的重要性。由于我使用的是hexo+NexT主题+Valine评论系统，自然而然地就去&lt;a href=&#34;https://valine.js.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Valine官网&lt;/a&gt;看了看，没想到还真有提醒的功能「&lt;a href=&#34;https://valine.js.org/notify.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;邮件提醒&lt;/a&gt;」。&lt;/p&gt;
 &lt;p&gt;这里就给大家讲讲Valine中如何配置邮件提醒功能。&lt;/p&gt;
 &lt;h2 id=&#34;Valine邮件提醒&#34;&gt;&lt;a href=&#34;#Valine邮件提醒&#34; class=&#34;headerlink&#34; title=&#34;Valine邮件提醒&#34;&gt;&lt;/a&gt;Valine邮件提醒&lt;/h2&gt;&lt;p&gt;Valine评论功能是基于&lt;a href=&#34;https://leancloud.cn/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leancloud&lt;/a&gt;的，Valine评论功能还不能跑起来的可以看看我之前写的文章《&lt;a href=&#34;/2345860311#comment_system&#34;&gt;Hexo使用NexT主题及配置&lt;/a&gt;》，其中就有详细的使用说明，这里就不展开了。&lt;/p&gt;
@@ -3565,7 +3905,7 @@ public:
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/dU5GQhPud/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-20-防御式编程（Defensive Programming）/"" data-c="
           &lt;h1 id=&#34;写在前面&#34;&gt;写在前面&lt;/h1&gt;
 &lt;p&gt;新的一年开始了，大家都立下了什么新年flag呢？好久没有更新简书了，最近在看《代码大全》对于第八章的防御式编程颇有感慨，正好最近又是在准备公司的技术分享，索性用&lt;code&gt;md&lt;/code&gt;写了篇博文，总结了一下又增加了一些我个人的理解，在这里跟各位分享一下。&lt;/p&gt;
 &lt;h1 id=&#34;defensive-programming&#34;&gt;Defensive Programming&lt;/h1&gt;
@@ -3958,97 +4298,7 @@ private func createEmergencyCoordinate(_ latitude: Float,_ longitude: Float,_ el
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/jtLxs4zLq/"" data-c="
-          &lt;h1 id=&#34;笔记的主要内容&#34;&gt;笔记的主要内容&lt;/h1&gt;
-&lt;p&gt;这篇博客主要用于记录《高性能MySQL》这本书的读书笔记，篇幅可能很长，因为书的篇幅本身就不小。在书中，作者有提到，不同章节之间相对独立，因此我也会尽量保持独立性。如果大家对我的读书笔记感兴趣，欢迎选取大家感兴趣的章节进行阅读。&lt;/p&gt;
-&lt;p&gt;本笔记的主要内容有：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对书中部分内容的摘抄&lt;/li&gt;
-&lt;li&gt;对精华内容的个人总结&lt;/li&gt;
-&lt;li&gt;相关基础知识的补充&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;笔记的目的：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对于我来说，本笔记希望能够取代书籍，当自己觉得有必要回顾《高性能MySQL》这本书时，只需要简单过一遍笔记即可。&lt;/li&gt;
-&lt;li&gt;对于大家来说，大家可以把我的读书笔记当成一个引言，先阅读我的笔记，之后，如果对于某些章节感兴趣，再去阅读书的相应章节，这样能节省大家的一些时间。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;mysql全称&#34;&gt;MySQL全称&lt;/h1&gt;
-&lt;p&gt;这是一个最基本的问题，但惭愧的是，在读这本书之前，我竟然没有思考过这个问题。&lt;/p&gt;
-&lt;p&gt;“My” 是因为 Monty 的女儿叫做 My，而 “SQL” 就是 Structured Query Language（结构化查询语言），用于和数据库交互的语言。&lt;/p&gt;
-&lt;p&gt;因此，对于MySQL的读法，应该是My&lt;sub&gt;S&lt;/sub&gt;Q&lt;sub&gt;L，而不是My&lt;/sub&gt;Se~Cou。&lt;/p&gt;
-&lt;h1 id=&#34;译者序&#34;&gt;译者序&lt;/h1&gt;
-&lt;p&gt;MySQL的存储引擎主要使用的是InnoDB。&lt;/p&gt;
-&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;与第二版相比，本书更强调原因，而不是结果。作者希望告诉大家“为什么MySQL这么做”，而不仅仅是“MySQL做了什么”。&lt;/p&gt;
-&lt;p&gt;正如作者所说：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我们希望能够尝试回到下面这样的问题：“给出MySQL 的内部结构和操作，对于实际应用能带来什么帮助？为什么能有这样的帮助？如何让MySQL 适合（或者不适合）特定的需求？”。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;本书的结构&#34;&gt;本书的结构&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;第1章：基础
-&lt;ul&gt;
-&lt;li&gt;MySQL的架构及其存储引擎的关键设计&lt;/li&gt;
-&lt;li&gt;关系型数据库和事务的基础知识&lt;/li&gt;
-&lt;li&gt;MySQL的入门知识&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;第2-7章：&lt;strong&gt;使用&lt;/strong&gt;MySQL前需要了解的基础知识，未特别标注的章节内容如章节标题所示。
-&lt;ul&gt;
-&lt;li&gt;第2章 MySQL 基准测试&lt;/li&gt;
-&lt;li&gt;第3章 服务器性能剖析：介绍了常用于故障诊断和服务器性能问题分析的一种面向响应时间的方法。&lt;/li&gt;
-&lt;li&gt;第4章 Schema 与数据类型优化：涵盖了不同数据类型的细节差别以及表设计的原则。&lt;/li&gt;
-&lt;li&gt;第5章 创建高性能的索引&lt;/li&gt;
-&lt;li&gt;第6章 查询性能优化&lt;/li&gt;
-&lt;li&gt;第7章 MySQL 高级特性
-&lt;ul&gt;
-&lt;li&gt;介绍了MySQL 的高级特性是如何工作的&lt;/li&gt;
-&lt;li&gt;包括分区、存储引擎、触发器，以及字符集&lt;/li&gt;
-&lt;li&gt;高级特性的实现可能有别于其他数据库，因此理解它们对于性能可能会带来新的收益&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;第8-9章：如何让MySQL、应用程序及硬件一起很好地工作
-&lt;ul&gt;
-&lt;li&gt;第8章 优化服务器设置：介绍了如何配置MySQL, 以便更好地利用硬件，达到更好的可靠性和鲁棒性。&lt;/li&gt;
-&lt;li&gt;第9章 操作系统和硬件优化：解释了如何让操作系统和硬件工作得更好。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;第10-15章：MySQL在实际应用场景中的相关知识
-&lt;ul&gt;
-&lt;li&gt;第10章 复制&lt;/li&gt;
-&lt;li&gt;第11章 可扩展的MySQL&lt;/li&gt;
-&lt;li&gt;第12章 高可用性：如何保障 MySQL 稳定而正确地持续运行&lt;/li&gt;
-&lt;li&gt;第13章 云端的MySQL&lt;/li&gt;
-&lt;li&gt;第14章 应用层优化：解释了什么是全方位的优化 (full-stack optimization) , 就是从前端到后端的整体优化，从用户体验开始直到数据库。&lt;/li&gt;
-&lt;li&gt;第15章 备份与恢复&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;使用示例代码&#34;&gt;使用示例代码&lt;/h2&gt;
-&lt;p&gt;本书中的示例代码的获取：http://www.highperfmysql.com&lt;/p&gt;
-&lt;h1 id=&#34;第1章-mysql架构与历史&#34;&gt;第1章 MySQL架构与历史&lt;/h1&gt;
-&lt;p&gt;理解MySQL架构的好处在于能够充分发挥MySQL的性能，因此，就算对于开发人员，了解其架构也是很有必要的。&lt;/p&gt;
-&lt;p&gt;其中，最重要、最与众不同的特性是其存储引擎架构，在接下来的章节会具体介绍。&lt;/p&gt;
-&lt;h2 id=&#34;11-mysql逻辑架构&#34;&gt;1.1 MySQL逻辑架构&lt;/h2&gt;
-&lt;p&gt;MySQL的逻辑架构图如下：&lt;/p&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;%E9%AB%98%E6%80%A7%E8%83%BDMySql%E7%AC%94%E8%AE%B0.assets/image-20201220092718896.png&#34; alt=&#34;image-20201220092718896&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
-&lt;p&gt;最上层（客户端）：大部分基于网络的服务都有这一层。&lt;/p&gt;
-&lt;p&gt;中间层：MySQL的核心层，大部分功能都是在这一层实现的。&lt;/p&gt;
-&lt;p&gt;最下层（存储引擎）：这一层包含了众多种类的存储引擎，不同存储引擎具有各自的优缺点，中间层通过API与存储引擎进行交互。&lt;/p&gt;
-&lt;h3 id=&#34;111-连接管理与安全性&#34;&gt;1.1.1 连接管理与安全性&lt;/h3&gt;
-&lt;h3 id=&#34;112-优化与执行&#34;&gt;1.1.2 优化与执行&lt;/h3&gt;
-&lt;p&gt;在MySQL内部，会对用户的查询进行优化，包括重写查询、决定表的读取顺序、选择合适的索引。同时，用户也可以使用特定的关键字 1、提示优化器，影响其决策过程；2、了解MySQL的优化过程。&lt;/p&gt;
-&lt;p&gt;对于Select语句，MySQL会优先检查&lt;em&gt;查询缓存&lt;/em&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;12-并发控制&#34;&gt;1.2 并发控制&lt;/h2&gt;
-&lt;p&gt;解决多线程的一个方法是加锁，保证同一时刻只有一个线程对数据进行修改，但这种处理方式本质上其实不是&lt;strong&gt;并发&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;121-读写锁&#34;&gt;1.2.1 读写锁&lt;/h3&gt;
-">《高性能MySql》笔记</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/wan-quan-xiao-bai-jiao-cheng-shi-yong-coding-pages-he-gridea-da-jian-ge-ren-bo-ke/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-18-完全小白教程：使用Coding Pages和Gridea搭建个人博客/"" data-c="
           &lt;div class=&#34;RichText ztext Post-RichText&#34;&gt;&lt;p&gt;2020/07/14更新&lt;/p&gt;&lt;p&gt;如果严格按照教程步骤操作了，还是出现远程连接失败的问题，可以尝试修改仓库名，例如我的仓库名叫myblog，在Gridea配置里，把仓库名设为myblog/myblog。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-86b676984105e58d319c6d56293267ad_b.png&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;778&#34; data-rawheight=&#34;85&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;778&#34; data-original=&#34;https://pic2.zhimg.com/v2-86b676984105e58d319c6d56293267ad_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;hr&gt;&lt;p&gt;上一篇文章写了使用Github Pages和Gridea来搭建个人博客：&lt;/p&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://zhuanlan.zhihu.com/p/165948546&#34; data-draft-node=&#34;block&#34; data-draft-type=&#34;link-card&#34; data-image=&#34;https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg&#34; data-image-width=&#34;1280&#34; data-image-height=&#34;720&#34; class=&#34;LinkCard LinkCard--hasImage&#34; data-za-detail-view-id=&#34;172&#34;&gt;&lt;span class=&#34;LinkCard-backdrop&#34; style=&#34;background-image:url(https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg)&#34;&gt;&lt;/span&gt;&lt;span class=&#34;LinkCard-content&#34;&gt;&lt;span class=&#34;LinkCard-text&#34;&gt;&lt;span class=&#34;LinkCard-title&#34; data-text=&#34;true&#34;&gt;海边的卡夫卡：完全小白教程：使用Github Pages和Gridea搭建个人博客&lt;/span&gt;&lt;span class=&#34;LinkCard-meta&#34;&gt;&lt;span style=&#34;display:inline-flex;align-items:center&#34;&gt;&amp;#8203;&lt;svg class=&#34;Zi Zi--InsertLink&#34; fill=&#34;currentColor&#34; viewBox=&#34;0 0 24 24&#34; width=&#34;17&#34; height=&#34;17&#34;&gt;&lt;path d=&#34;M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;zhuanlan.zhihu.com&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;LinkCard-imageCell&#34;&gt;&lt;img class=&#34;LinkCard-image LinkCard-image--horizontal&#34; alt=&#34;图标&#34; src=&#34;https://pic1.zhimg.com/v2-fccdcf1f6e8a31fc59da10690b6237fc_180x120.jpg&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;p&gt;但Github毕竟是国外的服务器，访问速度很慢，如果你只是想要在国内访问你的博客，你完全可以使用国内的&lt;b&gt;Coding Pages&lt;/b&gt;来代替Github Pages。&lt;/p&gt;&lt;h2&gt;1 Coding Pages开通&lt;/h2&gt;&lt;h3&gt;1.1 Coding账号注册&lt;/h3&gt;&lt;p&gt;原来的Coding个人版合并到团队版了，所以这里我详细说下Coding的注册。&lt;/p&gt;&lt;p&gt;进入&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//e.coding.net/signup%3F_ga%3D2.238701378.316970461.1592676170-1921038398.1592620024&#34; class=&#34; wrap external&#34; target=&#34;_blank&#34; rel=&#34;nofollow noreferrer&#34;&gt;注册页面&lt;/a&gt;，创建新团队，这个团队名称要记住，后面要用到，然后创建用户，完成注册。&lt;/p&gt;&lt;h3&gt;1.2 创建项目&lt;/h3&gt;&lt;p&gt;登录后，点击项目，发现只有一个示例项目，我们新建一个项目。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-e02b20de76c8cb3cebe989a02e845056_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;939&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic3.zhimg.com/v2-e02b20de76c8cb3cebe989a02e845056_r.jpg&#34;/&gt;
 &lt;/figure&gt;&lt;p&gt;选择第一个——代码托管项目。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-ce10057d87cd37ff3bd0d857bc7666bd_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1550&#34; data-rawheight=&#34;689&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1550&#34; data-original=&#34;https://pic2.zhimg.com/v2-ce10057d87cd37ff3bd0d857bc7666bd_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;然后填写项目名称，往下拉点完成创建。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-df2b99864998ed5915beb1d86812a431_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1049&#34; data-rawheight=&#34;766&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1049&#34; data-original=&#34;https://pic2.zhimg.com/v2-df2b99864998ed5915beb1d86812a431_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;创建后是这样的，点左下角的项目设置。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-9acebc8db0556e623b24a60f27869aad_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;941&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic2.zhimg.com/v2-9acebc8db0556e623b24a60f27869aad_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点功能开关，把&lt;b&gt;持续集成&lt;/b&gt;和&lt;b&gt;持续部署&lt;/b&gt;开关打开。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-b3de37c60db4f79cd554a86af3564ba1_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;940&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic2.zhimg.com/v2-b3de37c60db4f79cd554a86af3564ba1_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;进入代码仓库，如果还没有初始化，就先初始化仓库，勾选那个readme，就可以初始化了。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-a9d5df2f76c172659faa07886ee3969a_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1917&#34; data-rawheight=&#34;941&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1917&#34; data-original=&#34;https://pic3.zhimg.com/v2-a9d5df2f76c172659faa07886ee3969a_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;h3&gt;1.3 实名认证&lt;/h3&gt;&lt;p&gt;点网页左上角猴子的图标回主页，点左下角团队设置。团队所有者在【团队管理】-&amp;gt;【团队设置】-&amp;gt;【实名认证】，可进行团队实名认证。实名认证后，团队将可以使用 Pages 部署等产品功能。&lt;/p&gt;&lt;h3&gt;1.4 使用静态网站服务&lt;/h3&gt;&lt;p&gt;回到myblog项目，点【持续部署】-&amp;gt;【静态网站】-&amp;gt;【立即发布静态网站】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-dfa3b7b7335df71b8e69d3b1f32b9f36_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1916&#34; data-rawheight=&#34;940&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1916&#34; data-original=&#34;https://pic3.zhimg.com/v2-dfa3b7b7335df71b8e69d3b1f32b9f36_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;名称还是叫myblog吧，保存。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-989fbb95852b5d2f717534e39b2676ce_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1916&#34; data-rawheight=&#34;941&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1916&#34; data-original=&#34;https://pic3.zhimg.com/v2-989fbb95852b5d2f717534e39b2676ce_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;这里就是你的博客访问地址了（我的有两个，是因为我已经绑定域名了），不过现在点开，会显示404，别急嘛。点右上角的设置，来绑定域名，毕竟他给的这个网址好难记QAQ&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic1.zhimg.com/v2-fd71c6210cca2b60f306abbc49f3ea10_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1920&#34; data-rawheight=&#34;940&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1920&#34; data-original=&#34;https://pic1.zhimg.com/v2-fd71c6210cca2b60f306abbc49f3ea10_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点了设置后，往下拉，绑定域名，保存修改。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-0a7890a9a58c85f929cfe3e84c57df92_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1622&#34; data-rawheight=&#34;517&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1622&#34; data-original=&#34;https://pic3.zhimg.com/v2-0a7890a9a58c85f929cfe3e84c57df92_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;h3&gt;1.5 生成令牌&lt;/h3&gt;&lt;p&gt;右上角头像点开，点【个人设置】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic3.zhimg.com/v2-5b79df9c7eb537e614f982834bdc421e_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;458&#34; data-rawheight=&#34;347&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;458&#34; data-original=&#34;https://pic3.zhimg.com/v2-5b79df9c7eb537e614f982834bdc421e_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点【访问令牌】-&amp;gt;【新建令牌】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic1.zhimg.com/v2-94b281d3a536125870458e619390165c_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1403&#34; data-rawheight=&#34;625&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1403&#34; data-original=&#34;https://pic1.zhimg.com/v2-94b281d3a536125870458e619390165c_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;你可以把权限都勾上，然后点【创建令牌】。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic4.zhimg.com/v2-e25e6fdab144b3ebb0726a7bda69688f_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1237&#34; data-rawheight=&#34;910&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1237&#34; data-original=&#34;https://pic4.zhimg.com/v2-e25e6fdab144b3ebb0726a7bda69688f_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;p&gt;点这个图标复制令牌，另外你的令牌用户名也是后面要用到的。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic4.zhimg.com/v2-58f6b015615a71de66727bd496e05e7b_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1097&#34; data-rawheight=&#34;262&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1097&#34; data-original=&#34;https://pic4.zhimg.com/v2-58f6b015615a71de66727bd496e05e7b_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;h2&gt;2 Gridea远程部署&lt;/h2&gt;&lt;p&gt;Gridea下载请参考我上一篇文章，运行Gridea，配置。&lt;/p&gt;&lt;figure data-size=&#34;normal&#34;&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-802990ae28d0a396fdbfeb4e5b66f625_b.jpg&#34; data-caption=&#34;&#34; data-size=&#34;normal&#34; data-rawwidth=&#34;1484&#34; data-rawheight=&#34;992&#34; class=&#34;origin_image zh-lightbox-thumb&#34; width=&#34;1484&#34; data-original=&#34;https://pic2.zhimg.com/v2-802990ae28d0a396fdbfeb4e5b66f625_r.jpg&#34;/&gt;&lt;/figure&gt;&lt;blockquote&gt;如果你没有绑定域名，就填他提供给你的网址，CNAME就不填。&lt;br&gt;仓库用户名为你的&lt;b&gt;团队名&lt;/b&gt;。&lt;/blockquote&gt;&lt;p&gt;保存后，点检测远程连接，如果没有问题就可以同步了。&lt;/p&gt;&lt;p&gt;OK，可以正常访问了~&lt;/p&gt;&lt;/div&gt;
 &lt;hr&gt;
@@ -4057,7 +4307,7 @@ private func createEmergencyCoordinate(_ latitude: Float,_ longitude: Float,_ el
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/ji-yu-grideagithubcoding-da-jian-jing-tai-bo-ke/"" data-c="
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-12-18-基于Gridea+github搭建静态博客/"" data-c="
           &lt;div class=&#34;text &#34;&gt;
                 &lt;h3 id=&#34;写在开头&#34;&gt;写在开头&lt;/h3&gt;
 &lt;p&gt;为什么要写这篇博客呢，因为Gridea目前还处于未被发现的阶段，使用的用户很少。官方的文档里是使用视频进行介绍，配置过程中反复回调进度条比较麻烦，因此撰写该文章方便新加入的用户学习经验。同时将一些可能出现的问题总结在文章中，防止大家踩坑~&lt;br&gt;
@@ -4127,7 +4377,7 @@ ps:经过了以上步骤，这里我们快速讲解。大同小异。&lt;br&gt;
 &lt;img src=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/12.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; class=&#34;lazyload&#34; data-original=&#34;https://ericamblog.oss-cn-shanghai.aliyuncs.com/2019/12.png&#34; style=&#34;&#34;&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;from &lt;a href=&#34;https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/&#34;&gt;https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/&lt;/a&gt;&lt;/p&gt;
-">基于Gridea+github/coding搭建静态博客</a>
+">基于Gridea+github搭建静态博客</a>
       </div>
       
       <div class="item">
