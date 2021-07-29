@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>刷题记录 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1622190899099">
+<link rel="shortcut icon" href="/favicon.ico?v=1627554884504">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -200,19 +200,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">22</span>
+        <span class="site-item-stat-count">36</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-count">26</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-count">26</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -295,6 +295,7 @@
 <li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a>
 <ul>
 <li><a href="#kmp">KMP</a></li>
+<li><a href="#%E6%89%A9%E5%B1%95kmp">扩展KMP</a></li>
 </ul>
 </li>
 <li><a href="#%E5%9B%BE%E8%AE%BA">图论</a>
@@ -306,7 +307,12 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E6%80%9D%E7%BB%B4">思维</a></li>
+<li><a href="#%E6%80%9D%E7%BB%B4">思维</a>
+<ul>
+<li><a href="#%E5%A4%9A%E6%95%B0%E6%8A%95%E7%A5%A8%E7%AE%97%E6%B3%95">多数投票算法</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E5%8C%96">随机化</a></li>
+</ul>
+</li>
 <li><a href="#%E6%90%9C%E7%B4%A2">搜索</a></li>
 </ul>
 
@@ -606,7 +612,7 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>337<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>407<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
@@ -636,6 +642,7 @@
 <h1 id="分治">分治</h1>
 <ul>
 <li><a href="https://www.luogu.com.cn/problem/P1257">P1257 平面上的最接近点对</a></li>
+<li><a href="https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/">剑指 Offer 39. 数组中出现次数超过一半的数字</a></li>
 </ul>
 <h1 id="栈">栈</h1>
 <ul>
@@ -709,6 +716,10 @@
 <ul>
 <li><a href="https://leetcode-cn.com/problems/implement-strstr/">28. 实现 strStr()</a></li>
 </ul>
+<h2 id="扩展kmp">扩展KMP</h2>
+<ul>
+<li><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4763">HDU 4763 Theme Section</a></li>
+</ul>
 <h1 id="图论">图论</h1>
 <h2 id="最短路">最短路</h2>
 <h3 id="dijkstra">Dijkstra</h3>
@@ -720,6 +731,14 @@
 <li><a href="https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/">Pairs with same Manhattan and Euclidean distance</a></li>
 <li><a href="https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1">Geek collects the balls</a></li>
 <li><a href="https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/">581. 最短无序连续子数组</a></li>
+</ul>
+<h2 id="多数投票算法">多数投票算法</h2>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/">剑指 Offer 39. 数组中出现次数超过一半的数字</a></li>
+</ul>
+<h2 id="随机化">随机化</h2>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/">剑指 Offer 39. 数组中出现次数超过一半的数字</a></li>
 </ul>
 <h1 id="搜索">搜索</h1>
 <ul>
@@ -1800,6 +1819,734 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习JMM过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/B67o2UcNvG8&#34;&gt;深入理解并发内存模型JMM与内存屏障&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;java内存模型&#34;&gt;Java内存模型&lt;/h2&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210728151840865.png&#34; alt=&#34;image-20210728151840865&#34; style=&#34;zoom:60%;&#34; /&gt;
+&lt;p&gt;对于静态变量，每个线程中会存储变量副本。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;只要不影响到变量的值、变量不参与运算，则不会从主内存中拉取，比如while、if、赋值给其他变量、作为方法参数等&lt;/p&gt;
+&lt;p&gt;https://blog.csdn.net/ren421259121/article/details/90447853&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以下程序会死循环：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Main {
+    static boolean exit = false;
+    public static void main(String[] args) throws InterruptedException {
+        new Thread() {
+            @Override
+            public void run() {
+                while( !exit ) {
+
+                }
+                System.out.println( &amp;quot;end&amp;quot; );
+            }
+        }.start();
+        Thread.sleep(2000);
+        exit = true;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;jmm的原子操作&#34;&gt;JMM的原子操作&lt;/h2&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210729144205406.png&#34; alt=&#34;image-20210729144205406&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;h2 id=&#34;volatile&#34;&gt;volatile&lt;/h2&gt;
+&lt;p&gt;作用：保证多线程间共享变量的可见性&lt;/p&gt;
+&lt;p&gt;实现原理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;禁止JVM优化：指令重排、使用寄存器&lt;/li&gt;
+&lt;li&gt;利用CPU lock指令为总线加锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;缓存一致性协议-vs-volatile&#34;&gt;缓存一致性协议 VS volatile&lt;/h3&gt;
+&lt;h4 id=&#34;缓存一致性协议mesi&#34;&gt;缓存一致性协议（MESI）&lt;/h4&gt;
+&lt;p&gt;四种状态：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M（Modified）：在缓存行中被标记为Modified的值，与主存中的值不同，这个值将会在它被读取之前写入内存，并且状态置为Shared。&lt;/li&gt;
+&lt;li&gt;E（Exclusive）：在缓存行中被标记为Exclusive的值与主存中的值一致，被读取时置为Shared状态，被写时置为Modified状态。&lt;/li&gt;
+&lt;li&gt;S（Shared）：值也可能存在于其他缓存中，但是它的值和主存中的值一致。&lt;/li&gt;
+&lt;li&gt;I（Invalid）：缓存行无效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关于状态之间的转换以及更详细介绍MESI的内容，可以看这篇博客：https://www.cnblogs.com/igoodful/p/9493156.html&lt;/p&gt;
+&lt;p&gt;做个总结，MESI协议，保证了各CPU缓存之间的一致性。&lt;/p&gt;
+&lt;h4 id=&#34;volatile是否多余&#34;&gt;volatile是否多余&lt;/h4&gt;
+&lt;p&gt;既然MESI协议可以保证各CPU缓存之间数据的一致性，那么为什么还需要volatile关键词来保证各线程之间数据的可见性（一致性）呢？volatile关键字是否多余？&lt;/p&gt;
+&lt;p&gt;答：不多余&lt;/p&gt;
+&lt;p&gt;理由：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;出发点不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MESI协议保证了主内存和各CPU缓存的一致，而volatile保证了java进程中各线程之间的一致性。如果没有MESI，那么各线程之间一定是不一致的，但只有MESI，也不能完全保证各线程间的一致性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实现的功能不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;MESI的功能上文已经说过了，即，保证了各CPU缓存之间的一致性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;volatile的功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;防止JVM优化&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;防止数据从CPU cache以外的地方读取，这里做一下说明，MESI只能保证主内存和CPU缓存（CPU cache）的一致性，但CPU中还有很多额外的组件用于数据存储，这些组件可以提高CPU数据读写的效率，而这些组件的一致性MESI是不保证的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因为 MESI只是保证了多核cpu的独占cache之间的一致性，但是cpu的并不是直接把数据写入L1 cache的，中间还可能有store buffer。有些arm和power架构的cpu还可能有load buffer或者invalid queue等等。&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/296949412&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;保证多个变量的顺序一致，即，consistency。因为volatile会对总线加锁，且防止指令重排，所以可以保证用volatile修饰的多个变量之间的操作顺序。而MESI只能保证单个变量的操作顺序，即coherence。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Coherence deals with maintaining a global order in which writes to a single location or single variable are seen by all processors.&lt;/p&gt;
+&lt;p&gt;Consistency deals with the ordering of operations to multiple locations with respect to all processors.&lt;/p&gt;
+&lt;p&gt;https://www.zhihu.com/question/296949412&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;s&gt;### CPU lock指令&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;CPU lock指令会将对应缓存行的状态改成E，并立即修改主内存中的数据。其他CPU通过总线嗅探机制，监听到数据的修改，将自己工作内存中的缓存行状态改成I。&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;如果不使用volatile关键字，JVM则不会使用lock指令，此时，对变量的修改会导致缓存行的状态变成M，并不会修改主内存的数据，因此会导致不同线程中共享变量数据不一致。&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;之所以不修改主内存，是因为对主内存的操作相对于CPU操作来说过于耗时，因此不会频繁操作主内存。&lt;/s&gt;&lt;/p&gt;
+&lt;h3 id=&#34;reference&#34;&gt;Reference&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xrq730/p/7048693.html&#34;&gt;就是要你懂Java中volatile关键字实现原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/63120810&#34;&gt;java多线程在单核CPU上，还是需要volatile synchronized吗？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">JMM学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-28-K8S-Scheduler学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习K8S-Scheduler过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV12J411q7k4?from=search&amp;amp;seid=1977024601217253447&#34;&gt;阿里技术大牛 30 分钟讲透 Kubernetes : 调度器的调度流程和算法介绍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;调度器功能：负责整个集群资源的调度功能，根据特定的调度算法和策略，将 Pod 调度到最优的工作节点上面去，从而更加合理、更加充分的利用集群的资源。&lt;/p&gt;
+&lt;p&gt;什么是Pod：Pod是K8S中最小的调度单元，Pod和docker容器的关系就相当于docker容器和进程，在目前的技术环境下，往往一个服务依赖于多个docker容器，因此，k8s中提出了Pod的概念，使用Pod对docker容器进行打包，统一进行调度。&lt;/p&gt;
+&lt;h2 id=&#34;对pod进行自定义排序&#34;&gt;对Pod进行自定义排序&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;按名称排序：kubectl get pods --sort-by=.metadata.name&lt;/li&gt;
+&lt;li&gt;按创建时间进行排序：kubectl get pods --sort-by=.metadata.creationTimestamp&lt;/li&gt;
+&lt;li&gt;按启动时间进行排序：kubectl get pods --sort-by=.status.startTime&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/m0_50434960/article/details/114851074&#34;&gt;k8s:Kubernetes 调度器介绍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jianshu.com/p/bfaa566f17fe&#34;&gt;细说kubernetes - 为什么是pod？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/yangyuliufeng/p/14257928.html&#34;&gt;k8s调度器扩展机制&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV12J411q7k4?from=search&amp;amp;seid=1977024601217253447&#34;&gt;阿里技术大牛 30 分钟讲透 Kubernetes : 调度器的调度流程和算法介绍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">K8S-Scheduler学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-27-JVM性能调优学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习JVM性能调优过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/mmv27Dfr291&#34;&gt;双十一亿级电商系统JVM性能调优实战&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;java虚拟机组成&#34;&gt;Java虚拟机组成&lt;/h2&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210727153842086.png&#34; alt=&#34;image-20210727153842086&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;类装载子系统&lt;/li&gt;
+&lt;li&gt;字节码执行引擎&lt;/li&gt;
+&lt;li&gt;运行时数据区（内存模型）
+&lt;ul&gt;
+&lt;li&gt;栈（线程）
+&lt;ul&gt;
+&lt;li&gt;存放程序运行过程中的数据&lt;/li&gt;
+&lt;li&gt;栈 -&amp;gt; 线程 -&amp;gt; 方法
+&lt;ul&gt;
+&lt;li&gt;从栈中划分一块区域给线程，再从这块区域中划分一块给方法&lt;/li&gt;
+&lt;li&gt;方法中的局部变量就存在对应区域内&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;程序计数器：记录每个线程当前运行的代码在方法区中的位置&lt;/li&gt;
+&lt;li&gt;堆：存放程序运行过程中产生的对象&lt;/li&gt;
+&lt;li&gt;方法区（元空间）：常量+静态变量+类信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;gc工作原理&#34;&gt;GC工作原理&lt;/h2&gt;
+&lt;h3 id=&#34;minor-gc新生代gc&#34;&gt;Minor GC（新生代GC）&lt;/h3&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210727152911187.png&#34; alt=&#34;image-20210727152911187&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;GC Roots根节点：线程栈的本地变量、静态变量、本地方法栈的变量等等&lt;/li&gt;
+&lt;li&gt;将“GC Roots”对象作为起点，从这些节点开始向下搜索引用的对象，找到的对象都标记为&lt;strong&gt;非垃圾对象&lt;/strong&gt;，其余未标记的对象都是垃圾对象。&lt;/li&gt;
+&lt;li&gt;每次回收，都会将非垃圾对象放到s0(s1)中，然后杀死Eden和s1(s0)中的对象，并将非垃圾对象的分代年龄加一，当对象的分代年龄变成15时，会被移动到老年代中。&lt;/li&gt;
+&lt;li&gt;如果非垃圾对象过多，s0(s1)中放不下，则会被放到老年代中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;minor-gc-vs-full-gc&#34;&gt;Minor GC VS Full GC&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Minor GC会跳过处于老年代中的对象，但这样可能会使得部分被老年代中对象所引用的对象被标记成垃圾对象，因此，在Dirty cards中会存储所有老年代对象引用的对象。&lt;/li&gt;
+&lt;li&gt;Minor GC与Full GC相比，非垃圾对象较少，因此拷贝时间较短&lt;/li&gt;
+&lt;li&gt;算法不同：
+&lt;ul&gt;
+&lt;li&gt;Mnior GC用空间换时间，需要两个内存空间，直接Copy&lt;/li&gt;
+&lt;li&gt;Full GC用时间换空间，需要Mark+Compact&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;reference&#34;&gt;Reference&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/kevin7234/p/10644654.html&#34;&gt;jvm minor gc 为什么比 full gc 快很多&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/35172533&#34;&gt;为什么minor gc比full gc/major gc快？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;arthas工具&#34;&gt;Arthas工具&lt;/h2&gt;
+&lt;p&gt;阿里JVM性能调优工具&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;dashboard：显示监控仪表盘&lt;/p&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155106380.png&#34; alt=&#34;image-20210727155106380&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;thread thread_id：显示占用CPU较多的代码行数&lt;/p&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155209073.png&#34; alt=&#34;image-20210727155209073&#34; style=&#34;zoom:70%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;jad：反编译运行中的代码&lt;/p&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155320962.png&#34; alt=&#34;image-20210727155320962&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;性能调优&#34;&gt;性能调优&lt;/h2&gt;
+&lt;p&gt;目的：减少 STW 的次数。&lt;/p&gt;
+&lt;p&gt;STW: Stop-The-World，在执行垃圾收集算法时，Java应用程序的其他所有线程都被挂起（除了垃圾收集帮助器之外）。&lt;/p&gt;
+&lt;p&gt;Full GC的SWT时间远大于Minor GC。&lt;/p&gt;
+&lt;p&gt;调优方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对业务场景进行分析，为年轻代和老年代分配适当的空间，减少Full GC的频率。&lt;/li&gt;
+&lt;li&gt;对于“朝花夕拾”的对象，通过参数调优防止其进入老年代。&lt;/li&gt;
+&lt;li&gt;使用不同的垃圾收集器，不同收集器，适用于不同的场景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210727162355407.png&#34; alt=&#34;image-20210727162355407&#34; style=&#34;zoom:55%;&#34; /&gt;
+">JVM性能调优学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-19-非对称加密的应用/"" data-c="
+          &lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
+&lt;p&gt;稍微提一下原理&lt;/p&gt;
+&lt;p&gt;主要原理是，用一定的数学方法生成一对密钥对（公钥+私钥），公钥加密后，私钥可以解密，同时，私钥加密后，公钥也可以解密。&lt;/p&gt;
+&lt;h2 id=&#34;应用&#34;&gt;应用&lt;/h2&gt;
+&lt;h3 id=&#34;数据传输&#34;&gt;数据传输&lt;/h3&gt;
+&lt;p&gt;1、A生成一对密钥对，把公钥发给B。&lt;/p&gt;
+&lt;p&gt;2、B把需要传输的数据用公钥进行加密，然后发给A。&lt;/p&gt;
+&lt;p&gt;3、A收到后，用私钥进行解密，即可获取数据。&lt;/p&gt;
+&lt;h4 id=&#34;如何防截获&#34;&gt;如何防截获&lt;/h4&gt;
+&lt;p&gt;使用报文摘要算法&lt;/p&gt;
+&lt;p&gt;接上文&lt;/p&gt;
+&lt;p&gt;B在第2步传数据时，使用报文摘要算法对所发数据进行摘要生成，之后，用自己的私钥对摘要进行加密，然后伴随数据一起发给A。&lt;/p&gt;
+&lt;p&gt;A在收到后，对自己的私钥对数据进行解密，从而获取数据，之后再用B的公钥对摘要进行解密，然后比对收到的数据和摘要是否匹配，从而验证数据是否被篡改。&lt;/p&gt;
+&lt;h3 id=&#34;身份验证&#34;&gt;身份验证&lt;/h3&gt;
+&lt;p&gt;A要证明自己的身份&lt;/p&gt;
+&lt;p&gt;B向A发送一段数据&lt;/p&gt;
+&lt;p&gt;A用自己的私钥进行加密，然后发回给B，B用A的公钥进行解密，比对数据是否为自己发给A的数据，从而验证A的身份。&lt;/p&gt;
+">非对称加密的应用</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-15-在Docker容器内创建新的Docker容器/"" data-c="
+          &lt;h2 id=&#34;要解决的问题&#34;&gt;要解决的问题&lt;/h2&gt;
+&lt;p&gt;这篇文章主要解决的问题如标题所述：如何在Docker容器内创建新的Docker容器。受限于标题长度，没法详细描述要解决的问题，因此，第一节首先讲一下问题场景。&lt;/p&gt;
+&lt;p&gt;随着Docker技术以及微服务结构的普及，现在越来越多的应用被打包放在Docker容器中，并且，为了采用微服务的架构，应用通常是需要拆分成多个Docker容器的。&lt;/p&gt;
+&lt;p&gt;那么，这就带来了一个问题，如何在一个Docker容器内去控制别的Docker容器。这里需要啰嗦一句，我想表达的意思并不是在一个Docker容器的内部创建新的Docker容器，而是说，在一个Docker容器内部，控制宿主机，让其创建新的Docker容器。&lt;/p&gt;
+&lt;p&gt;问题描述讲完了，接下来说一下如何实现。&lt;/p&gt;
+&lt;h2 id=&#34;如何解决&#34;&gt;如何解决&lt;/h2&gt;
+&lt;p&gt;解决这个问题，就需要涉及到Docker的通信机制。&lt;/p&gt;
+&lt;p&gt;Docker分为服务端和客户端。当服务端启动后，会在/var/run/文件夹中创建docker.sock这个文件，并且会持续监听这个文件。当有请求被写到docker.sock文件时，Docker服务端就会执行相应的操作。&lt;/p&gt;
+&lt;p&gt;以往我们使用docker run等命令时，其实本质上也是往docker.sock文件中写请求。&lt;/p&gt;
+&lt;p&gt;了解到这一点后，我们在创建Docker容器时，就可以把宿主机的docker.sock文件挂载到容器内部，这样，便可以在容器内部控制宿主机对容器的操作了。&lt;/p&gt;
+&lt;p&gt;一共有两种方式，第一种是，在容器内部安装docker客户端，然后便可以像在宿主机中一样，使用docker命令，不同的地方时，docker命令控制的并不是容器内部的Docker服务端，而是宿主机中的Docker服务端。&lt;/p&gt;
+&lt;p&gt;可以使用如下命令进行容器的创建&lt;code&gt;curl -XPOST --unix-socket /var/run/docker.sock -d &#39;{&amp;quot;Image&amp;quot;:&amp;quot;centos&amp;quot;}&#39; -H &#39;Content-Type: application/json&#39; http://localhost/containers/create&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;第二种方法是，使用docker-java，通过java api操作宿主机中的Docker服务端。&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jianshu.com/p/dd0c814680ba&#34;&gt;解析 /var/run/docker.sock&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/94224305&#34;&gt;Docker客户端连接远程Docker服务&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">在Docker容器内创建新的Docker容器</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-02-Leetcode 169. 多数元素/"" data-c="
+          &lt;p&gt;题目链接：&lt;a href=&#34;https://leetcode-cn.com/problems/majority-element/&#34;&gt;169. 多数元素&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;题目&#34;&gt;题目&lt;/h2&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210702100456543.png&#34; alt=&#34;image-20210702100456543&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;h3 id=&#34;哈希表&#34;&gt;哈希表&lt;/h3&gt;
+&lt;p&gt;时间复杂度：O(n)&lt;/p&gt;
+&lt;p&gt;空间复杂度：O(n)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+public:
+    int majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        unordered_map&amp;lt;int, int&amp;gt; counts;
+        int majority = 0, cnt = 0;
+        for (int num: nums) {
+            ++counts[num];
+            if (counts[num] &amp;gt; cnt) {
+                majority = num;
+                cnt = counts[num];
+            }
+        }
+        return majority;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;分治&#34;&gt;分治&lt;/h3&gt;
+&lt;p&gt;时间复杂度：O(nlogn)&lt;/p&gt;
+&lt;p&gt;空间复杂度：O(logn)&lt;/p&gt;
+&lt;p&gt;思路：如果数 &lt;code&gt;a&lt;/code&gt; 是数组 &lt;code&gt;nums&lt;/code&gt; 的众数，如果我们将 &lt;code&gt;nums&lt;/code&gt; 分成两部分，那么 &lt;code&gt;a&lt;/code&gt; 必定是至少一部分的众数（&lt;/p&gt;
+&lt;h4 id=&#34;时间复杂度分析&#34;&gt;时间复杂度分析&lt;/h4&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mfrac&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mfrac&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;​&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;T(n)=2T({n\over2})+2n​
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.7935600000000003em;vertical-align:-0.686em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.10756em;&#34;&gt;&lt;span style=&#34;top:-2.314em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.677em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.686em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;主定理：&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mfrac&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/mfrac&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/msup&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mspace linebreak=&#34;newline&#34;&gt;&lt;/mspace&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mrow&gt;&lt;mo fence=&#34;true&#34;&gt;{&lt;/mo&gt;&lt;mtable&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/msup&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mo&gt;&amp;gt;&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/msub&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/msup&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/msub&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/msub&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;mtd&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;false&#34;&gt;&lt;mrow&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mo&gt;&amp;lt;&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/msub&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;/mtable&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;T(n)=aT({n\over b})+O(n^d) \\
+T(n) = \left\{ \begin{array}{lr} 
+O(n^d) &amp;amp; d &amp;gt; log_ba \\
+O(n^dlogn) &amp;amp; d = log_ba \\
+O(b^{log_ba}) &amp;amp; d &amp;lt; log_ba
+\end{array} \right.
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.7935600000000003em;vertical-align:-0.686em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.10756em;&#34;&gt;&lt;span style=&#34;top:-2.314em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.677em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.686em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.149108em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8991079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.113em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace newline&#34;&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:3.6273239999999998em;vertical-align:-1.5636619999999999em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;minner&#34;&gt;&lt;span class=&#34;mopen&#34;&gt;&lt;span class=&#34;delimsizing mult&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:2.05002em;&#34;&gt;&lt;span style=&#34;top:-2.49999em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;delimsizinginner delim-size4&#34;&gt;&lt;span&gt;⎩&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.15001em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;delimsizinginner delim-size4&#34;&gt;&lt;span&gt;⎨&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-4.30002em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;delimsizinginner delim-size4&#34;&gt;&lt;span&gt;⎧&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.55002em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mtable&#34;&gt;&lt;span class=&#34;arraycolsep&#34; style=&#34;width:0.5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;col-align-l&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:2.063662em;&#34;&gt;&lt;span style=&#34;top:-4.214554em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.849108em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.0054459999999996em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.849108em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-1.7963380000000002em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8491079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3448em;&#34;&gt;&lt;span style=&#34;top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size3 size1 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15122857142857138em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.5636619999999999em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;arraycolsep&#34; style=&#34;width:0.5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;arraycolsep&#34; style=&#34;width:0.5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;col-align-r&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:2.063662em;&#34;&gt;&lt;span style=&#34;top:-4.214554em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.0054459999999996em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-1.7963380000000002em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.5636619999999999em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;arraycolsep&#34; style=&#34;width:0.5em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+    int count_in_range(vector&amp;lt;int&amp;gt;&amp;amp; nums, int target, int lo, int hi) {
+        int count = 0;
+        for (int i = lo; i &amp;lt;= hi; ++i)
+            if (nums[i] == target)
+                ++count;
+        return count;
+    }
+    int majority_element_rec(vector&amp;lt;int&amp;gt;&amp;amp; nums, int lo, int hi) {
+        if (lo == hi)
+            return nums[lo];
+        int mid = (lo + hi) / 2;
+        int left_majority = majority_element_rec(nums, lo, mid);
+        int right_majority = majority_element_rec(nums, mid + 1, hi);
+        if (count_in_range(nums, left_majority, lo, hi) &amp;gt; (hi - lo + 1) / 2)
+            return left_majority;
+        if (count_in_range(nums, right_majority, lo, hi) &amp;gt; (hi - lo + 1) / 2)
+            return right_majority;
+        return -1;
+    }
+public:
+    int majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        return majority_element_rec(nums, 0, nums.size() - 1);
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;排序&#34;&gt;排序&lt;/h3&gt;
+&lt;h4 id=&#34;快速排序&#34;&gt;快速排序&lt;/h4&gt;
+&lt;p&gt;时间复杂度：O(nlogn)&lt;/p&gt;
+&lt;p&gt;空间复杂度：O(logn) 栈空间&lt;/p&gt;
+&lt;h4 id=&#34;堆排序&#34;&gt;堆排序&lt;/h4&gt;
+&lt;p&gt;时间复杂度：O(nlogn)&lt;/p&gt;
+&lt;p&gt;空间复杂度：O(1)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+public:
+    int majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        sort(nums.begin(), nums.end());
+        return nums[nums.size() / 2];
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;随机化&#34;&gt;随机化&lt;/h3&gt;
+&lt;p&gt;时间复杂度：O(n)&lt;/p&gt;
+&lt;p&gt;空间复杂度：O(1)&lt;/p&gt;
+&lt;p&gt;思路：随机挑选一个下标对应的元素并验证，有很大的概率能找到众数。&lt;/p&gt;
+&lt;p&gt;期望：&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;msub&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;→&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;∞&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msubsup&gt;&lt;mo&gt;∑&lt;/mo&gt;&lt;mrow&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/msubsup&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;∗&lt;/mo&gt;&lt;mfrac&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/msup&gt;&lt;/mfrac&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;E=lim_{n\to+\infty}\sum_{i=1}^n i * {1\over 2^i}=2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;E&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.104002em;vertical-align:-0.29971000000000003em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.25833100000000003em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mrel mtight&#34;&gt;→&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;∞&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.208331em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.16666666666666666em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mop&#34;&gt;&lt;span class=&#34;mop op-symbol small-op&#34; style=&#34;position:relative;top:-0.0000050000000000050004em;&#34;&gt;∑&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.804292em;&#34;&gt;&lt;span style=&#34;top:-2.40029em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mrel mtight&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.2029em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.29971000000000003em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.16666666666666666em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;∗&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.190108em;vertical-align:-0.345em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.845108em;&#34;&gt;&lt;span style=&#34;top:-2.6550000000000002em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.7570857142857143em;&#34;&gt;&lt;span style=&#34;top:-2.786em;margin-right:0.07142857142857144em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size3 size1 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;i&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.394em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.345em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+public:
+    int majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        while (true) {
+            int candidate = nums[rand() % nums.size()];
+            int count = 0;
+            for (int num : nums)
+                if (num == candidate)
+                    ++count;
+            if (count &amp;gt; nums.size() / 2)
+                return candidate;
+        }
+        return -1;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;多数投票算法&#34;&gt;多数投票算法&lt;/h3&gt;
+&lt;p&gt;时间复杂度：O(n)&lt;/p&gt;
+&lt;p&gt;空间复杂度：O(1)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums:      [#, 7, 7, 5, 7, 5, 1 | 5, 7 | 5, 5, 7, 7 | 7, 7, 7, 7]
+candidate:     7  7  7  7  7  7   5  5   5  5  5  5   7  7  7  7
+count:      0  1  2  1  2  1  0   1  0   1  2  1  0   1  2  3  4
+               7  7  7  7  7  7   7  7   7  7  7  7   7  7  7  7
+value:      0  1  2  1  2  1  0  -1  0  -1 -2 -1  0   1  2  3  4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检测count是否为0，如果为0，就用当前数组的元素值更新candidate。&lt;/li&gt;
+&lt;li&gt;如果当前数组的元素值和candidate相同，那么，count++，否则，count--。&lt;/li&gt;
+&lt;li&gt;当数组遍历完时，当前的candidate，就是我们要的答案。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;count永远不为负数。&lt;/li&gt;
+&lt;li&gt;当candidate和最终答案不相同时，count和value呈相反数；如果candidate和最终答案相同，count和value是相等的。&lt;/li&gt;
+&lt;li&gt;value的最终值等于：7的个数-非7的个数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;多数投票算法证明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果候选人不是7，则7会和其他&lt;strong&gt;非&lt;/strong&gt;候选人一起反对候选人，所以候选人一定会下台(count==0时发生换届选举)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果候选人是7，则 7 会支持自己，其他候选人会反对，但因为 7 票数超过一半，所以 7 一定会成功当选&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class Solution {
+public:
+    int majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        int candidate = -1;
+        int count = 0;
+        for (int num : nums) {
+            if (num == candidate)
+                ++count;
+            else if (--count &amp;lt; 0) {
+                candidate = num;
+                count = 1;
+            }
+        }
+        return candidate;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+">Leetcode 169. 多数元素</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-06-29-Jmeter ThreadGroup LoopController各参数含义梳理/"" data-c="
+          &lt;h2 id=&#34;实例&#34;&gt;实例&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;ThreadGroup guiclass=&amp;quot;ThreadGroupGui&amp;quot; testclass=&amp;quot;ThreadGroup&amp;quot; testname=&amp;quot;线程组&amp;quot; enabled=&amp;quot;true&amp;quot;&amp;gt;
+	&amp;lt;stringProp name=&amp;quot;ThreadGroup.on_sample_error&amp;quot;&amp;gt;continue&amp;lt;/stringProp&amp;gt;
+	&amp;lt;elementProp name=&amp;quot;ThreadGroup.main_controller&amp;quot; elementType=&amp;quot;LoopController&amp;quot; guiclass=&amp;quot;LoopControlPanel&amp;quot; testclass=&amp;quot;LoopController&amp;quot; testname=&amp;quot;循环控制器&amp;quot; enabled=&amp;quot;true&amp;quot;&amp;gt;
+		&amp;lt;boolProp name=&amp;quot;LoopController.continue_forever&amp;quot;&amp;gt;false&amp;lt;/boolProp&amp;gt;
+		&amp;lt;intProp name=&amp;quot;LoopController.loops&amp;quot;&amp;gt;-1&amp;lt;/intProp&amp;gt;
+	&amp;lt;/elementProp&amp;gt;
+	&amp;lt;stringProp name=&amp;quot;ThreadGroup.num_threads&amp;quot;&amp;gt;20&amp;lt;/stringProp&amp;gt;
+	&amp;lt;stringProp name=&amp;quot;ThreadGroup.ramp_time&amp;quot;&amp;gt;1&amp;lt;/stringProp&amp;gt;
+	&amp;lt;boolProp name=&amp;quot;ThreadGroup.scheduler&amp;quot;&amp;gt;true&amp;lt;/boolProp&amp;gt;
+	&amp;lt;stringProp name=&amp;quot;ThreadGroup.duration&amp;quot;&amp;gt;600&amp;lt;/stringProp&amp;gt;
+	&amp;lt;stringProp name=&amp;quot;ThreadGroup.delay&amp;quot;&amp;gt;&amp;lt;/stringProp&amp;gt;
+	&amp;lt;boolProp name=&amp;quot;ThreadGroup.same_user_on_next_iteration&amp;quot;&amp;gt;true&amp;lt;/boolProp&amp;gt;
+&amp;lt;/ThreadGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;参数说明&#34;&gt;参数说明&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ThreadGroup.num_threads：并发线程数&lt;/li&gt;
+&lt;li&gt;LoopController.loops：每个线程的循环次数，-1表示无限循环。&lt;/li&gt;
+&lt;li&gt;压测的总请求数：ThreadGroup.num_threads * LoopController.loops&lt;/li&gt;
+&lt;li&gt;调度器配置
+&lt;ul&gt;
+&lt;li&gt;ThreadGroup.duration：线程组的持续时间&lt;/li&gt;
+&lt;li&gt;ThreadGroup.delay：启动延迟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ThreadGroup.scheduler：调度器是否生效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;压测是否结束&#34;&gt;压测是否结束&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;如果调度器不生效，则线程组达到循环次数后，压测结束。&lt;/li&gt;
+&lt;li&gt;如果调度器生效，则每次循环结束后，都会检查持续时间，如果大于ThreadGroup.duration，则压测结束。在此过程中，如果线程组达到循环次数，也会结束压测。&lt;/li&gt;
+&lt;/ul&gt;
+">Jmeter ThreadGroup LoopController各参数含义梳理</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-06-25-OpenResty学习笔记/"" data-c="
+          &lt;h2 id=&#34;是什么-能做什么&#34;&gt;是什么、能做什么&lt;/h2&gt;
+&lt;p&gt;OpenResty 是一个基于 Nginx 的 Web 平台。Web开发人员可以使用 OpenResty 搭建 Web 平台。借助于OpenResty，开发人员可以使用 Lua 脚本语言调动 Nginx 支持的各种由 C 语言实现的功能模块，从而实现特定的Web 业务需求。&lt;/p&gt;
+&lt;p&gt;OpenResty 本质上是集成了 Lua 组件的 Nginx，是Nginx Plus。&lt;/p&gt;
+&lt;h2 id=&#34;优点-缺点是什么&#34;&gt;优点、缺点是什么&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;优点
+&lt;ul&gt;
+&lt;li&gt;高并发
+&lt;ul&gt;
+&lt;li&gt;相较于apache（200-300）、tomcat（1000），Nginx可以支持几万的并发量，因此，我们常常使用Nginx做负载均衡，OpenResty的出现，使得开发人员可以依托 Lua 脚本在 Nginx 的内部添加业务代码，充分利用Nginx高并发的优势。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;缺点
+&lt;ul&gt;
+&lt;li&gt;暂未发现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https://www.runoob.com/w3cnote/openresty-intro.html&lt;/li&gt;
+&lt;li&gt;https://www.zhihu.com/question/266535644?sort=created&lt;/li&gt;
+&lt;/ul&gt;
+">OpenResty学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-06-24-跳表/"" data-c="
+          &lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;跳跃表以有序的方式在层次化的链表中保存元素，效率和平衡树（AVL）媲美 —— 查找、删除、添加等操作都可以在对数期望时间下完成， 并且比起平衡树来说， 跳跃表的实现要简单直观得多。&lt;/p&gt;
+&lt;p&gt;https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210624182132534.png&#34; alt=&#34;image-20210624182132534&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210624191004554.png&#34; alt=&#34;image-20210624191004554&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
+&lt;p&gt;学过数据结构的都知道，在单链表中查询一个元素的时间复杂度为O(n)，即使该单链表是有序的，我们也不能通过2分的方式缩减时间复杂度。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205210928206&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;如上图，我们要查询元素为55的结点，必须从头结点，循环遍历到最后一个节点，不算-INF(负无穷)一共查询8次。那么用什么办法能够用更少的次数访问55呢？最直观的，当然是新开辟一条捷径去访问55。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205211105653&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;如上图，我们要查询元素为55的结点，只需要在L2层查找4次即可。在这个结构中，查询结点为46的元素将耗费最多的查询次数5次。即先在L2查询46，查询4次后找到元素55，因为链表是有序的，46一定在55的左边，所以L2层没有元素46。然后我们退回到元素37，到它的下一层即L1层继续搜索46。非常幸运，我们只需要再查询1次就能找到46。这样一共耗费5次查询。&lt;/p&gt;
+&lt;p&gt;那么，如何才能更快的搜寻55呢？有了上面的经验，我们就很容易想到，再开辟一条捷径。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205211246498&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;如上图，我们搜索55只需要2次查找即可。这个结构中，查询元素46仍然是最耗时的，需要查询5次。即首先在L3层查找2次，然后在L2层查找2次，最后在L1层查找1次，共5次。很显然，这种思想和2分非常相似，那么我们最后的结构图就应该如下图。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205211539787&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;我们可以看到，最耗时的访问46需要6次查询。即L4访问55，L3访问21、55，L2访问37、55，L1访问46。我们直觉上认为，这样的结构会让查询有序链表的某个元素更快。那么究竟算法复杂度是多少呢？&lt;/p&gt;
+&lt;p&gt;如果有n个元素，因为是2分，所以层数就应该是log n层 (本文所有log都是以2为底)，再加上自身的1层。以上图为例，如果是4个元素，那么分层为L3和L4，再加上本身的L2，一共3层；如果是8个元素，那么就是3+1层。最耗时间的查询自然是访问所有层数，耗时logn+logn，即2logn。为什么是2倍的logn呢？我们以上图中的46为例，查询到46要访问所有的分层，每个分层都要访问2个元素，中间元素和最后一个元素。所以时间复杂度为O(logn)。&lt;/p&gt;
+&lt;p&gt;至此为止，我们引入了最理想的跳跃表，但是如果想要在上图中插入或者删除一个元素呢？比如我们要插入一个元素22、23、24……，自然在L1层，我们将这些元素插入在元素21后，那么L2层，L3层呢？我们是不是要考虑插入后怎样调整连接，才能维持这个理想的跳跃表结构。我们知道，平衡二叉树的调整是一件令人头痛的事情，左旋右旋左右旋……一般人还真记不住，而调整一个理想的跳跃表将是一个比调整平衡二叉树还复杂的操作。幸运的是，我们并不需要通过复杂的操作调整连接来维护这样完美的跳跃表。有一种基于概率统计的插入算法，也能得到时间复杂度为O(logn)的查询效率，这种跳跃表才是我们真正要实现的。&lt;/p&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;h3 id=&#34;抛硬币&#34;&gt;抛硬币&lt;/h3&gt;
+&lt;p&gt;先讨论插入，我们先看理想的跳跃表结构，L2层的元素个数是L1层元素个数的1/2，L3层的元素个数是L2层的元素个数的1/2，以此类推。从这里，我们可以想到，只要在插入时尽量保证上一层的元素个数是下一层元素的1/2，我们的跳跃表就能成为理想的跳跃表。那么怎么样才能在插入时保证上一层元素个数是下一层元素个数的1/2呢？很简单，抛硬币就能解决了！假设元素X要插入跳跃表，很显然，L1层肯定要插入X。那么L2层要不要插入X呢？我们希望上层元素个数是下层元素个数的1/2，所以我们有1/2的概率希望X插入L2层，那么抛一下硬币吧，正面就插入，反面就不插入。那么L3到底要不要插入X呢？相对于L2层，我们还是希望1/2的概率插入，那么继续抛硬币吧！以此类推，元素X插入第n层的概率是(1/2)的n次。这样，我们能在跳跃表中插入一个元素了。&lt;/p&gt;
+&lt;p&gt;在此还是以上图为例：跳跃表的初试状态如下图，表中没有一个元素：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212059243&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;如果我们要插入元素2，首先是在底部插入元素2，如下图：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212313963&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;然后我们抛硬币，结果是正面，那么我们要将2插入到L2层，如下图:&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212409123&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;继续抛硬币，结果是反面，那么元素2的插入操作就停止了，插入后的表结构就是上图所示。接下来，我们插入元素33，跟元素2的插入一样，现在L1层插入33，如下图：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212458264&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;然后抛硬币，结果是反面，那么元素33的插入操作就结束了，插入后的表结构就是上图所示。接下来，我们插入元素55，首先在L1插入55，插入后如下图：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;11&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212553339&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;然后抛硬币，结果是正面，那么L2层需要插入55，如下图：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;12&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212659309&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;继续抛硬币，结果又是正面，那么L3层需要插入55，如下图：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;13&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205212712590&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;以此类推，我们插入剩余的元素。当然因为规模小，结果很可能不是一个理想的跳跃表。但是如果元素个数n的规模很大，学过概率论的同学都知道，最终的表结构肯定非常接近于理想跳跃表。&lt;/p&gt;
+&lt;p&gt;当然，这样的分析在感性上是很直接的，但是时间复杂度的证明实在复杂，在此我就不深究了，感兴趣的可以去看关于跳跃表的paper。再讨论删除，删除操作没什么讲的，直接删除元素，然后调整一下删除元素后的指针即可。跟普通的链表删除操作完全一样。再来讨论一下时间复杂度，插入和删除的时间复杂度就是查询元素插入位置的时间复杂度，这不难理解，所以是O(logn)。&lt;/p&gt;
+&lt;h3 id=&#34;随机数&#34;&gt;随机数&lt;/h3&gt;
+&lt;p&gt;在上一节中，我们采用抛硬币的方式来决定新元素插入的最高层数，这当然不能在程序中实现。代码中，我们采用随机数生成的方式来获取新元素插入的最高层数。我们先估摸一下n的规模，然后定义跳跃表的最大层数maxLevel，那么底层，也就是第0层，元素是一定要插入的，概率为1；最高层，也就是maxLevel层，元素插入的概率为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;1/2^{maxLevel}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.099108em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.849108em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;我们先随机生成一个范围为0~&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2^{maxLevel}-1&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.932438em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.849108em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;的一个整数r。那么元素r小于&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2^{maxLevel-1}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8491079999999999em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8491079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mbin mtight&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;的概率为1/2，r小于&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2^{maxLevel-2}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8491079999999999em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8491079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mbin mtight&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;的概率为1/4，……，r小于2的概率为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;1/2^{maxLevel-1}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.0991079999999998em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8491079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mbin mtight&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mord mtight&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;，r小于1的概率为&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;msup&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mrow&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;1/2^{maxLevel}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.099108em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.849108em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;举例，假设maxLevel为4，那么r的范围为0~15，则r小于8的概率为1/2，r小于4的概率为1/4，r小于2的概率为1/8，r小于1的概率为1/16。1/16正好是maxLevel层插入元素的概率，以此类推。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;14&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210624193459656.png&#34; alt=&#34;image-20210624193459656&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;以上分析是随机数算法的关键。算法跟实现跟语言无关，以下贴一下C++语言的代码实现。&lt;/p&gt;
+&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;15&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/20161205211539787&#34; alt=&#34;这里写图片描述&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;Node* next;&lt;/p&gt;
+&lt;p&gt;Node* next[MAXL];&lt;/p&gt;
+&lt;p&gt;next[2] = null;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;struct SkipListNode {
+    int val;
+    vector&amp;lt;SkipListNode *&amp;gt; level;
+    SkipListNode (int _val, int sz=32) : val(_val), level(sz, nullptr) {}
+};
+
+class Skiplist {
+public:
+    SkipListNode *head, *tail;
+    int level, length;
+    static int MAXL = 32;
+
+    Skiplist() {
+        level = length = 0;
+        tail = new SkipListNode(INT_MAX, 0);
+        head = new SkipListNode(-INT_MAX);
+        for (int i = 0; i &amp;lt; MAXL; ++i) {
+            head-&amp;gt;level[i] = tail;
+        }
+    }
+
+    SkipListNode* find(int val) {
+        SkipListNode *p = head;
+        for (int i = level - 1; i &amp;gt;= 0; --i) {
+            while (p-&amp;gt;level[i] &amp;amp;&amp;amp; p-&amp;gt;level[i]-&amp;gt;val &amp;lt; val) {
+                p = p-&amp;gt;level[i];
+            }
+        }
+        p = p-&amp;gt;level[0];
+        return p;
+    }
+
+    bool search(int target) {
+        SkipListNode *p = find(target);
+        return p-&amp;gt;val == target;
+    }
+
+    void add(int val) {
+        vector&amp;lt;SkipListNode *&amp;gt; update(MAXL);
+        SkipListNode *p = head;
+        for (int i = level - 1; i &amp;gt;= 0; --i) {
+            while (p-&amp;gt;level[i] &amp;amp;&amp;amp; p-&amp;gt;level[i]-&amp;gt;val &amp;lt; val) {
+                p = p-&amp;gt;level[i];
+            }
+            update[i] = p;
+        }
+        int lv = randomLevel();
+        if (lv &amp;gt; level) {
+            lv = ++level;
+            update[lv - 1] = head;
+        }
+        SkipListNode *newNode = new SkipListNode(val, lv);
+        for (int i = lv - 1; i &amp;gt;= 0; --i) {
+            p = update[i];
+            newNode-&amp;gt;level[i] = p-&amp;gt;level[i];
+            p-&amp;gt;level[i] = newNode;
+        }
+        ++length;
+    }
+
+    bool erase(int val) {
+        vector&amp;lt;SkipListNode *&amp;gt; update(MAXL + 1);
+        SkipListNode *p = head;
+        for (int i = level - 1; i &amp;gt;= 0; --i) {
+            while (p-&amp;gt;level[i] &amp;amp;&amp;amp; p-&amp;gt;level[i]-&amp;gt;val &amp;lt; val) {
+                p = p-&amp;gt;level[i];
+            }
+            update[i] = p;
+        }
+        p = p-&amp;gt;level[0];
+        if (p-&amp;gt;val != val) return false;
+        for (int i = 0; i &amp;lt; level; ++i) {
+            if (update[i]-&amp;gt;level[i] != p) {
+                break;
+            }
+            update[i]-&amp;gt;level[i] = p-&amp;gt;level[i];
+        }
+        while (level &amp;gt; 0 &amp;amp;&amp;amp; head-&amp;gt;level[level - 1] == tail)
+            --level;
+        --length;
+        return true;
+    }
+
+    int randomLevel() {
+        int level, r = rand(), target = INT_MAX/2;
+        level = 0;
+        for (int i = 1; i &amp;lt; MAXL; i++)
+            if( r &amp;gt; INT_MAX-target ) {
+                level = i;
+                target /= 2;
+            } else {
+                break;
+            }
+        return level+1;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;练习&#34;&gt;练习&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/design-skiplist/&#34;&gt;1206. 设计跳表&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html&lt;/li&gt;
+&lt;li&gt;https://blog.csdn.net/u013709270/article/details/53470428&lt;/li&gt;
+&lt;/ul&gt;
+">跳表</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-06-09-Kafka学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习Kafka过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://coding.imooc.com/class/434.html&#34;&gt;Kafka多维度系统精讲，从入门到熟练掌握&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;课程大纲：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210609101437740.png&#34; alt=&#34;image-20210609101437740&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;partition&#34;&gt;Partition&lt;/h2&gt;
+&lt;p&gt;Partition 在 Kafka 中是分区的意思。&lt;/p&gt;
+&lt;p&gt;Kafka 中每个 Topic 可以划分多个分区，同一个 Topic 下的不同分区包含的消息是不同的。&lt;/p&gt;
+&lt;p&gt;Kafka 通过 offset 可以保证消息在分区中的顺序性，但是跨分区是无序的，即 Kafka 只保证在同一个分区内的消息是有序的。&lt;/p&gt;
+&lt;p&gt;每一条消息发送到 broker 的时候，会根据 Partition 的分区规则计算，然后选择将该消息存储到哪一个 Partition。&lt;/p&gt;
+&lt;p&gt;参考资料：https://blog.csdn.net/lzb348110175/article/details/100764105&lt;/p&gt;
+&lt;p&gt;Partition和Consumer的关系不能是1对多，即，一个Partition由多个Comsumer进行消费。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这是由Consumer的消费机制决定的，Consumer在拿到消息后，需要在处理完后向Kafka提交处理结果，即，告诉Kafka这批消息已经处理好了（可以以自动的方式进行提交，也可以手动提交）。而在Kafka中，最小颗粒度的数据存储就是Partition，那么，如果有两个Consumer同时消费一个Partiton，就会导致线程不安全，即，两个Consumer同时拿到数据，然后导致数据冲突。&lt;/li&gt;
+&lt;li&gt;如果是多个Consumer对应多个Partition，则不会出现这个情况，因为不同Partition之间是不会相互影响的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;解读源码&#34;&gt;解读源码&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Producer在创建时，会新建发送线程，该线程会定时批量发送所有的消息。因此，Kafka是批量发送，不是调用一次send就发送一次，所以效率较高。&lt;/li&gt;
+&lt;li&gt;当调用send后，会将消息存储在batch（批次）中，当达到一定阈值时，发送线程会自动进行消息的批量发送。因此，严格意义上，消息发送不是由send实现的。&lt;/li&gt;
+&lt;li&gt;Kafka是线程安全的，可以多线程复用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Producer
+&lt;ul&gt;
+&lt;li&gt;ACKS_CONFIG：消息传递保障&lt;/li&gt;
+&lt;li&gt;RETRIES_CONFIG：发送失败后重试次数&lt;/li&gt;
+&lt;li&gt;BATCH_SIZE_CONFIG：最大批次容量&lt;/li&gt;
+&lt;li&gt;LINGER_MS_CONFIG：批量发送间隔时间&lt;/li&gt;
+&lt;li&gt;BUFFER_MEMORY_CONFIG：缓存大小&lt;/li&gt;
+&lt;li&gt;BATCH_SIZE &lt;strong&gt;VS&lt;/strong&gt; BUFFER_MEMORY
+&lt;ul&gt;
+&lt;li&gt;参考资料：https://blog.csdn.net/u010711495/article/details/113250402&lt;/li&gt;
+&lt;li&gt;Kafka的所有信息都会存在缓存中，包括配置信息、消息等，一旦缓存满了，Kafka就会禁止用户再发送消息；而对于最大批次容量，当批次实际大小达到最大批次容量时，就会触发发送线程的发送；因此，一般缓存大小都是大于最大批次容量的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;KEY_SERIALIZER_CLASS_CONFIG：key序列化类&lt;/li&gt;
+&lt;li&gt;VALUE_SERIALIZER_CLASS_CONFIG：value序列化类&lt;/li&gt;
+&lt;li&gt;PARTITIONER_CLASS_CONFIG：自定义partition选择&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;消息传递保障&#34;&gt;消息传递保障&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;最多一次：发了就不管了&lt;/li&gt;
+&lt;li&gt;最少一次：一直发，直到收到响应&lt;/li&gt;
+&lt;li&gt;正好一次：一直发，直到收到响应，但是接收方需要去重&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;key的作用&#34;&gt;Key的作用&lt;/h2&gt;
+&lt;p&gt;Kafka的消息是一对键值对，Key在Kafka中的主要作用是选择分区，若用户没有指定分区，则Kafka会根据key的hash决定分区的选择。&lt;/p&gt;
+&lt;p&gt;Kafka在设计时使用键值对的形式，可以为使用者提供功能上的扩展，例如可以自定义分区规则，将相同key的消息放在同一个分区中。&lt;/p&gt;
+&lt;p&gt;当然，如果某些业务场景下对key没有特殊要求，这个字段也是可以不填的。&lt;/p&gt;
+&lt;h2 id=&#34;kafka-vs-redis&#34;&gt;Kafka VS Redis&lt;/h2&gt;
+&lt;p&gt;Redis List的缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不支持重复消费：消息一旦被消费，就会从 Redis 中删除，无法再被其他消费者消费。&lt;/li&gt;
+&lt;li&gt;消息丢失：消费者获取消息后，若发生异常宕机，则消息就会丢失。&lt;/li&gt;
+&lt;li&gt;当List达到最大长度，则无法继续添加新的消息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Redis Pub/Sub的缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消息丢失
+&lt;ul&gt;
+&lt;li&gt;消费者下线&lt;/li&gt;
+&lt;li&gt;Redis 宕机&lt;/li&gt;
+&lt;li&gt;消息堆积：当消息超过消费者缓冲区大小，Redis 会强制消费者下线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考资料：https://www.jianshu.com/p/c37368c867f8&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/lzb348110175/category_9309572.html&#34;&gt;CSDN kafka-扛麻袋的少年&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">Kafka学习笔记</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/"" data-c="
           &lt;p&gt;这篇文章主要记录了学习NIO及Netty线程模型过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -2187,9 +2934,9 @@ while( true ) {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;epoll多路复用模型&#34;&gt;epoll多路复用模型&lt;/h4&gt;
-&lt;h5 id=&#34;redis为什么要用epoll&#34;&gt;redis为什么要用epoll&lt;/h5&gt;
+&lt;h5 id=&#34;redis为什么要用epollredis为什么采用单线程&#34;&gt;redis为什么要用epoll（redis为什么采用单线程）&lt;/h5&gt;
 &lt;ul&gt;
-&lt;li&gt;redis是单线程的：redis是内存操作，虽然内存的速度比CPU慢，但依旧很快，CPU的利用率较高，无需使用多线程提高CPU的利用率。&lt;/li&gt;
+&lt;li&gt;redis是单线程的：redis是内存操作，虽然内存的速度比CPU慢，但依旧很快，CPU的利用率较高，无需使用多线程提高CPU的利用率。在正常程序中，因为包含大量IO操作，CPU使用率不高，此时，使用多线程可以提高CPU利用率，优化性能。&lt;/li&gt;
 &lt;li&gt;对于单线程的应用，当用户进行网络请求后，该线程会被阻塞，等待用户输入。线程被阻塞，也就意味着整个进程、整个redis被阻塞。若等待用户输入时间较长，则在高并发场景下，会极大影响redis性能。&lt;/li&gt;
 &lt;li&gt;因此，redis需要将等待用户输入这一操作委托给系统去完成，即，redis基于系统提供的epoll实现了多路复用模型。&lt;/li&gt;
 &lt;/ul&gt;
@@ -2199,7 +2946,7 @@ while( true ) {
 &lt;p&gt;epoll_ctl&lt;/p&gt;
 &lt;p&gt;epoll_wait&lt;/p&gt;
 &lt;h3 id=&#34;不同数据类型的适用场景&#34;&gt;不同数据类型的适用场景&lt;/h3&gt;
-&lt;h4 id=&#34;string&#34;&gt;String&lt;/h4&gt;
+&lt;p&gt;String&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;单值缓存&lt;/li&gt;
 &lt;li&gt;对象缓存：JSON字符串&lt;/li&gt;
@@ -2211,7 +2958,7 @@ while( true ) {
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;hash&#34;&gt;Hash&lt;/h4&gt;
+&lt;p&gt;Hash&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;对象缓存
 &lt;ul&gt;
@@ -2219,18 +2966,18 @@ while( true ) {
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;list&#34;&gt;List&lt;/h4&gt;
+&lt;p&gt;List&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;实现栈、队列、拥塞队列&lt;/li&gt;
 &lt;li&gt;消息流：当大V发消息后，将消息id添加到每个关注用户的消息List中，使用LPUSH，用户获取消息使用LRANGE。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;set&#34;&gt;Set&lt;/h4&gt;
+&lt;p&gt;Set&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;抽奖功能：因为set有srandmember、spop方法&lt;/li&gt;
 &lt;li&gt;点赞功能：频繁添加、删除、比较元素，用set效率比list好&lt;/li&gt;
 &lt;li&gt;关注模型（共同关注、我关注的人关注了谁、可能认识的人）：集合操作&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;zset&#34;&gt;ZSet&lt;/h4&gt;
+&lt;p&gt;ZSet&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;排行榜&lt;/li&gt;
 &lt;/ul&gt;
@@ -2259,6 +3006,8 @@ while( true ) {
 &lt;li&gt;原子操作：Redis会将整个脚本作为一个整体执行，中间不会被其他命令插入。管道不是原子的，不过redis的批量操作命令(类似mset)是原子的。&lt;/li&gt;
 &lt;li&gt;替代redis的事务功能：redis自带的事务功能很鸡肋，报错不支持回滚，而redis的lua脚本几乎实现了常规的事务功能，支持报错回滚操作，官方推荐如果要使用redis的事务功能可以用redis lua替代。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;redis-vs-kafka&#34;&gt;Redis vs Kafka&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/112907568&#34;&gt;花5min就能搞清楚redis和zookeeper分布式锁的区别，太有必要读一下了&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/hunternet/p/11306690.html&#34;&gt;Redis数据结构——压缩列表&lt;/a&gt;&lt;/li&gt;
@@ -2311,7 +3060,20 @@ docker container exec -it container_id /bin/bash
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;好处&#34;&gt;好处&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;将主流的中间件打包成docker，可实现快速部署。因为docker的使用，如启动和关闭，命令都是相同的，所以可以使用脚本实现自动化的部署。而如果不使用docker，不同的中间件都有一套对应的运维命令，运维工作的效率将会降低很多。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将主流的中间件打包成docker，可实现快速部署。因为docker的使用，如启动和关闭，命令都是相同的，所以可以使用脚本实现自动化的部署。而如果不使用docker，不同的中间件都有一套对应的运维命令，运维工作的效率将会降低很多。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;docker技术提供了一种管理机制，可以对各种制品进行统一管理。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker 的镜像机制提供了一种更高级的通用的应用制品（artifact）包，也就是大家说的集装箱能力。原来各种操作系统或编程语言都有各自己的制品机制，Ubuntu 的 deb，RedHat 的 RPM，Java 的 JAR、WAR，各自的依赖管理，制品库都不相同。应用从源码打包，分发到制品库，再部署到服务器，很难抽象出一种通用的流程和机制。而有了 Docker 的镜像以及镜像仓库标准之后，这个流程终于可以标准化了。于是雨后春笋般冒出很多镜像管理仓库，这在以前的制品管理领域是很难想象的，以前貌似也就 Java 领域的 nexus 和 artifactory 略完备些。&lt;/p&gt;
+&lt;p&gt;https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&amp;amp;mid=2653548284&amp;amp;idx=1&amp;amp;sn=9243449fac7e86342f84da3a6a87453c&amp;amp;chksm=813a7f64b64df6728b15072640657b9642aa87a0bc30107becffc890125d32d8ff4dd091c9bf&amp;amp;scene=21#wechat_redirect&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;构建镜像&#34;&gt;构建镜像&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;# 指定基础镜像
@@ -3663,6 +4425,7 @@ public:
 &lt;h1 id=&#34;分治&#34;&gt;分治&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P1257&#34;&gt;P1257 平面上的最接近点对&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/&#34;&gt;剑指 Offer 39. 数组中出现次数超过一半的数字&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;栈&#34;&gt;栈&lt;/h1&gt;
 &lt;ul&gt;
@@ -3736,6 +4499,10 @@ public:
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/implement-strstr/&#34;&gt;28. 实现 strStr()&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;扩展kmp&#34;&gt;扩展KMP&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://acm.hdu.edu.cn/showproblem.php?pid=4763&#34;&gt;HDU 4763 Theme Section&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;图论&#34;&gt;图论&lt;/h1&gt;
 &lt;h2 id=&#34;最短路&#34;&gt;最短路&lt;/h2&gt;
 &lt;h3 id=&#34;dijkstra&#34;&gt;Dijkstra&lt;/h3&gt;
@@ -3747,6 +4514,14 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;多数投票算法&#34;&gt;多数投票算法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/&#34;&gt;剑指 Offer 39. 数组中出现次数超过一半的数字&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;随机化&#34;&gt;随机化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/&#34;&gt;剑指 Offer 39. 数组中出现次数超过一半的数字&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;搜索&#34;&gt;搜索&lt;/h1&gt;
 &lt;ul&gt;
@@ -3773,6 +4548,19 @@ public:
 &lt;h2 id=&#34;linux&#34;&gt;Linux&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/wulaa/p/7943550.html&#34;&gt;linux改变apt-get安装源&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/stickmangod/article/details/85316142/&#34;&gt;E: Sub-process /usr/bin/dpkg returned an error code (1)解决办法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;java&#34;&gt;Java&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jianshu.com/p/63c328ca208d&#34;&gt;Java Agent简介&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;android&#34;&gt;Android&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/niuba123456/article/details/90450135#t4&#34;&gt;使用adb获取设备信息： failed to start daemon error: cannot connect to daemon&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;推荐使用换端口号的方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;python&#34;&gt;Python&lt;/h2&gt;
 &lt;ul&gt;
@@ -3782,6 +4570,9 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/pyyong2011/article/details/105045883/&#34;&gt;python: cookies 解密问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qiyihan/article/details/105468754&#34;&gt;覃超五毒神掌步骤&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;分治&#34;&gt;分治&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_33935895/article/details/103261211&#34;&gt;算法]分治法解最近对问题&lt;/a&gt;&lt;/li&gt;
@@ -3795,11 +4586,37 @@ public:
 &lt;h3 id=&#34;字符串&#34;&gt;字符串&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/21923021&#34;&gt;如何更好地理解和掌握 KMP 算法?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ethsonliu.com/2019/06/extended-kmp.html&#34;&gt;扩展 KMP 算法&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;学习网站&#34;&gt;学习网站&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://developer.aliyun.com/learning&#34;&gt;阿里云-开发者学院&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://ke.qq.com/&#34;&gt;腾讯课堂&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fortify破解&#34;&gt;Fortify破解&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.shungg.cn/tag/Fortify19.1.0%E7%A0%B4%E8%A7%A3%E7%89%88/&#34;&gt;标签 Fortify19.1.0破解版 下的文章&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/drive/folder/60d975363027965796944370938057922389184e&#34;&gt;Fortify SCA 20.1.1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.52pojie.cn/thread-1085767-1-1.html&#34;&gt;fortify license 破解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;设计模式&#34;&gt;设计模式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/zhonghuan1992/article/details/38358183&#34;&gt;迪米特法则&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;uml&#34;&gt;UML&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/wglla/article/details/52225571&#34;&gt;uml图六种箭头的含义&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;数据库&#34;&gt;数据库&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/mafeng/p/7909450.html&#34;&gt;位图（BitMap）索引&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;kafka&#34;&gt;Kafka&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/hunternet/p/11017000.html&#34;&gt;docker 安装kafka&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ">与技术相关的文章、博客、网站的汇总</a>
       </div>
@@ -4378,6 +5195,518 @@ ps:经过了以上步骤，这里我们快速讲解。大同小异。&lt;br&gt;
 &lt;hr&gt;
 &lt;p&gt;from &lt;a href=&#34;https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/&#34;&gt;https://ericam.top/post/ji-yu-grideagithubcoding-da-jian-ge-ren-jing-tai-bo-ke/&lt;/a&gt;&lt;/p&gt;
 ">基于Gridea+github搭建静态博客</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-11-09-论文转述 Design Pattern Implementation in Java and AspectJ/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/74c24bb20c5d42869f844b9f2f1e154c~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h1 id=&#34;摘要&#34;&gt;摘要&lt;/h1&gt;
+&lt;h1 id=&#34;二-既定挑战&#34;&gt;二、既定挑战&lt;/h1&gt;
+&lt;p&gt;许多作者已经确定了当模式在特定的软件系统中具体化时会出现的挑战。其中，三个最重要的挑战与实现、文档和组合有关。&lt;/p&gt;
+&lt;p&gt;设计模式的实现通常有许多不良的相关影响。因为模式影响系统结构，并且它们的实现也受到系统结构的影响，所以模式实现通常是根据使用情况定制的。这可能导致它们“消失在代码中”，并失去模块化。这使得很难区分模式、具体实例和涉及的对象模型。在系统中添加或移除模式通常是一种侵入性的、难以逆转的改变。&lt;strong&gt;因此，虽然设计模式是可重用的，但它的实现通常不是&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;模式代码的侵入性，以及它与其他代码的分散和纠缠造成了文档问题。如果在一个系统中使用了多个模式，跟踪一个设计模式的特定实例会变得很困难，尤其是当类涉及到多个模式时(即，如果有模式覆盖/组合)。&lt;/p&gt;
+&lt;p&gt;模式组合导致的不仅仅是文档问题。对包含相同类的多个模式的系统进行推理本来就很困难，因为这种组合会产生大量相互依赖的类。这是一个重要的主题，因为一些设计模式在他们的解决方案中显式地使用其他模式。&lt;/p&gt;
+&lt;h1 id=&#34;三-研究格式&#34;&gt;三、研究格式&lt;/h1&gt;
+&lt;p&gt;本文中的发现是基于对GoF设计模式的Java和AspectJ实现的比较分析。&lt;/p&gt;
+&lt;p&gt;对于23种GoF模式中的每一种，我们都创建了一个利用该模式的小示例，并在Java和AspectJ中实现了该示例（&lt;a href=&#34;http://www.cs.ubc.ca/labs/spl/projects/aodps.html&#34;&gt;代码下载[已失效]&lt;/a&gt;）。Java实现对应于GoF书中的示例C++实现，并做了一些小的调整，以解决C++和Java之间的差异(缺乏多重继承等)。大多数模式都有许多实现变体和替代方案。如果一个模式提供了不止一个可能的实现，我们选择一个看起来最普遍适用的。&lt;/p&gt;
+&lt;p&gt;AspectJ实现是迭代开发的。AspectJ结构允许许多不同的实现，通常有不同的权衡。我们的目标是充分研究每个模式的明确定义的实现的设计空间。我们最终总共创建了57个不同的实现，每个模式从1到7个不等。第4节讨论了一些权衡和设计决策。&lt;/p&gt;
+&lt;h1 id=&#34;四-结果&#34;&gt;四、结果&lt;/h1&gt;
+&lt;p&gt;本节介绍了GoF设计模式的具体实例的AspectJ和Java实现的比较。第4.1节详细讨论了观察者模式。我们使用这个讨论来呈现大多数AspectJ解决方案共有的属性。其余的模式是基于第4.1节中的概念提出的。&lt;/p&gt;
+&lt;h2 id=&#34;41-例子-观察者模式&#34;&gt;4.1 例子: 观察者模式&lt;/h2&gt;
+&lt;p&gt;观察者模式的意图是“在对象之间定义一对多的依赖关系，这样当一个对象改变状态时，它的所有从属对象都会被自动通知和更新”。观察者模式的面向对象实现，比如GoF书(第300-303页)中的示例代码，通常向所有潜在的主题添加一个字段，存储对该特定主题感兴趣的观察者列表。当一个主体想要向它的观察者报告状态改变时，它调用它自己的通知方法，该方法又调用列表中所有观察者的更新方法。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/79c76dde9f844d689e4171f3532faffe~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;考虑一个简单图形包中观察者模式的具体例子，如图1所示。在这样的系统中，观察者模式将被用来使图形元素的突变操作更新屏幕。如图所示，实现这种模式的代码分布在各个类中。&lt;/p&gt;
+&lt;p&gt;所有参与者(即点和线)必须知道他们在模式中的角色，并因此拥有模式代码。从类中添加或删除角色需要更改该类。改变通知机制(例如在推和拉模型之间切换[9])需要改变所有参与的类。&lt;/p&gt;
+&lt;h3 id=&#34;411-抽象的观察者模式&#34;&gt;4.1.1 抽象的观察者模式&lt;/h3&gt;
+&lt;p&gt;在观察者模式的结构中，一些部分是模式的所有潜在实例化所共有的，而其他部分是每个实例化所特有的。所有实例共有的部分是:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;主体和观察者角色的存在(即有些类作为观察者，有些作为主体)。&lt;/li&gt;
+&lt;li&gt;维护从受试者到观察者的映射。&lt;/li&gt;
+&lt;li&gt;一般更新逻辑:主题更改触发观察者更新。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;模式的每个实例化的特定部分是:&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;哪些课可以是主题，哪些可以是观察者。&lt;/li&gt;
+&lt;li&gt;引发观察者更新的一组感兴趣的主题变化&lt;/li&gt;
+&lt;li&gt;当更新逻辑需要时，更新每种观察者的具体方法。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/e973ed1a3bdd48dd86f594112908369f~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;我们开发了AspectJ代码，它反映了可重用部分和实例特定部分的分离。抽象方面封装了可概括的部分(1-3)，而模式的每个实例的方面的一个具体扩展填充了特定的部分(4-6)。图2显示了可重用的ObserverProtocol方面。&lt;/p&gt;
+&lt;h4 id=&#34;4111-主体和观察者的角色&#34;&gt;4.1.1.1 主体和观察者的角色&lt;/h4&gt;
+&lt;p&gt;角色被实现为名为主题和观察者的受保护的内部接口(图2，第3-4行)。它们的主要目的是允许在模式实现的上下文中正确地输入主题和观察者，比如在像addObserver这样的方法中。ObserverProtocol方面的具体扩展将角色分配给特定的类(见下文)。&lt;/p&gt;
+&lt;p&gt;这些接口是受保护的，因为它们将只由ObserverProtocol及其具体扩展使用。方面和扩展之外的任何代码都不需要根据这些角色来处理对象。&lt;/p&gt;
+&lt;p&gt;这些接口是空的，因为模式没有定义主题或观察者角色的方法。通常在主体和观察者上定义的方法是在方面本身上定义的(见下文)。&lt;/p&gt;
+&lt;p&gt;对于可抽象的模式，我们必须决定将角色接口放在哪里。两个位置是可能的:要么作为抽象方面内部的私有接口，要么作为单独的公共接口。我们是根据角色接口是否引入了客户端访问的功能来做出这个决定的，即向客户端公开功能(如策略、迭代器等)或者不公开(如观察者的情况)。如果角色没有客户端可访问的功能，它将只在模式方面被引用。因为这个原因，我们把它放在抽象方面。在另一种情况下，我们将接口移动到一个单独的文件中，以便于引用。&lt;/p&gt;
+&lt;h4 id=&#34;4112-主体-观察者映射&#34;&gt;4.1.1.2 主体-观察者映射&lt;/h4&gt;
+&lt;p&gt;AspectJ代码中映射的实现被本地化为ObserverProtocol方面。它是通过使用链表的弱散列映射来存储每个主题的观察者来实现的(第6行)。由于每个模式实例都由ObserverProtocol的一个具体子方面表示，因此每个实例都有自己的映射。&lt;/p&gt;
+&lt;p&gt;对主题-观察者映射的改变可以通过具体子方面继承的公共的添加观察者和移除观察者方法(第21-26行)来实现。为了让屏幕对象成为点对象的观察者，客户在适当的子方面调用这些方法(例如颜色观察者):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ColorObserving.aspectOf().addObserver(P, S); 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;私有的getObservers方法只在内部使用。它按需创建适当的二级数据结构(链表)(第8-19行)。请注意，在这个实现中，主题-观察者映射数据结构集中在每个具体的扩展中。对抽象模式方面进行子类化的所有具体方面都将自动拥有一个单独的字段副本。这遵循[9]中给出的结构。这在某些情况下会造成瓶颈。通过用一种使用更分散的数据结构的方法覆盖getObservers，可以在每个模式实例的基础上修复这些问题。&lt;/p&gt;
+&lt;p&gt;一般来说，只要模式解决方案需要参与者之间的映射(即责任链中处理程序的后继字段)，并且模式实现是可抽象的，我们就可以在参与者上定义一个字段，或者将映射保留在抽象方面的中心数据结构中(如本例所示)。无论选择哪种方法，对数据结构的访问点都是特定于实例的方面，这样涉及相同参与者的模式的不同实例都是可能的，并且不会混淆。&lt;/p&gt;
+&lt;h4 id=&#34;4113-更新逻辑&#34;&gt;4.1.1.3 更新逻辑&lt;/h4&gt;
+&lt;p&gt;在可重用方面，更新逻辑实现了一个一般概念，即主题可以以需要更新所有观察者的方式进行更改。这个实现并没有精确地定义什么构成了一个改变，或者观察者应该如何被更新。一般更新逻辑由三部分组成:&lt;/p&gt;
+&lt;p&gt;感兴趣的变化描述了概念操作，即程序执行中的一组点，在这些点上，主体应该更新其观察者(以通知他们其状态的变化)。在AspectJ中，这类点的集合用切入点构造来标识。在可重用方面，我们只知道有感兴趣的修改，但我们不知道它们是什么。因此，我们定义了一个名为subjectChange的抽象切入点，它将被实例特定的子方面具体化(第28-29行)。&lt;/p&gt;
+&lt;p&gt;在可重用部分，我们只知道观察者必须在模式的上下文中更新，但是不能预测如何最好地实现。我们定义了一个抽象的更新方法updateObserver，它将为每个模式实例具体化(第31-32行)。这样，观察者模式的每个实例都可以选择自己的更新机制。&lt;/p&gt;
+&lt;p&gt;最后，可重用方面根据上面提到的可推广的实现部分来实现更新逻辑。这个逻辑包含在后一条建议中(第34-39行)。这个建议是这样的:每当执行到达一个与主题匹配的连接点时，改变切入点，然后更新适当主题的所有观察者。&lt;/p&gt;
+&lt;h3 id=&#34;412-特定于模式实例的具体方面&#34;&gt;4.1.2 特定于模式实例的具体方面&lt;/h3&gt;
+&lt;p&gt;ObserverProtocol的每个具体子方面定义了一种特定的观察关系，换句话说就是一个模式实例。在这种关系中，可以有任意数量的主体，每个主体有任意数量的观察者。子方面定义了三件事:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;扮演受试者和观察者角色的分类。这是通过使用declare parents构造来完成的，该构造将超类或超接口添加到类中，以分配抽象方面中定义的角色。&lt;/li&gt;
+&lt;li&gt;需要更新观察者的关于该主题的概念性操作。这是通过具体化subjectChange切入点来实现的。&lt;/li&gt;
+&lt;li&gt;如何更新观察者？这是通过具体化updateObserver来实现的。更新的推或拉模式之间的选择不再是必要的，因为此时我们可以访问主题和观察者，并且可以定制更新。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;declare parents构造是AspectJ开放类机制的一部分，它允许方面修改现有的类而不改变它们的代码。这种开放的类机制可以将字段、方法或者——在这种情况下——接口附加到现有的类上。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/913640c699a8455988c17999d6cd7f25~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;图3显示了观察者模式的两个不同实例，包括点、线和屏幕类。在这两种情况下，点和线扮演主体的角色，屏幕扮演观察者的角色。第一个观察颜色变化，第二个观察坐标变化。&lt;/p&gt;
+&lt;p&gt;请注意，第13行和第31行中的类型转换预计会随着AspectJ对泛型的计划支持而消失。这样就有可能创建包含角色分配并且类型安全的参数化子方面。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/c5396bacab2a489f851b5925364d7ec6~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;特定的类可以在同一个模式实例或不同的模式实例中扮演一个或两个主体和观察者的角色。图4显示了第三个模式实例，其中屏幕同时充当主体和观察者。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/a123.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;在AspectJ版本中，与观察者和主题之间的关系相关的所有代码都被移动到一个方面中，这改变了模块之间的依赖关系。图5显示了这种情况的结构。&lt;/p&gt;
+&lt;h3 id=&#34;413-此实现的属性&#34;&gt;4.1.3 此实现的属性&lt;/h3&gt;
+&lt;p&gt;观察者模式的这种实现具有以下密切相关的模块化属性:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;局部性——实现观察者模式的所有代码都在抽象和具体的观察者方面，没有一个在参与者类中。参与者类完全不受模式上下文的约束，因此参与者之间没有耦合。每个观察者模式实例的潜在变化被限制在一个地方。&lt;/li&gt;
+&lt;li&gt;可重用性——核心模式代码是抽象的和可重用的。ObserverProtocol的实现概括了整个模式行为。抽象方面可以在多个观察者模式实例中重用和共享。对于每个模式实例，我们只需要定义一个具体的方面。&lt;/li&gt;
+&lt;li&gt;合成透明性——因为模式参与者的实现与模式无关，如果一个主体或观察者参与多个观察关系，他们的代码不会变得更复杂，模式实例也不会混淆。该模式的每个实例都可以独立推理。&lt;/li&gt;
+&lt;li&gt;(不)可插入性——因为主体和观察者不需要知道他们在任何模式实例中的角色，所以可以在系统中使用模式和不使用模式之间切换。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;42-其他模式&#34;&gt;4.2 其他模式&lt;/h2&gt;
+&lt;p&gt;在下文中，我们将描述剩余的22种GoF模式，以及AspectJ实现与纯Java版本的不同之处。模式按共同特征分组，无论是模式结构还是它们的AspectJ实现。&lt;/p&gt;
+&lt;h3 id=&#34;421-复合-命令-中介-责任链角色仅用于模式方面&#34;&gt;4.2.1 复合、命令、中介、责任链：角色仅用于模式方面&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/6777d81cba204229b0863e0bd56dbdd7~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;类似于观察者模式，这些模式引入了&lt;strong&gt;不需要客户端可访问接口的角色&lt;/strong&gt;，并且只在模式中使用。在AspectJ中，这样的角色是用空的(受保护的)接口实现的。它们引入的类型在模式协议中使用。每个模式的一个抽象方面定义了角色，并在可能的情况下附加了默认实现(参见图6的部分抽象组合方面)。&lt;/p&gt;
+&lt;p&gt;对于涉及特定概念操作的模式，抽象模式方面引入了一个抽象切入点(为模式的每个实例具体化)，它捕获应该触发重要事件的连接点(例如命令模式中命令的执行)。就像在观察者的例子中一样，建议(在之后、之前或周围)负责调用适当的方法。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/f8a70c3386784d638547cc4ba22ba0ff~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;在复合情况下，为了允许遍历模式固有的树结构，我们定义了让访问者遍历和/或改变结构的工具。这些来访者是在具体方面定义的。有关如何从组合结构中收集统计数据的示例，请参见图7。在这个例子中，我们展示了一个为文件系统建模的复合模式的实例。目录是复合的，文件是叶。该示例显示了如何计算文件系统所需的磁盘空间，假设文件对象具有大小字段。同样，客户端使用方面的公共方法来访问新功能。参与者的适当方法是私下介绍的，只能通过方面看到。&lt;/p&gt;
+&lt;h3 id=&#34;422-单例模式-原型模式-备忘录模式-迭代器模式-享元模式作为对象工厂的方面&#34;&gt;4.2.2 单例模式、原型模式、备忘录模式、迭代器模式、享元模式：作为对象工厂的方面&lt;/h3&gt;
+&lt;p&gt;这些模式管理对特定对象实例的访问。它们都向客户提供工厂方法，并共享按需创建策略。模式在AspectJ中是抽象的(可重用的)，在Aspect中有工厂代码。&lt;/p&gt;
+&lt;p&gt;在AspectJ实现中，工厂方法要么是抽象Aspect的参数化方法，要么附加到参与者的方法中。如果使用前一种方法，模式的多个实例透明地组成，即使所有的工厂方法都有相同的名称。&lt;strong&gt;单例&lt;/strong&gt;的情况很特殊，因为我们可以使用“环绕”建议将原始构造函数转换为工厂方法，并在所有构造函数调用中返回唯一的对象。&lt;/p&gt;
+&lt;p&gt;参数化的工厂方法也可以根据诺德伯格的工厂示例[18]来实现：工厂方法为空(返回null或默认对象)。其他返回值由该方法的Advice提供。如果参数合适，Advice创建一个新的匹配对象；否则，它将继续正常执行。这使得我们可以在不改变代码的情况下扩展工厂(就新产品而言)。参与者不再需要有模式代码；原始对象和它的表示或访问器(纪念品，迭代器)之间的紧密耦合将从参与者中移除。&lt;/p&gt;
+&lt;h3 id=&#34;423-适配器-装饰器-策略-访问者-代理语言结构&#34;&gt;4.2.3 适配器、装饰器、策略、访问者、代理：语言结构&lt;/h3&gt;
+&lt;p&gt;使用AspectJ，一些模式的实现完全消失了，因为AspectJ语言构造直接实现了它们。这在不同程度上适用于这些模式。&lt;/p&gt;
+&lt;p&gt;适配器和访问者模式可以通过扩展适配器的接口来实现(通过AspectJ的开放类机制)。装饰器、策略和代理有基于附加建议的替代实现(在[18]中为装饰器提到)。&lt;/p&gt;
+&lt;p&gt;虽然更简单、更模块化，但这些方法有其固有的局限性。Decorator基于建议的实现失去了它的动态操作属性(Decorator的动态重新排序)，因此不太灵活。当我们想用另一个具有相同名称和参数但返回类型不同的方法替换现有方法时，适配器的接口扩展不能以这种方式实现。&lt;/p&gt;
+&lt;p&gt;使用上述方法，保护或委托代理可以实现为可重用的，但是代理模式的一些应用程序要求代理和主体是两个不同的对象(例如远程代理和虚拟代理)。在这些情况下，Java和AspectJ实现是相同的。&lt;/p&gt;
+&lt;h3 id=&#34;424-抽象工厂模式工厂方法模式模板模式建造者模式桥接模式多重继承&#34;&gt;4.2.4 抽象工厂模式，工厂方法模式，模板模式，建造者模式，桥接模式：多重继承&lt;/h3&gt;
+&lt;p&gt;这些模式在结构上是相似的：继承用于区分不同但相关的实现。因为这已经在面向对象中很好地实现了，所以这些模式不能被给予更多可重用的实现。然而，使用AspectJ，可以用接口替换GoF解决方案中提到的抽象类，而不会失去将(默认)实现附加到它们的方法的能力。对于Java，如果我们想为模式代码中的方法定义一个默认实现，我们就不能使用接口。在这方面，AspectJ的开放类机制有效地提供了一种有限形式的多重继承。&lt;/p&gt;
+&lt;p&gt;除此之外，建造者模式和桥接模式还有以下额外的实现注意事项。&lt;br&gt;
+对于建造者模式，一个Aspect可以拦截对创建方法的调用，并使用Advice用替代实现来替换它们(参见上面的策略)。&lt;br&gt;
+对于桥接模式，抽象和实现者的解耦可以通过使用诺德伯格建议的多态Advice来实现[24]。虽然这种方法减少了参与者之间的耦合，但是当涉及到动态改变实现者时，它就不那么灵活了。&lt;/p&gt;
+&lt;h3 id=&#34;426-外观模式没有从aspectj中获益&#34;&gt;4.2.6 外观模式：没有从AspectJ中获益&lt;/h3&gt;
+&lt;p&gt;实现&lt;/p&gt;
+&lt;p&gt;对于这种模式，AspectJ方法在结构上与Java实现没有什么不同。Façade为子系统的一组接口提供了统一的接口，使子系统更易于使用。这个例子主要需要名字空间管理和良好的编码风格。&lt;/p&gt;
+&lt;h1 id=&#34;五-分析&#34;&gt;五、分析&lt;/h1&gt;
+&lt;p&gt;在这一节中，我们分析了之前观察到的用AspectJ实现模式的好处。分析分为三个部分:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在许多模式重新实现中观察到的一般改进。&lt;/li&gt;
+&lt;li&gt;与特定模式相关的具体改进。&lt;/li&gt;
+&lt;li&gt;模式中横切结构的起源，以及观察到的改进与模式中横切结构的存在相关的演示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;51-总体改进&#34;&gt;5.1 总体改进&lt;/h2&gt;
+&lt;p&gt;对于许多模式来说，AspectJ实现体现了几个密切相关的模块化好处:局部性、可重用性、依赖性反转、透明的可组合性和(不)可插入性。试图说哪一个是主要的是困难的，相反，我们简单地描述它们并讨论它们的一些相互关系。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/68d760a110a5407aa036ad77a1225b0d~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;23个GoF模式中的17个的AspectJ实现是本地化的。对于其中的12个，局部性使得实现的核心部分能够被抽象成可重用的代码。在17个中的14个中，我们观察到了模式实例的透明可组合性，因此多个模式可以有共享的参与者(见表1)。&lt;/p&gt;
+&lt;p&gt;AspectJ实现的改进主要是由于颠倒了依赖性，因此模式代码依赖于参与者，而不是相反。这与局部性直接相关——模式和参与者之间的所有依赖都被本地化在模式代码中。&lt;/p&gt;
+&lt;h2 id=&#34;52-具体改进&#34;&gt;5.2 具体改进&lt;/h2&gt;
+&lt;h3 id=&#34;521-单例模式&#34;&gt;5.2.1 单例模式&lt;/h3&gt;
+&lt;p&gt;模式实现的AspectJ版本打开了两个在Java中不可能的设计选项：&lt;br&gt;
+第一，Singleton是继承属性，还是说，我们存在错误的继承？&lt;br&gt;
+第二，我们是希望一个专门的工厂方法来提供单例模式的实例，还是希望构造函数在被调用时返回它？&lt;/p&gt;
+&lt;p&gt;我们决定实现继承的Singleton属性，但是如果需要的话，我们提供了从Singleton保护中排除特定子类的工具。&lt;/p&gt;
+&lt;p&gt;第二，我们认为使用构造函数而不是专用的工厂方法是有益的。如果需要，工厂可以直接在类中实现，或者作为一个透明组合的Aspect来实现。&lt;/p&gt;
+&lt;h3 id=&#34;522-多重继承与java&#34;&gt;5.2.2 多重继承与Java&lt;/h3&gt;
+&lt;p&gt;正如最初提出的，一些GoF模式在其实现中利用了多重继承，例如适配器模式的类版本。对于许多模式，参与者在模式中扮演的角色在Java中被实现为抽象类。参与者类从这些抽象类继承接口和默认实现。但是如果参与者类具有模式上下文之外的功能(比如作为观察者模式中的主体或观察者的图形用户界面小部件)，它们通常已经是继承层次的一部分。由于Java缺乏多重继承，在这些情况下的实现可能有些笨拙：在Java中，如果参与者必须继承其角色和其他功能，那么其中一个超类型必须实现为接口。不幸的是，Java中的接口不能包含代码，因此无法附加方法的默认实现。&lt;/p&gt;
+&lt;p&gt;AspectJ中的开放类机制为我们提供了一种更灵活的方式来实现这些模式，因为它允许将接口和实现(代码)都附加到现有的类上。&lt;/p&gt;
+&lt;h3 id=&#34;523-打破循环依赖&#34;&gt;5.2.3 打破循环依赖&lt;/h3&gt;
+&lt;p&gt;一些设计模式管理对象集合之间复杂的交互。在面向对象的实现中，这些类紧密耦合并且相互依赖。引入循环依赖的设计模式的一个例子是中介器，它是在用户界面编程中经常使用的观察者模式的变体。在这里，对同事(如小部件)的更改会触发中介对象(如控制器)的更新。另一方面，作为对此的反应，调解人可能会更新一些或所有同事。&lt;/p&gt;
+&lt;h2 id=&#34;53-设计模式的横切结构&#34;&gt;5.3 设计模式的横切结构&lt;/h2&gt;
+&lt;p&gt;本节介绍了模式中横切结构的起源，并展示了在模式实现中使用AspectJ的观察到的好处与模式中的横切相关。角色定义了模式中参与者的行为和功能。这种角色的例子有:复合模式的组件、叶和复合，观察者模式的主题和观察者，或者抽象工厂模式的抽象和具体工厂。模式结构中的横切是由不同类型的角色及其与参与者类的交互引起的。&lt;/p&gt;
+&lt;p&gt;在一些模式中，角色是定义的：参与者在模式之外没有功能。也就是角色完整的定义了参与者。例如，扮演门面角色的对象为子系统提供统一的接口，并且(通常)没有自己的其他行为。定义角色通常包括客户端可访问的界面。&lt;/p&gt;
+&lt;p&gt;在其他模式中，角色是重叠的:它们被分配给在模式之外有功能和责任的类。例如，在观察者模式中，扮演主体和观察者的类不仅仅满足模式要求。例如，在图形用户界面环境中，主题可以是小部件。换句话说，在观察者模式上下文之外有行为的类。因此，主体角色只是现有类的扩充。叠加角色通常没有客户端可访问的界面。&lt;/p&gt;
+&lt;p&gt;在面向对象编程中，定义角色往往是通过子类化一个抽象超类来实现不同但相关的行为；叠加的角色通常是定义行为和责任的接口。&lt;/p&gt;
+&lt;p&gt;Java中有一个不一致的地方，叠加角色上的方法可能只供模式使用，但是它们必须在接口上定义，这要求它们是公共的。&lt;/p&gt;
+&lt;h3 id=&#34;531-角色和横切&#34;&gt;5.3.1 角色和横切&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/4e2f42fcd41c4494a60e89c4af6a5722~tplv-k3u1fbpfcp-watermark.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;叠加的角色导致模式和参与者之间三种不同的横切:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;角色可以横切参与者类。即对于1个角色，可以有n个类，1个类可以有n个角色；即如图5所示的主题角色。&lt;/li&gt;
+&lt;li&gt;感兴趣的概念操作可以横切一个或多个类中的方法。即一个概念操作可以有n个方法，n个概念操作中可以有1个方法；即触发观察者更新的主题变更操作，如图5所示。&lt;/li&gt;
+&lt;li&gt;来自多个模式的角色可以在类和/或方法方面相互横切。也就是说，模式A认为是一个角色的一部分的两个类，模式B可能认为是一个以上的角色，反之亦然。概念操作也是如此；即主体角色和主体变更操作，如图9所示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;表1显示了模式引入的角色类型和AspectJ实现的观察到的好处之间的关系。设计模式可以分为三类:只有定义角色的，有两种角色的和只有叠加角色的。该表显示，虽然第一组中模式的AspectJ实现没有显示出任何改进，但最后一组中的模式显示出我们确定的所有模块化优势类别的改进。对于具有两种角色的模式，结果取决于特定的模式。&lt;/p&gt;
+&lt;p&gt;鉴于AspectJ旨在模块化横切结构，这一结果并不奇怪。主要涉及横切结构的模式在AspectJ实现中被很好地模块化了。&lt;br&gt;
+（请注意，AspectJ没有移除模式的横切，而是提供了模块化该结构的机制。）&lt;/p&gt;
+&lt;h3 id=&#34;532-预测模型&#34;&gt;5.3.2 预测模型？&lt;/h3&gt;
+&lt;p&gt;模式角色之间的紧密联系，模式引入的横切，以及观察到的AspectJ实现的好处，暗示了给定设计模式的AspectJ实现的好处的预测模型。&lt;/p&gt;
+&lt;p&gt;通过定义角色，每个抽象单元(类)代表一个单一的概念，即一个类的功能对应于它在模式中的角色。继承用于区分相关但不同的实现。在这种情况下，透明性和可插入性并不是有用的属性，因为每个参与者本质上都只在一个特定的模式实例中有用。&lt;/p&gt;
+&lt;p&gt;有叠加行为，情况就不一样了。参与者在模式环境之外有自己的责任和理由。如果我们强迫一个这样的类进入模式上下文，我们至少有两个由一个抽象模块(类)表示的关注点:原始功能和模式特定的行为。由于模块化受到损害，由此产生的混乱和代码重复经常会导致问题。对于这些模式和它们的实现，模式功能和参与者的原始功能的干净模块化是合乎需要的。在AspectJ实现中，通常可以模块化抽象的模式行为，并让每个模式实例有一个方面来分配角色、概念操作和填充实例特定的代码。因为参与者在模式上下文之外确实有一个意义，所以他们并不局限于一个角色或者一个模式实例。&lt;/p&gt;
+&lt;p&gt;这个模型对于那些只有定义或只有叠加角色的GoF模式来说似乎是准确的。对其他人来说，预期的好处似乎取决于实现特定角色的参与者的数量。映射到多个参与者的叠加角色(例如，访问者中的元素、组合或组合中的叶)表明了模块化的潜力，即使模式也包括定义角色。&lt;/p&gt;
+&lt;h1 id=&#34;七-总结&#34;&gt;七、总结&lt;/h1&gt;
+&lt;p&gt;在模式实现中使用AspectJ的改进与模式中&lt;strong&gt;横切结构&lt;/strong&gt;的存在直接相关。这种横切结构出现在将行为叠加到参与者身上的模式中。在这种模式中，角色可以横切参与者类，概念操作可以横切方法(和构造函数)。就共享参与者而言，多个这样的模式也可以相互横切。&lt;/p&gt;
+&lt;p&gt;这些改进表现为一组与模块化相关的属性。模式实现更加本地化，并且在很多情况下是可重用的。因为AspectJ解决方案更好地将代码中的依赖与解决方案结构中的依赖联系起来，所以模式的AspectJ实现有时也是可组合的。&lt;/p&gt;
+&lt;p&gt;本地化模式实现提供了内在的代码可理解性优势——模式代码的单个命名单元的存在使得模式的存在和结构更加明确。此外，它还为改进代码文档提供了一个锚。&lt;/p&gt;
+&lt;p&gt;我们的结果为进一步的实验提出了几个方向，包括将AspectJ应用于更多的模式，试图系统地使用我们的可重用模式实现，以及试图在已知受设计模式思维影响的遗留代码库中使用AspectJ。未来工作的另一个途径是将这些结果与其他定向技术的使用进行比较。&lt;/p&gt;
+">论文转述 Design Pattern Implementation in Java and AspectJ</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-09-06-SpringBoot jar包运行报错/"" data-c="
+          &lt;p&gt;报错信息如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.lang.NoClassDefFoundError: org/springframework/boot/SpringApplication
+        at com.MainApplication.main(MainApplication.java:10)
+Caused by: java.lang.ClassNotFoundException: org.springframework.boot.SpringApplication
+        at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+        ... 1 more
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;生成jar&#34;&gt;生成jar&lt;/h1&gt;
+&lt;p&gt;首先，如果使用的是maven，那么直接执行package指令就可以生成jar包，如下图：&lt;br&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/149a1061ed2c4c5e922605fd60aae2a2~tplv-k3u1fbpfcp-zoom-1.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+但是，当我们使用&lt;code&gt;java -jar xx.jar&lt;/code&gt;运行时，会报错：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.lang.NoClassDefFoundError: org/springframework/boot/SpringApplication
+        at com.MainApplication.main(MainApplication.java:10)
+Caused by: java.lang.ClassNotFoundException: org.springframework.boot.SpringApplication
+        at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+        ... 1 more
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;大概的意思就是缺少依赖。&lt;/p&gt;
+&lt;h1 id=&#34;解决jar包依赖问题&#34;&gt;解决jar包依赖问题&lt;/h1&gt;
+&lt;p&gt;通过修改pom文件，解决依赖问题。&lt;/p&gt;
+&lt;p&gt;在pom文件中添加：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;build&amp;gt;
+    &amp;lt;plugins&amp;gt;
+        &amp;lt;plugin&amp;gt;
+            &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+            &amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt;
+        &amp;lt;/plugin&amp;gt;
+    &amp;lt;/plugins&amp;gt;
+&amp;lt;/build&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后重新打包(package)即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;需要注意的是&lt;/strong&gt;，随着IDEA的升级，现在开始出现了一个新的标签&lt;code&gt;pluginManagement&lt;/code&gt;，在这个标签里，也同样有&lt;code&gt;plugins&lt;/code&gt;标签，但千万不要把&lt;code&gt;pluginManagement&lt;/code&gt;中的&lt;code&gt;plugins&lt;/code&gt;当成上文中出现的&lt;code&gt;plugins&lt;/code&gt;标签，即下面的写法是错误的：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;build&amp;gt;
+	&amp;lt;pluginManagement&amp;gt;
+	    &amp;lt;plugins&amp;gt;
+	        &amp;lt;plugin&amp;gt;
+	            &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+	            &amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt;
+	        &amp;lt;/plugin&amp;gt;
+	    &amp;lt;/plugins&amp;gt;
+	&amp;lt;/pluginManagement&amp;gt;
+&amp;lt;/build&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">SpringBoot jar包运行报错</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-07-28-Go cannot find package google.golang.orgprotobuf 解决办法/"" data-c="
+          &lt;p&gt;使用Go语言开发时，出现访问Google有些包无法下载问题，解决方法如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Go的root目录，src下创建文件夹“src\google.golang.org”&lt;/li&gt;
+&lt;li&gt;在google.golang.org文件夹中，执行如下代码&lt;code&gt;git clone https://github.com/protocolbuffers/protobuf-go.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将生成的文件夹重命名为protobuf，如下图&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/17394d7e05d34455&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">Go cannot find package google.golang.orgprotobuf 解决办法</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2020-07-28-Go语言的反射/"" data-c="
+          &lt;p&gt;反射是语言里面非常重要的一个特性，我们经常会看见这个词，但是对于反射没有一个很好的理解，主要是因为对于反射的使用场景不太熟悉。&lt;/p&gt;
+&lt;h1 id=&#34;一-理解变量的内在机制&#34;&gt;一、理解变量的内在机制&lt;/h1&gt;
+&lt;p&gt;1.类型信息，元信息，是预先定义好的，静态的。&lt;/p&gt;
+&lt;p&gt;2.值信息，程序进行过程中，动态变化的。&lt;/p&gt;
+&lt;h1 id=&#34;二-反射和空接口&#34;&gt;二、反射和空接口&lt;/h1&gt;
+&lt;p&gt;1.空接口相当于一个容器，能接受任何东西。&lt;/p&gt;
+&lt;p&gt;2.那怎么判断空接口变量存储的是什么类型呢？之前有使用过类型断言，这只是一个比较基础的方法&lt;/p&gt;
+&lt;p&gt;3.如果想获取存储变量的类型信息和值信息就要使用反射机制，所以反射是什么？ 反射就是动态的获取变量类型信息和值信息的机制。&lt;/p&gt;
+&lt;h1 id=&#34;三-怎么利用反射分析空接口里面的信息呢&#34;&gt;三、怎么利用反射分析空接口里面的信息呢？&lt;/h1&gt;
+&lt;p&gt;①首先利用的是GO语言里面的Reflect包&lt;/p&gt;
+&lt;p&gt;②利用包里的TypeOf方法可以获取变量的类型信息&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func reflect_typeof(a interface{}) {
+    t := reflect.TypeOf(a)
+    fmt.Printf(&amp;quot;type of a is:%v\n&amp;quot;, t)
+ 
+    k := t.Kind()
+    switch k {
+    case reflect.Int64:
+        fmt.Printf(&amp;quot;a is int64\n&amp;quot;)
+    case reflect.String:
+        fmt.Printf(&amp;quot;a is string\n&amp;quot;)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;利用Kind() 可以获取t的类型，如代码所示，这里可以判断a是Int64还是string, 像下面一样使用：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    var x int64 = 3
+    reflect_example(x)
+ 
+    var y string = &amp;quot;hello&amp;quot;
+    reflect_example(y)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;打印结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type of a is:int64
+a is int64
+type of a is:string
+a is string
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;③利用包里的ValueOf方法可以获取变量的值信息&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func reflect_value(a interface{}) {
+    v := reflect.ValueOf(a)
+    k := v.Kind()
+    switch k {
+    case reflect.Int64:
+        fmt.Printf(&amp;quot;a is Int64, store value is:%d\n&amp;quot;, v.Int())
+    case reflect.String:
+        fmt.Printf(&amp;quot;a is String, store value is:%s\n&amp;quot;, v.String())
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;利用ValueOf方法可以得到变量的值信息,ValueOf返回的是一个Value结构体类型，有趣的是 可以使用 v.Type() 获取该变量的类型，和上面reflect.TypeOf() 获取的结果一样。&lt;/p&gt;
+&lt;p&gt;此外，因为值信息是动态的，所以我们不仅仅可以获取这个变量的类型，还能取得这个变量里面存储的值，利用 v.Int() 、 v.String() 等等就能取得值。如上面的main，调用此函数返回的结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a is Int64, store value is:3
+a is String, store value is:hello
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里存在一个问题，如果传进去一个类型，使用了错误的解析，那么将会在运行的时候报错， 例如将  一个string类型强行的v.Int()。&lt;/p&gt;
+&lt;p&gt;既然值类型是动态的，能取到保存的值，同样可以设置值。在反射里面有很多set的方法，例如SetFloat、SetInt()、SetString()等可以帮助我们设置值。&lt;/p&gt;
+&lt;p&gt;① 下面的例子，我想把 x设置为 6.28，但是会报错！&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    var x float64 = 3.14
+    v := reflect.ValueOf(x)
+    v.SetFloat(6.28)
+    fmt.Printf(&amp;quot;After Set Value is %f&amp;quot;, x)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;错误结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;panic: reflect: reflect.Value.SetFloat using unaddressable value
+......
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;结果上说明是不可设置的，为什么呢？ 因为我们的x是一个值类型，而值类型的传递是拷贝了一个副本，当 v := reflect.ValueOf(x) 函数通过传递一个 x 拷贝创建了 v，那么 v 的改变并不能更改原始的 x。要想 v 的更改能作用到 x，那就必须传递 x 的地址 v = reflect.ValueOf(&amp;amp;x)。修改程序如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    var x float64 = 3.14
+    v := reflect.ValueOf(&amp;amp;x)
+    v.SetFloat(6.28)
+    fmt.Printf(&amp;quot;After Set Value is %f&amp;quot;, x)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;结果：依然报错！为什么传了地址还报错？因为&amp;amp;x是地址了，所以它的类型就变了，可以通过v.Type()，看下改变成了什么：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    var x float64 = 3.14
+    v := reflect.ValueOf(&amp;amp;x)
+    fmt.Printf(&amp;quot;type of v is %v&amp;quot;, v.Type())   //打印的结果是：type of v is *float64
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;由程序可以知道，这个返回的是一个指针类型的。所以上面SetFloat才会失败，那怎么做？&lt;/p&gt;
+&lt;p&gt;我们正常的赋值，如果是地址的话，例如下面：一般我们都会对*y进行赋值, *的意思就是往这个地址里面赋值。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var y *float64 = new(float64)
+*y = 10.12
+fmt.Printf(&amp;quot;y = %v&amp;quot;, *y)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同样的，我们在反射里面也可以取地址，需要通过 Elem() 方法进行取地址。再次修改程序&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    var x float64 = 3.14
+    v := reflect.ValueOf(&amp;amp;x)
+    fmt.Printf(&amp;quot;type of v is %v\n&amp;quot;, v.Type())
+    v.Elem().SetFloat(6.28)
+    fmt.Printf(&amp;quot;After set x is %v&amp;quot;, x)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;结果为：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type of v is *float64
+After set x is 6.28
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;四-利用反射获取结构体里面的方法和调用&#34;&gt;四、利用反射获取结构体里面的方法和调用。&lt;/h1&gt;
+&lt;h2 id=&#34;1获取结构体的字段&#34;&gt;1.获取结构体的字段&lt;/h2&gt;
+&lt;p&gt;我们可以通过上面的方法判断一个变量是不是结构体。&lt;/p&gt;
+&lt;p&gt;可以通过 NumField() 获取所有结构体字段的数目、进而遍历，通过Field()方法获取字段的信息。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Student struct {
+    Name  string
+    Sex   int
+    Age   int
+    Score float32
+}
+ 
+func main() {
+    //创建一个结构体变量
+    var s Student = Student{
+        Name:  &amp;quot;BigOrange&amp;quot;,
+        Sex:   1,
+        Age:   10,
+        Score: 80.1,
+    }
+ 
+    v := reflect.ValueOf(s)
+    t := v.Type()
+    kind := t.Kind()
+     
+    //分析s变量的类型，如果是结构体类型，那么遍历所有的字段
+    switch kind {
+    case reflect.Int64:
+        fmt.Printf(&amp;quot;s is int64\n&amp;quot;)
+    case reflect.Float32:
+        fmt.Printf(&amp;quot;s is int64\n&amp;quot;)
+    case reflect.Struct:
+        fmt.Printf(&amp;quot;s is struct\n&amp;quot;)
+        fmt.Printf(&amp;quot;field num of s is %d\n&amp;quot;, v.NumField())
+        //NumFiled()获取字段数，v.Field(i)可以取得下标位置的字段信息，返回的是一个Value类型的值
+        for i := 0; i &amp;lt; v.NumField(); i++ {
+            field := v.Field(i)
+            //打印字段的名称、类型以及值
+            fmt.Printf(&amp;quot;name:%s type:%v value:%v\n&amp;quot;,
+                t.Field(i).Name, field.Type().Kind(), field.Interface())
+        }
+    default:
+        fmt.Printf(&amp;quot;default\n&amp;quot;)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;执行结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;s is struct
+field num of s is 4
+name:Name type:string value:BigOrange
+name:Sex type:int value:1
+name:Age type:int value:10
+name:Score type:float32 value:80.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里需要说明几个问题：&lt;/p&gt;
+&lt;p&gt;①打印字段名称的时候，使用的是t.Field(i).Name ，Name是静态的，所以属于类型的信息&lt;/p&gt;
+&lt;p&gt;②打印值的时候，这里将field.Interface()实际上相当于ValueOf的反操作（&lt;a href=&#34;https://www.cnblogs.com/baicaiyoudu/archive/2016/09/25/5905766.html&#34;&gt;可以参考这篇文章&lt;/a&gt;），所以才能把值打印出来&lt;/p&gt;
+&lt;p&gt;③此外如果Student中的Name字段变为name（私有），那么则会报错，不能反射出私有变量 错误信息 &lt;code&gt;panic: reflect.Value.Interface: cannot return value obtained from unexported field or method&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2对结构体内的字段进行赋值操作&#34;&gt;2.对结构体内的字段进行赋值操作&lt;/h2&gt;
+&lt;p&gt;参考下面的代码，对上面的Student进行赋值操作：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    s := Student{
+        Name:  &amp;quot;BigOrange&amp;quot;,
+        Sex:   1,
+        Age:   10,
+        Score: 80.1,
+    }
+ 
+    fmt.Printf(&amp;quot;Name:%v, Sex:%v,Age:%v,Score:%v \n&amp;quot;, s.Name, s.Sex, s.Age, s.Score)
+    v := reflect.ValueOf(&amp;amp;s)  //这里传的是地址！！！
+ 
+    v.Elem().Field(0).SetString(&amp;quot;ChangeName&amp;quot;)
+    v.Elem().FieldByName(&amp;quot;Score&amp;quot;).SetFloat(99.9)
+ 
+    fmt.Printf(&amp;quot;Name:%v, Sex:%v,Age:%v,Score:%v \n&amp;quot;, s.Name, s.Sex, s.Age, s.Score)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Name:BigOrange, Sex:1,Age:10,Score:80.1
+Name:ChangeName, Sex:1,Age:10,Score:99.9
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3获取结构体里面的方法&#34;&gt;3.获取结构体里面的方法&lt;/h2&gt;
+&lt;p&gt;可以通过NumMethod()获得接头体里面的方法数量，然后遍历通过Method()获取方法的具体信息。如下代码所示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;//新增-设置名称方法
+func (s *Student) SetName(name string) {
+     fmt.Printf(&amp;quot;有参数方法 通过反射进行调用:%v\n&amp;quot;, s)
+     s.Name = name
+}
+//新增-打印信息方法
+func (s *Student) PrintStudent() {
+    fmt.Printf(&amp;quot;无参数方法 通过反射进行调用:%v\n&amp;quot;, s)
+}
+ 
+func main() {
+    s := Student{
+        Name:  &amp;quot;BigOrange&amp;quot;,
+        Sex:   1,
+        Age:   10,
+        Score: 80.1,
+    }
+ 
+    v := reflect.ValueOf(&amp;amp;s)
+    //取得Type信息
+    t := v.Type()
+     
+    fmt.Printf(&amp;quot;struct student have %d methods\n&amp;quot;, t.NumMethod())
+ 
+    for i := 0; i &amp;lt; t.NumMethod(); i++ {
+        method := t.Method(i)
+        fmt.Printf(&amp;quot;struct %d method, name:%s type:%v\n&amp;quot;, i, method.Name, method.Type)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;struct student have 2 methods
+struct 0 method, name:PrintStudent type:func(*main.Student)
+struct 1 method, name:SetName type:func(*main.Student, string)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;从结果中看到我们可以获取方法的名称以及签名信息，并且这个方法的输出顺序是按照字母排列的。&lt;/p&gt;
+&lt;p&gt;并且输出结果可以看到一个有趣的现象：结构体的方法其实也是通过函数实现的例如 func(s Student) SetName(name string) 这个方法，反射之后的结果就是 func(main.Student , string) 实际上把Student当参数了。&lt;/p&gt;
+&lt;p&gt;此外还可以通过反射来调用这些方法。想要通过反射调用结构体里面的方法，首先要知道方法调用时一个动态的，所以要先通过ValueOf获取值，然后通过获取的值进行方法的调用 ，通过 value里面的Method方法 返回一个方法，然后通过Call方法调用，Call是参数是一个切片，也就是参数的列表。以下是Call方法的定义：可以看到参数是一个Value的数组：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/31c638c8e4c94fb8b9ddea294a80f9a5~tplv-k3u1fbpfcp-zoom-1.image&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+如下代码展示了如何调用有参数的方法和无参数的方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;func main() {
+    s := Student{
+        Name:  &amp;quot;BigOrange&amp;quot;,
+        Sex:   1,
+        Age:   10,
+        Score: 80.1,
+    }
+ 
+    v := reflect.ValueOf(&amp;amp;s)
+ 
+    //通过reflect.Value获取对应的方法并调用
+    m1 := v.MethodByName(&amp;quot;PrintStudent&amp;quot;)
+    var args []reflect.Value
+    m1.Call(args)
+ 
+    m2 := v.MethodByName(&amp;quot;SetName&amp;quot;)
+    var args2 []reflect.Value
+    name := &amp;quot;stu01&amp;quot;
+    nameVal := reflect.ValueOf(name)
+    args2 = append(args2, nameVal)
+    m2.Call(args2)
+    m1.Call(args)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;执行结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;无参数方法 通过反射进行调用:&amp;amp;main.Student{Name:&amp;quot;BigOrange&amp;quot;, Sex:1, Age:10, Score:80.1}
+有参数方法 通过反射进行调用:&amp;amp;main.Student{Name:&amp;quot;BigOrange&amp;quot;, Sex:1, Age:10, Score:80.1}
+无参数方法 通过反射进行调用:&amp;amp;main.Student{Name:&amp;quot;stu01&amp;quot;, Sex:1, Age:10, Score:80.1}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面格式打印：&lt;/p&gt;
+&lt;p&gt;%v      相应值的默认格式。            Printf(&amp;quot;%v&amp;quot;, people)   {zhangsan}，&lt;/p&gt;
+&lt;p&gt;%+v     打印结构体时，会添加字段名     Printf(&amp;quot;%+v&amp;quot;, people)  {Name:zhangsan}&lt;/p&gt;
+&lt;p&gt;%#v     相应值的Go语法表示            Printf(&amp;quot;#v&amp;quot;, people)   main.Human{Name:&amp;quot;zhangsan&amp;quot;}&lt;/p&gt;
+&lt;h1 id=&#34;五-怎么获取结构体里tag的信息&#34;&gt;五、怎么获取结构体里tag的信息。&lt;/h1&gt;
+&lt;p&gt;有时候我们在类型上面定义一些tag，例如使用json和数据库的时候。Field()方法返回的StructField结构体中保存着Tag信息，并且Tag信息可以通过一个Get(Key)的方法获取出来，如下代码所示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;type Student struct {
+    Name string `json:&amp;quot;jsName&amp;quot; db:&amp;quot;dbName&amp;quot;`
+}
+ 
+func main() {
+    s := Student{
+        Name: &amp;quot;BigOrange&amp;quot;,
+    }
+    v := reflect.ValueOf(&amp;amp;s)
+    t := v.Type()
+    field0 := t.Elem().Field(0)
+    fmt.Printf(&amp;quot;tag json=%s\n&amp;quot;, field0.Tag.Get(&amp;quot;json&amp;quot;))
+    fmt.Printf(&amp;quot;tag db=%s\n&amp;quot;, field0.Tag.Get(&amp;quot;db&amp;quot;))
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;结果：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tag json=jsName
+tag db=dbName
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;六-应用场景&#34;&gt;六、应用场景&lt;/h1&gt;
+&lt;p&gt;1.序列化和反序列化，比如json, protobuf等各种数据协议&lt;/p&gt;
+&lt;p&gt;2.各种数据库的ORM，比如gorm，sqlx等数据库中间件&lt;/p&gt;
+&lt;p&gt;3.配置文件解析相关的库，比如yaml、ini等&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;from https://www.cnblogs.com/dcz2015/p/11199060.html&lt;/p&gt;
+">Go语言的反射</a>
       </div>
       
       <div class="item">

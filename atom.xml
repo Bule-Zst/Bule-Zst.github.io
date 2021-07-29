@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-05-28T08:36:20.633Z</updated>
+    <updated>2021-07-29T10:35:18.888Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -10,1136 +10,760 @@
     <icon>http://Bule-Zst.gitee.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
     <entry>
-        <title type="html"><![CDATA[NIO与epoll模型学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/">
+        <title type="html"><![CDATA[JMM学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/">
         </link>
-        <updated>2021-05-27T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习NIO及Netty线程模型过程中的笔记，学习资料为视频，链接如下：</p>
+        <updated>2021-07-28T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习JMM过程中的笔记，学习资料为视频，链接如下：</p>
 <ul>
-<li><a href="https://ke.qq.com/course/3293405?taid=11073426419761373">深入Hotspot源码与Linux内核理解NIO与Netty线程模型</a></li>
+<li><a href="https://www.aliyundrive.com/s/B67o2UcNvG8">深入理解并发内存模型JMM与内存屏障</a></li>
 </ul>
 <hr>
-<h2 id="io">IO</h2>
-<h3 id="bio">BIO</h3>
-<h4 id="基本写法">基本写法</h4>
-<pre><code class="language-java">ServerSocket serverSocket = new ServerSocket( 9000 );
-while( true ) {
-    Socket socket = serverSocket.accept();
-    BufferedReader reader = new BufferedReader( new InputStreamReader( socket.getInputStream()));
-    System.out.println( reader.readLine() );
-}
-</code></pre>
-<p>缺点：并发量为1</p>
-<h4 id="优化1使用多线程进行优化">优化1：使用多线程进行优化</h4>
-<pre><code class="language-java">ServerSocket serverSocket = new ServerSocket( 9000 );
-while( true ) {
-    Socket socket = serverSocket.accept();
-    new Thread() {
-        @Override
-        public void run() {
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader( new InputStreamReader( socket.getInputStream()));
-                System.out.println( reader.readLine() );
-            } catch (IOException e) {
-                e.printStackTrace();
+<h2 id="java内存模型">Java内存模型</h2>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210728151840865.png" alt="image-20210728151840865" style="zoom:60%;" />
+<p>对于静态变量，每个线程中会存储变量副本。</p>
+<blockquote>
+<p>只要不影响到变量的值、变量不参与运算，则不会从主内存中拉取，比如while、if、赋值给其他变量、作为方法参数等</p>
+<p>https://blog.csdn.net/ren421259121/article/details/90447853</p>
+</blockquote>
+<p>以下程序会死循环：</p>
+<pre><code class="language-java">public class Main {
+    static boolean exit = false;
+    public static void main(String[] args) throws InterruptedException {
+        new Thread() {
+            @Override
+            public void run() {
+                while( !exit ) {
+
+                }
+                System.out.println( &quot;end&quot; );
             }
-            
-        }
-    }.start();
-}
-</code></pre>
-<p>缺点：存在C10K问题，当并发量过大时，因为开的线程太多，会被内存挤爆。</p>
-<h4 id="优化2使用线程池进行优化">优化2：使用线程池进行优化</h4>
-<p>缺点：并发数会受到线程池中线程数的约束</p>
-<h4 id="共同问题">共同问题</h4>
-<p>可能会存在建立连接后不发数据的情况，导致该线程阻塞，降低系统性能</p>
-<h3 id="nio">NIO</h3>
-<h4 id="基本写法-2">基本写法</h4>
-<pre><code class="language-java">ServerSocketChannel serverChannel = ServerSocketChannel.open();
-serverChannel.bind( new InetSocketAddress(9000) );
-serverChannel.configureBlocking( false );
-List&lt;SocketChannel&gt; socketChannelList = new ArrayList&lt;&gt;();
-while( true ) {
-    SocketChannel socketChannel = serverChannel.accept();
-    if( socketChannel != null ) {
-        socketChannel.configureBlocking( false );
-        socketChannelList.add( socketChannel );
-    }
-    Iterator&lt;SocketChannel&gt; iterator = socketChannelList.iterator();
-    while( iterator.hasNext() ) {
-        SocketChannel socketChannel1 = iterator.next();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(128);
-        int len = socketChannel1.read( byteBuffer );
-        if( len &gt; 0 ) {
-            System.out.println( new String(byteBuffer.array()));
-        } else if( len == -1 ) {
-            iterator.remove();
-        }
+        }.start();
+        Thread.sleep(2000);
+        exit = true;
     }
 }
 </code></pre>
-<p>缺点：</p>
+<h2 id="jmm的原子操作">JMM的原子操作</h2>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210729144205406.png" alt="image-20210729144205406" style="zoom:80%;" />
+<h2 id="volatile">volatile</h2>
+<p>作用：保证多线程间共享变量的可见性</p>
+<p>实现原理：</p>
 <ul>
-<li>对所有连接进行轮询，判断是否发送数据，但可能大部分连接都没有发送数据（空轮询）</li>
-<li>C10K问题</li>
+<li>禁止JVM优化：指令重排、使用寄存器</li>
+<li>利用CPU lock指令为总线加锁</li>
 </ul>
-<h4 id="优化使用selector进行优化">优化：使用selector进行优化</h4>
-<pre><code class="language-java">ServerSocketChannel serverChannel = ServerSocketChannel.open();
-serverChannel.bind( new InetSocketAddress(9000) );
-serverChannel.configureBlocking( false );
-Selector selector = Selector.open();
-serverChannel.register( selector, SelectionKey.OP_ACCEPT );
-while( true ) {
-    selector.select();
-    Set&lt;SelectionKey&gt; selectionKeys = selector.selectedKeys();
-    Iterator&lt;SelectionKey&gt; iterator = selectionKeys.iterator();
-    while( iterator.hasNext() ) {
-        SelectionKey selectionKey = iterator.next();
-        if( selectionKey.isAcceptable() ) {
-            ServerSocketChannel serverChannel1 = (ServerSocketChannel) selectionKey.channel();
-            SocketChannel socketChannel = serverChannel1.accept();
-            socketChannel.register( selector, SelectionKey.OP_READ );
-        } else if( selectionKey.isReadable() ) {
-            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
-            ByteBuffer byteBuffer = ByteBuffer.allocate(128);
-            int len = socketChannel.read( byteBuffer );
-            if( len &gt; 0 ) {
-                System.out.println( new String(byteBuffer.array()));
-            } else if( len == -1 ) {
-                iterator.remove();
+<h3 id="缓存一致性协议-vs-volatile">缓存一致性协议 VS volatile</h3>
+<h4 id="缓存一致性协议mesi">缓存一致性协议（MESI）</h4>
+<p>四种状态：</p>
+<ul>
+<li>M（Modified）：在缓存行中被标记为Modified的值，与主存中的值不同，这个值将会在它被读取之前写入内存，并且状态置为Shared。</li>
+<li>E（Exclusive）：在缓存行中被标记为Exclusive的值与主存中的值一致，被读取时置为Shared状态，被写时置为Modified状态。</li>
+<li>S（Shared）：值也可能存在于其他缓存中，但是它的值和主存中的值一致。</li>
+<li>I（Invalid）：缓存行无效。</li>
+</ul>
+<p>关于状态之间的转换以及更详细介绍MESI的内容，可以看这篇博客：https://www.cnblogs.com/igoodful/p/9493156.html</p>
+<p>做个总结，MESI协议，保证了各CPU缓存之间的一致性。</p>
+<h4 id="volatile是否多余">volatile是否多余</h4>
+<p>既然MESI协议可以保证各CPU缓存之间数据的一致性，那么为什么还需要volatile关键词来保证各线程之间数据的可见性（一致性）呢？volatile关键字是否多余？</p>
+<p>答：不多余</p>
+<p>理由：</p>
+<ul>
+<li>
+<p>出发点不同：</p>
+<ul>
+<li>MESI协议保证了主内存和各CPU缓存的一致，而volatile保证了java进程中各线程之间的一致性。如果没有MESI，那么各线程之间一定是不一致的，但只有MESI，也不能完全保证各线程间的一致性。</li>
+</ul>
+</li>
+<li>
+<p>实现的功能不同：</p>
+<ul>
+<li>
+<p>MESI的功能上文已经说过了，即，保证了各CPU缓存之间的一致性</p>
+</li>
+<li>
+<p>volatile的功能：</p>
+<ul>
+<li>
+<p>防止JVM优化</p>
+</li>
+<li>
+<p>防止数据从CPU cache以外的地方读取，这里做一下说明，MESI只能保证主内存和CPU缓存（CPU cache）的一致性，但CPU中还有很多额外的组件用于数据存储，这些组件可以提高CPU数据读写的效率，而这些组件的一致性MESI是不保证的。</p>
+<blockquote>
+<p>因为 MESI只是保证了多核cpu的独占cache之间的一致性，但是cpu的并不是直接把数据写入L1 cache的，中间还可能有store buffer。有些arm和power架构的cpu还可能有load buffer或者invalid queue等等。</p>
+<p>https://www.zhihu.com/question/296949412</p>
+</blockquote>
+</li>
+<li>
+<p>保证多个变量的顺序一致，即，consistency。因为volatile会对总线加锁，且防止指令重排，所以可以保证用volatile修饰的多个变量之间的操作顺序。而MESI只能保证单个变量的操作顺序，即coherence。</p>
+<blockquote>
+<p>Coherence deals with maintaining a global order in which writes to a single location or single variable are seen by all processors.</p>
+<p>Consistency deals with the ordering of operations to multiple locations with respect to all processors.</p>
+<p>https://www.zhihu.com/question/296949412</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><s>### CPU lock指令</s></p>
+<p><s>CPU lock指令会将对应缓存行的状态改成E，并立即修改主内存中的数据。其他CPU通过总线嗅探机制，监听到数据的修改，将自己工作内存中的缓存行状态改成I。</s></p>
+<p><s>如果不使用volatile关键字，JVM则不会使用lock指令，此时，对变量的修改会导致缓存行的状态变成M，并不会修改主内存的数据，因此会导致不同线程中共享变量数据不一致。</s></p>
+<p><s>之所以不修改主内存，是因为对主内存的操作相对于CPU操作来说过于耗时，因此不会频繁操作主内存。</s></p>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/xrq730/p/7048693.html">就是要你懂Java中volatile关键字实现原理</a></li>
+<li><a href="https://www.zhihu.com/question/63120810">java多线程在单核CPU上，还是需要volatile synchronized吗？</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[K8S-Scheduler学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-07-28-K8S-Scheduler学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-07-28-K8S-Scheduler学习笔记/">
+        </link>
+        <updated>2021-07-28T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习K8S-Scheduler过程中的笔记，学习资料为视频，链接如下：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV12J411q7k4?from=search&amp;seid=1977024601217253447">阿里技术大牛 30 分钟讲透 Kubernetes : 调度器的调度流程和算法介绍</a></li>
+</ul>
+<hr>
+<p>调度器功能：负责整个集群资源的调度功能，根据特定的调度算法和策略，将 Pod 调度到最优的工作节点上面去，从而更加合理、更加充分的利用集群的资源。</p>
+<p>什么是Pod：Pod是K8S中最小的调度单元，Pod和docker容器的关系就相当于docker容器和进程，在目前的技术环境下，往往一个服务依赖于多个docker容器，因此，k8s中提出了Pod的概念，使用Pod对docker容器进行打包，统一进行调度。</p>
+<h2 id="对pod进行自定义排序">对Pod进行自定义排序</h2>
+<ul>
+<li>按名称排序：kubectl get pods --sort-by=.metadata.name</li>
+<li>按创建时间进行排序：kubectl get pods --sort-by=.metadata.creationTimestamp</li>
+<li>按启动时间进行排序：kubectl get pods --sort-by=.status.startTime</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://blog.csdn.net/m0_50434960/article/details/114851074">k8s:Kubernetes 调度器介绍</a></li>
+<li><a href="https://www.jianshu.com/p/bfaa566f17fe">细说kubernetes - 为什么是pod？</a></li>
+<li><a href="https://www.cnblogs.com/yangyuliufeng/p/14257928.html">k8s调度器扩展机制</a></li>
+<li><a href="https://www.bilibili.com/video/BV12J411q7k4?from=search&amp;seid=1977024601217253447">阿里技术大牛 30 分钟讲透 Kubernetes : 调度器的调度流程和算法介绍</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[JVM性能调优学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-07-27-JVM性能调优学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-07-27-JVM性能调优学习笔记/">
+        </link>
+        <updated>2021-07-27T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习JVM性能调优过程中的笔记，学习资料为视频，链接如下：</p>
+<ul>
+<li><a href="https://www.aliyundrive.com/s/mmv27Dfr291">双十一亿级电商系统JVM性能调优实战</a></li>
+</ul>
+<hr>
+<h2 id="java虚拟机组成">Java虚拟机组成</h2>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727153842086.png" alt="image-20210727153842086" style="zoom:67%;" />
+<ul>
+<li>类装载子系统</li>
+<li>字节码执行引擎</li>
+<li>运行时数据区（内存模型）
+<ul>
+<li>栈（线程）
+<ul>
+<li>存放程序运行过程中的数据</li>
+<li>栈 -&gt; 线程 -&gt; 方法
+<ul>
+<li>从栈中划分一块区域给线程，再从这块区域中划分一块给方法</li>
+<li>方法中的局部变量就存在对应区域内</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>程序计数器：记录每个线程当前运行的代码在方法区中的位置</li>
+<li>堆：存放程序运行过程中产生的对象</li>
+<li>方法区（元空间）：常量+静态变量+类信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="gc工作原理">GC工作原理</h2>
+<h3 id="minor-gc新生代gc">Minor GC（新生代GC）</h3>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727152911187.png" alt="image-20210727152911187" style="zoom:80%;" />
+<ul>
+<li>GC Roots根节点：线程栈的本地变量、静态变量、本地方法栈的变量等等</li>
+<li>将“GC Roots”对象作为起点，从这些节点开始向下搜索引用的对象，找到的对象都标记为<strong>非垃圾对象</strong>，其余未标记的对象都是垃圾对象。</li>
+<li>每次回收，都会将非垃圾对象放到s0(s1)中，然后杀死Eden和s1(s0)中的对象，并将非垃圾对象的分代年龄加一，当对象的分代年龄变成15时，会被移动到老年代中。</li>
+<li>如果非垃圾对象过多，s0(s1)中放不下，则会被放到老年代中。</li>
+</ul>
+<h3 id="minor-gc-vs-full-gc">Minor GC VS Full GC</h3>
+<ul>
+<li>Minor GC会跳过处于老年代中的对象，但这样可能会使得部分被老年代中对象所引用的对象被标记成垃圾对象，因此，在Dirty cards中会存储所有老年代对象引用的对象。</li>
+<li>Minor GC与Full GC相比，非垃圾对象较少，因此拷贝时间较短</li>
+<li>算法不同：
+<ul>
+<li>Mnior GC用空间换时间，需要两个内存空间，直接Copy</li>
+<li>Full GC用时间换空间，需要Mark+Compact</li>
+</ul>
+</li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/kevin7234/p/10644654.html">jvm minor gc 为什么比 full gc 快很多</a></li>
+<li><a href="https://www.zhihu.com/question/35172533">为什么minor gc比full gc/major gc快？</a></li>
+</ul>
+<h2 id="arthas工具">Arthas工具</h2>
+<p>阿里JVM性能调优工具</p>
+<ul>
+<li>
+<p>dashboard：显示监控仪表盘</p>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155106380.png" alt="image-20210727155106380" style="zoom:50%;" />
+</li>
+<li>
+<p>thread thread_id：显示占用CPU较多的代码行数</p>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155209073.png" alt="image-20210727155209073" style="zoom:70%;" />
+</li>
+<li>
+<p>jad：反编译运行中的代码</p>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155320962.png" alt="image-20210727155320962" style="zoom:80%;" />
+</li>
+</ul>
+<h2 id="性能调优">性能调优</h2>
+<p>目的：减少 STW 的次数。</p>
+<p>STW: Stop-The-World，在执行垃圾收集算法时，Java应用程序的其他所有线程都被挂起（除了垃圾收集帮助器之外）。</p>
+<p>Full GC的SWT时间远大于Minor GC。</p>
+<p>调优方法：</p>
+<ul>
+<li>对业务场景进行分析，为年轻代和老年代分配适当的空间，减少Full GC的频率。</li>
+<li>对于“朝花夕拾”的对象，通过参数调优防止其进入老年代。</li>
+<li>使用不同的垃圾收集器，不同收集器，适用于不同的场景。</li>
+</ul>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727162355407.png" alt="image-20210727162355407" style="zoom:55%;" />
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[非对称加密的应用]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-07-19-非对称加密的应用/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-07-19-非对称加密的应用/">
+        </link>
+        <updated>2021-07-19T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="原理">原理</h2>
+<p>稍微提一下原理</p>
+<p>主要原理是，用一定的数学方法生成一对密钥对（公钥+私钥），公钥加密后，私钥可以解密，同时，私钥加密后，公钥也可以解密。</p>
+<h2 id="应用">应用</h2>
+<h3 id="数据传输">数据传输</h3>
+<p>1、A生成一对密钥对，把公钥发给B。</p>
+<p>2、B把需要传输的数据用公钥进行加密，然后发给A。</p>
+<p>3、A收到后，用私钥进行解密，即可获取数据。</p>
+<h4 id="如何防截获">如何防截获</h4>
+<p>使用报文摘要算法</p>
+<p>接上文</p>
+<p>B在第2步传数据时，使用报文摘要算法对所发数据进行摘要生成，之后，用自己的私钥对摘要进行加密，然后伴随数据一起发给A。</p>
+<p>A在收到后，对自己的私钥对数据进行解密，从而获取数据，之后再用B的公钥对摘要进行解密，然后比对收到的数据和摘要是否匹配，从而验证数据是否被篡改。</p>
+<h3 id="身份验证">身份验证</h3>
+<p>A要证明自己的身份</p>
+<p>B向A发送一段数据</p>
+<p>A用自己的私钥进行加密，然后发回给B，B用A的公钥进行解密，比对数据是否为自己发给A的数据，从而验证A的身份。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在Docker容器内创建新的Docker容器]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-07-15-在Docker容器内创建新的Docker容器/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-07-15-在Docker容器内创建新的Docker容器/">
+        </link>
+        <updated>2021-07-15T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="要解决的问题">要解决的问题</h2>
+<p>这篇文章主要解决的问题如标题所述：如何在Docker容器内创建新的Docker容器。受限于标题长度，没法详细描述要解决的问题，因此，第一节首先讲一下问题场景。</p>
+<p>随着Docker技术以及微服务结构的普及，现在越来越多的应用被打包放在Docker容器中，并且，为了采用微服务的架构，应用通常是需要拆分成多个Docker容器的。</p>
+<p>那么，这就带来了一个问题，如何在一个Docker容器内去控制别的Docker容器。这里需要啰嗦一句，我想表达的意思并不是在一个Docker容器的内部创建新的Docker容器，而是说，在一个Docker容器内部，控制宿主机，让其创建新的Docker容器。</p>
+<p>问题描述讲完了，接下来说一下如何实现。</p>
+<h2 id="如何解决">如何解决</h2>
+<p>解决这个问题，就需要涉及到Docker的通信机制。</p>
+<p>Docker分为服务端和客户端。当服务端启动后，会在/var/run/文件夹中创建docker.sock这个文件，并且会持续监听这个文件。当有请求被写到docker.sock文件时，Docker服务端就会执行相应的操作。</p>
+<p>以往我们使用docker run等命令时，其实本质上也是往docker.sock文件中写请求。</p>
+<p>了解到这一点后，我们在创建Docker容器时，就可以把宿主机的docker.sock文件挂载到容器内部，这样，便可以在容器内部控制宿主机对容器的操作了。</p>
+<p>一共有两种方式，第一种是，在容器内部安装docker客户端，然后便可以像在宿主机中一样，使用docker命令，不同的地方时，docker命令控制的并不是容器内部的Docker服务端，而是宿主机中的Docker服务端。</p>
+<p>可以使用如下命令进行容器的创建<code>curl -XPOST --unix-socket /var/run/docker.sock -d '{&quot;Image&quot;:&quot;centos&quot;}' -H 'Content-Type: application/json' http://localhost/containers/create</code>。</p>
+<p>第二种方法是，使用docker-java，通过java api操作宿主机中的Docker服务端。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://www.jianshu.com/p/dd0c814680ba">解析 /var/run/docker.sock</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/94224305">Docker客户端连接远程Docker服务</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Leetcode 169. 多数元素]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-07-02-Leetcode 169. 多数元素/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-07-02-Leetcode 169. 多数元素/">
+        </link>
+        <updated>2021-07-02T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>题目链接：<a href="https://leetcode-cn.com/problems/majority-element/">169. 多数元素</a></p>
+<hr>
+<h2 id="题目">题目</h2>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210702100456543.png" alt="image-20210702100456543" loading="lazy"></figure>
+<h2 id="解法">解法</h2>
+<h3 id="哈希表">哈希表</h3>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(n)</p>
+<pre><code class="language-c++">class Solution {
+public:
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        unordered_map&lt;int, int&gt; counts;
+        int majority = 0, cnt = 0;
+        for (int num: nums) {
+            ++counts[num];
+            if (counts[num] &gt; cnt) {
+                majority = num;
+                cnt = counts[num];
             }
         }
-        iterator.remove();
+        return majority;
     }
-}
+};
 </code></pre>
-<h4 id="selector原理">Selector原理</h4>
-<p>在linux环境下，selector基于epoll实现（在windows环境下，不基于epoll）。</p>
-<p>使用epoll_create创建epoll对象，使用epoll_ctl进行注册，使用epoll_wait进行阻塞监听。</p>
-<p>Java调用操作系统的内核函数来创建Socket，获取到Socket的文件描述符，再创建一个Selector对象，对应操作系统的Epoll描述符，将获取到的Socket连接的文件描述符的事件绑定到Selector对应的Epoll文件描述符上，进行事件的异步通知。</p>
-<p>epoll基于“回调”实现监听。</p>
-<p>在Selector中，连接建立、数据读取都依赖于系统函数，例如，连接建立依赖于accept函数。因此，Selector可以使用epoll监听系统函数的调用，从而实现对连接建立、数据读取的监听。</p>
-<p>本质上，epoll监听的事文件描述符的状态（可读、可写）</p>
-<h4 id="对selector的理解">对Selector的理解</h4>
-<p>在Selector的实现中，看似是存在阻塞的（<code>selector.select()</code>），但Selector依旧属于同步非阻塞IO的范畴，这是因为，这里所谓的阻塞，指的是当有多个连接希望建立时，因为正在处理某个连接的建立，导致其他连接无法被处理（连接被阻塞了），因此，这里所谓的阻塞，面向的对象是连接，当然，也可以是数据的读取，而不是程序的阻塞。</p>
-<p>对于<code>selector.select()</code>方法，当没有连接希望建立时，会阻塞，一旦有连接希望建立，则会立刻结束阻塞，且当有多个连接希望建立时，多个连接之间也不会有相互影响（即，因为线程A的建立，导致线程B建立请求的阻塞）。</p>
-<p>在<code>selector.select()</code>方法的内部，其实调用的是<code>epoll_wait</code>方法，这个方法是异步非阻塞的。</p>
-<h3 id="nio与aio的区别">NIO与AIO的区别</h3>
-<p>NIO为同步非阻塞IO，会在程序中进行轮询，当发现有事件发生后，会对事件进行处理。</p>
-<p>AIO为异步非阻塞IO，预先写好处理逻辑，当有事件发生后，处理函数会被调用，用于处理事件（观察者模式）。</p>
+<h3 id="分治">分治</h3>
+<p>时间复杂度：O(nlogn)</p>
+<p>空间复杂度：O(logn)</p>
+<p>思路：如果数 <code>a</code> 是数组 <code>nums</code> 的众数，如果我们将 <code>nums</code> 分成两部分，那么 <code>a</code> 必定是至少一部分的众数（</p>
+<h4 id="时间复杂度分析">时间复杂度分析</h4>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>T</mi><mo>(</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mo>)</mo><mo>+</mo><mn>2</mn><mi>n</mi><mi mathvariant="normal">​</mi></mrow><annotation encoding="application/x-tex">T(n)=2T({n\over2})+2n​
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">n</span><span class="mord">​</span></span></span></span></span></p>
+<p>主定理：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>a</mi><mi>T</mi><mo>(</mo><mfrac><mi>n</mi><mi>b</mi></mfrac><mo>)</mo><mo>+</mo><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>d</mi></msup><mo>)</mo><mspace linebreak="newline"></mspace><mi>T</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>d</mi></msup><mo>)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>&gt;</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>d</mi></msup><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>O</mi><mo>(</mo><msup><mi>b</mi><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></msup><mo>)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>&lt;</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">T(n)=aT({n\over b})+O(n^d) \\
+T(n) = \left\{ \begin{array}{lr} 
+O(n^d) &amp; d &gt; log_ba \\
+O(n^dlogn) &amp; d = log_ba \\
+O(b^{log_ba}) &amp; d &lt; log_ba
+\end{array} \right.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span><span class="mclose">)</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.6273239999999998em;vertical-align:-1.5636619999999999em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.49999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-3.15001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.30002em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.063662em;"><span style="top:-4.214554em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.0054459999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span><span style="top:-1.7963380000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mord mathdefault mtight">a</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5636619999999999em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.063662em;"><span style="top:-4.214554em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span></span></span><span style="top:-3.0054459999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span></span></span><span style="top:-1.7963380000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5636619999999999em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<pre><code class="language-c++">class Solution {
+    int count_in_range(vector&lt;int&gt;&amp; nums, int target, int lo, int hi) {
+        int count = 0;
+        for (int i = lo; i &lt;= hi; ++i)
+            if (nums[i] == target)
+                ++count;
+        return count;
+    }
+    int majority_element_rec(vector&lt;int&gt;&amp; nums, int lo, int hi) {
+        if (lo == hi)
+            return nums[lo];
+        int mid = (lo + hi) / 2;
+        int left_majority = majority_element_rec(nums, lo, mid);
+        int right_majority = majority_element_rec(nums, mid + 1, hi);
+        if (count_in_range(nums, left_majority, lo, hi) &gt; (hi - lo + 1) / 2)
+            return left_majority;
+        if (count_in_range(nums, right_majority, lo, hi) &gt; (hi - lo + 1) / 2)
+            return right_majority;
+        return -1;
+    }
+public:
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        return majority_element_rec(nums, 0, nums.size() - 1);
+    }
+};
+</code></pre>
+<h3 id="排序">排序</h3>
+<h4 id="快速排序">快速排序</h4>
+<p>时间复杂度：O(nlogn)</p>
+<p>空间复杂度：O(logn) 栈空间</p>
+<h4 id="堆排序">堆排序</h4>
+<p>时间复杂度：O(nlogn)</p>
+<p>空间复杂度：O(1)</p>
+<pre><code class="language-c++">class Solution {
+public:
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        sort(nums.begin(), nums.end());
+        return nums[nums.size() / 2];
+    }
+};
+</code></pre>
+<h3 id="随机化">随机化</h3>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(1)</p>
+<p>思路：随机挑选一个下标对应的元素并验证，有很大的概率能找到众数。</p>
+<p>期望：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mo>=</mo><mi>l</mi><mi>i</mi><msub><mi>m</mi><mrow><mi>n</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msub><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>i</mi><mo>∗</mo><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">E=lim_{n\to+\infty}\sum_{i=1}^n i * {1\over 2^i}=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.25833100000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7570857142857143em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></p>
+<pre><code class="language-c++">class Solution {
+public:
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        while (true) {
+            int candidate = nums[rand() % nums.size()];
+            int count = 0;
+            for (int num : nums)
+                if (num == candidate)
+                    ++count;
+            if (count &gt; nums.size() / 2)
+                return candidate;
+        }
+        return -1;
+    }
+};
+</code></pre>
+<h3 id="多数投票算法">多数投票算法</h3>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(1)</p>
+<pre><code>nums:      [#, 7, 7, 5, 7, 5, 1 | 5, 7 | 5, 5, 7, 7 | 7, 7, 7, 7]
+candidate:     7  7  7  7  7  7   5  5   5  5  5  5   7  7  7  7
+count:      0  1  2  1  2  1  0   1  0   1  2  1  0   1  2  3  4
+               7  7  7  7  7  7   7  7   7  7  7  7   7  7  7  7
+value:      0  1  2  1  2  1  0  -1  0  -1 -2 -1  0   1  2  3  4
+</code></pre>
+<p>步骤：</p>
+<ol>
+<li>检测count是否为0，如果为0，就用当前数组的元素值更新candidate。</li>
+<li>如果当前数组的元素值和candidate相同，那么，count++，否则，count--。</li>
+<li>当数组遍历完时，当前的candidate，就是我们要的答案。</li>
+</ol>
+<p>特性：</p>
+<ul>
+<li>count永远不为负数。</li>
+<li>当candidate和最终答案不相同时，count和value呈相反数；如果candidate和最终答案相同，count和value是相等的。</li>
+<li>value的最终值等于：7的个数-非7的个数。</li>
+</ul>
+<p>多数投票算法证明：</p>
+<ul>
+<li>
+<p>如果候选人不是7，则7会和其他<strong>非</strong>候选人一起反对候选人，所以候选人一定会下台(count==0时发生换届选举)</p>
+</li>
+<li>
+<p>如果候选人是7，则 7 会支持自己，其他候选人会反对，但因为 7 票数超过一半，所以 7 一定会成功当选</p>
+</li>
+</ul>
+<pre><code class="language-c++">class Solution {
+public:
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        int candidate = -1;
+        int count = 0;
+        for (int num : nums) {
+            if (num == candidate)
+                ++count;
+            else if (--count &lt; 0) {
+                candidate = num;
+                count = 1;
+            }
+        }
+        return candidate;
+    }
+};
+</code></pre>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[RESTHeart学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-14-RESTHeart学习笔记/">
+        <title type="html"><![CDATA[Jmeter ThreadGroup LoopController各参数含义梳理]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-06-29-Jmeter ThreadGroup LoopController各参数含义梳理/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-06-29-Jmeter ThreadGroup LoopController各参数含义梳理/">
         </link>
-        <updated>2021-05-14T00:35:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Zabbix过程中的笔记</p>
-<p>学习资料来源：</p>
+        <updated>2021-06-29T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="实例">实例</h2>
+<pre><code class="language-xml">&lt;ThreadGroup guiclass=&quot;ThreadGroupGui&quot; testclass=&quot;ThreadGroup&quot; testname=&quot;线程组&quot; enabled=&quot;true&quot;&gt;
+	&lt;stringProp name=&quot;ThreadGroup.on_sample_error&quot;&gt;continue&lt;/stringProp&gt;
+	&lt;elementProp name=&quot;ThreadGroup.main_controller&quot; elementType=&quot;LoopController&quot; guiclass=&quot;LoopControlPanel&quot; testclass=&quot;LoopController&quot; testname=&quot;循环控制器&quot; enabled=&quot;true&quot;&gt;
+		&lt;boolProp name=&quot;LoopController.continue_forever&quot;&gt;false&lt;/boolProp&gt;
+		&lt;intProp name=&quot;LoopController.loops&quot;&gt;-1&lt;/intProp&gt;
+	&lt;/elementProp&gt;
+	&lt;stringProp name=&quot;ThreadGroup.num_threads&quot;&gt;20&lt;/stringProp&gt;
+	&lt;stringProp name=&quot;ThreadGroup.ramp_time&quot;&gt;1&lt;/stringProp&gt;
+	&lt;boolProp name=&quot;ThreadGroup.scheduler&quot;&gt;true&lt;/boolProp&gt;
+	&lt;stringProp name=&quot;ThreadGroup.duration&quot;&gt;600&lt;/stringProp&gt;
+	&lt;stringProp name=&quot;ThreadGroup.delay&quot;&gt;&lt;/stringProp&gt;
+	&lt;boolProp name=&quot;ThreadGroup.same_user_on_next_iteration&quot;&gt;true&lt;/boolProp&gt;
+&lt;/ThreadGroup&gt;
+</code></pre>
+<h2 id="参数说明">参数说明</h2>
 <ul>
-<li><a href="https://restheart.org/docs/try/">Try RESTHeart Online</a></li>
-<li><a href="https://www.cnblogs.com/rongfengliang/p/9584470.html">restheart 基本使用</a></li>
-</ul>
-<hr>
-<p>PS：在RESTHeart中，如果要更新的item不存在，则会自动进行创建。</p>
-<h2 id="创建">创建</h2>
-<h3 id="创建文档">创建文档</h3>
-<p>POST</p>
-<p><code>host_url/db_id/collection_id -d &quot;{'from':'you','message':'create document'}&quot;</code></p>
-<h2 id="获取">获取</h2>
-<h3 id="获取集合中所有文档">获取集合中所有文档</h3>
-<p>GET</p>
-<p><code>host_url/db_id/collection_id</code></p>
-<h3 id="获取特定文档">获取特定文档</h3>
-<p>GET</p>
-<p><code>host_url/db_id/collection_id/document_id</code></p>
-<h3 id="指定过滤条件获取集合中的部分文档">指定过滤条件，获取集合中的部分文档</h3>
-<p>GET</p>
-<p><code>host_url/db_id/collection_id?filter={'from':'you'}&amp;pagesize=2</code></p>
-<h2 id="更新">更新</h2>
-<h3 id="更新数据库">更新数据库</h3>
-<p>PUT</p>
-<p><code>host_url/db_id</code></p>
-<h3 id="更新集合">更新集合</h3>
-<p>PUT</p>
-<p><code>host_url/db_id/collection_id</code></p>
-<h3 id="更新整个文档">更新整个文档</h3>
-<p>PUT</p>
-<p><code>host_url/db_id/collection_id/document_id -d &quot;{'from':'you','message':'create document'}&quot;</code></p>
-<h3 id="更新文档中的部分内容">更新文档中的部分内容</h3>
-<p>PATCH</p>
-<p><code>host_url/db_id/collection_id/document_id -d &quot;{'from':'you','message':'create document'}&quot;</code></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Zabbix学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-14-Zabbix学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-14-Zabbix学习笔记/">
-        </link>
-        <updated>2021-05-14T00:35:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Zabbix过程中的笔记</p>
-<p>学习资料来源：</p>
+<li>ThreadGroup.num_threads：并发线程数</li>
+<li>LoopController.loops：每个线程的循环次数，-1表示无限循环。</li>
+<li>压测的总请求数：ThreadGroup.num_threads * LoopController.loops</li>
+<li>调度器配置
 <ul>
-<li><a href="https://www.zsythink.net/archives/790">zabbix从放弃到入门</a></li>
-</ul>
-<hr>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Celery学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-13-Celery学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-13-Celery学习笔记/">
-        </link>
-        <updated>2021-05-13T02:06:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Celery过程中的笔记</p>
-<p>学习资料来源：</p>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/22304455">使用Celery-小明</a></li>
-</ul>
-<hr>
-<h2 id="架构">架构</h2>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210513101505012.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MongoDB学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-12-MongoDB学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-12-MongoDB学习笔记/">
-        </link>
-        <updated>2021-05-12T01:26:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习MongoDB过程中的笔记</p>
-<p>学习资料来源：</p>
-<ul>
-<li><a href="https://www.cnblogs.com/xiaohuiduan/p/11403891.html">Mongodb最基础入门教程</a></li>
-<li><a href="https://developer.aliyun.com/article/64352">什么场景应该用 MongoDB ？</a></li>
-<li><a href="https://www.zhihu.com/question/32071167">MongoDB 应用场景?</a></li>
-</ul>
-<hr>
-<h2 id="mongodb使用场景">MongoDB使用场景</h2>
-<ul>
-<li>使用方便
-<ul>
-<li>增加字段不用改表结构</li>
+<li>ThreadGroup.duration：线程组的持续时间</li>
+<li>ThreadGroup.delay：启动延迟</li>
 </ul>
 </li>
-<li>可进行地理位置查询</li>
-<li>方便扩展</li>
+<li>ThreadGroup.scheduler：调度器是否生效</li>
+</ul>
+<h2 id="压测是否结束">压测是否结束</h2>
+<ul>
+<li>如果调度器不生效，则线程组达到循环次数后，压测结束。</li>
+<li>如果调度器生效，则每次循环结束后，都会检查持续时间，如果大于ThreadGroup.duration，则压测结束。在此过程中，如果线程组达到循环次数，也会结束压测。</li>
 </ul>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[redis学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-08-redis学习笔记/">
+        <title type="html"><![CDATA[OpenResty学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-06-25-OpenResty学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-06-25-OpenResty学习笔记/">
         </link>
-        <updated>2021-05-08T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习redis过程中的笔记，学习资料为视频及pdf，链接如下：</p>
+        <updated>2021-06-25T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="是什么-能做什么">是什么、能做什么</h2>
+<p>OpenResty 是一个基于 Nginx 的 Web 平台。Web开发人员可以使用 OpenResty 搭建 Web 平台。借助于OpenResty，开发人员可以使用 Lua 脚本语言调动 Nginx 支持的各种由 C 语言实现的功能模块，从而实现特定的Web 业务需求。</p>
+<p>OpenResty 本质上是集成了 Lua 组件的 Nginx，是Nginx Plus。</p>
+<h2 id="优点-缺点是什么">优点、缺点是什么</h2>
 <ul>
-<li><a href="https://www.aliyundrive.com/s/2Fg2Arj1Doe">双十一秒杀系统后端Redis高并发架构实战</a></li>
-<li><a href="https://www.aliyundrive.com/s/N7WiV8Wgjm9">亿级流量新浪微博与微信Redis架构实战</a></li>
-<li><a href="https://www.aliyundrive.com/s/e1jtR4D15kz">Redis常见面试题汇总.pdf</a></li>
-<li><a href="https://www.aliyundrive.com/s/CprZdykwNd2">Redis持久化、主从与哨兵架构详解.pdf</a></li>
-<li><a href="https://www.aliyundrive.com/s/1HdqGt4krK1">Redis命令参考手册完整版.pdf</a></li>
-</ul>
-<hr>
-<h2 id="分布式">分布式</h2>
-<h3 id="分布式并发场景中可能存在的问题">分布式并发场景中可能存在的问题</h3>
-<p>使用synchronized对代码块加锁，但因为是分布式，多个应用同时访问redis，依旧无法解决并发冲突问题</p>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210508160113749.png" alt="" loading="lazy"></figure>
-<h3 id="redis实现分布式锁">Redis实现分布式锁</h3>
-<p>使用SETNX实现分布式锁</p>
+<li>优点
 <ul>
-<li>
-<p>存在的问题：因为某些原因，锁在用完后没有成功释放，如，功能代码块抛异常、系统宕机</p>
-</li>
-<li>
-<p>解决方案：</p>
+<li>高并发
 <ul>
-<li>增加过期时间：</li>
-<li>存在的问题：
-<ul>
-<li>实际业务执行时间可能会大于过期时间：进程A执行过慢，导致锁自动被释放，之后进程B进行加锁，开始处理业务，然后进程A执行完，释放B的锁，又导致进程C进行加锁，无限循环，最终导致锁永久失效。</li>
-</ul>
-</li>
-<li>解决方案：自己的锁只有自己可以释放（或者过期自动释放）
-<ul>
-<li>存在的问题：
-<ul>
-<li>还是<strong>过期时间</strong>的锅：当进程A需要释放锁的时候，从redis获取锁的value，发现是自己加的锁，但随后，锁因为过期时间，自动失效，进程B随即进行加锁，然后进程A释放锁，就导致会把进程B的锁释放掉。</li>
-</ul>
-</li>
-<li>解决方案：
-<ul>
-<li>锁续命：另开一个线程，持续进行加锁操作，例如过期时间是30s，则每10s加一次锁，保证业务执行过程中，锁不会自动失效。</li>
+<li>相较于apache（200-300）、tomcat（1000），Nginx可以支持几万的并发量，因此，我们常常使用Nginx做负载均衡，OpenResty的出现，使得开发人员可以依托 Lua 脚本在 Nginx 的内部添加业务代码，充分利用Nginx高并发的优势。</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>缺点
+<ul>
+<li>暂未发现</li>
 </ul>
 </li>
-</ul>
-<h3 id="分布式锁的性能问题">分布式锁的性能问题</h3>
-<p>使用分布式锁，本质上是让所有web请求串行化执行，执行效率较低。</p>
-<p>解决方案：分段加锁</p>
-<ul>
-<li>举例：秒杀场景下，为了防止超卖，需要使用分布式锁，例如商品数量为200个，那么可以划分成10分，分别进行加锁，这样可以提高约10倍的效率。</li>
-</ul>
-<h2 id="缓存-数据库双写不一致问题">缓存、数据库双写不一致问题</h2>
-<p>场景1：</p>
-<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213252468.png" alt="" loading="lazy"></figure>
-<p>场景2：</p>
-<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210508213547682.png" alt="" loading="lazy"></figure>
-<p><strong>不一致</strong>：数据库里数据为6，缓存为10</p>
-<h3 id="解决方案">解决方案</h3>
-<p>比较不推荐的做法：</p>
-<ul>
-<li>延迟双删</li>
-<li>内存队列</li>
-</ul>
-<p>推荐做法：</p>
-<ul>
-<li>读多写少
-<ul>
-<li>分布式锁：通过读写锁进行优化</li>
-</ul>
-</li>
-<li>读多写多，对一致性要求不高
-<ul>
-<li>给缓存设置过期时间，保证双写不一致的最大时长。</li>
-</ul>
-</li>
-<li>读多写多，对一致性要求高
-<ul>
-<li>不要用缓存：因为缓存更新后，可能过了几秒，就又要进行更新。这种情况下，不如不用缓存。</li>
-<li>使用canal中间件</li>
-</ul>
-</li>
-</ul>
-<h2 id="redis">Redis</h2>
-<p>全称：Remote Dictionary Server</p>
-<h3 id="为什么性能高">为什么性能高</h3>
-<p>对性能的影响：</p>
-<ul>
-<li>消极
-<ul>
-<li>单线程</li>
-</ul>
-</li>
-<li>积极
-<ul>
-<li>内存操作</li>
-<li>基于epoll的多路复用模型</li>
-<li>高效的数据存储结构</li>
-</ul>
-</li>
-</ul>
-<h4 id="数据存储结构">数据存储结构</h4>
-<p>redis使用哈希表存储key-value对</p>
-<p>在redis中有对象和数据结构的概念，redis对象利用不同的数据结构进行存储，例如，String对象可以用int数据结构进行存储，也可以用SDS数据结构进行存储。</p>
-<p>对不同类型的对象，内部存储逻辑不同：</p>
-<ul>
-<li>
-<p>String对象：</p>
-<ul>
-<li>
-<p>int数据结构</p>
-</li>
-<li>
-<p>SDS数据结构</p>
-<ul>
-<li>
-<p>embstr：小于等于44字节</p>
-<figure data-type="image" tabindex="4"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210528141323986.png" alt="image-20210528141323986" loading="lazy"></figure>
-</li>
-<li>
-<p>raw：大于44字节</p>
-<figure data-type="image" tabindex="5"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210528141338577.png" alt="image-20210528141338577" loading="lazy"></figure>
-</li>
-<li>
-<p>embstr与raw的区别是，embstr只会申请一次内存空间</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Hash对象</p>
-<ul>
-<li>
-<p>压缩列表：空间占用小，查找慢。当数据个数较小或者数据所占内存空间较少（键和值的大小都小于 64 字节）时，使用压缩列表。</p>
-<figure data-type="image" tabindex="6"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210525101358367.png" alt="image-20210525101358367" loading="lazy"></figure>
-</li>
-<li>
-<p>哈希表：空间占用大，查找快</p>
-</li>
-</ul>
-</li>
-<li>
-<p>List对象</p>
-<ul>
-<li>
-<p>压缩列表：数据数量较少或所占空间较少时，使用压缩列表</p>
-</li>
-<li>
-<p>链表：空间占用更多，但添加、删除元素时，效率高</p>
-</li>
-<li>
-<p>快速列表：Redis3.2之后，用快速列表代替压缩列表和链表</p>
-<figure data-type="image" tabindex="7"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210528150649602.png" alt="image-20210528150649602" loading="lazy"></figure>
-</li>
-</ul>
-</li>
-<li>
-<p>Set对象</p>
-<ul>
-<li>整数集合</li>
-<li>哈希表</li>
-</ul>
-</li>
-<li>
-<p>ZSet对象：</p>
-<ul>
-<li>
-<p>压缩列表</p>
-</li>
-<li>
-<p>跳表：查找快，但更占空间且更新性能低</p>
-<figure data-type="image" tabindex="8"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210524163213876.png" alt="image-20210524163213876" loading="lazy"></figure>
-</li>
-<li>
-<p>当元素个数超过<code>zset-max-ziplist-entries</code>，切换成跳表。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="epoll多路复用模型">epoll多路复用模型</h4>
-<h5 id="redis为什么要用epoll">redis为什么要用epoll</h5>
-<ul>
-<li>redis是单线程的：redis是内存操作，虽然内存的速度比CPU慢，但依旧很快，CPU的利用率较高，无需使用多线程提高CPU的利用率。</li>
-<li>对于单线程的应用，当用户进行网络请求后，该线程会被阻塞，等待用户输入。线程被阻塞，也就意味着整个进程、整个redis被阻塞。若等待用户输入时间较长，则在高并发场景下，会极大影响redis性能。</li>
-<li>因此，redis需要将等待用户输入这一操作委托给系统去完成，即，redis基于系统提供的epoll实现了多路复用模型。</li>
-</ul>
-<h5 id="epoll的实现原理">epoll的实现原理</h5>
-<h5 id="redis如何使用epoll">redis如何使用epoll</h5>
-<p>epoll_create</p>
-<p>epoll_ctl</p>
-<p>epoll_wait</p>
-<h3 id="不同数据类型的适用场景">不同数据类型的适用场景</h3>
-<h4 id="string">String</h4>
-<ul>
-<li>单值缓存</li>
-<li>对象缓存：JSON字符串</li>
-<li>分布式锁</li>
-<li>计数器</li>
-<li>分布式系统全局序列号
-<ul>
-<li>分库分表，用redis维护Id。优化思路：一次性让Id增加100，减少对redis的访问次数。</li>
-</ul>
-</li>
-</ul>
-<h4 id="hash">Hash</h4>
-<ul>
-<li>对象缓存
-<ul>
-<li>与string方式存储相比，其优势在于：对于局部频繁更新，效率更高，比如，只修改对象的某个属性</li>
-</ul>
-</li>
-</ul>
-<h4 id="list">List</h4>
-<ul>
-<li>实现栈、队列、拥塞队列</li>
-<li>消息流：当大V发消息后，将消息id添加到每个关注用户的消息List中，使用LPUSH，用户获取消息使用LRANGE。</li>
-</ul>
-<h4 id="set">Set</h4>
-<ul>
-<li>抽奖功能：因为set有srandmember、spop方法</li>
-<li>点赞功能：频繁添加、删除、比较元素，用set效率比list好</li>
-<li>关注模型（共同关注、我关注的人关注了谁、可能认识的人）：集合操作</li>
-</ul>
-<h4 id="zset">ZSet</h4>
-<ul>
-<li>排行榜</li>
-</ul>
-<h3 id="备份策略">备份策略</h3>
-<ul>
-<li>每小时都copy一份rdb或aof的备份到一个目录中去，仅仅保留最近48小时的备份</li>
-<li>每天都保留一份当日的数据备份到一个目录中去，保留最近1个月的备份</li>
-<li>每天晚上将当前机器上的备份复制一份到其他机器上，以防机器损坏</li>
-</ul>
-<h3 id="主从架构">主从架构</h3>
-<p>防止单点redis宕机，对业务造成影响</p>
-<p>使用主从架构，子节点同步父节点信息，当父节点宕机后，用子节点代替父节点继续提供服务</p>
-<p>主从节点切换导致锁丢失：使用zookeeper代替redis</p>
-<p>redis vs zookeeper：redis性能更好；zookeeper一致性更好。</p>
-<h3 id="哨兵机制">哨兵机制</h3>
-<p>1、故障节点主观下线</p>
-<p>2、故障节点客观下线</p>
-<p>3、Sentinel集群选举Leader</p>
-<p>4、Sentinel Leader决定新主节点</p>
-<p>详细资料：<a href="https://blog.csdn.net/weixin_28871885/article/details/113315639">redis 从节点如何选举从节点升级为主节点_redis sentinel集群选举机制剖析</a></p>
-<h3 id="lua脚本">Lua脚本</h3>
-<p>Lua脚本可以植入redis内部进行运行</p>
-<p>Lua脚本的优势：</p>
-<ul>
-<li>减少网络开销：本来5次网络请求的操作，可以用一个请求完成，原先5次请求的逻辑放在redis服务器上完成。使用脚本，减少了网络往返时延。这点跟管道类似。</li>
-<li>原子操作：Redis会将整个脚本作为一个整体执行，中间不会被其他命令插入。管道不是原子的，不过redis的批量操作命令(类似mset)是原子的。</li>
-<li>替代redis的事务功能：redis自带的事务功能很鸡肋，报错不支持回滚，而redis的lua脚本几乎实现了常规的事务功能，支持报错回滚操作，官方推荐如果要使用redis的事务功能可以用redis lua替代。</li>
 </ul>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://www.cnblogs.com/hunternet/p/11306690.html">Redis数据结构——压缩列表</a></li>
-<li><a href="https://blog.csdn.net/qq_45401061/article/details/107382276">面试官：Redis 为什么这么快？除了基于内存操作还有其他原因吗？</a></li>
-<li><a href="https://blog.csdn.net/u011663149/article/details/85307615">Redis为什么是单线程、及高并发快的大原因详解</a></li>
-<li><a href="https://blog.csdn.net/yyoc97/article/details/85804654">从redis为什么单线程还那么快到epoll的设计原理</a></li>
-<li><a href="https://blog.csdn.net/weixin_28871885/article/details/113315639">redis 从节点如何选举从节点升级为主节点_redis sentinel集群选举机制剖析</a></li>
+<li>https://www.runoob.com/w3cnote/openresty-intro.html</li>
+<li>https://www.zhihu.com/question/266535644?sort=created</li>
 </ul>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[docker学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-05-07-docker学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-05-07-docker学习笔记/">
+        <title type="html"><![CDATA[跳表]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-06-24-跳表/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-06-24-跳表/">
         </link>
-        <updated>2021-05-07T01:19:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习docker过程中的笔记，学习资料为视频，链接如下：</p>
-<p><a href="https://ke.qq.com/course/3385294?taid=11066554472179662">Docker部署微服务实战</a></p>
-<hr>
-<h2 id="安装">安装</h2>
-<pre><code># 设置yum源
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-# 安装docker
-yum -y install docker-ce # ce为社区版
-# 启动docker
-service docker start
-# 验证
-docker version
-</code></pre>
-<h2 id="使用">使用</h2>
-<h3 id="镜像相关">镜像相关</h3>
-<pre><code># 搜索镜像
-docker search java
-# 下载镜像
-docker pull java:8
-docker pull nginx:1.14
-# 列出本地镜像
-docker images
-# 删除镜像
-docker rmi java:8
-</code></pre>
-<h3 id="容器相关">容器相关</h3>
-<pre><code># 新建并启动容器
-docker run -d -p 91:80 -net=bridge(default)/host nginx
-# 列出容器
-docker ps
-# 启动/停止容器
-docker start/stop container_id
-# 查看容器信息
-docker inspect container_id
-# 进入容器
-docker container exec -it container_id /bin/bash
-</code></pre>
-<h2 id="好处">好处</h2>
-<ul>
-<li>将主流的中间件打包成docker，可实现快速部署。因为docker的使用，如启动和关闭，命令都是相同的，所以可以使用脚本实现自动化的部署。而如果不使用docker，不同的中间件都有一套对应的运维命令，运维工作的效率将会降低很多。</li>
-</ul>
-<h2 id="构建镜像">构建镜像</h2>
-<pre><code># 指定基础镜像
-FROM nginx
-# 执行命令
-RUN echo &quot;hello, world!&quot; &gt; hello.html
-# 复制文件到容器
-ADD a.jar /app.jar
-# 声明需要暴露的端口
-EXPOSE 8761
-# 配置容器启动后执行的命令
-ENTRYPOINT[&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+        <updated>2021-06-24T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="定义">定义</h2>
+<blockquote>
+<p>跳跃表以有序的方式在层次化的链表中保存元素，效率和平衡树（AVL）媲美 —— 查找、删除、添加等操作都可以在对数期望时间下完成， 并且比起平衡树来说， 跳跃表的实现要简单直观得多。</p>
+<p>https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210624182132534.png" alt="image-20210624182132534" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210624191004554.png" alt="image-20210624191004554" loading="lazy"></figure>
+<h2 id="原理">原理</h2>
+<p>学过数据结构的都知道，在单链表中查询一个元素的时间复杂度为O(n)，即使该单链表是有序的，我们也不能通过2分的方式缩减时间复杂度。</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205210928206" alt="这里写图片描述" loading="lazy"></figure>
+<p>如上图，我们要查询元素为55的结点，必须从头结点，循环遍历到最后一个节点，不算-INF(负无穷)一共查询8次。那么用什么办法能够用更少的次数访问55呢？最直观的，当然是新开辟一条捷径去访问55。</p>
+<figure data-type="image" tabindex="4"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211105653" alt="这里写图片描述" loading="lazy"></figure>
+<p>如上图，我们要查询元素为55的结点，只需要在L2层查找4次即可。在这个结构中，查询结点为46的元素将耗费最多的查询次数5次。即先在L2查询46，查询4次后找到元素55，因为链表是有序的，46一定在55的左边，所以L2层没有元素46。然后我们退回到元素37，到它的下一层即L1层继续搜索46。非常幸运，我们只需要再查询1次就能找到46。这样一共耗费5次查询。</p>
+<p>那么，如何才能更快的搜寻55呢？有了上面的经验，我们就很容易想到，再开辟一条捷径。</p>
+<figure data-type="image" tabindex="5"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211246498" alt="这里写图片描述" loading="lazy"></figure>
+<p>如上图，我们搜索55只需要2次查找即可。这个结构中，查询元素46仍然是最耗时的，需要查询5次。即首先在L3层查找2次，然后在L2层查找2次，最后在L1层查找1次，共5次。很显然，这种思想和2分非常相似，那么我们最后的结构图就应该如下图。</p>
+<figure data-type="image" tabindex="6"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211539787" alt="这里写图片描述" loading="lazy"></figure>
+<p>我们可以看到，最耗时的访问46需要6次查询。即L4访问55，L3访问21、55，L2访问37、55，L1访问46。我们直觉上认为，这样的结构会让查询有序链表的某个元素更快。那么究竟算法复杂度是多少呢？</p>
+<p>如果有n个元素，因为是2分，所以层数就应该是log n层 (本文所有log都是以2为底)，再加上自身的1层。以上图为例，如果是4个元素，那么分层为L3和L4，再加上本身的L2，一共3层；如果是8个元素，那么就是3+1层。最耗时间的查询自然是访问所有层数，耗时logn+logn，即2logn。为什么是2倍的logn呢？我们以上图中的46为例，查询到46要访问所有的分层，每个分层都要访问2个元素，中间元素和最后一个元素。所以时间复杂度为O(logn)。</p>
+<p>至此为止，我们引入了最理想的跳跃表，但是如果想要在上图中插入或者删除一个元素呢？比如我们要插入一个元素22、23、24……，自然在L1层，我们将这些元素插入在元素21后，那么L2层，L3层呢？我们是不是要考虑插入后怎样调整连接，才能维持这个理想的跳跃表结构。我们知道，平衡二叉树的调整是一件令人头痛的事情，左旋右旋左右旋……一般人还真记不住，而调整一个理想的跳跃表将是一个比调整平衡二叉树还复杂的操作。幸运的是，我们并不需要通过复杂的操作调整连接来维护这样完美的跳跃表。有一种基于概率统计的插入算法，也能得到时间复杂度为O(logn)的查询效率，这种跳跃表才是我们真正要实现的。</p>
+<h2 id="实现">实现</h2>
+<h3 id="抛硬币">抛硬币</h3>
+<p>先讨论插入，我们先看理想的跳跃表结构，L2层的元素个数是L1层元素个数的1/2，L3层的元素个数是L2层的元素个数的1/2，以此类推。从这里，我们可以想到，只要在插入时尽量保证上一层的元素个数是下一层元素的1/2，我们的跳跃表就能成为理想的跳跃表。那么怎么样才能在插入时保证上一层元素个数是下一层元素个数的1/2呢？很简单，抛硬币就能解决了！假设元素X要插入跳跃表，很显然，L1层肯定要插入X。那么L2层要不要插入X呢？我们希望上层元素个数是下层元素个数的1/2，所以我们有1/2的概率希望X插入L2层，那么抛一下硬币吧，正面就插入，反面就不插入。那么L3到底要不要插入X呢？相对于L2层，我们还是希望1/2的概率插入，那么继续抛硬币吧！以此类推，元素X插入第n层的概率是(1/2)的n次。这样，我们能在跳跃表中插入一个元素了。</p>
+<p>在此还是以上图为例：跳跃表的初试状态如下图，表中没有一个元素：</p>
+<figure data-type="image" tabindex="7"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212059243" alt="这里写图片描述" loading="lazy"></figure>
+<p>如果我们要插入元素2，首先是在底部插入元素2，如下图：</p>
+<figure data-type="image" tabindex="8"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212313963" alt="这里写图片描述" loading="lazy"></figure>
+<p>然后我们抛硬币，结果是正面，那么我们要将2插入到L2层，如下图:</p>
+<figure data-type="image" tabindex="9"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212409123" alt="这里写图片描述" loading="lazy"></figure>
+<p>继续抛硬币，结果是反面，那么元素2的插入操作就停止了，插入后的表结构就是上图所示。接下来，我们插入元素33，跟元素2的插入一样，现在L1层插入33，如下图：</p>
+<figure data-type="image" tabindex="10"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212458264" alt="这里写图片描述" loading="lazy"></figure>
+<p>然后抛硬币，结果是反面，那么元素33的插入操作就结束了，插入后的表结构就是上图所示。接下来，我们插入元素55，首先在L1插入55，插入后如下图：</p>
+<figure data-type="image" tabindex="11"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212553339" alt="这里写图片描述" loading="lazy"></figure>
+<p>然后抛硬币，结果是正面，那么L2层需要插入55，如下图：</p>
+<figure data-type="image" tabindex="12"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212659309" alt="这里写图片描述" loading="lazy"></figure>
+<p>继续抛硬币，结果又是正面，那么L3层需要插入55，如下图：</p>
+<figure data-type="image" tabindex="13"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212712590" alt="这里写图片描述" loading="lazy"></figure>
+<p>以此类推，我们插入剩余的元素。当然因为规模小，结果很可能不是一个理想的跳跃表。但是如果元素个数n的规模很大，学过概率论的同学都知道，最终的表结构肯定非常接近于理想跳跃表。</p>
+<p>当然，这样的分析在感性上是很直接的，但是时间复杂度的证明实在复杂，在此我就不深究了，感兴趣的可以去看关于跳跃表的paper。再讨论删除，删除操作没什么讲的，直接删除元素，然后调整一下删除元素后的指针即可。跟普通的链表删除操作完全一样。再来讨论一下时间复杂度，插入和删除的时间复杂度就是查询元素插入位置的时间复杂度，这不难理解，所以是O(logn)。</p>
+<h3 id="随机数">随机数</h3>
+<p>在上一节中，我们采用抛硬币的方式来决定新元素插入的最高层数，这当然不能在程序中实现。代码中，我们采用随机数生成的方式来获取新元素插入的最高层数。我们先估摸一下n的规模，然后定义跳跃表的最大层数maxLevel，那么底层，也就是第0层，元素是一定要插入的，概率为1；最高层，也就是maxLevel层，元素插入的概率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi></mrow></msup></mrow><annotation encoding="application/x-tex">1/2^{maxLevel}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span></span>。</p>
+<p>我们先随机生成一个范围为0~<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{maxLevel}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>的一个整数r。那么元素r小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{maxLevel-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>的概率为1/2，r小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{maxLevel-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>的概率为1/4，……，r小于2的概率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1/2^{maxLevel-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991079999999998em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>，r小于1的概率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi></mrow></msup></mrow><annotation encoding="application/x-tex">1/2^{maxLevel}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span></span>。</p>
+<p>举例，假设maxLevel为4，那么r的范围为0~15，则r小于8的概率为1/2，r小于4的概率为1/4，r小于2的概率为1/8，r小于1的概率为1/16。1/16正好是maxLevel层插入元素的概率，以此类推。</p>
+<figure data-type="image" tabindex="14"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210624193459656.png" alt="image-20210624193459656" loading="lazy"></figure>
+<p>以上分析是随机数算法的关键。算法跟实现跟语言无关，以下贴一下C++语言的代码实现。</p>
+<h3 id="代码">代码</h3>
+<figure data-type="image" tabindex="15"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211539787" alt="这里写图片描述" loading="lazy"></figure>
+<p>Node* next;</p>
+<p>Node* next[MAXL];</p>
+<p>next[2] = null;</p>
+<pre><code class="language-c++">struct SkipListNode {
+    int val;
+    vector&lt;SkipListNode *&gt; level;
+    SkipListNode (int _val, int sz=32) : val(_val), level(sz, nullptr) {}
+};
 
-docker build -t nginx:hello .
-</code></pre>
-<h2 id="virtual-machines-vs-docker">Virtual Machines VS Docker</h2>
-<p>OS：虚拟机有实实在在的操作系统；Docker通过引擎虚拟操作系统</p>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210507193822675.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[NOJ优化-PHP-Laravel]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-04-25-NOJ优化-PHP-Laravel/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-04-25-NOJ优化-PHP-Laravel/">
-        </link>
-        <updated>2021-04-25T09:12:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章，主要介绍一下NOJ的部署。</p>
-<p>主要参考这篇文章：https://njuptaaa.github.io/docs/#/noj/guide/deploy</p>
-<hr>
-<h2 id="部署">部署</h2>
-<h3 id="安装环境">安装环境</h3>
-<p>需要安装的环境有：Apache、PHP、Composer、MySQL、Redis</p>
-<p>Apache和MySQL在我本地已经有了，直接跳过。</p>
-<p>对于PHP和Composer，直接在官网下载，需要注意的是，对于Composer，直接下载可执行的安装包就行；对于PHP，需要下载的是zip，而不是source code，如下图：</p>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210425175552450.png" alt="image-20210425175552450" loading="lazy"></figure>
-<p>PHP压缩包下载完，解压到任意文件夹中，然后运行Composer的安装程序，在安装过程中，需要指定php的路径，选择解压后文件夹中的php.exe：</p>
-<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210425175722912.png" alt="image-20210425175722912" loading="lazy"></figure>
-<h3 id="git-clone">git-clone</h3>
-<p>在这一步，需要注意的是，需要把noj项目克隆到apache或者nginx的文件夹下，并将其中的public文件夹设置成根目录。</p>
-<h3 id="composer-install">composer install</h3>
-<h4 id="your-lock-file-does-not-contain-a-compatible-set-of-packages-please-run-composer-update">Your lock file does not contain a compatible set of packages. Please run composer update.</h4>
-<p>环境配置好后，就可以开始安装项目了，使用<code>composer install</code>进行安装，但我本地报错：</p>
-<pre><code>E:\NOJ&gt;composer install
-Installing dependencies from lock file (including require-dev)
-Verifying lock file contents can be installed on current platform.
-Your lock file does not contain a compatible set of packages. Please run composer update.
+class Skiplist {
+public:
+    SkipListNode *head, *tail;
+    int level, length;
+    static int MAXL = 32;
 
-  Problem 1
-    - grubersjoe/bing-daily-photo is locked to version v2.0.0 and an update of this package was not requested.
-    - grubersjoe/bing-daily-photo v2.0.0 requires ext-intl * -&gt; it is missing from your system. Install or enable PHP's intl extension.
-  Problem 2
-    - intervention/image is locked to version 2.5.1 and an update of this package was not requested.
-    - intervention/image 2.5.1 requires ext-fileinfo * -&gt; it is missing from your system. Install or enable PHP's fileinfo extension.
-  Problem 3
-    - league/flysystem is locked to version 1.1.3 and an update of this package was not requested.
-    - league/flysystem 1.1.3 requires ext-fileinfo * -&gt; it is missing from your system. Install or enable PHP's fileinfo extension.
-  Problem 4
-    - league/mime-type-detection is locked to version 1.5.1 and an update of this package was not requested.
-    - league/mime-type-detection 1.5.1 requires ext-fileinfo * -&gt; it is missing from your system. Install or enable PHP's fileinfo extension.
-  Problem 5
-    - phpoffice/phpspreadsheet is locked to version 1.15.0 and an update of this package was not requested.
-    - phpoffice/phpspreadsheet 1.15.0 requires ext-fileinfo * -&gt; it is missing from your system. Install or enable PHP's fileinfo extension.
-  Problem 6
-    - league/flysystem 1.1.3 requires ext-fileinfo * -&gt; it is missing from your system. Install or enable PHP's fileinfo extension.
-    - spatie/laravel-backup 6.13.1 requires league/flysystem ^1.0.49 -&gt; satisfiable by league/flysystem[1.1.3].
-    - spatie/laravel-backup is locked to version 6.13.1 and an update of this package was not requested.
+    Skiplist() {
+        level = length = 0;
+        tail = new SkipListNode(INT_MAX, 0);
+        head = new SkipListNode(-INT_MAX);
+        for (int i = 0; i &lt; MAXL; ++i) {
+            head-&gt;level[i] = tail;
+        }
+    }
 
-To enable extensions, verify that they are enabled in your .ini files:
-    - E:\environment\php\php-7.3.27-nts-Win32-VC15-x64\php.ini
-You can also run `php --ini` inside terminal to see which files are used by PHP in CLI mode.
+    SkipListNode* find(int val) {
+        SkipListNode *p = head;
+        for (int i = level - 1; i &gt;= 0; --i) {
+            while (p-&gt;level[i] &amp;&amp; p-&gt;level[i]-&gt;val &lt; val) {
+                p = p-&gt;level[i];
+            }
+        }
+        p = p-&gt;level[0];
+        return p;
+    }
+
+    bool search(int target) {
+        SkipListNode *p = find(target);
+        return p-&gt;val == target;
+    }
+
+    void add(int val) {
+        vector&lt;SkipListNode *&gt; update(MAXL);
+        SkipListNode *p = head;
+        for (int i = level - 1; i &gt;= 0; --i) {
+            while (p-&gt;level[i] &amp;&amp; p-&gt;level[i]-&gt;val &lt; val) {
+                p = p-&gt;level[i];
+            }
+            update[i] = p;
+        }
+        int lv = randomLevel();
+        if (lv &gt; level) {
+            lv = ++level;
+            update[lv - 1] = head;
+        }
+        SkipListNode *newNode = new SkipListNode(val, lv);
+        for (int i = lv - 1; i &gt;= 0; --i) {
+            p = update[i];
+            newNode-&gt;level[i] = p-&gt;level[i];
+            p-&gt;level[i] = newNode;
+        }
+        ++length;
+    }
+
+    bool erase(int val) {
+        vector&lt;SkipListNode *&gt; update(MAXL + 1);
+        SkipListNode *p = head;
+        for (int i = level - 1; i &gt;= 0; --i) {
+            while (p-&gt;level[i] &amp;&amp; p-&gt;level[i]-&gt;val &lt; val) {
+                p = p-&gt;level[i];
+            }
+            update[i] = p;
+        }
+        p = p-&gt;level[0];
+        if (p-&gt;val != val) return false;
+        for (int i = 0; i &lt; level; ++i) {
+            if (update[i]-&gt;level[i] != p) {
+                break;
+            }
+            update[i]-&gt;level[i] = p-&gt;level[i];
+        }
+        while (level &gt; 0 &amp;&amp; head-&gt;level[level - 1] == tail)
+            --level;
+        --length;
+        return true;
+    }
+
+    int randomLevel() {
+        int level, r = rand(), target = INT_MAX/2;
+        level = 0;
+        for (int i = 1; i &lt; MAXL; i++)
+            if( r &gt; INT_MAX-target ) {
+                level = i;
+                target /= 2;
+            } else {
+                break;
+            }
+        return level+1;
+    }
+};
 </code></pre>
-<p>使用<code>composer install --ignore-platform-reqs</code>就不会报错了。</p>
-<h4 id="the-process-class-relies-on-proc_open-which-is-not-available-on-your-php-installation">The Process class relies on proc_open, which is not available on your PHP installation.</h4>
-<p><a href="https://blog.csdn.net/lw545034502/article/details/96450335">（亲测可用）The Process class relies on proc_open, which is not available on your PHP installation.解决方案！</a></p>
-<h3 id="php-routes的使用">php routes的使用</h3>
-<p><a href="https://www.cnblogs.com/yaoliuyang/p/12298780.html">thinkphp中路由的基本使用</a></p>
-<h3 id="nginx配置">nginx配置</h3>
-<p><a href="https://zhuanlan.zhihu.com/p/96149578">PHP]深度解析Nginx下的PHP框架路由实现</a></p>
-<h2 id="项目信息">项目信息</h2>
+<h2 id="练习">练习</h2>
 <ul>
-<li>submit：提交到后台</li>
-<li>pedding：队列中准备提交</li>
-<li>waiting：已提交，等待结果</li>
-<li>submitting -&gt; pedding -&gt; waiting -&gt; accept</li>
+<li><a href="https://leetcode-cn.com/problems/design-skiplist/">1206. 设计跳表</a></li>
 </ul>
-<h2 id="优化">优化</h2>
-<p>01:08开始</p>
-<p>前面，主要是介绍项目</p>
-<h3 id="优化1实时更新榜单">优化1：实时更新榜单</h3>
-<p>06:00</p>
-<p>目前是一分钟更新一次，从数据库读取到redis中</p>
-<p>优化思路：1、使用增量更新，当有新的AC事件发生时，更新内存中的redis缓存；2、客户端，对于提交记录，循环查询结果，查询操作为异步，循环间隔为5s，使用内存锁避免查询冲突</p>
-<p>目前的问题：对于每个提交记录，被更新了10几次。</p>
-<h3 id="优化2容器化">优化2：容器化</h3>
-<p>将各个功能点封装成docker容器</p>
-<h3 id="优化3管理功能界面">优化3：管理功能界面</h3>
-<p>74:28</p>
-<h2 id="phpstore">PhpStore</h2>
+<h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://blog.csdn.net/ljh101/article/details/112549860">composer require --dev barryvdh/laravel-ide-helper报错解决</a></li>
-<li>[<a href="https://my.oschina.net/anziguoer/blog/647367">Phpstorm 安装 laravel扩展，laravel代码提示插件</a>](https://my.oschina.net/anziguoer/blog/647367)</li>
+<li>https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html</li>
+<li>https://blog.csdn.net/u013709270/article/details/53470428</li>
 </ul>
-<p>后台参考这里的代码https://github.com/ZsgsDesign/HASAAOSE/tree/main/app/Admin</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[南京大学-软件过程改进-复习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-04-16-南京大学-软件过程改进-复习笔记/">
+        <title type="html"><![CDATA[Kafka学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-06-09-Kafka学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-06-09-Kafka学习笔记/">
         </link>
-        <updated>2021-04-16T01:53:00.000Z</updated>
-        <content type="html"><![CDATA[<p>本文主要是对 <a href="https://wym0120.github.io/2021/04/12/cmmi/">[课堂笔记] 软件过程改进 </a>这篇文章的一些个人补充</p>
+        <updated>2021-06-09T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Kafka过程中的笔记，学习资料为视频，链接如下：</p>
+<ul>
+<li><a href="https://coding.imooc.com/class/434.html">Kafka多维度系统精讲，从入门到熟练掌握</a></li>
+</ul>
 <hr>
-<p>[TOC]</p>
-<h2 id="过程的定义">过程的定义</h2>
+<p>课程大纲：</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210609101437740.png" alt="image-20210609101437740" loading="lazy"></figure>
+<h2 id="partition">Partition</h2>
+<p>Partition 在 Kafka 中是分区的意思。</p>
+<p>Kafka 中每个 Topic 可以划分多个分区，同一个 Topic 下的不同分区包含的消息是不同的。</p>
+<p>Kafka 通过 offset 可以保证消息在分区中的顺序性，但是跨分区是无序的，即 Kafka 只保证在同一个分区内的消息是有序的。</p>
+<p>每一条消息发送到 broker 的时候，会根据 Partition 的分区规则计算，然后选择将该消息存储到哪一个 Partition。</p>
+<p>参考资料：https://blog.csdn.net/lzb348110175/article/details/100764105</p>
+<p>Partition和Consumer的关系不能是1对多，即，一个Partition由多个Comsumer进行消费。</p>
 <ul>
-<li>IEEE: Sequence of steps performed for a given purpose.
+<li>这是由Consumer的消费机制决定的，Consumer在拿到消息后，需要在处理完后向Kafka提交处理结果，即，告诉Kafka这批消息已经处理好了（可以以自动的方式进行提交，也可以手动提交）。而在Kafka中，最小颗粒度的数据存储就是Partition，那么，如果有两个Consumer同时消费一个Partiton，就会导致线程不安全，即，两个Consumer同时拿到数据，然后导致数据冲突。</li>
+<li>如果是多个Consumer对应多个Partition，则不会出现这个情况，因为不同Partition之间是不会相互影响的。</li>
+</ul>
+<h2 id="解读源码">解读源码</h2>
 <ul>
-<li>为给定目的执行的步骤顺序。</li>
+<li>Producer在创建时，会新建发送线程，该线程会定时批量发送所有的消息。因此，Kafka是批量发送，不是调用一次send就发送一次，所以效率较高。</li>
+<li>当调用send后，会将消息存储在batch（批次）中，当达到一定阈值时，发送线程会自动进行消息的批量发送。因此，严格意义上，消息发送不是由send实现的。</li>
+<li>Kafka是线程安全的，可以多线程复用</li>
+</ul>
+<h2 id="配置">配置</h2>
+<ul>
+<li>Producer
+<ul>
+<li>ACKS_CONFIG：消息传递保障</li>
+<li>RETRIES_CONFIG：发送失败后重试次数</li>
+<li>BATCH_SIZE_CONFIG：最大批次容量</li>
+<li>LINGER_MS_CONFIG：批量发送间隔时间</li>
+<li>BUFFER_MEMORY_CONFIG：缓存大小</li>
+<li>BATCH_SIZE <strong>VS</strong> BUFFER_MEMORY
+<ul>
+<li>参考资料：https://blog.csdn.net/u010711495/article/details/113250402</li>
+<li>Kafka的所有信息都会存在缓存中，包括配置信息、消息等，一旦缓存满了，Kafka就会禁止用户再发送消息；而对于最大批次容量，当批次实际大小达到最大批次容量时，就会触发发送线程的发送；因此，一般缓存大小都是大于最大批次容量的。</li>
 </ul>
 </li>
-<li>PALL: Logical organization of people, materials, energy, equipment, and procedures into work activities designed to produce a SP ecified end result.
-<ul>
-<li>人员、材料、能源、设备和程序 在工作活动中的逻辑组织，旨在产生SP（特定实践）确认的最终结果。</li>
-</ul>
-</li>
-<li>CMMI GLOSSARY: A set of interrelated activities, which transform inputs into outputs, to achieve a given purpose (These activities can be mapped to one or more practices in CMMI process areas to allow a model to be useful for process improvement and process appraisal.)
-<ul>
-<li>一组相互关联的活动，这些活动将输入转化为输出，以实现给定的目的（这些活动可以映射到CMMI过程域中的一个或多个实践，以使模型可用于流程改进和流程评估。）</li>
-</ul>
-</li>
-</ul>
-<h2 id="过程和过程域的关系">过程和过程域的关系</h2>
-<p>过程域中包含若干过程。</p>
-<h2 id="连续式表示法与阶段式表示法">连续式表示法与阶段式表示法</h2>
-<ul>
-<li>连续式表示法：选择一个特定的过程域进行改进。</li>
-<li>阶段式表示法：选择某一成熟度级别下的多个过程域进行改进。</li>
-</ul>
-<h2 id="等价阶段式定级">等价阶段式定级</h2>
-<ul>
-<li>CL：capability level 能力等级</li>
-<li>ML：maturity level 成熟度级别</li>
-</ul>
-<h2 id="过程模型">过程模型</h2>
-<p>过程模型是一种开发策略，这种策略针对软件工程的各个阶段提供了一套范形，使工程的进展达到预期的目的。</p>
-<p>CMMI 开发模型就是一种过程模型。</p>
-<h2 id="cmmi来源于哪三个模型-研究机构">CMMI来源于哪三个模型 ，研究机构</h2>
-<ul>
-<li>软件工程 sw-cmm</li>
-<li>系统工程 EIA/IS</li>
-<li>集成化产品和过程开发 IPD-CMM</li>
-</ul>
-<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/image-20210416144801516.png" alt="image-20210416144801516" loading="lazy"></figure>
-<h2 id="已管理和已定义的区别">已管理和已定义的区别</h2>
-<p>已管理：标准、过程描述与规程在过程的每个特定实例中（如在某一特定项目中）都可能有很大的不同。</p>
-<p>已定义：项目的标准、过程描述与规程是从组织的标准过程集中裁剪得来，以适应特定的项目或组织级单位，因而就更为一致，除非是裁剪指南所允许的差别。</p>
-<h2 id="过程域">过程域</h2>
-<h3 id="工程类">工程类</h3>
-<h4 id="确认与验证的区别">确认与验证的区别</h4>
-<p>确认：确认产品实际的用途是否符合其预期的用途；做了正确的事。</p>
-<p>验证：验证工作产品（or 产品）的功能是否符合需求；正确地做了事。</p>
-<h3 id="支持类">支持类</h3>
-<h4 id="度量与分析-and-过程与产品质量保证">度量与分析 and 过程与产品质量保证</h4>
-<p>PPQA专注于质量，而MA则是对一切过程提供度量与分析。当对质量进行度量与分析时，个人认为MA与PPQA是等价的，因此，MA的范围更广，而PPQA则专注于质量方面。</p>
-<h2 id="ppt中问题整理">PPT中问题整理</h2>
-<ul>
-<li>
-<p>requirements traceability：需求可追溯性</p>
-</li>
-<li>
-<p>A to B and vice versa：A符合B，反之亦然</p>
-</li>
-<li>
-<p>Budget and funding：预算和资金</p>
-</li>
-<li>
-<p>Staff：职员</p>
-</li>
-<li>
-<p>Facilities：设施</p>
-</li>
-<li>
-<p>peer review meetings：同行评审会议</p>
-</li>
-<li>
-<p>delinquent：拖欠的</p>
-</li>
-<li>
-<p>People are not meeting schedules.：人们没有遵守时间表。</p>
-</li>
-<li>
-<p>likelihood：可能性</p>
-</li>
-<li>
-<p>motion sensors：运动传感器</p>
-</li>
-<li>
-<p>contract：合同</p>
-</li>
-<li>
-<p>COTS were used for the keypad; sensors were secured from suppliers; and the controller consists of re-used PASS in-house software.：键盘上使用了COTS； 传感器由供应商提供保护； 控制器由重复使用的PASS内部软件组成。</p>
-</li>
-<li>
-<p>incorporating experiences：整合经验</p>
-</li>
-<li>
-<p>appraisal metrics：评估指标</p>
-</li>
-<li>
-<p>align with：对齐</p>
-</li>
-<li>
-<p>All PASS projects follow the standard process exactly as is.：所有PASS项目都完全按照标准流程进行。</p>
-</li>
-<li>
-<p>trace：追溯</p>
-</li>
-<li>
-<p>tailoring：裁剪</p>
-</li>
-<li>
-<p>Spiral lifecycle：螺旋生命周期</p>
-</li>
-</ul>
-<h2 id="简答题列表">简答题列表</h2>
-<h3 id="过程域相关">过程域相关</h3>
-<p>Lv4组织级过程性能(OPP)</p>
-<ul>
-<li>x.y.z代表着什么</li>
-</ul>
-<p>Lv2项目监督与控制(PMC)</p>
-<ul>
-<li>项目监控点选择的原则？原因</li>
-<li>SG2中的相关实践约定，需要采取纠偏措施的问题来源</li>
-<li>纠偏行动的先决条件</li>
-</ul>
-<p>Lv2项目计划(PP)</p>
-<ul>
-<li>PP过程域在项目中的作用域</li>
-<li>计划制定的原则？</li>
-<li>一般的估算方法有哪几个？区别</li>
-<li>什么是承诺管理？承诺的分类</li>
-<li>PP中“建立”和“维护”两个活动的解释？</li>
-<li>估算目标: 不是尽可能客观描述代码行/工作量（永远不可能实现估算），而是得到一个数字<strong>数字对不对不重要，重要的是大家认可</strong></li>
-</ul>
-<p>Lv2需求管理(REQM)</p>
-<ul>
-<li>(需求跟踪的方法) 需求跟踪矩阵的使用</li>
-<li>(获得需求承诺) 应该获得那些人的承诺</li>
-<li>识别需求不一致性的最有效方法</li>
-<li>敏捷对于需求的态度是拥抱变更，但这是不正确的，大部分开发人员还是希望能够close开发</li>
-<li>Scrum对于需求的态度是不响应一个SP rint中的需求变更(目标不变)，只是记录到backlog，可能会在下一个迭代响应变更</li>
-<li>理解双向可跟踪</li>
-</ul>
-<p>Lv4量化项目管理(QPM)</p>
-<ul>
-<li>OPP 和 QPM 的关联</li>
-<li>QPM SP1.2 和之前过程定义的区别 （和 IPM 的区别）</li>
-<li>QPM 和 OPM 的关系</li>
-</ul>
-<p>Lv3产品集成(PI)</p>
-<ul>
-<li>假设你是产品集成的负责人，拒绝那些不合格的产品组件。定义哪些验收标准</li>
-</ul>
-<p>Lv3验证 (VER)</p>
-<ul>
-<li>VAL 和 VER的关键区别</li>
-</ul>
-<p>Lv2度量与分析(MA)</p>
-<ul>
-<li>度量分析的作用体现在哪些方面？(从项目和组织两个角度分析)</li>
-<li>度量的目的要支持质量的目标</li>
-<li>如何满足度量的可追踪性(哪些工作产品可以满足)</li>
-</ul>
-<p>Lv2配置管理(CM)</p>
-<ul>
-<li>一个软件开发过程中会产生很多工作产品artifacts/work product，但是并不是所有产品都是值得管理的，要去掉一些不那么重要的产品，确保重要的（为了让交付有完整性的）工作产品被管理。其实就是为了减少工作量。</li>
-<li>CCB: Change Control Board</li>
-<li>配置管理员的主要职责</li>
-<li>配置项标示的规则，什么情况下改写Vx.y.z中的x和y？什么说情况下改写z？规则是怎样的</li>
-<li>配置管理系统的等级？三个概念库如何体现配置库的等级？配置库需要注意什么</li>
-<li>基线的定义和特点</li>
-</ul>
-<p>Lv2过程与产品质量保证(PPQA)</p>
-<ul>
-<li>软件项目质量的分类</li>
-<li>QA行使的角色</li>
-<li>解释 PPQA QA SQA NC QC</li>
-<li>QA 和 QC差别？</li>
-<li>执行PPQA的工具方法</li>
-<li>简述评审一般过程、审计一般过程</li>
-<li>QA人员以及PPQA过程的质量保证如何实现</li>
-<li>如何评价&quot;测试驱动开发TDD可以显著提升质量&quot;这一说法</li>
-</ul>
-<p>Lv3决策分析与解决(DAR)</p>
-<ul>
-<li>如何评价 &quot;CMMI 是官僚、重文档的&quot;这一说法</li>
-</ul>
-<p>Lv5原因分析与解决(CAR)</p>
-<ul>
-<li>CAR 在本质上做的是什么</li>
-<li>CAR 一定是选坏的吗</li>
-<li>CAR 实际上是依赖于 OPM 进行执行的</li>
-<li>CAR 的理念是不犯错比犯了错再改正更好</li>
-<li>CAR 在4级和5级的不同</li>
-<li>CAR 为什么需要和 OPM 配合</li>
-</ul>
-<h3 id="ppt">ppt</h3>
-<ul>
-<li>Which of the following examples of requirements traceability are adequate?</li>
-<li>PASS is planning their resources. What project resources should be included?</li>
-<li>Project Management and Control</li>
-<li>Risk Management</li>
-<li>Supplier Agreement Management</li>
-<li>Which CM SPs could have prevented the problem?</li>
-<li>Which are process evaluations? Which are product evaluations?</li>
-<li>Which of the following are adequate for verification procedures and criteria?</li>
-<li>Which are verification and which are validation?</li>
-<li>Which of the following show incorporating experiences?</li>
-<li>Which PASS scenarios align with IPM?</li>
-<li>Organizational Process Definition</li>
-<li>Organizational Training</li>
-<li>VER SG2 SG3: SG3包含SG2</li>
-<li>持续集成 vs 大爆炸集成</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[南京大学-高级数据库开发技术-复习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-04-15-南京大学-高级数据库开发技术-复习笔记/">
-        </link>
-        <updated>2021-04-15T07:35:25.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="b树-b树索引">B树、B+树索引</h2>
-<h3 id="阶的含义">阶的含义</h3>
-<ul>
-<li>上限：每个节点最多有 M 个子树</li>
-<li>下限：
-<ul>
-<li>根节点至少2个子树
-<ul>
-<li>非根节点至少有⌈M /2⌉个子树</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="画结构">画结构</h3>
-<p>B+树</p>
-<figure data-type="image" tabindex="1"><img src="http://Bule-Zst.gitee.io/post-images/image-20210415160910412.png" alt="image-20210415160910412" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="http://Bule-Zst.gitee.io/post-images/image-20210418174758526.png" alt="image-20210418174758526" loading="lazy"></figure>
-<figure data-type="image" tabindex="3"><img src="http://Bule-Zst.gitee.io/post-images/image-20210418175351820.png" alt="image-20210418175351820" loading="lazy"></figure>
-<h3 id="b树使用场景">B+树使用场景</h3>
-<p>能做的：</p>
-<ul>
-<li>全键值：Where x=123</li>
-<li>键值范围：Where 45&lt;x&lt;123</li>
-<li>键前缀查找：where x LIKE ‘J%’</li>
-</ul>
-<p>什么时候能用，什么时候不能用：</p>
-<ul>
-<li>对于一般索引，都能用，除非查询优化器发现用了索引后，会导致性能降低，则不会使用索引，例如因为索引占用空间太大，导致IO操作耗时较高。</li>
-<li>对于复合索引，如果违反最左匹配原则，则不能用。例如，对(x,y)建立索引，但对y进行查询，则不能用。</li>
-<li>对于一个有索引的列作出函数查询，Select * from t where f(indexed_col) = value</li>
-<li>隐形函数查询，比如查询SQL中存在隐式类型转换，比如no为VARCHAR类型，但是查询时把该字段当做INT类型查询：SELECT * FROM T WHERE no = 2124</li>
-<li>没有正确的统计信息，造成查询优化器无法做出正确的选择</li>
-<li>含前导模糊查询的Like语法不能使用索引（”%XXX”）</li>
-<li>B-TREE索引里不保存字段为NULL值记录，因此IS NULL不能使用索引</li>
-</ul>
-<p>什么时候应该用：</p>
-<ul>
-<li>仅当要通过索引访问表中很少一部分行</li>
-<li>虽然查询行数比较多，但索引包含多个字段，而要访问的字段全部包含在索引中时，查找只需通过索引而不用访问全表时</li>
-</ul>
-<p>什么时候不应该用（没找到答案，自己的理解）：</p>
-<ul>
-<li>当需要查询的数据占表总数据的比重很大时，不应该使用索引，因为查询优化器会发现，使用索引的效率不如全表遍历。</li>
-<li>写密集型事务：频繁修改索引，增加开销</li>
-</ul>
-<h2 id="分区">分区</h2>
-<h3 id="分区是干嘛用的">分区是干嘛用的</h3>
-<p>分区就是将一个大表根据条件分割成若干个小表，是一种数据分组方式，能够提高并发性和并行性。对于多用户并发访问情况，查询效率可能较高。</p>
-<p>表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个表空间（物理文件）上</p>
-<h3 id="根据分区键partition-key的类型分类分区有哪几种类型">根据分区键（Partition Key）的类型分类，分区有哪几种类型？</h3>
-<ul>
-<li>哈希分区：对分区键进行哈希运算，根据运算结果进行分区。 <s>把不同的列随机平均的分布到不同的物理环境，达到备份和恢复（写 undo 和 redo文件）效率高，降低错误回滚压力（为了管理）。</s></li>
-<li>范围分区：根据连续数据的范围对数据进行分区~~。把字段的值分布到一个物理范围~~，这个范围是你在创建分区时指定的分区键决定的。这种分区方式是最为常用的。</li>
-<li>列表分区：把不同的列存到不同的分区中。</li>
-</ul>
-<h3 id="如何选择分区键-选择原则是什么">如何选择分区键、选择原则是什么</h3>
-<ul>
-<li>哈希分区：根据分区键，可以快速找到记录，但对范围检索没有任何帮助。更接近于非数据驱动的循环分区，用于负载均衡，提高并发的能力。</li>
-<li>范围分区：比较常用，非常适合处理历史数据。</li>
-<li>列表分区：查询时，通常只查询某几个字段，或者，某几个字段通常一起被查询。但，每个分区都必须有主键，因此会造成冗余。</li>
 <li></li>
-<li>按什么字段进行分区要整体考虑，因为：更新分区键会引起移动数据，应该避免这么做。当数据分区键均匀分布时，分区表查询收益最大。</li>
-</ul>
-<h2 id="设计原则">设计原则</h2>
-<h3 id="处理模式操作模式批处理与实时系统">处理模式（操作模式）：批处理与实时系统</h3>
-<p>9.2 为性能设计（下）.mp4，17:09</p>
-<h4 id="基本逻辑">基本逻辑</h4>
-<ul>
-<li>
-<p>异步处理模式：可以允许用户发出操作之后去做其他工作，数据库进行集中的批处理，当处理完毕后通知用户，但是实时性不好</p>
-</li>
-<li>
-<p>同步处理时模式：用户必须等待数据库操作并返回结果，期间不能做其它操作。适合数据库进行实时交易。</p>
-</li>
-</ul>
-<h4 id="好坏">好坏</h4>
-<ul>
-<li>当操作过于复杂，需要横跨很多系统、物理环境，实时系统中不可控的因素就会变多，此时就需要采用异步处理模式。</li>
-<li>异步处理模式：健壮性、稳定性更强。</li>
-<li>同步处理模式：满足实时性的要求，在某些特定业务下，这是必须的，比如银行转账业务。</li>
-</ul>
-<h4 id="选择">选择</h4>
-<ul>
-<li>由系统需求和所需处理的数据的物理结构决定的，大部分情况下，同步和异步是共存的，不能先入为主得认为业务必须同步。</li>
-<li>从性能的角度，如果对实时性没有要求，则可以考虑尝试使用批处理模式</li>
-<li>在批处理模式下，更容易暴露性能问题，因为批处理需要压榨硬件资源，而实时系统只有在高并发或大数据量的情况下才可能暴露性能问题，而当实时系统暴露出性能问题后，可能会极大影响正常业务的开展。</li>
-</ul>
-<h3 id="存储模式集中式与分布式">存储模式：集中式与分布式</h3>
-<p>9.2 为性能设计（下）.mp4，11:31</p>
-<h4 id="基本逻辑-2">基本逻辑</h4>
-<ul>
-<li>
-<p>分布式数据存储：将数据分散存储在多台独立的设备上，一般情况下，多台设备在地理位置上相对分散。</p>
-</li>
-<li>
-<p>集中式数据存储：将数据集中存储在一台或多台设备上，一般情况下，存储设备在地理位置上相对集中。</p>
-</li>
-</ul>
-<h4 id="好坏-2">好坏</h4>
-<ul>
-<li>分布式数据系统：
-<ul>
-<li>缺点
-<ul>
-<li>复杂度高、健壮性低、管理成本高</li>
-<li>保密性不易控制</li>
-<li>多个副本的一致性难以保证</li>
-<li>不同数据源数据的结合极为困难
-<ul>
-<li>数据传输开销大</li>
-<li>脱离数据源的环境，数据源无法从数据规划中获益（物理结构、索引）</li>
+<li>KEY_SERIALIZER_CLASS_CONFIG：key序列化类</li>
+<li>VALUE_SERIALIZER_CLASS_CONFIG：value序列化类</li>
+<li>PARTITIONER_CLASS_CONFIG：自定义partition选择</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>优点
+<h2 id="消息传递保障">消息传递保障</h2>
 <ul>
-<li>单一节点的负担低</li>
-<li>具有更灵活的体系结构</li>
+<li>最多一次：发了就不管了</li>
+<li>最少一次：一直发，直到收到响应</li>
+<li>正好一次：一直发，直到收到响应，但是接收方需要去重</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>集中式
+<h2 id="key的作用">Key的作用</h2>
+<p>Kafka的消息是一对键值对，Key在Kafka中的主要作用是选择分区，若用户没有指定分区，则Kafka会根据key的hash决定分区的选择。</p>
+<p>Kafka在设计时使用键值对的形式，可以为使用者提供功能上的扩展，例如可以自定义分区规则，将相同key的消息放在同一个分区中。</p>
+<p>当然，如果某些业务场景下对key没有特殊要求，这个字段也是可以不填的。</p>
+<h2 id="kafka-vs-redis">Kafka VS Redis</h2>
+<p>Redis List的缺点：</p>
 <ul>
-<li>缺点：单点故障，会带来很大损失，因此常常需要热备份或灾难备份</li>
+<li>不支持重复消费：消息一旦被消费，就会从 Redis 中删除，无法再被其他消费者消费。</li>
+<li>消息丢失：消费者获取消息后，若发生异常宕机，则消息就会丢失。</li>
+<li>当List达到最大长度，则无法继续添加新的消息。</li>
+</ul>
+<p>Redis Pub/Sub的缺点：</p>
+<ul>
+<li>消息丢失
+<ul>
+<li>消费者下线</li>
+<li>Redis 宕机</li>
+<li>消息堆积：当消息超过消费者缓冲区大小，Redis 会强制消费者下线</li>
 </ul>
 </li>
 </ul>
-<h4 id="选择-2">选择</h4>
+<p>参考资料：https://www.jianshu.com/p/c37368c867f8</p>
+<h2 id="参考资料">参考资料</h2>
 <ul>
-<li>平衡、折中
-<ul>
-<li>全球性的数据，若集中存储，则跨大陆的访问速度将大幅降低（离数据越近，访问越快）；但从另一个角度看，因为集中式避免了分布式中的数据传输，并可以利用数据规划，因此查询速度快。</li>
-<li>集中式存储的访问吞吐量有上限</li>
-</ul>
-</li>
-</ul>
-<h2 id="sql-查询优化器是如何工作的">SQL-查询优化器是如何工作的</h2>
-<p>4.1 SQL优化.mp4，13:38</p>
-<p>优化是在数据处理的真正被执行的时候发生</p>
-<p>不同结果的关系表达式在实际环境下执行的效率千差万别</p>
-<p>查询优化器如何权衡哪种优化更好</p>
-<ul>
-<li>基于成本的优化器 CBO：综合考虑所有的情况。现在最常用的优化器类型。</li>
-<li>基于规则的优化器 RBO：根据预定义的规则进行优化，例如加减的权重是1，乘除的权重是2。</li>
-</ul>
-<p>SQL的执行顺序：</p>
-<ul>
-<li>SQL、语法语义检查、解析（软解析+硬解析）、执行计划、执行引擎、存储引擎、数据库</li>
-<li>解析是整个SQL优化最消耗资源的环节，其中硬解析是最重要的一部分。</li>
-<li>执行计划：Plan，二进制的执行代码</li>
-<li>解析+生成执行计划是查询优化器最重要的工作</li>
-<li>生成执行计划后，抛入执行引擎，从数据库中读取数据，然后返回。</li>
-<li>语法分析：判断一条SQL语句的语法是否符合SQL的规范，代价小</li>
-<li>语义分析：判断该SQL语句所访问的对象是否准确，且用户是否有相应的权限，代价小</li>
-<li>硬解析：对提交的sql完全重新从头进行解析(当在共享池中找不到已解析好的结果时将会进行此操作)</li>
-<li>软解析：如果在共享池中找到了与之完全相同的sql解析好的结果后，会跳过硬解析的后两步，代价小</li>
-</ul>
-<p>优化器只能对关系领域进行优化</p>
-<p>优化器的有效范围：</p>
-<ul>
-<li>优化器需要借助数据库中找到的信息</li>
-<li>能进行数学意义上的等价变换</li>
-<li>优化器考虑整体响应时间</li>
-<li>优化器改善的是独立的查询</li>
-</ul>
-<h2 id="数据库设计-层次结构">数据库设计-层次结构</h2>
-<p>6.1 处理层次结构.mp4，12:17</p>
-<ul>
-<li>
-<p>邻接模型：id、pid</p>
-<ul>
-<li>兄弟节点是无序的</li>
-</ul>
-</li>
-<li>
-<p>物化路径模型：1、1.1、1.1.2</p>
-<ul>
-<li>兄弟节点是有序的</li>
-<li>方便扩展：3层结构扩展层4层</li>
-<li>查询语句编写简单，找出适当的记录并缩排显示比较容易</li>
-</ul>
-</li>
-<li>
-<p>嵌套集合模型：left_num、right_num，所有子节点都在left_num和right_num之间</p>
-<p>上述3种树状表结构设计都满足三范式</p>
-</li>
-</ul>
-<p>两种查询方式：</p>
-<ul>
-<li>自顶向下（Vandamme查询）
-<ul>
-<li>邻接模型
-<ul>
-<li>
-<p>connect by current = <em>prior</em> previous，非关系型查询方式</p>
-<figure data-type="image" tabindex="4"><img src="http://Bule-Zst.gitee.io/post-images/image-20210420103050088.png" alt="image-20210420103050088" loading="lazy"></figure>
-</li>
-<li>
-<p>利用with as，首先定义起始点，之后对两个select语句进行union all，通过递归查询不断根据父记录生成子记录。</p>
-<figure data-type="image" tabindex="5"><img src="http://Bule-Zst.gitee.io/post-images/image-20210420103019003.png" alt="image-20210420103019003" loading="lazy"></figure>
-</li>
-<li>
-<p>mysql不支持connect by，也不支持with as，因此只能事先知道树的深度，然后手动union</p>
-</li>
-</ul>
-</li>
-<li>物化路径模型
-<ul>
-<li>
-<p>计算深度：path字符串长度 减去 去掉点之后的path字符串长度</p>
-</li>
-<li>
-<p>指定需要查询的path前缀，之后使用模糊查询获取结果，然后对path进行排序，即可</p>
-<figure data-type="image" tabindex="6"><img src="http://Bule-Zst.gitee.io/post-images/image-20210420103422776.png" alt="image-20210420103422776" loading="lazy"></figure>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>自底向上（Hignland查询）
-<ul>
-<li>邻接模型
-<ul>
-<li>connect by previous = <em>prior</em> current</li>
-</ul>
-</li>
-<li>物化路径模型
-<ul>
-<li>指定需要查询的叶子结点，之后使用模糊查询获取父节点</li>
-<li>会存在重复记录，因此需要使用distinct</li>
-<li>排序问题：对distinct的结果进行select，并按path进行排序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>性能对比</p>
-<ul>
-<li>自顶向下
-<ul>
-<li>邻接模型
-<ul>
-<li>性能最好，每秒返回的查询记录数最多，只需要处理数值关系，但性能会收到迭代操作的影响</li>
-</ul>
-</li>
-<li>物化路径模型
-<ul>
-<li>中等，因为涉及到字符串操作</li>
-<li>计算深度、缩排函数 比较费时</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>自底向上
-<ul>
-<li>和自顶向下类似，邻接最好，物化路径中等</li>
-<li>当不能用connect by和with as时，可以使用物化路径模型作为替代</li>
-</ul>
-</li>
+<li><a href="https://blog.csdn.net/lzb348110175/category_9309572.html">CSDN kafka-扛麻袋的少年</a></li>
 </ul>
 ]]></content>
     </entry>
