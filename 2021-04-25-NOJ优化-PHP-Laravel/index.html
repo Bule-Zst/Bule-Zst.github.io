@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>NOJ优化-PHP-Laravel | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1627554884504">
+<link rel="shortcut icon" href="/favicon.ico?v=1631613696776">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -200,19 +200,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">36</span>
+        <span class="site-item-stat-count">43</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">26</span>
+        <span class="site-item-stat-count">29</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">26</span>
+        <span class="site-item-stat-count">29</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -1750,6 +1750,507 @@ You can also run `php --ini` inside terminal to see which files are used by PHP 
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-09-14-秒杀系统-实战/"" data-c="
+          &lt;p&gt;这篇文章主要用于记录如何实现一个秒杀系统，学习资料如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1CE411s7xN?p=2&amp;amp;spm_id_from=pageDriver&#34;&gt;1小时带你用Redis轻松实现秒杀系统（附秒杀系统优化实战）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;什么是秒杀系统&#34;&gt;什么是秒杀系统&lt;/h2&gt;
+&lt;p&gt;其实主要的业务流程就是下订单、减库存，只是，该业务流程是在高并发、大流量的场景下进行的。&lt;/p&gt;
+&lt;h2 id=&#34;并发量&#34;&gt;并发量&lt;/h2&gt;
+&lt;p&gt;一般秒杀系统的并发量是万级别的，几万、几十万、几百万。&lt;/p&gt;
+&lt;p&gt;单机MySQL的并发量一般为几百，最多一千。&lt;/p&gt;
+&lt;p&gt;单机Tomcat的并发量一般也为几百。&lt;/p&gt;
+&lt;p&gt;单机Redis的并发量一般为几万。&lt;/p&gt;
+&lt;h2 id=&#34;优化前&#34;&gt;优化前&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://gitee.com/Bule-Zst/picture/raw/master/Seckill-%E4%BC%98%E5%8C%96%E5%89%8D.jpg&#34;&gt;项目下载&lt;/a&gt;（为了省事，我把文件后缀改成jpg了，这样直接用图床帮我存到云端）&lt;/p&gt;
+&lt;p&gt;就是一个简单的购物系统，先下单之后再减库存，这个系统在业务逻辑上是没有bug的，最主要的问题就是性能差。&lt;/p&gt;
+&lt;p&gt;需要注意的是，在系统里用到了事务，从而保证下单和减库存是原子操作，这里补充说一下Springboot事务失效的两个常见原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内部调用：事务基于AOP，会对事务对象包装一个代理对象，因此不能直接调用事务对象的方法，应该使用Springboot的依赖注入，使用注入对象的方法。&lt;/li&gt;
+&lt;li&gt;数据库存储引擎不支持：MyISAM是不支持事务的，所以可以检查一下数据库表的存储引擎，如果是MyISAM，需要改成InnoDB。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;性能：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210914151845646.png&#34; alt=&#34;image-20210914151845646&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;吞吐量为130/s&lt;/p&gt;
+&lt;h2 id=&#34;优化&#34;&gt;优化&lt;/h2&gt;
+&lt;h3 id=&#34;redis缓存&#34;&gt;Redis缓存&lt;/h3&gt;
+&lt;p&gt;使用redis做缓存&lt;/p&gt;
+&lt;p&gt;在秒杀之前，把商品库存信息放到redis中&lt;/p&gt;
+&lt;p&gt;在秒杀时，先对redis中的库存执行decrement方法，之后判断返回结果是否小于0，如果返回结果大于等于0，则进行秒杀业务，否则说明库存为零。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Long stock = stringRedisTemplate.opsForValue().decrement( id+&amp;quot;&amp;quot; );
+if( stock &amp;lt; 0 ) {
+    return &amp;quot;fail&amp;quot;;
+}
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;性能：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210914154013003.png&#34; alt=&#34;image-20210914154013003&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;吞吐量为1400/s&lt;/p&gt;
+&lt;h4 id=&#34;存在的问题&#34;&gt;存在的问题&lt;/h4&gt;
+&lt;p&gt;缓存不一致问题：一旦秒杀业务过程中发生错误导致事务回滚，那么redis中的库存信息就和数据库中的不一致了。&lt;/p&gt;
+&lt;p&gt;解决方案：如果事务中出现报错，就在catch语句中让库存加一。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Long stock = stringRedisTemplate.opsForValue().decrement( id+&amp;quot;&amp;quot; );
+if( stock &amp;lt; 0 ) {
+    stringRedisTemplate.opsForValue().increment( id+&amp;quot;&amp;quot; );
+    return &amp;quot;fail&amp;quot;;
+}
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {
+    stringRedisTemplate.opsForValue().increment( id+&amp;quot;&amp;quot; );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;jvm缓存&#34;&gt;JVM缓存&lt;/h3&gt;
+&lt;p&gt;使用ConcurrentHashMap在JVM级别做缓存，当发现redis中库存为零后，使用ConcurrentHashMap标记当前商品为False。&lt;/p&gt;
+&lt;p&gt;当收到秒杀请求时，首先判断ConcurrentHashMap中当前商品是否被标记，如果被标记了，说明库存为零，直接return。&lt;/p&gt;
+&lt;p&gt;使用JVM级别的缓存能更好地提高系统性能，因为redis缓存是需要和redis服务做交互的，伴随网络请求，因此性能没有JVM级别快。&lt;/p&gt;
+&lt;p&gt;性能：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210914164139365.png&#34; alt=&#34;image-20210914164139365&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;吞吐量为：1815/s&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;if( concurrentHashMap.get(id) != null ) {
+    return &amp;quot;fail&amp;quot;;
+}
+
+Long stock = stringRedisTemplate.opsForValue().decrement( id+&amp;quot;&amp;quot; );
+if( stock &amp;lt; 0 ) {
+    stringRedisTemplate.opsForValue().increment( id+&amp;quot;&amp;quot; );
+    concurrentHashMap.put( id, true );
+    return &amp;quot;fail&amp;quot;;
+}
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {
+    stringRedisTemplate.opsForValue().increment( id+&amp;quot;&amp;quot; );
+    if( concurrentHashMap.get(id) != null ) {
+        concurrentHashMap.remove( id );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;存在的问题-2&#34;&gt;存在的问题&lt;/h4&gt;
+&lt;p&gt;JVM级缓存与redis缓存不一致，主要有两种场景&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;当秒杀业务中存在异常时，会对redis和concurrentHashMap进行恢复，对redis中的缓存进行increment操作，对ConcurrentHashMap进行remove操作，但此时，redis中的库存很可能是负数的情况，因为在高并发情况下，大量请求被接受，所以redis会执行大量的decrement操作，虽然后续会执行increment操作进行恢复，但是有概率在新的请求被处理时，increment操作还未执行，当新的请求进来后，会发现redis中库存为负数，从而在concurrentHashMap进行标记。所以最终，redis中的库存数可能不为0，而concurrentHashMap中对应的商品却被标记了。&lt;/p&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210914163636067.png&#34; alt=&#34;image-20210914163636067&#34; style=&#34;zoom:63%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在分布式场景下，不同JVM中的concurrentHashMap很难保证同步，可能在某个JVM中对hashMap进行了恢复，但是别的JVM中，hashMap并没有进行恢复。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;解决方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是分布式导致的不一致问题，可以使用zookeeper解决。当zookeeper中节点的数据发生改变后，zookeeper会主动通知监听该节点的进程，从而实现分布式下JVM级的缓存同步。&lt;/li&gt;
+&lt;li&gt;如果是单机不一致问题，暂时没想好如何解决。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他优化手段&#34;&gt;其他优化手段&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;限流降级&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Redis集群：提高redis并发量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;微服务架构&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;异步下单&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前端优化：静态页面、CDN&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+">秒杀系统-实战.md</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-09-13-MySQL慢查询优化-实战/"" data-c="
+          &lt;p&gt;这篇文章主要用于记录优化MySQL慢查询的完整过程以及心得体会。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;数据准备&#34;&gt;数据准备&lt;/h2&gt;
+&lt;p&gt;随机生成了50w条数据，具体步骤可以参考这篇博客：&lt;a href=&#34;https://blog.csdn.net/qq_36994788/article/details/73216961&#34;&gt;mysql插入千万条随机数据&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;前置知识&#34;&gt;前置知识&lt;/h2&gt;
+&lt;p&gt;Explain语句结果中各个字段分表表示什么：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913102404385.png&#34; alt=&#34;image-20210913102404385&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913125829371.png&#34; alt=&#34;image-20210913125829371&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;优化前统计&#34;&gt;优化前统计&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;select * from emp where deptno = 101;&lt;/p&gt;
+&lt;p&gt;时间: 0.55s&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;开始优化&#34;&gt;开始优化&lt;/h2&gt;
+&lt;h3 id=&#34;是否走了索引&#34;&gt;是否走了索引&lt;/h3&gt;
+&lt;p&gt;Explain结果：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913102307124.png&#34; alt=&#34;image-20210913102307124&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;结果分析：&lt;/p&gt;
+&lt;p&gt;Extra中为Using where，表示未使用索引，根据where条件顺序扫描&lt;/p&gt;
+&lt;p&gt;解决方案：对deptno列建立索引&lt;/p&gt;
+&lt;p&gt;建立索引后，Explain结果：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913105003822.png&#34; alt=&#34;image-20210913105003822&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;时间: 3.636s&lt;/p&gt;
+&lt;p&gt;结果分析：时间反而变长了，猜测，可能是发生了回表操作。&lt;/p&gt;
+&lt;p&gt;验证：&lt;/p&gt;
+&lt;p&gt;尝试只select deptno，从而使用覆盖索引。&lt;/p&gt;
+&lt;p&gt;select deptno from emp where deptno = 101;&lt;/p&gt;
+&lt;p&gt;时间: 0.095s&lt;/p&gt;
+&lt;p&gt;Explain结果：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913110312538.png&#34; alt=&#34;image-20210913110312538&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;注意到Extra出现Using index，表示使用了覆盖索引。&lt;/p&gt;
+&lt;p&gt;尝试select ename，在这种情况下，会发生回表操作&lt;/p&gt;
+&lt;p&gt;select ename from emp where deptno = 101;&lt;/p&gt;
+&lt;p&gt;时间: 3.189s&lt;/p&gt;
+&lt;p&gt;Explain结果：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913110337524.png&#34; alt=&#34;image-20210913110337524&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;未使用覆盖索引&lt;/p&gt;
+&lt;p&gt;建立联合索引，(deptno, ename)&lt;/p&gt;
+&lt;p&gt;select ename from emp where deptno = 101;&lt;/p&gt;
+&lt;p&gt;时间: 0.033s&lt;/p&gt;
+&lt;p&gt;Explain结果：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210913105937845.png&#34; alt=&#34;image-20210913105937845&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;使用了覆盖索引&lt;/p&gt;
+&lt;p&gt;验证结束&lt;/p&gt;
+&lt;h3 id=&#34;是否是最优索引&#34;&gt;是否是最优索引&lt;/h3&gt;
+&lt;p&gt;where条件只对deptno进行了约束，因此是最优索引&lt;/p&gt;
+&lt;h3 id=&#34;是否查询了过多字段&#34;&gt;是否查询了过多字段&lt;/h3&gt;
+&lt;p&gt;select *，查询字段过多，应根据实际业务需要，减少查询字段，例如只查询ename和deptno，这样就可以使用联合索引进行优化。&lt;/p&gt;
+&lt;h3 id=&#34;是否应该进行分库分表&#34;&gt;是否应该进行分库分表&lt;/h3&gt;
+&lt;p&gt;暂时不考虑分库分表&lt;/p&gt;
+&lt;h3 id=&#34;是否数据库服务所在机器性能过低&#34;&gt;是否数据库服务所在机器性能过低&lt;/h3&gt;
+&lt;p&gt;暂时不考虑机器性能&lt;/p&gt;
+">MySQL慢查询优化-实战</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-09-01-ConcurrentHashMap详解/"" data-c="
+          &lt;p&gt;这篇文章主要用于记录学习ConcurrentHashMap过程中的学习笔记，学习资料如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/4dTDHcwa7M9&#34;&gt;ConcurrentHashMap底层原理与源码分析深入详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hashmap&#34;&gt;HashMap&lt;/h2&gt;
+&lt;p&gt;非线程安全&lt;/p&gt;
+&lt;p&gt;实现原理：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210901135831288.png&#34; alt=&#34;image-20210901135831288&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;hashtable&#34;&gt;Hashtable&lt;/h2&gt;
+&lt;p&gt;线程安全：对put方法加synchronized锁&lt;/p&gt;
+&lt;p&gt;缺点：性能差&lt;/p&gt;
+&lt;h2 id=&#34;concurrenthashmap&#34;&gt;ConcurrentHashMap&lt;/h2&gt;
+&lt;p&gt;class Segment extends Reentralock&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210901141125962.png&#34; alt=&#34;image-20210901141125962&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;扩容&#34;&gt;扩容&lt;/h3&gt;
+&lt;p&gt;segments数组大小不变，与扩增级别（concurrencyLevel）相同&lt;/p&gt;
+&lt;p&gt;触发扩容后，只会在Segment对象内部进行扩容，不会整体扩容&lt;/p&gt;
+&lt;h3 id=&#34;源码&#34;&gt;源码&lt;/h3&gt;
+&lt;h4 id=&#34;初始化&#34;&gt;初始化&lt;/h4&gt;
+&lt;p&gt;segments数组长度为2的幂，为什么？因为计算下标时需要 &lt;code&gt;h &amp;amp; (length-1)&lt;/code&gt;，因此，必须是2的幂。&lt;/p&gt;
+&lt;p&gt;同时，Segment对象内部的数组，长度也是2的幂&lt;/p&gt;
+&lt;h4 id=&#34;put&#34;&gt;put&lt;/h4&gt;
+&lt;p&gt;在put时会对Segment对象进行初始化，使用了CAS&lt;/p&gt;
+&lt;p&gt;在等待锁的过程中，提前生成entry对象&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210901160244226.png&#34; alt=&#34;image-20210901160244226&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">ConcurrentHashMap详解</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-08-28-微服务架构与Spring Cloud Alibaba框架学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要用于记录学习微服务架构与Spring Cloud Alibaba框架过程中的学习笔记，学习资料如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/bJKCoGeUWY7&#34;&gt;微服务Spring Cloud Alibaba三高架构实战视频.mp4&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/1TgXEyrFN2p&#34;&gt;阿里微服务架构Spring Cloud Alibaba源码深度剖析视频.mp4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;微服务架构的优势劣势&#34;&gt;微服务架构的优势劣势&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;优势
+&lt;ul&gt;
+&lt;li&gt;单一服务崩溃，不会影响其他服务的正常运行&lt;/li&gt;
+&lt;li&gt;方便大型团队的开发和管理&lt;/li&gt;
+&lt;li&gt;方便对特定服务的扩容&lt;/li&gt;
+&lt;li&gt;不同服务使用不同的数据库，便于数据库的管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;劣势
+&lt;ul&gt;
+&lt;li&gt;增加运维难度&lt;/li&gt;
+&lt;li&gt;引发分布式事务问题&lt;/li&gt;
+&lt;li&gt;bug定位困难&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;服务扩容方案&#34;&gt;服务扩容方案&lt;/h2&gt;
+&lt;h3 id=&#34;nginx负载均衡&#34;&gt;nginx负载均衡&lt;/h3&gt;
+&lt;p&gt;需要手动修改nginx配置，对运维要求较高&lt;/p&gt;
+&lt;h3 id=&#34;spring-cloud-alibaba&#34;&gt;Spring Cloud Alibaba&lt;/h3&gt;
+&lt;p&gt;使用注册中心组件-nacos&lt;/p&gt;
+&lt;h4 id=&#34;实现原理&#34;&gt;实现原理&lt;/h4&gt;
+&lt;p&gt;客户端：默认集成Ribbon，Ribbon定时从Nacos上拉取相关信息。当客户端通过rest调用服务时，会被Ribbon拦截，Ribbon会根据本地的服务信息替换链接。Ribbon默认使用的是轮询负载均衡。&lt;/p&gt;
+&lt;p&gt;服务端：服务端启动后，会向Nacos注册服务，并开启心跳任务，定时向Nacos发送消息以证明自身存活。&lt;/p&gt;
+&lt;h2 id=&#34;高可用&#34;&gt;高可用&lt;/h2&gt;
+&lt;p&gt;核心链路中，某些服务未调用成功，则触发服务降级。服务降级可通过 sentinel组件 实现。&lt;/p&gt;
+&lt;p&gt;sentinel组件还可以帮我们实现限流、熔断功能。&lt;/p&gt;
+&lt;p&gt;限流：限制访问量。&lt;/p&gt;
+&lt;p&gt;熔断：对于大概率失败的请求调用，直接调用降级服务。&lt;/p&gt;
+&lt;h3 id=&#34;限流算法&#34;&gt;限流算法&lt;/h3&gt;
+&lt;p&gt;滑动时间窗、漏桶、令牌桶&lt;/p&gt;
+&lt;h2 id=&#34;高并发&#34;&gt;高并发&lt;/h2&gt;
+&lt;h3 id=&#34;nacos&#34;&gt;nacos&lt;/h3&gt;
+&lt;p&gt;如何解决读写冲突问题：读写分离，在副本上进行写，写完之后再覆盖掉原有数据。&lt;/p&gt;
+&lt;h2 id=&#34;高扩展&#34;&gt;高扩展&lt;/h2&gt;
+&lt;h3 id=&#34;nacos-2&#34;&gt;nacos&lt;/h3&gt;
+&lt;p&gt;namespace -&amp;gt; group -&amp;gt; cluster -&amp;gt; instance&lt;/p&gt;
+&lt;p&gt;namespace: test, dev...&lt;/p&gt;
+&lt;p&gt;group: 交易微服务分组、仓储微服务分组&lt;/p&gt;
+&lt;p&gt;cluster: 多地部署，深圳、杭州、北京、成都&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210830082845291.png&#34; alt=&#34;image-20210830082845291&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210830082920845.png&#34; alt=&#34;image-20210830082920845&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;分布式事务&#34;&gt;分布式事务&lt;/h2&gt;
+&lt;p&gt;借助 seata组件 完成&lt;/p&gt;
+">微服务架构与Spring Cloud Alibaba框架学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-08-26-ConcurrentHashMap扩容机制/"" data-c="
+          &lt;p&gt;这篇文章主要用于记录学习 HashMap 过程中的笔记。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;扩容机制&#34;&gt;扩容机制&lt;/h2&gt;
+&lt;p&gt;首先要了解 HashMap 的底层结构，如图所示，数组+单向链表（红黑树）。&lt;/p&gt;
+&lt;p&gt;当单链表长度大于8时，~~数组长度达到64时，~~会由链表转换成红黑树。（依据：源码）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;for (int binCount = 0; ; ++binCount) {
+    if ((e = p.next) == null) {
+        p.next = newNode(hash, key, value, null);
+        if (binCount &amp;gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+            treeifyBin(tab, hash);
+        break;
+    }
+    if (e.hash == hash &amp;amp;&amp;amp;
+        ((k = e.key) == key || (key != null &amp;amp;&amp;amp; key.equals(k))))
+        break;
+    p = e;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210826131403378.png&#34; alt=&#34;image-20210826131403378&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;初始时，数组长度为16，当数组中超过16*0.75=12个位置被使用后，数组会被扩容到32，之后会扩容到64。&lt;/p&gt;
+&lt;p&gt;这里需要注意的是，必须是数组中12个位置被使用过，并不是说HashMap中存放12个元素，这里容易混淆。&lt;/p&gt;
+&lt;p&gt;同样，附上代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;if (++size &amp;gt; threshold)
+    resize();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;比例因子：&lt;/p&gt;
+&lt;p&gt;默认为0.75，也就是说，虽然数组长度为16，但只能存放16*0.75=12个元素。&lt;/p&gt;
+&lt;h2 id=&#34;看源码梳理put方法逻辑&#34;&gt;看源码，梳理put方法逻辑&lt;/h2&gt;
+&lt;p&gt;源码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
+    Node&amp;lt;K,V&amp;gt;[] tab; Node&amp;lt;K,V&amp;gt; p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    
+    if ((p = tab[i = (n - 1) &amp;amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&amp;lt;K,V&amp;gt; e; K k;
+        if (p.hash == hash &amp;amp;&amp;amp;
+            ((k = p.key) == key || (key != null &amp;amp;&amp;amp; key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&amp;lt;K,V&amp;gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount &amp;gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;amp;&amp;amp;
+                    ((k = e.key) == key || (key != null &amp;amp;&amp;amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &amp;gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;首先根据key计算hash值&lt;/li&gt;
+&lt;li&gt;根据hash值，从table中取出node
+&lt;ul&gt;
+&lt;li&gt;如果node为空，则根据key-value构造node，放到table相应位置中，并将size++，如果size超过阈值（容量*比例因子），则会进行扩容操作。&lt;/li&gt;
+&lt;li&gt;如果node不为空
+&lt;ul&gt;
+&lt;li&gt;如果node为红黑树，则会调用putTreeVal，向树中添加元素&lt;/li&gt;
+&lt;li&gt;如果node为单链表，则会遍历单链表
+&lt;ul&gt;
+&lt;li&gt;如果找到与key-value相等的元素，则直接返回。如果没找到，则新建&lt;/li&gt;
+&lt;li&gt;在遍历的过程中，如果发现链表长度大于TREEIFY_THRESHOLD（默认为8），则会将单链表转为红黑树。&lt;/li&gt;
+&lt;li&gt;分支逻辑：在转换过程中，如果发现当前table数组的大小小于MIN_TREEIFY_CAPACITY（默认为64），则不会进行转换，而是进行扩容操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/xpsallwell/article/details/88071038&#34;&gt;ConcurrentHashMap扩容原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/zuokaopuqingnian/article/details/79508730&#34;&gt;ArrayList HashMap ConcurrentHashMap扩容机制&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">HashMap详解</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-08-23-AQS、CAS学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习AQS、CAS过程中的笔记。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;cas的应用&#34;&gt;CAS的应用&lt;/h2&gt;
+&lt;p&gt;保证原子性&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;上面我们了解了cas是什么了，那么它能解决什么问题呢？它可以解决多线程并发安全的问题，以前我们对一些多线程操作的代码都是使用synchronize关键字，来保证线程安全的问题；现在我们将cas放入到多线程环境里我们看一下它是怎么解决的，我们假设有A、B两个线程同时执行一个int值value自增的代码，并且同时获取了当前的value，我们还要假设线程B比A快了那么0.00000001s，所以B先执行，线程B执行了cas操作之后，发现当前值和预期值相符，就执行了自增操作，此时这个value = value + 1;然后A开始执行，A也执行了cas操作，但是此时value的值和它当时取到的值已经不一样了，所以此次操作失败，重新取值然后比较成功，然后将value值更新，这样两个线程进入，value值自增了两次，符合我们的预期。&lt;/p&gt;
+&lt;p&gt;https://blog.csdn.net/ln_6am/article/details/85642853&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/mulinsen77/article/details/84583716&#34;&gt;AQS详解（面试）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/40025595&#34;&gt;AQS 如何使用&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u011506543/article/details/82392338&#34;&gt;JAVA CAS实现原理与使用&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+">AQS、CAS学习笔记</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-08-10-Spring中Bean、AOP、事务学习笔记/"" data-c="
+          &lt;p&gt;这篇文章主要记录了学习Spring Bean、AOP、事务过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/JBxJZYEJADm&#34;&gt;Spring之IOC、AOP、事务底层原理详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;bean&#34;&gt;Bean&lt;/h2&gt;
+&lt;p&gt;Bean对象默认为单例Bean，即根据Bean的name获取对象，相同name对应相同的对象。如果是独立Bean，就算name相同，也依旧是不同的对象。&lt;/p&gt;
+&lt;h3 id=&#34;bean-vs-对象&#34;&gt;Bean VS 对象&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;定义：Bean一定是对象，但对象不一定是Bean，只有被Spring管理的对象才是Bean对象。&lt;/li&gt;
+&lt;li&gt;特性：Bean对象中的Bean&lt;strong&gt;子&lt;/strong&gt;对象，会被Spring自动注入。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bean创建流程&#34;&gt;Bean创建流程&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;实例化（无参构造方法）&lt;/li&gt;
+&lt;li&gt;依赖注入
+&lt;ol&gt;
+&lt;li&gt;初始化前：@PostConstruct&lt;/li&gt;
+&lt;li&gt;初始化：InitializingBean&lt;/li&gt;
+&lt;li&gt;初始化后：AOP，生成代理对象&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;spring容器&#34;&gt;Spring容器&lt;/h2&gt;
+&lt;p&gt;本质上是Map，先根据.class进行寻找，如果找到的结果不唯一，则继续根据name进行寻找&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class AppConfig {
+	@Bean
+	public OrderService orderService1() {
+		return new OrderService();
+	}
+	@Bean
+	public OrderService orderService2() {
+		return new OrderService();
+	}
+}
+
+public UserService( OrderService orderService1, OrderService orderService2 ) {
+	不报错
+}
+---------------------------------------------------------
+class AppConfig {
+	@Bean
+	public OrderService orderService1() {
+		return new OrderService();
+	}
+	@Bean
+	public OrderService orderService2() {
+		return new OrderService();
+	}
+}
+
+public UserService( OrderService orderService1, OrderService orderService123 ) {
+	报错
+}
+---------------------------------------------------------
+class AppConfig {
+	@Bean
+	public OrderService orderService1() {
+		return new OrderService();
+	}
+}
+
+public UserService( OrderService orderService1, OrderService orderService123 ) {
+	不报错
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;aop&#34;&gt;AOP&lt;/h2&gt;
+&lt;h2 id=&#34;事务&#34;&gt;事务&lt;/h2&gt;
+&lt;p&gt;具有事务的对象为代理对象，切面逻辑为“开启事务”。&lt;/p&gt;
+&lt;h3 id=&#34;事务失效&#34;&gt;事务失效&lt;/h3&gt;
+&lt;h4 id=&#34;存储引擎&#34;&gt;存储引擎&lt;/h4&gt;
+&lt;p&gt;MySQL默认存储引擎是MyISAM，该存储引擎不知道事务，需要切换成InnoDB。&lt;/p&gt;
+&lt;h4 id=&#34;内部调用&#34;&gt;内部调用&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Transactional
+public void test() {
+	jdbcTemplate.execute(&amp;quot;insert t1 values(1,1,1)&amp;quot;);
+	a();
+}
+
+// Propagation.NEVER: throw an exception if a transaction exists
+@Transactional(propagation=Propagation.NEVER)
+public void a() {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上代码不会报错，原因是：&lt;/p&gt;
+&lt;p&gt;事务开启的逻辑是在代理对象中进行的，上述代码中a()方法的调用是在target对象中进行的，因此在调用a()方法时，不会触发事务相关的逻辑，因此事务失效。&lt;/p&gt;
+&lt;p&gt;解决方案：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;@Autowired
+private UserService userService;
+
+@Transactional
+public void test() {
+	jdbcTemplate.execute(&amp;quot;insert t1 values(1,1,1)&amp;quot;);
+	userService.a();
+}
+
+// Propagation.NEVER: throw an exception if a transaction exists
+@Transactional(propagation=Propagation.NEVER)
+public void a() {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bean初始化，为什么有了initializingBean，还要PostConstructor&lt;/li&gt;
+&lt;/ul&gt;
+">Spring中Bean、AOP、事务学习笔记</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/"" data-c="
           &lt;p&gt;这篇文章主要记录了学习JMM过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -1784,14 +2285,15 @@ You can also run `php --ini` inside terminal to see which files are used by PHP 
 &lt;h2 id=&#34;jmm的原子操作&#34;&gt;JMM的原子操作&lt;/h2&gt;
 &lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210729144205406.png&#34; alt=&#34;image-20210729144205406&#34; style=&#34;zoom:80%;&#34; /&gt;
 &lt;h2 id=&#34;volatile&#34;&gt;volatile&lt;/h2&gt;
-&lt;p&gt;作用：保证多线程间共享变量的可见性&lt;/p&gt;
+&lt;p&gt;作用：保证多线程间共享变量的可见性、有序性。不保证原子性，原子性需通过synchronized保证。&lt;/p&gt;
 &lt;p&gt;实现原理：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;禁止JVM优化：指令重排、使用寄存器&lt;/li&gt;
-&lt;li&gt;利用CPU lock指令为总线加锁&lt;/li&gt;
+&lt;li&gt;JVM级：禁止JVM优化：指令重排、使用寄存器&lt;/li&gt;
+&lt;li&gt;CPU级：利用CPU lock指令为总线加锁&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;缓存一致性协议-vs-volatile&#34;&gt;缓存一致性协议 VS volatile&lt;/h3&gt;
-&lt;h4 id=&#34;缓存一致性协议mesi&#34;&gt;缓存一致性协议（MESI）&lt;/h4&gt;
+&lt;h3 id=&#34;可见性&#34;&gt;可见性&lt;/h3&gt;
+&lt;h4 id=&#34;缓存一致性协议-vs-volatile&#34;&gt;缓存一致性协议 VS volatile&lt;/h4&gt;
+&lt;h5 id=&#34;缓存一致性协议mesi&#34;&gt;缓存一致性协议（MESI）&lt;/h5&gt;
 &lt;p&gt;四种状态：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;M（Modified）：在缓存行中被标记为Modified的值，与主存中的值不同，这个值将会在它被读取之前写入内存，并且状态置为Shared。&lt;/li&gt;
@@ -1801,8 +2303,8 @@ You can also run `php --ini` inside terminal to see which files are used by PHP 
 &lt;/ul&gt;
 &lt;p&gt;关于状态之间的转换以及更详细介绍MESI的内容，可以看这篇博客：https://www.cnblogs.com/igoodful/p/9493156.html&lt;/p&gt;
 &lt;p&gt;做个总结，MESI协议，保证了各CPU缓存之间的一致性。&lt;/p&gt;
-&lt;h4 id=&#34;volatile是否多余&#34;&gt;volatile是否多余&lt;/h4&gt;
-&lt;p&gt;既然MESI协议可以保证各CPU缓存之间数据的一致性，那么为什么还需要volatile关键词来保证各线程之间数据的可见性（一致性）呢？volatile关键字是否多余？&lt;/p&gt;
+&lt;h5 id=&#34;volatile是否多余&#34;&gt;volatile是否多余&lt;/h5&gt;
+&lt;p&gt;既然MESI协议可以保证各CPU缓存之间数据的一致性（可见性），那么为什么还需要volatile关键词来保证各线程之间数据的一致性（可见性）呢？volatile关键字是否多余？&lt;/p&gt;
 &lt;p&gt;答：不多余&lt;/p&gt;
 &lt;p&gt;理由：&lt;/p&gt;
 &lt;ul&gt;
@@ -1848,10 +2350,34 @@ You can also run `php --ini` inside terminal to see which files are used by PHP 
 &lt;p&gt;&lt;s&gt;CPU lock指令会将对应缓存行的状态改成E，并立即修改主内存中的数据。其他CPU通过总线嗅探机制，监听到数据的修改，将自己工作内存中的缓存行状态改成I。&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;如果不使用volatile关键字，JVM则不会使用lock指令，此时，对变量的修改会导致缓存行的状态变成M，并不会修改主内存的数据，因此会导致不同线程中共享变量数据不一致。&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;之所以不修改主内存，是因为对主内存的操作相对于CPU操作来说过于耗时，因此不会频繁操作主内存。&lt;/s&gt;&lt;/p&gt;
-&lt;h3 id=&#34;reference&#34;&gt;Reference&lt;/h3&gt;
+&lt;h4 id=&#34;reference&#34;&gt;Reference&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xrq730/p/7048693.html&#34;&gt;就是要你懂Java中volatile关键字实现原理&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/63120810&#34;&gt;java多线程在单核CPU上，还是需要volatile synchronized吗？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;有序性&#34;&gt;有序性&lt;/h3&gt;
+&lt;h4 id=&#34;重排序原则&#34;&gt;重排序原则&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;as-if-serial：不管怎么重排序 (编译器和处理器为了提高并行度)，(单线程) 程序的执行结果不能被改变。&lt;/li&gt;
+&lt;li&gt;happens-before：本质上其实和第一点类似，就是保证单线程程序的语义不被改变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;面试题：单例模式下对象半初始化问题&lt;/p&gt;
+&lt;h4 id=&#34;内存屏障&#34;&gt;内存屏障&lt;/h4&gt;
+&lt;p&gt;JVM内存屏障指令：LoadLoad, LoadStore, StoreLoad, StoreStore&lt;/p&gt;
+&lt;p&gt;对于volatile修饰的变量，在JVM级，会在该操作前后添加内存屏障指令，在CPU级，会通过lock指令实现内存屏障。&lt;/p&gt;
+&lt;h2 id=&#34;面试题&#34;&gt;面试题&lt;/h2&gt;
+&lt;h3 id=&#34;volatile有什么特点和synchornized相比有什么区别&#34;&gt;volatile有什么特点，和synchornized相比有什么区别？&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;volatile的特点：保证可见性和有序性，不保证原子性&lt;/li&gt;
+&lt;li&gt;volatile VS synchronized
+&lt;ul&gt;
+&lt;li&gt;修饰对象不同：volatile修饰变量，synchronized修饰方法和代码块&lt;/li&gt;
+&lt;li&gt;原子性：volatile不保证，synchronized保证&lt;/li&gt;
+&lt;li&gt;是否造成阻塞：volatile不会，synchronized会&lt;/li&gt;
+&lt;li&gt;volatile为轻量级锁，synchronized为重量级锁&lt;/li&gt;
+&lt;li&gt;都保证原子性和有序性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 ">JMM学习笔记</a>
       </div>
@@ -2214,7 +2740,16 @@ public:
 &lt;ul&gt;
 &lt;li&gt;高并发
 &lt;ul&gt;
-&lt;li&gt;相较于apache（200-300）、tomcat（1000），Nginx可以支持几万的并发量，因此，我们常常使用Nginx做负载均衡，OpenResty的出现，使得开发人员可以依托 Lua 脚本在 Nginx 的内部添加业务代码，充分利用Nginx高并发的优势。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;相较于apache（200-300）、tomcat（1000），Nginx可以支持几万的并发量，因此，我们常常使用Nginx做负载均衡，OpenResty的出现，使得开发人员可以依托 Lua 脚本在 Nginx 的内部添加业务代码，充分利用Nginx高并发的优势。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;高性能的原因：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;多线程+IO多路复用。&lt;/p&gt;
+&lt;p&gt;https://blog.csdn.net/weixin_30764137/article/details/98058884&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2479,14 +3014,16 @@ public:
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-05-27-NIO与epoll模型学习笔记/"" data-c="
-          &lt;p&gt;这篇文章主要记录了学习NIO及Netty线程模型过程中的笔记，学习资料为视频，链接如下：&lt;/p&gt;
+          &lt;p&gt;这篇文章主要记录了学习BIO NIO AIO、epoll模型、Netty框架过程中的笔记，学习资料为文档及视频，链接如下：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://ke.qq.com/course/3293405?taid=11073426419761373&#34;&gt;深入Hotspot源码与Linux内核理解NIO与Netty线程模型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/aLXiPUwmRs4&#34;&gt;深入Hotspot源码与Linux内核理解NIO与Netty线程模型-预习资料&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/hyVcrKK9xHF&#34;&gt;深入Hotspot源码与Linux内核理解NIO与Netty线程模型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/5nSfgiayKS5&#34;&gt;高性能网络通信框架Netty从入门到核心源码剖析-预习资料&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aliyundrive.com/s/H5MPxB4cCcd&#34;&gt;高性能网络通信框架Netty从入门到核心源码剖析&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;io&#34;&gt;IO&lt;/h2&gt;
-&lt;h3 id=&#34;bio&#34;&gt;BIO&lt;/h3&gt;
-&lt;h4 id=&#34;基本写法&#34;&gt;基本写法&lt;/h4&gt;
+&lt;h2 id=&#34;bio-blocking-io&#34;&gt;BIO-Blocking IO&lt;/h2&gt;
+&lt;h3 id=&#34;基本写法&#34;&gt;基本写法&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocket serverSocket = new ServerSocket( 9000 );
 while( true ) {
     Socket socket = serverSocket.accept();
@@ -2495,7 +3032,7 @@ while( true ) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;缺点：并发量为1&lt;/p&gt;
-&lt;h4 id=&#34;优化1使用多线程进行优化&#34;&gt;优化1：使用多线程进行优化&lt;/h4&gt;
+&lt;h3 id=&#34;优化1使用多线程进行优化&#34;&gt;优化1：使用多线程进行优化&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocket serverSocket = new ServerSocket( 9000 );
 while( true ) {
     Socket socket = serverSocket.accept();
@@ -2515,12 +3052,12 @@ while( true ) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;缺点：存在C10K问题，当并发量过大时，因为开的线程太多，会被内存挤爆。&lt;/p&gt;
-&lt;h4 id=&#34;优化2使用线程池进行优化&#34;&gt;优化2：使用线程池进行优化&lt;/h4&gt;
+&lt;h3 id=&#34;优化2使用线程池进行优化&#34;&gt;优化2：使用线程池进行优化&lt;/h3&gt;
 &lt;p&gt;缺点：并发数会受到线程池中线程数的约束&lt;/p&gt;
-&lt;h4 id=&#34;共同问题&#34;&gt;共同问题&lt;/h4&gt;
+&lt;h3 id=&#34;共同问题&#34;&gt;共同问题&lt;/h3&gt;
 &lt;p&gt;可能会存在建立连接后不发数据的情况，导致该线程阻塞，降低系统性能&lt;/p&gt;
-&lt;h3 id=&#34;nio&#34;&gt;NIO&lt;/h3&gt;
-&lt;h4 id=&#34;基本写法-2&#34;&gt;基本写法&lt;/h4&gt;
+&lt;h2 id=&#34;nio-non-blocking-io&#34;&gt;NIO-Non-blocking IO&lt;/h2&gt;
+&lt;h3 id=&#34;基本写法-2&#34;&gt;基本写法&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocketChannel serverChannel = ServerSocketChannel.open();
 serverChannel.bind( new InetSocketAddress(9000) );
 serverChannel.configureBlocking( false );
@@ -2549,7 +3086,7 @@ while( true ) {
 &lt;li&gt;对所有连接进行轮询，判断是否发送数据，但可能大部分连接都没有发送数据（空轮询）&lt;/li&gt;
 &lt;li&gt;C10K问题&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;优化使用selector进行优化&#34;&gt;优化：使用selector进行优化&lt;/h4&gt;
+&lt;h3 id=&#34;优化使用selector进行优化&#34;&gt;优化：使用selector进行优化&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;ServerSocketChannel serverChannel = ServerSocketChannel.open();
 serverChannel.bind( new InetSocketAddress(9000) );
 serverChannel.configureBlocking( false );
@@ -2579,21 +3116,40 @@ while( true ) {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;selector原理&#34;&gt;Selector原理&lt;/h4&gt;
+&lt;h3 id=&#34;selector原理&#34;&gt;Selector原理&lt;/h3&gt;
 &lt;p&gt;在linux环境下，selector基于epoll实现（在windows环境下，不基于epoll）。&lt;/p&gt;
 &lt;p&gt;使用epoll_create创建epoll对象，使用epoll_ctl进行注册，使用epoll_wait进行阻塞监听。&lt;/p&gt;
 &lt;p&gt;Java调用操作系统的内核函数来创建Socket，获取到Socket的文件描述符，再创建一个Selector对象，对应操作系统的Epoll描述符，将获取到的Socket连接的文件描述符的事件绑定到Selector对应的Epoll文件描述符上，进行事件的异步通知。&lt;/p&gt;
 &lt;p&gt;epoll基于“回调”实现监听。&lt;/p&gt;
 &lt;p&gt;在Selector中，连接建立、数据读取都依赖于系统函数，例如，连接建立依赖于accept函数。因此，Selector可以使用epoll监听系统函数的调用，从而实现对连接建立、数据读取的监听。&lt;/p&gt;
-&lt;p&gt;本质上，epoll监听的事文件描述符的状态（可读、可写）&lt;/p&gt;
-&lt;h4 id=&#34;对selector的理解&#34;&gt;对Selector的理解&lt;/h4&gt;
+&lt;p&gt;本质上，epoll监听的是文件描述符的状态（可读、可写）&lt;/p&gt;
+&lt;h3 id=&#34;对selector的理解&#34;&gt;对Selector的理解&lt;/h3&gt;
 &lt;p&gt;在Selector的实现中，看似是存在阻塞的（&lt;code&gt;selector.select()&lt;/code&gt;），但Selector依旧属于同步非阻塞IO的范畴，这是因为，这里所谓的阻塞，指的是当有多个连接希望建立时，因为正在处理某个连接的建立，导致其他连接无法被处理（连接被阻塞了），因此，这里所谓的阻塞，面向的对象是连接，当然，也可以是数据的读取，而不是程序的阻塞。&lt;/p&gt;
 &lt;p&gt;对于&lt;code&gt;selector.select()&lt;/code&gt;方法，当没有连接希望建立时，会阻塞，一旦有连接希望建立，则会立刻结束阻塞，且当有多个连接希望建立时，多个连接之间也不会有相互影响（即，因为线程A的建立，导致线程B建立请求的阻塞）。&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;selector.select()&lt;/code&gt;方法的内部，其实调用的是&lt;code&gt;epoll_wait&lt;/code&gt;方法，这个方法是异步非阻塞的。&lt;/p&gt;
-&lt;h3 id=&#34;nio与aio的区别&#34;&gt;NIO与AIO的区别&lt;/h3&gt;
+&lt;h3 id=&#34;对epoll的理解&#34;&gt;对epoll的理解&lt;/h3&gt;
+&lt;p&gt;epoll本质上还是属于NIO的，虽然它的内部实现是基于“回调”的。&lt;/p&gt;
+&lt;p&gt;这句话怎么理解？&lt;/p&gt;
+&lt;p&gt;在epoll中，会有一个就绪队列，当监听的fd（文件描述符）完成某个操作（完成连接、读取数据完成等）时，内核会触发epoll的回调函数，回调函数会把该fd放入就绪队列里。&lt;code&gt;epoll_wait&lt;/code&gt; 会监听就绪队列，当就绪队列中存在fd时，则会返回。&lt;/p&gt;
+&lt;h4 id=&#34;参考资料&#34;&gt;参考资料&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/h2604396739/article/details/82534253&#34;&gt;BIO\NIO\AIO再理解，nio轮询方式与epoll&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;nio与aio-asynchronous-io-的区别&#34;&gt;NIO与AIO (Asynchronous IO) 的区别&lt;/h2&gt;
 &lt;p&gt;NIO为同步非阻塞IO，会在程序中进行轮询，当发现有事件发生后，会对事件进行处理。&lt;/p&gt;
 &lt;p&gt;AIO为异步非阻塞IO，预先写好处理逻辑，当有事件发生后，处理函数会被调用，用于处理事件（观察者模式）。&lt;/p&gt;
-">NIO与epoll模型学习笔记</a>
+&lt;h2 id=&#34;对io多路复用的理解&#34;&gt;对IO多路复用的理解&lt;/h2&gt;
+&lt;p&gt;如果不使用IO多路复用技术，那么对于每一个请求，都需要一个线程去进行管理，而如果使用了IO多路复用技术，则可以使用一个线程去管理多个请求，这里所谓的复用，指的是线程的复用。&lt;/p&gt;
+&lt;p&gt;对于select和poll，使用的是轮询，即，在一个线程中，遍历所有的请求。而epoll，使用的是回调，即，当收到内核的通知后，将请求放到就绪队列中，同时，用 &lt;code&gt;epoll_wait&lt;/code&gt; 监听就绪队列。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210813163540811.png&#34; alt=&#34;image-20210813163540811&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;参考资料-2&#34;&gt;参考资料&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/32163005&#34;&gt;IO 多路复用是什么意思？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;netty&#34;&gt;Netty&lt;/h2&gt;
+&lt;h3 id=&#34;零拷贝机制&#34;&gt;零拷贝机制&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210824140232560.png&#34; alt=&#34;image-20210824140232560&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">BIO NIO AIO、epoll模型、Netty框架学习笔记</a>
       </div>
       
       <div class="item">
@@ -2939,6 +3495,10 @@ while( true ) {
 &lt;/ul&gt;
 &lt;h2 id=&#34;redis-vs-kafka&#34;&gt;Redis vs Kafka&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/112907568&#34;&gt;花5min就能搞清楚redis和zookeeper分布式锁的区别，太有必要读一下了&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;面试&#34;&gt;面试&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/LkIcGS9kFTXNLFlxASPYUA&#34;&gt;整理好了，Redis面试题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/hunternet/p/11306690.html&#34;&gt;Redis数据结构——压缩列表&lt;/a&gt;&lt;/li&gt;
@@ -4148,6 +4708,59 @@ Algorithm bag:
 &lt;/ul&gt;
 &lt;h1 id=&#34;简历&#34;&gt;简历&lt;/h1&gt;
 &lt;p&gt;不要光罗列会的技术，要深入地写，写技术细节。&lt;/p&gt;
+&lt;h1 id=&#34;面试题&#34;&gt;面试题&lt;/h1&gt;
+&lt;h2 id=&#34;说说建立索引的优势-负面影响和原则&#34;&gt;说说建立索引的优势、负面影响和原则?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;优势
+&lt;ul&gt;
+&lt;li&gt;提高检索速度&lt;/li&gt;
+&lt;li&gt;唯一性索引，保证数据的唯一性&lt;/li&gt;
+&lt;li&gt;加速表与表之间的连接&lt;/li&gt;
+&lt;li&gt;减少分组和排序的时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;负面影响：
+&lt;ul&gt;
+&lt;li&gt;耗时：创建和维护，都需要消耗时间，耗时随数据量增加而增加&lt;/li&gt;
+&lt;li&gt;占空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;原则：
+&lt;ul&gt;
+&lt;li&gt;什么时候该建
+&lt;ul&gt;
+&lt;li&gt;在最频繁使用的、用以缩小查询范围的字段上建立索引&lt;/li&gt;
+&lt;li&gt;在最频繁使用的、需要排序的字段上建立索引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;什么时候不该建
+&lt;ul&gt;
+&lt;li&gt;对于查询中很少涉及的列或者重复值比较多的列，不宜建立索引&lt;/li&gt;
+&lt;li&gt;对于一些特殊的数据类型，不宜建立索引，比如文本字段(text)、uuid&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;说说sql事务隔离级别&#34;&gt;说说SQL事务隔离级别?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;读未提交(read uncommitted）是指，一个事务还没提交时，它做的变更就能被别的事务看到。&lt;/li&gt;
+&lt;li&gt;读提交(read committed)是指，一个事务提交之后，它做的变更才会被其他事务看到。&lt;/li&gt;
+&lt;li&gt;可重复读(repeatable read)是指，一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的。&lt;/li&gt;
+&lt;li&gt;串行化 (serializable ) ，顾名思义是对于同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20210818155116207.png&#34; alt=&#34;image-20210818155116207&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;b树相对于b树的优势&#34;&gt;B+树相对于B树的优势&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;把数据统一存放在叶子结点中，好处是，非叶子结点可以包含更多的索引元素，因此树的高度更低。&lt;/li&gt;
+&lt;li&gt;叶子结点之前的连接：更好地支持范围查找。B-树如果要做范围查询，则需要定位到第一个元素后，进行中序遍历。&lt;/li&gt;
+&lt;li&gt;B+树，每次都会查到叶子结点才结束，因此查询时间较稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;参考资料&#34;&gt;参考资料&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/uyu0lKz2_N5BYgITKz71CQ&#34;&gt;什么是数据库的 “缓存池” ？（万字干货）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_16162981/article/details/70142166&#34;&gt;全文检索原理及实现方式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 ">MySQL性能优化</a>
       </div>
       
@@ -4401,12 +5014,30 @@ public:
 &lt;/ul&gt;
 &lt;h1 id=&#34;dp&#34;&gt;dp&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845&#34;&gt;ZOJ 1346 Comparing Your Heroes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;85. 最大矩形&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/&#34;&gt;42. 接雨水&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/partition-equal-subset-sum/&#34;&gt;416. 分割等和子集&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/longest-increasing-subsequence/&#34;&gt;300. 最长递增子序列&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/interleaving-string/&#34;&gt;97. 交错字符串&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zoj.pintia.cn/problem-sets/91827364500/problems/91827364845&#34;&gt;ZOJ 1346 Comparing Your Heroes&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;85. 最大矩形&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/&#34;&gt;42. 接雨水&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/partition-equal-subset-sum/&#34;&gt;416. 分割等和子集&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/longest-increasing-subsequence/&#34;&gt;300. 最长递增子序列&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/interleaving-string/&#34;&gt;97. 交错字符串&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/number-of-ways-to-separate-numbers/&#34;&gt;1977. 划分数字的方案数&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/cherry-pickup/&#34;&gt;741. 摘樱桃&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;旅行商问题&#34;&gt;旅行商问题&lt;/h2&gt;
 &lt;ul&gt;
@@ -4442,9 +5073,18 @@ public:
 &lt;/ul&gt;
 &lt;h1 id=&#34;思维&#34;&gt;思维&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/word-subsets/&#34;&gt;916. 单词子集&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;多数投票算法&#34;&gt;多数投票算法&lt;/h2&gt;
 &lt;ul&gt;
@@ -4500,6 +5140,10 @@ public:
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qm5132/article/details/105619531/&#34;&gt;python和Microsoft Visual C++ Build Tools版本安装&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/pyyong2011/article/details/105045883/&#34;&gt;python: cookies 解密问题&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;django&#34;&gt;Django&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/356405945&#34;&gt;手把手教你用Django实现RESTful接口&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;算法&#34;&gt;算法&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qiyihan/article/details/105468754&#34;&gt;覃超五毒神掌步骤&lt;/a&gt;&lt;/li&gt;
@@ -4548,6 +5192,11 @@ public:
 &lt;h2 id=&#34;kafka&#34;&gt;Kafka&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/hunternet/p/11017000.html&#34;&gt;docker 安装kafka&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;面试题&#34;&gt;面试题&lt;/h2&gt;
+&lt;h3 id=&#34;悟空架构&#34;&gt;悟空架构&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzAwMjI0ODk0NA==&amp;amp;mid=2451958620&amp;amp;idx=1&amp;amp;sn=2b68a7579fe43f185b9479e257f6b8ea&amp;amp;chksm=8d1c12c3ba6b9bd5d12b50b3685759053204d63e2fadf8989ad1c8cafde01f0791f37320612d&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=0909GosYFr1BPWpDIiHTMimh&amp;amp;sharer_sharetime=1631186094285&amp;amp;sharer_shareid=909e580e119d7a6d472174ec4df35366#rd&#34;&gt;1 W 字+ | 硬刚 MySQL（典藏版）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ">与技术相关的文章、博客、网站的汇总</a>
       </div>

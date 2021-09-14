@@ -2,13 +2,535 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-07-29T10:35:18.888Z</updated>
+    <updated>2021-09-14T10:02:06.559Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
     <logo>http://Bule-Zst.gitee.io/images/avatar.png</logo>
     <icon>http://Bule-Zst.gitee.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
+    <entry>
+        <title type="html"><![CDATA[秒杀系统-实战.md]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-14-秒杀系统-实战/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-14-秒杀系统-实战/">
+        </link>
+        <updated>2021-09-14T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录如何实现一个秒杀系统，学习资料如下：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1CE411s7xN?p=2&amp;spm_id_from=pageDriver">1小时带你用Redis轻松实现秒杀系统（附秒杀系统优化实战）</a></li>
+</ul>
+<hr>
+<h2 id="什么是秒杀系统">什么是秒杀系统</h2>
+<p>其实主要的业务流程就是下订单、减库存，只是，该业务流程是在高并发、大流量的场景下进行的。</p>
+<h2 id="并发量">并发量</h2>
+<p>一般秒杀系统的并发量是万级别的，几万、几十万、几百万。</p>
+<p>单机MySQL的并发量一般为几百，最多一千。</p>
+<p>单机Tomcat的并发量一般也为几百。</p>
+<p>单机Redis的并发量一般为几万。</p>
+<h2 id="优化前">优化前</h2>
+<p><a href="https://gitee.com/Bule-Zst/picture/raw/master/Seckill-%E4%BC%98%E5%8C%96%E5%89%8D.jpg">项目下载</a>（为了省事，我把文件后缀改成jpg了，这样直接用图床帮我存到云端）</p>
+<p>就是一个简单的购物系统，先下单之后再减库存，这个系统在业务逻辑上是没有bug的，最主要的问题就是性能差。</p>
+<p>需要注意的是，在系统里用到了事务，从而保证下单和减库存是原子操作，这里补充说一下Springboot事务失效的两个常见原因：</p>
+<ul>
+<li>内部调用：事务基于AOP，会对事务对象包装一个代理对象，因此不能直接调用事务对象的方法，应该使用Springboot的依赖注入，使用注入对象的方法。</li>
+<li>数据库存储引擎不支持：MyISAM是不支持事务的，所以可以检查一下数据库表的存储引擎，如果是MyISAM，需要改成InnoDB。</li>
+</ul>
+<p>性能：</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914151845646.png" alt="image-20210914151845646" loading="lazy"></figure>
+<p>吞吐量为130/s</p>
+<h2 id="优化">优化</h2>
+<h3 id="redis缓存">Redis缓存</h3>
+<p>使用redis做缓存</p>
+<p>在秒杀之前，把商品库存信息放到redis中</p>
+<p>在秒杀时，先对redis中的库存执行decrement方法，之后判断返回结果是否小于0，如果返回结果大于等于0，则进行秒杀业务，否则说明库存为零。</p>
+<pre><code class="language-java">Long stock = stringRedisTemplate.opsForValue().decrement( id+&quot;&quot; );
+if( stock &lt; 0 ) {
+    return &quot;fail&quot;;
+}
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {}
+</code></pre>
+<p>性能：</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914154013003.png" alt="image-20210914154013003" loading="lazy"></figure>
+<p>吞吐量为1400/s</p>
+<h4 id="存在的问题">存在的问题</h4>
+<p>缓存不一致问题：一旦秒杀业务过程中发生错误导致事务回滚，那么redis中的库存信息就和数据库中的不一致了。</p>
+<p>解决方案：如果事务中出现报错，就在catch语句中让库存加一。</p>
+<pre><code class="language-java">Long stock = stringRedisTemplate.opsForValue().decrement( id+&quot;&quot; );
+if( stock &lt; 0 ) {
+    stringRedisTemplate.opsForValue().increment( id+&quot;&quot; );
+    return &quot;fail&quot;;
+}
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {
+    stringRedisTemplate.opsForValue().increment( id+&quot;&quot; );
+}
+</code></pre>
+<h3 id="jvm缓存">JVM缓存</h3>
+<p>使用ConcurrentHashMap在JVM级别做缓存，当发现redis中库存为零后，使用ConcurrentHashMap标记当前商品为False。</p>
+<p>当收到秒杀请求时，首先判断ConcurrentHashMap中当前商品是否被标记，如果被标记了，说明库存为零，直接return。</p>
+<p>使用JVM级别的缓存能更好地提高系统性能，因为redis缓存是需要和redis服务做交互的，伴随网络请求，因此性能没有JVM级别快。</p>
+<p>性能：</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914164139365.png" alt="image-20210914164139365" loading="lazy"></figure>
+<p>吞吐量为：1815/s</p>
+<pre><code class="language-java">if( concurrentHashMap.get(id) != null ) {
+    return &quot;fail&quot;;
+}
+
+Long stock = stringRedisTemplate.opsForValue().decrement( id+&quot;&quot; );
+if( stock &lt; 0 ) {
+    stringRedisTemplate.opsForValue().increment( id+&quot;&quot; );
+    concurrentHashMap.put( id, true );
+    return &quot;fail&quot;;
+}
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {
+    stringRedisTemplate.opsForValue().increment( id+&quot;&quot; );
+    if( concurrentHashMap.get(id) != null ) {
+        concurrentHashMap.remove( id );
+    }
+}
+</code></pre>
+<h4 id="存在的问题-2">存在的问题</h4>
+<p>JVM级缓存与redis缓存不一致，主要有两种场景</p>
+<ul>
+<li>
+<p>当秒杀业务中存在异常时，会对redis和concurrentHashMap进行恢复，对redis中的缓存进行increment操作，对ConcurrentHashMap进行remove操作，但此时，redis中的库存很可能是负数的情况，因为在高并发情况下，大量请求被接受，所以redis会执行大量的decrement操作，虽然后续会执行increment操作进行恢复，但是有概率在新的请求被处理时，increment操作还未执行，当新的请求进来后，会发现redis中库存为负数，从而在concurrentHashMap进行标记。所以最终，redis中的库存数可能不为0，而concurrentHashMap中对应的商品却被标记了。</p>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914163636067.png" alt="image-20210914163636067" style="zoom:63%;" />
+</li>
+<li>
+<p>在分布式场景下，不同JVM中的concurrentHashMap很难保证同步，可能在某个JVM中对hashMap进行了恢复，但是别的JVM中，hashMap并没有进行恢复。</p>
+</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>如果是分布式导致的不一致问题，可以使用zookeeper解决。当zookeeper中节点的数据发生改变后，zookeeper会主动通知监听该节点的进程，从而实现分布式下JVM级的缓存同步。</li>
+<li>如果是单机不一致问题，暂时没想好如何解决。</li>
+</ul>
+<h3 id="其他优化手段">其他优化手段</h3>
+<ul>
+<li>
+<p>限流降级</p>
+</li>
+<li>
+<p>Redis集群：提高redis并发量</p>
+</li>
+<li>
+<p>微服务架构</p>
+</li>
+<li>
+<p>异步下单</p>
+</li>
+<li>
+<p>前端优化：静态页面、CDN</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL慢查询优化-实战]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-13-MySQL慢查询优化-实战/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-13-MySQL慢查询优化-实战/">
+        </link>
+        <updated>2021-09-13T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录优化MySQL慢查询的完整过程以及心得体会。</p>
+<hr>
+<h2 id="数据准备">数据准备</h2>
+<p>随机生成了50w条数据，具体步骤可以参考这篇博客：<a href="https://blog.csdn.net/qq_36994788/article/details/73216961">mysql插入千万条随机数据</a></p>
+<h2 id="前置知识">前置知识</h2>
+<p>Explain语句结果中各个字段分表表示什么：</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913102404385.png" alt="image-20210913102404385" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913125829371.png" alt="image-20210913125829371" loading="lazy"></figure>
+<h2 id="优化前统计">优化前统计</h2>
+<ul>
+<li>
+<p>select * from emp where deptno = 101;</p>
+<p>时间: 0.55s</p>
+</li>
+</ul>
+<h2 id="开始优化">开始优化</h2>
+<h3 id="是否走了索引">是否走了索引</h3>
+<p>Explain结果：</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913102307124.png" alt="image-20210913102307124" loading="lazy"></figure>
+<p>结果分析：</p>
+<p>Extra中为Using where，表示未使用索引，根据where条件顺序扫描</p>
+<p>解决方案：对deptno列建立索引</p>
+<p>建立索引后，Explain结果：</p>
+<figure data-type="image" tabindex="4"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913105003822.png" alt="image-20210913105003822" loading="lazy"></figure>
+<p>时间: 3.636s</p>
+<p>结果分析：时间反而变长了，猜测，可能是发生了回表操作。</p>
+<p>验证：</p>
+<p>尝试只select deptno，从而使用覆盖索引。</p>
+<p>select deptno from emp where deptno = 101;</p>
+<p>时间: 0.095s</p>
+<p>Explain结果：</p>
+<figure data-type="image" tabindex="5"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913110312538.png" alt="image-20210913110312538" loading="lazy"></figure>
+<p>注意到Extra出现Using index，表示使用了覆盖索引。</p>
+<p>尝试select ename，在这种情况下，会发生回表操作</p>
+<p>select ename from emp where deptno = 101;</p>
+<p>时间: 3.189s</p>
+<p>Explain结果：</p>
+<figure data-type="image" tabindex="6"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913110337524.png" alt="image-20210913110337524" loading="lazy"></figure>
+<p>未使用覆盖索引</p>
+<p>建立联合索引，(deptno, ename)</p>
+<p>select ename from emp where deptno = 101;</p>
+<p>时间: 0.033s</p>
+<p>Explain结果：</p>
+<figure data-type="image" tabindex="7"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210913105937845.png" alt="image-20210913105937845" loading="lazy"></figure>
+<p>使用了覆盖索引</p>
+<p>验证结束</p>
+<h3 id="是否是最优索引">是否是最优索引</h3>
+<p>where条件只对deptno进行了约束，因此是最优索引</p>
+<h3 id="是否查询了过多字段">是否查询了过多字段</h3>
+<p>select *，查询字段过多，应根据实际业务需要，减少查询字段，例如只查询ename和deptno，这样就可以使用联合索引进行优化。</p>
+<h3 id="是否应该进行分库分表">是否应该进行分库分表</h3>
+<p>暂时不考虑分库分表</p>
+<h3 id="是否数据库服务所在机器性能过低">是否数据库服务所在机器性能过低</h3>
+<p>暂时不考虑机器性能</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ConcurrentHashMap详解]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-01-ConcurrentHashMap详解/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-01-ConcurrentHashMap详解/">
+        </link>
+        <updated>2021-09-01T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习ConcurrentHashMap过程中的学习笔记，学习资料如下：</p>
+<ul>
+<li><a href="https://www.aliyundrive.com/s/4dTDHcwa7M9">ConcurrentHashMap底层原理与源码分析深入详解</a></li>
+</ul>
+<hr>
+<h2 id="hashmap">HashMap</h2>
+<p>非线程安全</p>
+<p>实现原理：</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210901135831288.png" alt="image-20210901135831288" loading="lazy"></figure>
+<h2 id="hashtable">Hashtable</h2>
+<p>线程安全：对put方法加synchronized锁</p>
+<p>缺点：性能差</p>
+<h2 id="concurrenthashmap">ConcurrentHashMap</h2>
+<p>class Segment extends Reentralock</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210901141125962.png" alt="image-20210901141125962" loading="lazy"></figure>
+<h3 id="扩容">扩容</h3>
+<p>segments数组大小不变，与扩增级别（concurrencyLevel）相同</p>
+<p>触发扩容后，只会在Segment对象内部进行扩容，不会整体扩容</p>
+<h3 id="源码">源码</h3>
+<h4 id="初始化">初始化</h4>
+<p>segments数组长度为2的幂，为什么？因为计算下标时需要 <code>h &amp; (length-1)</code>，因此，必须是2的幂。</p>
+<p>同时，Segment对象内部的数组，长度也是2的幂</p>
+<h4 id="put">put</h4>
+<p>在put时会对Segment对象进行初始化，使用了CAS</p>
+<p>在等待锁的过程中，提前生成entry对象</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210901160244226.png" alt="image-20210901160244226" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[微服务架构与Spring Cloud Alibaba框架学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-08-28-微服务架构与Spring Cloud Alibaba框架学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-08-28-微服务架构与Spring Cloud Alibaba框架学习笔记/">
+        </link>
+        <updated>2021-08-28T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习微服务架构与Spring Cloud Alibaba框架过程中的学习笔记，学习资料如下：</p>
+<ul>
+<li><a href="https://www.aliyundrive.com/s/bJKCoGeUWY7">微服务Spring Cloud Alibaba三高架构实战视频.mp4</a></li>
+<li><a href="https://www.aliyundrive.com/s/1TgXEyrFN2p">阿里微服务架构Spring Cloud Alibaba源码深度剖析视频.mp4</a></li>
+</ul>
+<hr>
+<h2 id="微服务架构的优势劣势">微服务架构的优势劣势</h2>
+<ul>
+<li>优势
+<ul>
+<li>单一服务崩溃，不会影响其他服务的正常运行</li>
+<li>方便大型团队的开发和管理</li>
+<li>方便对特定服务的扩容</li>
+<li>不同服务使用不同的数据库，便于数据库的管理</li>
+</ul>
+</li>
+<li>劣势
+<ul>
+<li>增加运维难度</li>
+<li>引发分布式事务问题</li>
+<li>bug定位困难</li>
+</ul>
+</li>
+</ul>
+<h2 id="服务扩容方案">服务扩容方案</h2>
+<h3 id="nginx负载均衡">nginx负载均衡</h3>
+<p>需要手动修改nginx配置，对运维要求较高</p>
+<h3 id="spring-cloud-alibaba">Spring Cloud Alibaba</h3>
+<p>使用注册中心组件-nacos</p>
+<h4 id="实现原理">实现原理</h4>
+<p>客户端：默认集成Ribbon，Ribbon定时从Nacos上拉取相关信息。当客户端通过rest调用服务时，会被Ribbon拦截，Ribbon会根据本地的服务信息替换链接。Ribbon默认使用的是轮询负载均衡。</p>
+<p>服务端：服务端启动后，会向Nacos注册服务，并开启心跳任务，定时向Nacos发送消息以证明自身存活。</p>
+<h2 id="高可用">高可用</h2>
+<p>核心链路中，某些服务未调用成功，则触发服务降级。服务降级可通过 sentinel组件 实现。</p>
+<p>sentinel组件还可以帮我们实现限流、熔断功能。</p>
+<p>限流：限制访问量。</p>
+<p>熔断：对于大概率失败的请求调用，直接调用降级服务。</p>
+<h3 id="限流算法">限流算法</h3>
+<p>滑动时间窗、漏桶、令牌桶</p>
+<h2 id="高并发">高并发</h2>
+<h3 id="nacos">nacos</h3>
+<p>如何解决读写冲突问题：读写分离，在副本上进行写，写完之后再覆盖掉原有数据。</p>
+<h2 id="高扩展">高扩展</h2>
+<h3 id="nacos-2">nacos</h3>
+<p>namespace -&gt; group -&gt; cluster -&gt; instance</p>
+<p>namespace: test, dev...</p>
+<p>group: 交易微服务分组、仓储微服务分组</p>
+<p>cluster: 多地部署，深圳、杭州、北京、成都</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210830082845291.png" alt="image-20210830082845291" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210830082920845.png" alt="image-20210830082920845" loading="lazy"></figure>
+<h2 id="分布式事务">分布式事务</h2>
+<p>借助 seata组件 完成</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HashMap详解]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-08-26-ConcurrentHashMap扩容机制/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-08-26-ConcurrentHashMap扩容机制/">
+        </link>
+        <updated>2021-08-26T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习 HashMap 过程中的笔记。</p>
+<hr>
+<h2 id="扩容机制">扩容机制</h2>
+<p>首先要了解 HashMap 的底层结构，如图所示，数组+单向链表（红黑树）。</p>
+<p>当单链表长度大于8时，~~数组长度达到64时，~~会由链表转换成红黑树。（依据：源码）</p>
+<pre><code class="language-java">for (int binCount = 0; ; ++binCount) {
+    if ((e = p.next) == null) {
+        p.next = newNode(hash, key, value, null);
+        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+            treeifyBin(tab, hash);
+        break;
+    }
+    if (e.hash == hash &amp;&amp;
+        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+        break;
+    p = e;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210826131403378.png" alt="image-20210826131403378" loading="lazy"></figure>
+<p>初始时，数组长度为16，当数组中超过16*0.75=12个位置被使用后，数组会被扩容到32，之后会扩容到64。</p>
+<p>这里需要注意的是，必须是数组中12个位置被使用过，并不是说HashMap中存放12个元素，这里容易混淆。</p>
+<p>同样，附上代码：</p>
+<pre><code class="language-java">if (++size &gt; threshold)
+    resize();
+</code></pre>
+<p>比例因子：</p>
+<p>默认为0.75，也就是说，虽然数组长度为16，但只能存放16*0.75=12个元素。</p>
+<h2 id="看源码梳理put方法逻辑">看源码，梳理put方法逻辑</h2>
+<p>源码如下：</p>
+<pre><code class="language-java">final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&lt;K,V&gt; e; K k;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre>
+<ul>
+<li>首先根据key计算hash值</li>
+<li>根据hash值，从table中取出node
+<ul>
+<li>如果node为空，则根据key-value构造node，放到table相应位置中，并将size++，如果size超过阈值（容量*比例因子），则会进行扩容操作。</li>
+<li>如果node不为空
+<ul>
+<li>如果node为红黑树，则会调用putTreeVal，向树中添加元素</li>
+<li>如果node为单链表，则会遍历单链表
+<ul>
+<li>如果找到与key-value相等的元素，则直接返回。如果没找到，则新建</li>
+<li>在遍历的过程中，如果发现链表长度大于TREEIFY_THRESHOLD（默认为8），则会将单链表转为红黑树。</li>
+<li>分支逻辑：在转换过程中，如果发现当前table数组的大小小于MIN_TREEIFY_CAPACITY（默认为64），则不会进行转换，而是进行扩容操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://blog.csdn.net/xpsallwell/article/details/88071038">ConcurrentHashMap扩容原理</a></li>
+<li><a href="https://blog.csdn.net/zuokaopuqingnian/article/details/79508730">ArrayList HashMap ConcurrentHashMap扩容机制</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[AQS、CAS学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-08-23-AQS、CAS学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-08-23-AQS、CAS学习笔记/">
+        </link>
+        <updated>2021-08-23T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习AQS、CAS过程中的笔记。</p>
+<hr>
+<h2 id="cas的应用">CAS的应用</h2>
+<p>保证原子性</p>
+<blockquote>
+<p>上面我们了解了cas是什么了，那么它能解决什么问题呢？它可以解决多线程并发安全的问题，以前我们对一些多线程操作的代码都是使用synchronize关键字，来保证线程安全的问题；现在我们将cas放入到多线程环境里我们看一下它是怎么解决的，我们假设有A、B两个线程同时执行一个int值value自增的代码，并且同时获取了当前的value，我们还要假设线程B比A快了那么0.00000001s，所以B先执行，线程B执行了cas操作之后，发现当前值和预期值相符，就执行了自增操作，此时这个value = value + 1;然后A开始执行，A也执行了cas操作，但是此时value的值和它当时取到的值已经不一样了，所以此次操作失败，重新取值然后比较成功，然后将value值更新，这样两个线程进入，value值自增了两次，符合我们的预期。</p>
+<p>https://blog.csdn.net/ln_6am/article/details/85642853</p>
+</blockquote>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>
+<p><a href="https://blog.csdn.net/mulinsen77/article/details/84583716">AQS详解（面试）</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/40025595">AQS 如何使用</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/u011506543/article/details/82392338">JAVA CAS实现原理与使用</a></p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spring中Bean、AOP、事务学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-08-10-Spring中Bean、AOP、事务学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-08-10-Spring中Bean、AOP、事务学习笔记/">
+        </link>
+        <updated>2021-08-10T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Spring Bean、AOP、事务过程中的笔记，学习资料为视频，链接如下：</p>
+<ul>
+<li><a href="https://www.aliyundrive.com/s/JBxJZYEJADm">Spring之IOC、AOP、事务底层原理详解</a></li>
+</ul>
+<hr>
+<h2 id="bean">Bean</h2>
+<p>Bean对象默认为单例Bean，即根据Bean的name获取对象，相同name对应相同的对象。如果是独立Bean，就算name相同，也依旧是不同的对象。</p>
+<h3 id="bean-vs-对象">Bean VS 对象</h3>
+<ul>
+<li>定义：Bean一定是对象，但对象不一定是Bean，只有被Spring管理的对象才是Bean对象。</li>
+<li>特性：Bean对象中的Bean<strong>子</strong>对象，会被Spring自动注入。</li>
+</ul>
+<h3 id="bean创建流程">Bean创建流程</h3>
+<ol>
+<li>实例化（无参构造方法）</li>
+<li>依赖注入
+<ol>
+<li>初始化前：@PostConstruct</li>
+<li>初始化：InitializingBean</li>
+<li>初始化后：AOP，生成代理对象</li>
+</ol>
+</li>
+</ol>
+<h2 id="spring容器">Spring容器</h2>
+<p>本质上是Map，先根据.class进行寻找，如果找到的结果不唯一，则继续根据name进行寻找</p>
+<pre><code class="language-java">class AppConfig {
+	@Bean
+	public OrderService orderService1() {
+		return new OrderService();
+	}
+	@Bean
+	public OrderService orderService2() {
+		return new OrderService();
+	}
+}
+
+public UserService( OrderService orderService1, OrderService orderService2 ) {
+	不报错
+}
+---------------------------------------------------------
+class AppConfig {
+	@Bean
+	public OrderService orderService1() {
+		return new OrderService();
+	}
+	@Bean
+	public OrderService orderService2() {
+		return new OrderService();
+	}
+}
+
+public UserService( OrderService orderService1, OrderService orderService123 ) {
+	报错
+}
+---------------------------------------------------------
+class AppConfig {
+	@Bean
+	public OrderService orderService1() {
+		return new OrderService();
+	}
+}
+
+public UserService( OrderService orderService1, OrderService orderService123 ) {
+	不报错
+}
+</code></pre>
+<h2 id="aop">AOP</h2>
+<h2 id="事务">事务</h2>
+<p>具有事务的对象为代理对象，切面逻辑为“开启事务”。</p>
+<h3 id="事务失效">事务失效</h3>
+<h4 id="存储引擎">存储引擎</h4>
+<p>MySQL默认存储引擎是MyISAM，该存储引擎不知道事务，需要切换成InnoDB。</p>
+<h4 id="内部调用">内部调用</h4>
+<pre><code class="language-java">@Transactional
+public void test() {
+	jdbcTemplate.execute(&quot;insert t1 values(1,1,1)&quot;);
+	a();
+}
+
+// Propagation.NEVER: throw an exception if a transaction exists
+@Transactional(propagation=Propagation.NEVER)
+public void a() {}
+</code></pre>
+<p>以上代码不会报错，原因是：</p>
+<p>事务开启的逻辑是在代理对象中进行的，上述代码中a()方法的调用是在target对象中进行的，因此在调用a()方法时，不会触发事务相关的逻辑，因此事务失效。</p>
+<p>解决方案：</p>
+<pre><code class="language-java">@Autowired
+private UserService userService;
+
+@Transactional
+public void test() {
+	jdbcTemplate.execute(&quot;insert t1 values(1,1,1)&quot;);
+	userService.a();
+}
+
+// Propagation.NEVER: throw an exception if a transaction exists
+@Transactional(propagation=Propagation.NEVER)
+public void a() {}
+</code></pre>
+<h2 id="问题">问题</h2>
+<ul>
+<li>Bean初始化，为什么有了initializingBean，还要PostConstructor</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JMM学习笔记]]></title>
         <id>http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/</id>
@@ -48,14 +570,15 @@
 <h2 id="jmm的原子操作">JMM的原子操作</h2>
 <img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210729144205406.png" alt="image-20210729144205406" style="zoom:80%;" />
 <h2 id="volatile">volatile</h2>
-<p>作用：保证多线程间共享变量的可见性</p>
+<p>作用：保证多线程间共享变量的可见性、有序性。不保证原子性，原子性需通过synchronized保证。</p>
 <p>实现原理：</p>
 <ul>
-<li>禁止JVM优化：指令重排、使用寄存器</li>
-<li>利用CPU lock指令为总线加锁</li>
+<li>JVM级：禁止JVM优化：指令重排、使用寄存器</li>
+<li>CPU级：利用CPU lock指令为总线加锁</li>
 </ul>
-<h3 id="缓存一致性协议-vs-volatile">缓存一致性协议 VS volatile</h3>
-<h4 id="缓存一致性协议mesi">缓存一致性协议（MESI）</h4>
+<h3 id="可见性">可见性</h3>
+<h4 id="缓存一致性协议-vs-volatile">缓存一致性协议 VS volatile</h4>
+<h5 id="缓存一致性协议mesi">缓存一致性协议（MESI）</h5>
 <p>四种状态：</p>
 <ul>
 <li>M（Modified）：在缓存行中被标记为Modified的值，与主存中的值不同，这个值将会在它被读取之前写入内存，并且状态置为Shared。</li>
@@ -65,8 +588,8 @@
 </ul>
 <p>关于状态之间的转换以及更详细介绍MESI的内容，可以看这篇博客：https://www.cnblogs.com/igoodful/p/9493156.html</p>
 <p>做个总结，MESI协议，保证了各CPU缓存之间的一致性。</p>
-<h4 id="volatile是否多余">volatile是否多余</h4>
-<p>既然MESI协议可以保证各CPU缓存之间数据的一致性，那么为什么还需要volatile关键词来保证各线程之间数据的可见性（一致性）呢？volatile关键字是否多余？</p>
+<h5 id="volatile是否多余">volatile是否多余</h5>
+<p>既然MESI协议可以保证各CPU缓存之间数据的一致性（可见性），那么为什么还需要volatile关键词来保证各线程之间数据的一致性（可见性）呢？volatile关键字是否多余？</p>
 <p>答：不多余</p>
 <p>理由：</p>
 <ul>
@@ -112,10 +635,34 @@
 <p><s>CPU lock指令会将对应缓存行的状态改成E，并立即修改主内存中的数据。其他CPU通过总线嗅探机制，监听到数据的修改，将自己工作内存中的缓存行状态改成I。</s></p>
 <p><s>如果不使用volatile关键字，JVM则不会使用lock指令，此时，对变量的修改会导致缓存行的状态变成M，并不会修改主内存的数据，因此会导致不同线程中共享变量数据不一致。</s></p>
 <p><s>之所以不修改主内存，是因为对主内存的操作相对于CPU操作来说过于耗时，因此不会频繁操作主内存。</s></p>
-<h3 id="reference">Reference</h3>
+<h4 id="reference">Reference</h4>
 <ul>
 <li><a href="https://www.cnblogs.com/xrq730/p/7048693.html">就是要你懂Java中volatile关键字实现原理</a></li>
 <li><a href="https://www.zhihu.com/question/63120810">java多线程在单核CPU上，还是需要volatile synchronized吗？</a></li>
+</ul>
+<h3 id="有序性">有序性</h3>
+<h4 id="重排序原则">重排序原则</h4>
+<ul>
+<li>as-if-serial：不管怎么重排序 (编译器和处理器为了提高并行度)，(单线程) 程序的执行结果不能被改变。</li>
+<li>happens-before：本质上其实和第一点类似，就是保证单线程程序的语义不被改变。</li>
+</ul>
+<p>面试题：单例模式下对象半初始化问题</p>
+<h4 id="内存屏障">内存屏障</h4>
+<p>JVM内存屏障指令：LoadLoad, LoadStore, StoreLoad, StoreStore</p>
+<p>对于volatile修饰的变量，在JVM级，会在该操作前后添加内存屏障指令，在CPU级，会通过lock指令实现内存屏障。</p>
+<h2 id="面试题">面试题</h2>
+<h3 id="volatile有什么特点和synchornized相比有什么区别">volatile有什么特点，和synchornized相比有什么区别？</h3>
+<ul>
+<li>volatile的特点：保证可见性和有序性，不保证原子性</li>
+<li>volatile VS synchronized
+<ul>
+<li>修饰对象不同：volatile修饰变量，synchronized修饰方法和代码块</li>
+<li>原子性：volatile不保证，synchronized保证</li>
+<li>是否造成阻塞：volatile不会，synchronized会</li>
+<li>volatile为轻量级锁，synchronized为重量级锁</li>
+<li>都保证原子性和有序性</li>
+</ul>
+</li>
 </ul>
 ]]></content>
     </entry>
@@ -234,537 +781,6 @@
 <li>使用不同的垃圾收集器，不同收集器，适用于不同的场景。</li>
 </ul>
 <img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727162355407.png" alt="image-20210727162355407" style="zoom:55%;" />
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[非对称加密的应用]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-07-19-非对称加密的应用/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-07-19-非对称加密的应用/">
-        </link>
-        <updated>2021-07-19T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="原理">原理</h2>
-<p>稍微提一下原理</p>
-<p>主要原理是，用一定的数学方法生成一对密钥对（公钥+私钥），公钥加密后，私钥可以解密，同时，私钥加密后，公钥也可以解密。</p>
-<h2 id="应用">应用</h2>
-<h3 id="数据传输">数据传输</h3>
-<p>1、A生成一对密钥对，把公钥发给B。</p>
-<p>2、B把需要传输的数据用公钥进行加密，然后发给A。</p>
-<p>3、A收到后，用私钥进行解密，即可获取数据。</p>
-<h4 id="如何防截获">如何防截获</h4>
-<p>使用报文摘要算法</p>
-<p>接上文</p>
-<p>B在第2步传数据时，使用报文摘要算法对所发数据进行摘要生成，之后，用自己的私钥对摘要进行加密，然后伴随数据一起发给A。</p>
-<p>A在收到后，对自己的私钥对数据进行解密，从而获取数据，之后再用B的公钥对摘要进行解密，然后比对收到的数据和摘要是否匹配，从而验证数据是否被篡改。</p>
-<h3 id="身份验证">身份验证</h3>
-<p>A要证明自己的身份</p>
-<p>B向A发送一段数据</p>
-<p>A用自己的私钥进行加密，然后发回给B，B用A的公钥进行解密，比对数据是否为自己发给A的数据，从而验证A的身份。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[在Docker容器内创建新的Docker容器]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-07-15-在Docker容器内创建新的Docker容器/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-07-15-在Docker容器内创建新的Docker容器/">
-        </link>
-        <updated>2021-07-15T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="要解决的问题">要解决的问题</h2>
-<p>这篇文章主要解决的问题如标题所述：如何在Docker容器内创建新的Docker容器。受限于标题长度，没法详细描述要解决的问题，因此，第一节首先讲一下问题场景。</p>
-<p>随着Docker技术以及微服务结构的普及，现在越来越多的应用被打包放在Docker容器中，并且，为了采用微服务的架构，应用通常是需要拆分成多个Docker容器的。</p>
-<p>那么，这就带来了一个问题，如何在一个Docker容器内去控制别的Docker容器。这里需要啰嗦一句，我想表达的意思并不是在一个Docker容器的内部创建新的Docker容器，而是说，在一个Docker容器内部，控制宿主机，让其创建新的Docker容器。</p>
-<p>问题描述讲完了，接下来说一下如何实现。</p>
-<h2 id="如何解决">如何解决</h2>
-<p>解决这个问题，就需要涉及到Docker的通信机制。</p>
-<p>Docker分为服务端和客户端。当服务端启动后，会在/var/run/文件夹中创建docker.sock这个文件，并且会持续监听这个文件。当有请求被写到docker.sock文件时，Docker服务端就会执行相应的操作。</p>
-<p>以往我们使用docker run等命令时，其实本质上也是往docker.sock文件中写请求。</p>
-<p>了解到这一点后，我们在创建Docker容器时，就可以把宿主机的docker.sock文件挂载到容器内部，这样，便可以在容器内部控制宿主机对容器的操作了。</p>
-<p>一共有两种方式，第一种是，在容器内部安装docker客户端，然后便可以像在宿主机中一样，使用docker命令，不同的地方时，docker命令控制的并不是容器内部的Docker服务端，而是宿主机中的Docker服务端。</p>
-<p>可以使用如下命令进行容器的创建<code>curl -XPOST --unix-socket /var/run/docker.sock -d '{&quot;Image&quot;:&quot;centos&quot;}' -H 'Content-Type: application/json' http://localhost/containers/create</code>。</p>
-<p>第二种方法是，使用docker-java，通过java api操作宿主机中的Docker服务端。</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><a href="https://www.jianshu.com/p/dd0c814680ba">解析 /var/run/docker.sock</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/94224305">Docker客户端连接远程Docker服务</a></li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Leetcode 169. 多数元素]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-07-02-Leetcode 169. 多数元素/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-07-02-Leetcode 169. 多数元素/">
-        </link>
-        <updated>2021-07-02T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>题目链接：<a href="https://leetcode-cn.com/problems/majority-element/">169. 多数元素</a></p>
-<hr>
-<h2 id="题目">题目</h2>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210702100456543.png" alt="image-20210702100456543" loading="lazy"></figure>
-<h2 id="解法">解法</h2>
-<h3 id="哈希表">哈希表</h3>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(n)</p>
-<pre><code class="language-c++">class Solution {
-public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) {
-        unordered_map&lt;int, int&gt; counts;
-        int majority = 0, cnt = 0;
-        for (int num: nums) {
-            ++counts[num];
-            if (counts[num] &gt; cnt) {
-                majority = num;
-                cnt = counts[num];
-            }
-        }
-        return majority;
-    }
-};
-</code></pre>
-<h3 id="分治">分治</h3>
-<p>时间复杂度：O(nlogn)</p>
-<p>空间复杂度：O(logn)</p>
-<p>思路：如果数 <code>a</code> 是数组 <code>nums</code> 的众数，如果我们将 <code>nums</code> 分成两部分，那么 <code>a</code> 必定是至少一部分的众数（</p>
-<h4 id="时间复杂度分析">时间复杂度分析</h4>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>T</mi><mo>(</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mo>)</mo><mo>+</mo><mn>2</mn><mi>n</mi><mi mathvariant="normal">​</mi></mrow><annotation encoding="application/x-tex">T(n)=2T({n\over2})+2n​
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">n</span><span class="mord">​</span></span></span></span></span></p>
-<p>主定理：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>a</mi><mi>T</mi><mo>(</mo><mfrac><mi>n</mi><mi>b</mi></mfrac><mo>)</mo><mo>+</mo><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>d</mi></msup><mo>)</mo><mspace linebreak="newline"></mspace><mi>T</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>d</mi></msup><mo>)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>&gt;</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>O</mi><mo>(</mo><msup><mi>n</mi><mi>d</mi></msup><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>O</mi><mo>(</mo><msup><mi>b</mi><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></msup><mo>)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mo>&lt;</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>a</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">T(n)=aT({n\over b})+O(n^d) \\
-T(n) = \left\{ \begin{array}{lr} 
-O(n^d) &amp; d &gt; log_ba \\
-O(n^dlogn) &amp; d = log_ba \\
-O(b^{log_ba}) &amp; d &lt; log_ba
-\end{array} \right.
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">b</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span><span class="mclose">)</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.6273239999999998em;vertical-align:-1.5636619999999999em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.49999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-3.15001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.30002em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.063662em;"><span style="top:-4.214554em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.0054459999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span><span style="top:-1.7963380000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mord mathdefault mtight">a</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5636619999999999em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.063662em;"><span style="top:-4.214554em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span></span></span><span style="top:-3.0054459999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span></span></span><span style="top:-1.7963380000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5636619999999999em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<pre><code class="language-c++">class Solution {
-    int count_in_range(vector&lt;int&gt;&amp; nums, int target, int lo, int hi) {
-        int count = 0;
-        for (int i = lo; i &lt;= hi; ++i)
-            if (nums[i] == target)
-                ++count;
-        return count;
-    }
-    int majority_element_rec(vector&lt;int&gt;&amp; nums, int lo, int hi) {
-        if (lo == hi)
-            return nums[lo];
-        int mid = (lo + hi) / 2;
-        int left_majority = majority_element_rec(nums, lo, mid);
-        int right_majority = majority_element_rec(nums, mid + 1, hi);
-        if (count_in_range(nums, left_majority, lo, hi) &gt; (hi - lo + 1) / 2)
-            return left_majority;
-        if (count_in_range(nums, right_majority, lo, hi) &gt; (hi - lo + 1) / 2)
-            return right_majority;
-        return -1;
-    }
-public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) {
-        return majority_element_rec(nums, 0, nums.size() - 1);
-    }
-};
-</code></pre>
-<h3 id="排序">排序</h3>
-<h4 id="快速排序">快速排序</h4>
-<p>时间复杂度：O(nlogn)</p>
-<p>空间复杂度：O(logn) 栈空间</p>
-<h4 id="堆排序">堆排序</h4>
-<p>时间复杂度：O(nlogn)</p>
-<p>空间复杂度：O(1)</p>
-<pre><code class="language-c++">class Solution {
-public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) {
-        sort(nums.begin(), nums.end());
-        return nums[nums.size() / 2];
-    }
-};
-</code></pre>
-<h3 id="随机化">随机化</h3>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(1)</p>
-<p>思路：随机挑选一个下标对应的元素并验证，有很大的概率能找到众数。</p>
-<p>期望：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mo>=</mo><mi>l</mi><mi>i</mi><msub><mi>m</mi><mrow><mi>n</mi><mo>→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msub><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>i</mi><mo>∗</mo><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">E=lim_{n\to+\infty}\sum_{i=1}^n i * {1\over 2^i}=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.104002em;vertical-align:-0.29971000000000003em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.25833100000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">→</span><span class="mord mtight">+</span><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7570857142857143em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span></p>
-<pre><code class="language-c++">class Solution {
-public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) {
-        while (true) {
-            int candidate = nums[rand() % nums.size()];
-            int count = 0;
-            for (int num : nums)
-                if (num == candidate)
-                    ++count;
-            if (count &gt; nums.size() / 2)
-                return candidate;
-        }
-        return -1;
-    }
-};
-</code></pre>
-<h3 id="多数投票算法">多数投票算法</h3>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(1)</p>
-<pre><code>nums:      [#, 7, 7, 5, 7, 5, 1 | 5, 7 | 5, 5, 7, 7 | 7, 7, 7, 7]
-candidate:     7  7  7  7  7  7   5  5   5  5  5  5   7  7  7  7
-count:      0  1  2  1  2  1  0   1  0   1  2  1  0   1  2  3  4
-               7  7  7  7  7  7   7  7   7  7  7  7   7  7  7  7
-value:      0  1  2  1  2  1  0  -1  0  -1 -2 -1  0   1  2  3  4
-</code></pre>
-<p>步骤：</p>
-<ol>
-<li>检测count是否为0，如果为0，就用当前数组的元素值更新candidate。</li>
-<li>如果当前数组的元素值和candidate相同，那么，count++，否则，count--。</li>
-<li>当数组遍历完时，当前的candidate，就是我们要的答案。</li>
-</ol>
-<p>特性：</p>
-<ul>
-<li>count永远不为负数。</li>
-<li>当candidate和最终答案不相同时，count和value呈相反数；如果candidate和最终答案相同，count和value是相等的。</li>
-<li>value的最终值等于：7的个数-非7的个数。</li>
-</ul>
-<p>多数投票算法证明：</p>
-<ul>
-<li>
-<p>如果候选人不是7，则7会和其他<strong>非</strong>候选人一起反对候选人，所以候选人一定会下台(count==0时发生换届选举)</p>
-</li>
-<li>
-<p>如果候选人是7，则 7 会支持自己，其他候选人会反对，但因为 7 票数超过一半，所以 7 一定会成功当选</p>
-</li>
-</ul>
-<pre><code class="language-c++">class Solution {
-public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) {
-        int candidate = -1;
-        int count = 0;
-        for (int num : nums) {
-            if (num == candidate)
-                ++count;
-            else if (--count &lt; 0) {
-                candidate = num;
-                count = 1;
-            }
-        }
-        return candidate;
-    }
-};
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Jmeter ThreadGroup LoopController各参数含义梳理]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-06-29-Jmeter ThreadGroup LoopController各参数含义梳理/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-06-29-Jmeter ThreadGroup LoopController各参数含义梳理/">
-        </link>
-        <updated>2021-06-29T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="实例">实例</h2>
-<pre><code class="language-xml">&lt;ThreadGroup guiclass=&quot;ThreadGroupGui&quot; testclass=&quot;ThreadGroup&quot; testname=&quot;线程组&quot; enabled=&quot;true&quot;&gt;
-	&lt;stringProp name=&quot;ThreadGroup.on_sample_error&quot;&gt;continue&lt;/stringProp&gt;
-	&lt;elementProp name=&quot;ThreadGroup.main_controller&quot; elementType=&quot;LoopController&quot; guiclass=&quot;LoopControlPanel&quot; testclass=&quot;LoopController&quot; testname=&quot;循环控制器&quot; enabled=&quot;true&quot;&gt;
-		&lt;boolProp name=&quot;LoopController.continue_forever&quot;&gt;false&lt;/boolProp&gt;
-		&lt;intProp name=&quot;LoopController.loops&quot;&gt;-1&lt;/intProp&gt;
-	&lt;/elementProp&gt;
-	&lt;stringProp name=&quot;ThreadGroup.num_threads&quot;&gt;20&lt;/stringProp&gt;
-	&lt;stringProp name=&quot;ThreadGroup.ramp_time&quot;&gt;1&lt;/stringProp&gt;
-	&lt;boolProp name=&quot;ThreadGroup.scheduler&quot;&gt;true&lt;/boolProp&gt;
-	&lt;stringProp name=&quot;ThreadGroup.duration&quot;&gt;600&lt;/stringProp&gt;
-	&lt;stringProp name=&quot;ThreadGroup.delay&quot;&gt;&lt;/stringProp&gt;
-	&lt;boolProp name=&quot;ThreadGroup.same_user_on_next_iteration&quot;&gt;true&lt;/boolProp&gt;
-&lt;/ThreadGroup&gt;
-</code></pre>
-<h2 id="参数说明">参数说明</h2>
-<ul>
-<li>ThreadGroup.num_threads：并发线程数</li>
-<li>LoopController.loops：每个线程的循环次数，-1表示无限循环。</li>
-<li>压测的总请求数：ThreadGroup.num_threads * LoopController.loops</li>
-<li>调度器配置
-<ul>
-<li>ThreadGroup.duration：线程组的持续时间</li>
-<li>ThreadGroup.delay：启动延迟</li>
-</ul>
-</li>
-<li>ThreadGroup.scheduler：调度器是否生效</li>
-</ul>
-<h2 id="压测是否结束">压测是否结束</h2>
-<ul>
-<li>如果调度器不生效，则线程组达到循环次数后，压测结束。</li>
-<li>如果调度器生效，则每次循环结束后，都会检查持续时间，如果大于ThreadGroup.duration，则压测结束。在此过程中，如果线程组达到循环次数，也会结束压测。</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[OpenResty学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-06-25-OpenResty学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-06-25-OpenResty学习笔记/">
-        </link>
-        <updated>2021-06-25T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="是什么-能做什么">是什么、能做什么</h2>
-<p>OpenResty 是一个基于 Nginx 的 Web 平台。Web开发人员可以使用 OpenResty 搭建 Web 平台。借助于OpenResty，开发人员可以使用 Lua 脚本语言调动 Nginx 支持的各种由 C 语言实现的功能模块，从而实现特定的Web 业务需求。</p>
-<p>OpenResty 本质上是集成了 Lua 组件的 Nginx，是Nginx Plus。</p>
-<h2 id="优点-缺点是什么">优点、缺点是什么</h2>
-<ul>
-<li>优点
-<ul>
-<li>高并发
-<ul>
-<li>相较于apache（200-300）、tomcat（1000），Nginx可以支持几万的并发量，因此，我们常常使用Nginx做负载均衡，OpenResty的出现，使得开发人员可以依托 Lua 脚本在 Nginx 的内部添加业务代码，充分利用Nginx高并发的优势。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>缺点
-<ul>
-<li>暂未发现</li>
-</ul>
-</li>
-</ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li>https://www.runoob.com/w3cnote/openresty-intro.html</li>
-<li>https://www.zhihu.com/question/266535644?sort=created</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[跳表]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-06-24-跳表/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-06-24-跳表/">
-        </link>
-        <updated>2021-06-24T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="定义">定义</h2>
-<blockquote>
-<p>跳跃表以有序的方式在层次化的链表中保存元素，效率和平衡树（AVL）媲美 —— 查找、删除、添加等操作都可以在对数期望时间下完成， 并且比起平衡树来说， 跳跃表的实现要简单直观得多。</p>
-<p>https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html</p>
-</blockquote>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210624182132534.png" alt="image-20210624182132534" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210624191004554.png" alt="image-20210624191004554" loading="lazy"></figure>
-<h2 id="原理">原理</h2>
-<p>学过数据结构的都知道，在单链表中查询一个元素的时间复杂度为O(n)，即使该单链表是有序的，我们也不能通过2分的方式缩减时间复杂度。</p>
-<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205210928206" alt="这里写图片描述" loading="lazy"></figure>
-<p>如上图，我们要查询元素为55的结点，必须从头结点，循环遍历到最后一个节点，不算-INF(负无穷)一共查询8次。那么用什么办法能够用更少的次数访问55呢？最直观的，当然是新开辟一条捷径去访问55。</p>
-<figure data-type="image" tabindex="4"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211105653" alt="这里写图片描述" loading="lazy"></figure>
-<p>如上图，我们要查询元素为55的结点，只需要在L2层查找4次即可。在这个结构中，查询结点为46的元素将耗费最多的查询次数5次。即先在L2查询46，查询4次后找到元素55，因为链表是有序的，46一定在55的左边，所以L2层没有元素46。然后我们退回到元素37，到它的下一层即L1层继续搜索46。非常幸运，我们只需要再查询1次就能找到46。这样一共耗费5次查询。</p>
-<p>那么，如何才能更快的搜寻55呢？有了上面的经验，我们就很容易想到，再开辟一条捷径。</p>
-<figure data-type="image" tabindex="5"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211246498" alt="这里写图片描述" loading="lazy"></figure>
-<p>如上图，我们搜索55只需要2次查找即可。这个结构中，查询元素46仍然是最耗时的，需要查询5次。即首先在L3层查找2次，然后在L2层查找2次，最后在L1层查找1次，共5次。很显然，这种思想和2分非常相似，那么我们最后的结构图就应该如下图。</p>
-<figure data-type="image" tabindex="6"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211539787" alt="这里写图片描述" loading="lazy"></figure>
-<p>我们可以看到，最耗时的访问46需要6次查询。即L4访问55，L3访问21、55，L2访问37、55，L1访问46。我们直觉上认为，这样的结构会让查询有序链表的某个元素更快。那么究竟算法复杂度是多少呢？</p>
-<p>如果有n个元素，因为是2分，所以层数就应该是log n层 (本文所有log都是以2为底)，再加上自身的1层。以上图为例，如果是4个元素，那么分层为L3和L4，再加上本身的L2，一共3层；如果是8个元素，那么就是3+1层。最耗时间的查询自然是访问所有层数，耗时logn+logn，即2logn。为什么是2倍的logn呢？我们以上图中的46为例，查询到46要访问所有的分层，每个分层都要访问2个元素，中间元素和最后一个元素。所以时间复杂度为O(logn)。</p>
-<p>至此为止，我们引入了最理想的跳跃表，但是如果想要在上图中插入或者删除一个元素呢？比如我们要插入一个元素22、23、24……，自然在L1层，我们将这些元素插入在元素21后，那么L2层，L3层呢？我们是不是要考虑插入后怎样调整连接，才能维持这个理想的跳跃表结构。我们知道，平衡二叉树的调整是一件令人头痛的事情，左旋右旋左右旋……一般人还真记不住，而调整一个理想的跳跃表将是一个比调整平衡二叉树还复杂的操作。幸运的是，我们并不需要通过复杂的操作调整连接来维护这样完美的跳跃表。有一种基于概率统计的插入算法，也能得到时间复杂度为O(logn)的查询效率，这种跳跃表才是我们真正要实现的。</p>
-<h2 id="实现">实现</h2>
-<h3 id="抛硬币">抛硬币</h3>
-<p>先讨论插入，我们先看理想的跳跃表结构，L2层的元素个数是L1层元素个数的1/2，L3层的元素个数是L2层的元素个数的1/2，以此类推。从这里，我们可以想到，只要在插入时尽量保证上一层的元素个数是下一层元素的1/2，我们的跳跃表就能成为理想的跳跃表。那么怎么样才能在插入时保证上一层元素个数是下一层元素个数的1/2呢？很简单，抛硬币就能解决了！假设元素X要插入跳跃表，很显然，L1层肯定要插入X。那么L2层要不要插入X呢？我们希望上层元素个数是下层元素个数的1/2，所以我们有1/2的概率希望X插入L2层，那么抛一下硬币吧，正面就插入，反面就不插入。那么L3到底要不要插入X呢？相对于L2层，我们还是希望1/2的概率插入，那么继续抛硬币吧！以此类推，元素X插入第n层的概率是(1/2)的n次。这样，我们能在跳跃表中插入一个元素了。</p>
-<p>在此还是以上图为例：跳跃表的初试状态如下图，表中没有一个元素：</p>
-<figure data-type="image" tabindex="7"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212059243" alt="这里写图片描述" loading="lazy"></figure>
-<p>如果我们要插入元素2，首先是在底部插入元素2，如下图：</p>
-<figure data-type="image" tabindex="8"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212313963" alt="这里写图片描述" loading="lazy"></figure>
-<p>然后我们抛硬币，结果是正面，那么我们要将2插入到L2层，如下图:</p>
-<figure data-type="image" tabindex="9"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212409123" alt="这里写图片描述" loading="lazy"></figure>
-<p>继续抛硬币，结果是反面，那么元素2的插入操作就停止了，插入后的表结构就是上图所示。接下来，我们插入元素33，跟元素2的插入一样，现在L1层插入33，如下图：</p>
-<figure data-type="image" tabindex="10"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212458264" alt="这里写图片描述" loading="lazy"></figure>
-<p>然后抛硬币，结果是反面，那么元素33的插入操作就结束了，插入后的表结构就是上图所示。接下来，我们插入元素55，首先在L1插入55，插入后如下图：</p>
-<figure data-type="image" tabindex="11"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212553339" alt="这里写图片描述" loading="lazy"></figure>
-<p>然后抛硬币，结果是正面，那么L2层需要插入55，如下图：</p>
-<figure data-type="image" tabindex="12"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212659309" alt="这里写图片描述" loading="lazy"></figure>
-<p>继续抛硬币，结果又是正面，那么L3层需要插入55，如下图：</p>
-<figure data-type="image" tabindex="13"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205212712590" alt="这里写图片描述" loading="lazy"></figure>
-<p>以此类推，我们插入剩余的元素。当然因为规模小，结果很可能不是一个理想的跳跃表。但是如果元素个数n的规模很大，学过概率论的同学都知道，最终的表结构肯定非常接近于理想跳跃表。</p>
-<p>当然，这样的分析在感性上是很直接的，但是时间复杂度的证明实在复杂，在此我就不深究了，感兴趣的可以去看关于跳跃表的paper。再讨论删除，删除操作没什么讲的，直接删除元素，然后调整一下删除元素后的指针即可。跟普通的链表删除操作完全一样。再来讨论一下时间复杂度，插入和删除的时间复杂度就是查询元素插入位置的时间复杂度，这不难理解，所以是O(logn)。</p>
-<h3 id="随机数">随机数</h3>
-<p>在上一节中，我们采用抛硬币的方式来决定新元素插入的最高层数，这当然不能在程序中实现。代码中，我们采用随机数生成的方式来获取新元素插入的最高层数。我们先估摸一下n的规模，然后定义跳跃表的最大层数maxLevel，那么底层，也就是第0层，元素是一定要插入的，概率为1；最高层，也就是maxLevel层，元素插入的概率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi></mrow></msup></mrow><annotation encoding="application/x-tex">1/2^{maxLevel}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span></span>。</p>
-<p>我们先随机生成一个范围为0~<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{maxLevel}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.932438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>的一个整数r。那么元素r小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{maxLevel-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>的概率为1/2，r小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{maxLevel-2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>的概率为1/4，……，r小于2的概率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1/2^{maxLevel-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991079999999998em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>，r小于1的概率为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mn>2</mn><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>L</mi><mi>e</mi><mi>v</mi><mi>e</mi><mi>l</mi></mrow></msup></mrow><annotation encoding="application/x-tex">1/2^{maxLevel}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight">e</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span></span></span></span></span>。</p>
-<p>举例，假设maxLevel为4，那么r的范围为0~15，则r小于8的概率为1/2，r小于4的概率为1/4，r小于2的概率为1/8，r小于1的概率为1/16。1/16正好是maxLevel层插入元素的概率，以此类推。</p>
-<figure data-type="image" tabindex="14"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210624193459656.png" alt="image-20210624193459656" loading="lazy"></figure>
-<p>以上分析是随机数算法的关键。算法跟实现跟语言无关，以下贴一下C++语言的代码实现。</p>
-<h3 id="代码">代码</h3>
-<figure data-type="image" tabindex="15"><img src="https://gitee.com/Bule-Zst/picture/raw/master/20161205211539787" alt="这里写图片描述" loading="lazy"></figure>
-<p>Node* next;</p>
-<p>Node* next[MAXL];</p>
-<p>next[2] = null;</p>
-<pre><code class="language-c++">struct SkipListNode {
-    int val;
-    vector&lt;SkipListNode *&gt; level;
-    SkipListNode (int _val, int sz=32) : val(_val), level(sz, nullptr) {}
-};
-
-class Skiplist {
-public:
-    SkipListNode *head, *tail;
-    int level, length;
-    static int MAXL = 32;
-
-    Skiplist() {
-        level = length = 0;
-        tail = new SkipListNode(INT_MAX, 0);
-        head = new SkipListNode(-INT_MAX);
-        for (int i = 0; i &lt; MAXL; ++i) {
-            head-&gt;level[i] = tail;
-        }
-    }
-
-    SkipListNode* find(int val) {
-        SkipListNode *p = head;
-        for (int i = level - 1; i &gt;= 0; --i) {
-            while (p-&gt;level[i] &amp;&amp; p-&gt;level[i]-&gt;val &lt; val) {
-                p = p-&gt;level[i];
-            }
-        }
-        p = p-&gt;level[0];
-        return p;
-    }
-
-    bool search(int target) {
-        SkipListNode *p = find(target);
-        return p-&gt;val == target;
-    }
-
-    void add(int val) {
-        vector&lt;SkipListNode *&gt; update(MAXL);
-        SkipListNode *p = head;
-        for (int i = level - 1; i &gt;= 0; --i) {
-            while (p-&gt;level[i] &amp;&amp; p-&gt;level[i]-&gt;val &lt; val) {
-                p = p-&gt;level[i];
-            }
-            update[i] = p;
-        }
-        int lv = randomLevel();
-        if (lv &gt; level) {
-            lv = ++level;
-            update[lv - 1] = head;
-        }
-        SkipListNode *newNode = new SkipListNode(val, lv);
-        for (int i = lv - 1; i &gt;= 0; --i) {
-            p = update[i];
-            newNode-&gt;level[i] = p-&gt;level[i];
-            p-&gt;level[i] = newNode;
-        }
-        ++length;
-    }
-
-    bool erase(int val) {
-        vector&lt;SkipListNode *&gt; update(MAXL + 1);
-        SkipListNode *p = head;
-        for (int i = level - 1; i &gt;= 0; --i) {
-            while (p-&gt;level[i] &amp;&amp; p-&gt;level[i]-&gt;val &lt; val) {
-                p = p-&gt;level[i];
-            }
-            update[i] = p;
-        }
-        p = p-&gt;level[0];
-        if (p-&gt;val != val) return false;
-        for (int i = 0; i &lt; level; ++i) {
-            if (update[i]-&gt;level[i] != p) {
-                break;
-            }
-            update[i]-&gt;level[i] = p-&gt;level[i];
-        }
-        while (level &gt; 0 &amp;&amp; head-&gt;level[level - 1] == tail)
-            --level;
-        --length;
-        return true;
-    }
-
-    int randomLevel() {
-        int level, r = rand(), target = INT_MAX/2;
-        level = 0;
-        for (int i = 1; i &lt; MAXL; i++)
-            if( r &gt; INT_MAX-target ) {
-                level = i;
-                target /= 2;
-            } else {
-                break;
-            }
-        return level+1;
-    }
-};
-</code></pre>
-<h2 id="练习">练习</h2>
-<ul>
-<li><a href="https://leetcode-cn.com/problems/design-skiplist/">1206. 设计跳表</a></li>
-</ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li>https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html</li>
-<li>https://blog.csdn.net/u013709270/article/details/53470428</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Kafka学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-06-09-Kafka学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-06-09-Kafka学习笔记/">
-        </link>
-        <updated>2021-06-09T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Kafka过程中的笔记，学习资料为视频，链接如下：</p>
-<ul>
-<li><a href="https://coding.imooc.com/class/434.html">Kafka多维度系统精讲，从入门到熟练掌握</a></li>
-</ul>
-<hr>
-<p>课程大纲：</p>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210609101437740.png" alt="image-20210609101437740" loading="lazy"></figure>
-<h2 id="partition">Partition</h2>
-<p>Partition 在 Kafka 中是分区的意思。</p>
-<p>Kafka 中每个 Topic 可以划分多个分区，同一个 Topic 下的不同分区包含的消息是不同的。</p>
-<p>Kafka 通过 offset 可以保证消息在分区中的顺序性，但是跨分区是无序的，即 Kafka 只保证在同一个分区内的消息是有序的。</p>
-<p>每一条消息发送到 broker 的时候，会根据 Partition 的分区规则计算，然后选择将该消息存储到哪一个 Partition。</p>
-<p>参考资料：https://blog.csdn.net/lzb348110175/article/details/100764105</p>
-<p>Partition和Consumer的关系不能是1对多，即，一个Partition由多个Comsumer进行消费。</p>
-<ul>
-<li>这是由Consumer的消费机制决定的，Consumer在拿到消息后，需要在处理完后向Kafka提交处理结果，即，告诉Kafka这批消息已经处理好了（可以以自动的方式进行提交，也可以手动提交）。而在Kafka中，最小颗粒度的数据存储就是Partition，那么，如果有两个Consumer同时消费一个Partiton，就会导致线程不安全，即，两个Consumer同时拿到数据，然后导致数据冲突。</li>
-<li>如果是多个Consumer对应多个Partition，则不会出现这个情况，因为不同Partition之间是不会相互影响的。</li>
-</ul>
-<h2 id="解读源码">解读源码</h2>
-<ul>
-<li>Producer在创建时，会新建发送线程，该线程会定时批量发送所有的消息。因此，Kafka是批量发送，不是调用一次send就发送一次，所以效率较高。</li>
-<li>当调用send后，会将消息存储在batch（批次）中，当达到一定阈值时，发送线程会自动进行消息的批量发送。因此，严格意义上，消息发送不是由send实现的。</li>
-<li>Kafka是线程安全的，可以多线程复用</li>
-</ul>
-<h2 id="配置">配置</h2>
-<ul>
-<li>Producer
-<ul>
-<li>ACKS_CONFIG：消息传递保障</li>
-<li>RETRIES_CONFIG：发送失败后重试次数</li>
-<li>BATCH_SIZE_CONFIG：最大批次容量</li>
-<li>LINGER_MS_CONFIG：批量发送间隔时间</li>
-<li>BUFFER_MEMORY_CONFIG：缓存大小</li>
-<li>BATCH_SIZE <strong>VS</strong> BUFFER_MEMORY
-<ul>
-<li>参考资料：https://blog.csdn.net/u010711495/article/details/113250402</li>
-<li>Kafka的所有信息都会存在缓存中，包括配置信息、消息等，一旦缓存满了，Kafka就会禁止用户再发送消息；而对于最大批次容量，当批次实际大小达到最大批次容量时，就会触发发送线程的发送；因此，一般缓存大小都是大于最大批次容量的。</li>
-</ul>
-</li>
-<li></li>
-<li>KEY_SERIALIZER_CLASS_CONFIG：key序列化类</li>
-<li>VALUE_SERIALIZER_CLASS_CONFIG：value序列化类</li>
-<li>PARTITIONER_CLASS_CONFIG：自定义partition选择</li>
-</ul>
-</li>
-</ul>
-<h2 id="消息传递保障">消息传递保障</h2>
-<ul>
-<li>最多一次：发了就不管了</li>
-<li>最少一次：一直发，直到收到响应</li>
-<li>正好一次：一直发，直到收到响应，但是接收方需要去重</li>
-</ul>
-<h2 id="key的作用">Key的作用</h2>
-<p>Kafka的消息是一对键值对，Key在Kafka中的主要作用是选择分区，若用户没有指定分区，则Kafka会根据key的hash决定分区的选择。</p>
-<p>Kafka在设计时使用键值对的形式，可以为使用者提供功能上的扩展，例如可以自定义分区规则，将相同key的消息放在同一个分区中。</p>
-<p>当然，如果某些业务场景下对key没有特殊要求，这个字段也是可以不填的。</p>
-<h2 id="kafka-vs-redis">Kafka VS Redis</h2>
-<p>Redis List的缺点：</p>
-<ul>
-<li>不支持重复消费：消息一旦被消费，就会从 Redis 中删除，无法再被其他消费者消费。</li>
-<li>消息丢失：消费者获取消息后，若发生异常宕机，则消息就会丢失。</li>
-<li>当List达到最大长度，则无法继续添加新的消息。</li>
-</ul>
-<p>Redis Pub/Sub的缺点：</p>
-<ul>
-<li>消息丢失
-<ul>
-<li>消费者下线</li>
-<li>Redis 宕机</li>
-<li>消息堆积：当消息超过消费者缓冲区大小，Redis 会强制消费者下线</li>
-</ul>
-</li>
-</ul>
-<p>参考资料：https://www.jianshu.com/p/c37368c867f8</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><a href="https://blog.csdn.net/lzb348110175/category_9309572.html">CSDN kafka-扛麻袋的少年</a></li>
-</ul>
 ]]></content>
     </entry>
 </feed>
