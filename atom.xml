@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-09-14T10:02:06.559Z</updated>
+    <updated>2021-12-14T12:10:16.542Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -10,7 +10,889 @@
     <icon>http://Bule-Zst.gitee.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Bule-Zst</rights>
     <entry>
-        <title type="html"><![CDATA[秒杀系统-实战.md]]></title>
+        <title type="html"><![CDATA[春招保卫战]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-12-10-春招保卫战/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-12-10-春招保卫战/">
+        </link>
+        <updated>2021-12-10T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录与春招相关的一些内容，包括：</p>
+<ul>
+<li>明年3月份春招（暑期实习）的备战计划</li>
+<li>春招过程中需要注意的地方</li>
+</ul>
+<hr>
+<h2 id="备战阶段">备战阶段</h2>
+<p>Java技术栈+计算机基础+算法+项目+加分项（竞赛/开源项目/博客）</p>
+<h3 id="笔试算法">笔试（算法）</h3>
+<ul>
+<li><a href="https://www.lintcode.com/cat/">lintcode CAT模式 天梯上分</a></li>
+<li><a href="https://www.nowcoder.com/study/live/489/1/1">左神算法笔面试真题精讲</a></li>
+<li><a href="https://www.nowcoder.com/ta/exam-bytedance">牛客网 名企编程真题</a>（企业真题可以多刷刷头条 网易 拼多多）</li>
+<li><a href="https://www.nowcoder.com/ta/coding-interviews">牛客网 剑指offer</a></li>
+<li><a href="https://www.nowcoder.com/ta/leetcode">牛客网 经典必刷编程题库</a></li>
+<li><a href="https://www.nowcoder.com/ta/job-code-high">牛客网 名企高频面试题</a></li>
+<li><a href="https://codetop.cc/home">CodeTop 汇总互联网大厂面试的高频考题 帮助面试者更有针对性地准备面试</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/158977583">leetcode 精选 by sergio</a></li>
+<li><a href="https://www.yuque.com/office/yuque/0/2020/pdf/619289/1605766958275-87ed48a3-0a68-4433-9d3c-b4ea9c829ccb.pdf?from=https%3A%2F%2Fwww.yuque.com%2Fshenjingwa-o51xg%2Fyh6opc%2Fsqqfew%2Fedit">leetcode 精选</a></li>
+<li><a href="https://www.zhihu.com/question/24964987/answer/182447205">lintcode 精选</a></li>
+<li><a href="https://javaguide.cn/cs-basics/algorithms/%E5%87%A0%E9%81%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E9%A2%98/">JavaGuide</a></li>
+<li><a href="http://www.cyc2018.xyz/#%E7%AE%97%E6%B3%95">JavaCyc</a></li>
+<li>统计：
+<ul>
+<li>LintCode：7题</li>
+<li>LeetCode：0题</li>
+<li>牛客网：
+<ul>
+<li>名企编程真题：</li>
+<li>剑指offer：</li>
+<li>经典必刷编程题库：</li>
+<li>名企高频面试题：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="面试java技术栈计算机基础项目">面试（Java技术栈+计算机基础+项目）</h3>
+<p><strong>刷面经！</strong></p>
+<p>备战阶段，就不要去看书或者视频了，书和视频都是用来系统学习知识的，备战阶段要的就是突击！应试！直接刷 <strong>面试题</strong> 就好~</p>
+<h4 id="面经">面经</h4>
+<p>面试题：</p>
+<ul>
+<li><a href="https://www.toutiao.com/i6862994550059696654/?tt_from=weixin&amp;utm_campaign=client_share&amp;wxshare_count=1&amp;timestamp=1599958973&amp;app=news_article&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;use_new_style=1&amp;req_id=2020091309025201014708310411A6D669&amp;group_id=6862994550059696654&amp;wid=1639135144091">字节</a> （后面的广告，直接忽略即可）</li>
+<li><a href="https://zhuanlan.zhihu.com/p/438229187">字节2</a> （后面的广告，直接忽略即可）</li>
+<li><a href="https://www.nowcoder.com/discuss/293661?from=zhnkw">合集</a></li>
+<li><a href="https://mp.weixin.qq.com/s/i29juUTnfOKZQIeY08l4RA">其他</a></li>
+<li><a href="https://www.nowcoder.com/discuss/762719?type=all&amp;order=recall&amp;pos=&amp;page=1&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">合集 南大 22届 硕 Java后端</a></li>
+<li><a href="https://www.nowcoder.com/discuss/629687?source_id=profile_create_nctrack&amp;channel=-1">微软+蚂蚁 南大 22届 硕 Java后端 实习面经</a></li>
+<li><a href="https://www.nowcoder.com/discuss/802981?type=all&amp;order=recall&amp;pos=&amp;page=2&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">合集</a></li>
+<li><a href="https://pan.baidu.com/s/1yCCeNMb0FNCJKDIE6EASYA#list/path=%2F">大厂面经合集：美团、腾讯、字节、虾皮 各方向都有</a> 提取码【lrp3】 解压码【jk7z】</li>
+<li><a href="https://www.nowcoder.com/discuss/172152">合集 C++ 基础架构方向</a></li>
+</ul>
+<p>心路历程：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/56655579">cyc2018大佬的面经</a></li>
+<li><a href="https://www.nowcoder.com/discuss/762719?type=all&amp;order=recall&amp;pos=&amp;page=1&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">南大 22届 硕 Java后端</a></li>
+</ul>
+<h4 id="面试题汇总">面试题汇总</h4>
+<ul>
+<li><a href="https://javaguide.cn/">JavaGuide</a></li>
+<li><a href="https://cyc2018.github.io/CS-Notes/#/">JavaCyc</a></li>
+<li><a href="http://passjava.cn/#/88.Interview/01.Redis/Redis1">PassJava-面试必备</a></li>
+<li><a href="https://github.com/cosen1024/Java-Interview">「Java面试小抄」一份通向理想互联网公司的面试指南，包括 Java基础、集合、Java并发、JVM、MySQL、Redis、Spring、MyBatis、Kafka、操作系统、计算机网络、系统设计、分布式、Java 项目实战等 by 库森</a></li>
+<li><a href="https://www.zhihu.com/column/c_1339954942191271936">大厂面试 by 程序员库森</a></li>
+<li><a href="https://www.nowcoder.com/discuss/820419?type=all&amp;order=recall&amp;pos=&amp;page=1&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">对线面试官系列之Java集合--面试官看了都说好</a></li>
+</ul>
+<h4 id="知识点梳理">知识点梳理</h4>
+<p>主要整理了需要掌握的知识点，但是没有答案，可以先看上面的面试题汇总，这里列出来的作为查缺补漏用</p>
+<ul>
+<li><a href="https://www.nowcoder.com/discuss/61438?from=zhnkw">JAVA后端秋招/春招准备方向</a></li>
+</ul>
+<h3 id="项目">项目</h3>
+<ul>
+<li>
+<blockquote>
+<p>对实习项目的描述还不够好，没有把实习内容的闪光点描述出来，也没有讲清楚为什么做这个项目，自己通过什么方法去做，以及最后的结果</p>
+<p>cyc2018面经 https://zhuanlan.zhihu.com/p/69138371</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="简历">简历</h3>
+<ul>
+<li><a href="https://www.zhihu.com/zvideo/1289637611880026112?utm_source=qq&amp;utm_medium=social&amp;utm_oi=747689983887814656">建议收藏！小白简历这样改，一秒成为优秀简历！秋招必备，让你offer拿到手软！</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU2OTY4Nzk1Mw==&amp;mid=2247485451&amp;idx=1&amp;sn=6a722f682d1df07404cc79b5aaf41a87&amp;chksm=fcfba2f5cb8c2be30908bc0bf2146c8203d4f055780d6b64d9b2e5570d96b5b0bfae9d872432&amp;scene=21#wechat_redirect">通过 BAT 面试的程序员简历长什么样? 附简历模板</a></li>
+<li><a href="https://cyc2018.github.io/page.html">cyc2018 大佬的网页简历</a></li>
+</ul>
+<h2 id="春招开始">春招开始</h2>
+<h3 id="投递">投递</h3>
+<ul>
+<li>
+<p>海投！一定要海投！</p>
+<ul>
+<li>疯狂面试，可以积累经验</li>
+<li><strong>但有一点需要注意</strong>，就是如果最终拿到实习资格，然后拒掉，会不会影响后期秋招？这个到时候要再确认一下。</li>
+<li>对于一些自己不想去的公司或者部门，也可以试着投递，增加经验（如果是部门，提前了解清楚投递会不会影响到自己想去的部门）</li>
+</ul>
+</li>
+<li>
+<p>早投递机会更大（存疑）</p>
+</li>
+<li>
+<p>知乎了解一下boss直聘，到时候找实习，可以把简历放到boss直聘上</p>
+</li>
+<li>
+<blockquote>
+<p>作者：特立独行MVP<br>
+链接：https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;page=4&amp;channel=1009&amp;source_id=search_all<br>
+来源：牛客网</p>
+<p>首先就是策略，一开始最好不要立刻投大厂，因为一上来就面大厂的话容易崩，刚开始面的人少所以难度也会相对高一些，有的还凑合的会被大厂当备胎，很难受的。其次就是能内推就不要走官网，能免笔试免笔试，不是说笔试难度大还是咋地，这玩意其实是玄学，因为你说你一个人做呢没问题，大神嘛无所谓但是你保不齐别人是一个实验室或者一个班级的人在做，如果遇到点坑的题目，你交代了，别人合作做出来了那你被挂能怪谁呢。还有就是如果大家也是合作做题的话，oj的查重或者作弊系统的判别现在越来越严，如果保不齐你被抓到了，可能就被企业拉黑，然后你还不知道，后面怎么投都没面试机会这是最惨的。还有就是大家都是一起做的，然后分数也差不多，但是别人接到了面试而你没有，我就遇到了这样的情况，就很玄学我都怀疑是随机选的人面试。反正就是笔试有风险，大家还是抱紧学长学姐的大腿，能走内推就内推。但是内推之前还是需要能够了解一下这个部门，大概是做什么的，hc的数量以及技术氛围，这点其实很重要，因为一旦进了流程，你反悔就来不及了，如果过了之后还想换部门那只能重新面试，再走一遍别说多恶心了。其实哪个部门最好或者哪个部门最有前景啥的这些问题，真的很难了解的非常清楚，我就纠结过很久很久，这种事情找不到最优解的，不过还好对我而言现在只是实习。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="部门">部门</h4>
+<ul>
+<li>
+<p>微众：</p>
+<ul>
+<li>贷款科技部：<strong>很核心</strong></li>
+</ul>
+</li>
+<li>
+<p>阿里系：</p>
+<ul>
+<li>阿里集团（简称集团）
+<ul>
+<li>阿里云：很香</li>
+<li>天猫精灵团队：</li>
+<li>一面、二面、总监面、交叉部门主管面、HR面；每一面都有一票否决权（包括HR面）</li>
+</ul>
+</li>
+<li>蚂蚁
+<ul>
+<li>CTO线-数据与平台技术事业群-蚂蚁智能引擎与数据中台技术事业部-大数据部
+<ul>
+<li>一面、二面、笔试、三面、四面、HR面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>听同学群里讨论，集团没有蚂蚁好，至少薪资福利这块，没有蚂蚁好</li>
+</ul>
+</li>
+<li>
+<p>百度：</p>
+<ul>
+<li>工程效率部门：做内部工具的，对个人成长并不好</li>
+<li>企业智能平台：主要是内部系统，虽然会接触到机器学习和大数据，不太好</li>
+</ul>
+</li>
+<li>
+<p>字节：</p>
+<ul>
+<li>基础架构</li>
+<li>今日头条：薪资很诱人
+<ul>
+<li>头条加面有两种情况，一是三轮评级都是 4 可以评 SSP，二是面试官评价差别很大，再面一轮决定是否录用</li>
+</ul>
+</li>
+<li>一面、二面、三面，就可以offer了</li>
+</ul>
+</li>
+<li>
+<p>华为：</p>
+<ul>
+<li>Cloud Bu：不错</li>
+<li>车BU智能座舱产品部</li>
+<li>cyc2018 拿到了十四级最高的薪资</li>
+<li>不怎么问技术</li>
+</ul>
+</li>
+<li>
+<p>微软</p>
+<ul>
+<li>STCA-M365
+<ul>
+<li>笔试、一面、Leader面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>华泰证券</p>
+<ul>
+<li>信息技术部：base南京</li>
+</ul>
+</li>
+<li>
+<p>网易</p>
+<ul>
+<li>杭研院</li>
+</ul>
+</li>
+<li>
+<p>TP-Link</p>
+</li>
+</ul>
+<h3 id="面试中">面试中</h3>
+<ul>
+<li>
+<p>面试时问一下对方是哪个部门的，方便后续面试时做相应的准备</p>
+</li>
+<li>
+<p><a href="https://b23.tv/ajxmk5">如何回答面试官最后一个问题——钻石版-哔哩哔哩</a></p>
+</li>
+<li>
+<blockquote>
+<p>作者：特立独行MVP<br>
+链接：https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;page=4&amp;channel=1009&amp;source_id=search_all<br>
+来源：牛客网</p>
+<p>其次就是面试总结了。面试过程当中我建议大家开启手机录音。这样方便事后复盘，我是每次都会再听一遍自己的录音，不论是写<a href="">面经</a>还是琢磨自己的回答有录音真的方便很多。因为面试期间的紧张感会让你很难用最好的描述回答清楚问题，那么事后总结就会让你在下次遇到同样的问题的时候回答的更好。如果说大家有小伙伴在一起战斗的话那么经常互相分享经验真的会决定你能不能拿到offer，大家的经验会让你迅速成长，说实话面试实习这2月也是我成长的最快的一个阶段。<br>
+最后就是信息。在面试结束的时候，一般面试官都会问：你有什么问题问我。这个时候我个人最经常问的就是这个部门正在做什么，如果我进来我会接触到什么。面试官才是最了解这个部门的人，只有从他的口里得到的信息才是最真实也是最有用的，通过他的回答你会了解到这个部门做的产品或者是使用的技术，对于自己的学习方向也有很大的指向作用。其次，我会问的问题就是：您认为我在哪些方面可以提高自己。这个问题其实从侧面可以让你获取你此次面试的结果。因为这个问题不像问我面试能不能过这样直白的面试禁忌。一般面试官会指明他认为你的缺点，如果他在说的时候带有建议的语气以及对你其他方面的肯定那基本是十拿九稳了，再不济有大佬对你的一个建议指导对你自己查漏补缺也是非常有帮助的。说下我自己的经历吧，我在面<a href="">阿里云</a>3面的时候，那位p9大佬在我问完这个问题之后不仅肯定了我的一些表现还给我推荐了2本书建议我去阅读，这真的是非常良好的面试体验。</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/56655579">cyc2018大佬的面经</a> 读后总结：</p>
+<ul>
+<li>
+<p>对于面试官的问题，要能回答到点上；对于自己擅长的知识点，要学会展开讲。</p>
+</li>
+<li>
+<p>面试过程中，要表现得比较自信（不要自大，也不要自卑）</p>
+</li>
+<li>
+<p>这次面试我表现地非常自信，自己知道的知识都很有信心地表达出来，被问到不会的内容也不会那么慌张，和面试官探讨一些细节，然后说说自己的想法，还有自己看过相关的内容</p>
+</li>
+<li>
+<p>整个春招过程中，会被拒很多次，但要时刻保持信心</p>
+</li>
+<li>
+<p>要学会把问题往自己擅长的领域引</p>
+</li>
+<li>
+<p>当被问到没有掌握的知识，可以通过讨论的方式，给出大概的思路，因为很多技术都是相通的</p>
+</li>
+<li>
+<blockquote>
+<p>位运算的问题，面试官让我之后完善了再发给他，过后我写了详细文档讲解了思路，以及使用 JUnit 进行了详细的单元测试，把文档和代码都发给了他</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>非技术问题回答的支支吾吾，然后面试官开始质疑我说的内容，给我压力，我没有当场反驳，就说了“哦，好像是这样的”。因为面试官全程都绷着脸，所以我也比较紧张，很多问题没回答好。</p>
+<p>这次面试失败的主要原因是自己在应对这种压力时处理地不是很好，主要体现在失去信心以及紧张。</p>
+<p>解决方法也简单，做好充分准备来保持信心，受到质疑的时候积极反驳，紧张的时候及时调整心态，可以试试深呼吸或者喝水。</p>
+</blockquote>
+</li>
+<li>
+<p>面试中还会涉及到非技术性问题，要有心理准备</p>
+</li>
+<li>
+<blockquote>
+<p>面完之后我立马查了一下那个错排问题，证实了我的答案是正确的，于是写了一个详细的文档，联系 HR 让她发给面试官</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="内推">内推</h3>
+<ul>
+<li>
+<p><a href="https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;page=4&amp;channel=1009&amp;source_id=search_all">字节 基础架构</a></p>
+<ul>
+<li>
+<blockquote>
+<p>作者：特立独行MVP<br>
+链接：https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;page=4&amp;channel=1009&amp;source_id=search_all<br>
+来源：牛客网</p>
+<p><strong>有想加入<a href="">字节跳动</a>基础架构的同学可以找我内推呀 大量实习和提前批HC！（请搜索基础架构才是~）</strong><br>
+<strong>直推部门老大直接面试无笔试：可以把简历发送至<a href="mailto:zhuhaochuan.snow@bytedance.com">zhuhaochuan.snow@bytedance.com</a> （注明实习还是校招，岗位）</strong><br>
+<strong>投递链接：https://job.toutiao.com/s/JNAvu8A</strong><br>
+<strong>内推码:QDZH4QP</strong></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;page=4&amp;channel=1009&amp;source_id=search_all">北京图森未来 基础架构</a></p>
+</li>
+</ul>
+<h2 id="春招各公司时间线面经">春招各公司时间线+面经</h2>
+<h2 id="春招后">春招后</h2>
+<ul>
+<li>就算春招失利，也不要灰心，秋招还有机会，参考cyc2018大佬的经历</li>
+</ul>
+<h2 id="暑期实习">暑期实习</h2>
+<ul>
+<li>实习时，可以利用晚上和周末时间来自我提升，因为还需要为秋招做准备</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java锁机制详解]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-12-07-Java锁机制详解/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-12-07-Java锁机制详解/">
+        </link>
+        <updated>2021-12-07T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习Java锁机制过程中的笔记，学习资料如下：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1YB4y1P7xC?p=1">多线程高并发底层锁机制与优化最佳实践</a></li>
+</ul>
+<hr>
+<h2 id="synchronized">Synchronized</h2>
+<p>在普通方法上加synchronized，锁的是对象</p>
+<p>在静态方法上加synchronized，锁的是class</p>
+<h3 id="实现">实现</h3>
+<h4 id="jdk16之前">jdk1.6之前</h4>
+<p>对 对象内部的monitor对象 进行加锁，如果加锁失败，进入等待队列，当锁释放时，从等待队列中依次唤醒线程</p>
+<ul>
+<li>非公平锁：先尝试获取锁，如果失败，则进入等待队列</li>
+<li>公平锁：直接进入等待队列</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>重量级锁</li>
+<li>线程挂起和唤醒时，需要从用户态切换到内核态
+<ul>
+<li>之所以需要切换到内核态，是因为，挂起和唤醒操作，是依赖于内核程序完成的，只有进入内核态，才能调用内核中的方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://blog.csdn.net/qq_42013590/article/details/107327439">什么是CPU的用户态和内核态</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[脑裂问题]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-11-06-脑裂问题/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-11-06-脑裂问题/">
+        </link>
+        <updated>2021-11-06T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习脑裂问题过程中的笔记。</p>
+<hr>
+<h2 id="什么是脑裂问题">什么是脑裂问题</h2>
+<p>简单说，就是在一个集群中，出现两个master节点</p>
+<p>原本，一个集群中，只有一个master节点，可以看做是大脑，现在出现了两个，或者多个，就可以想象成大脑分裂了，所以叫脑裂问题</p>
+<h2 id="成因以及造成的后果">成因以及造成的后果</h2>
+<p>主要是由网络通信故障导致的</p>
+<p>一般来说，集群中的master节点都是选举产生的，想象一下，假设两个机房之间出现了通信故障，那么分处于两个机房中的节点就会各自选举出master节点，当网络恢复时，就不知道该听哪个master节点的了。</p>
+<h2 id="如何避免">如何避免</h2>
+<p>知道了成因，那么，想解决脑裂问题，就需要避免假死亡现象的产生，因为如果master节点正常死亡，监控节点重新选举master节点，是不会产生脑裂问题的。</p>
+<p>有以下三种常见方法：</p>
+<ul>
+<li>
+<p>冗余通信：集群中采用多种通信方式，防止一种通信方式失效导致集群中的节点无法通信</p>
+</li>
+<li>
+<p>过半机制（Quorum）：zookeeper采用的防止脑裂问题的方法，通过这个机制，可以确保就算发生了网络故障，也只会有一个master节点被选出</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20211106134247658.png" alt="image-20211106134247658" loading="lazy"></figure>
+</li>
+<li>
+<p>共享存储隔离（Fencing）：能看到共享资源的节点就表示在集群中，能够获得共享资源的锁的节点就是master，看不到共享资源的节点就不在集群中</p>
+</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>
+<p><a href="https://blog.csdn.net/u013374645/article/details/93140148">面试题：Zookeeper是如何解决脑裂问题</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/394160966">分布式系统的“脑裂”到底是个什么玩意？</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/u014156013/article/details/81226424">脑裂问题以及如何避免</a></p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[面试笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-30-面试笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-30-面试笔记/">
+        </link>
+        <updated>2021-09-30T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录：</p>
+<ul>
+<li>面试过程中可能会被问到的常见面试题</li>
+<li>一些辅助面试时回答的资料</li>
+</ul>
+<hr>
+<h2 id="数据库">数据库</h2>
+<h3 id="事务">事务</h3>
+<h4 id="什么是事务">什么是事务</h4>
+<p>事务是属于数据库中的一个概念，本质上指的是一系列的操作，但是这些操作会满足一些性质，ACID。</p>
+<h4 id="acid">ACID</h4>
+<ul>
+<li>原子性 Atomicity：所有操作，要么全部执行，要么全部回滚。</li>
+<li>一致性 Consistency：强调数据库在逻辑上的一致性状态，依赖于原子性。比如，转账操作，要求多账户余额总和保持一致；扣款操作，要求账户余额变化与扣款金额一致。</li>
+<li>隔离性 Isolation：事务之间，不会因为中间操作产生相互影响。</li>
+<li>持久性 Durability：当事务提交后，该事务中的一系列操作需要能被持久化到数据库中。</li>
+</ul>
+<h4 id="隔离级别脏读-vs-不可重复读-vs-幻读">隔离级别？脏读 VS 不可重复读 VS 幻读？</h4>
+<ul>
+<li>READ UNCOMMITTED (未提交读）：
+<ul>
+<li>事务未提交时，依旧可以读取到其所做的修改</li>
+<li>也被叫做“脏读”</li>
+<li>该隔离级别在性能上并不会比其他的好太多，但却缺乏其他隔离级别所拥有的好处，因此在实际应用中，一般不使用。</li>
+</ul>
+</li>
+<li>READ COMMITTED (提交读）
+<ul>
+<li>大部分数据库系统默认的隔离级别，但MySQL不是。</li>
+<li>又被称为“不可重复读”，因为同样的查询，在事务提交前和提交后，读取到的数据可能不同。</li>
+</ul>
+</li>
+<li>REPEATABLE READ (可重复读）
+<ul>
+<li>MySQL默认的隔离级别</li>
+<li>保证了在一个事务中的多次查询结果一致</li>
+<li>存在幻读：在事务执行过程中，另一事务修改了数据，从而产生“幻行”。两次查询读取到的数据总行数不一样。</li>
+<li>InnoDB 和XtraDB 存储引擎通过多版本并发控制 (MVCC, Multiversion Concurrency Control) 解决了幻读的问题。</li>
+</ul>
+</li>
+<li>SERIALIZABLE (可串行化）
+<ul>
+<li>最高级别的隔离级别</li>
+<li>强制事务串行执行，不存在并发</li>
+<li>具体实现：为读取的每一行数据加锁</li>
+</ul>
+</li>
+</ul>
+<h4 id="mvcc">MVCC</h4>
+<p>多版本并发控制，每个版本对应一个事务id，当事务提交后，会生成对应的版本，多个版本之间构成链表，从最新的版本开始寻找，知道找到满足要求的版本。</p>
+<p>ReadView会在执行查询语句时生成，对于提交读，每次查询都会生成一次，对于可重复度，只在第一次查询时生成。</p>
+<p>可重复读：ReadView只会生成一次</p>
+<p>ReadView：</p>
+<ul>
+<li>未提交事务列表：[51, 59, 61]</li>
+<li>最小事务id：51</li>
+<li>下次要生成的事务（最大事务）id：60</li>
+<li>当前事务id：51</li>
+</ul>
+<p>版本链-&gt;62, 61</p>
+<h3 id="分布式事务">分布式事务</h3>
+<h4 id="两阶段提交与三阶段提交">两阶段提交与三阶段提交</h4>
+<p>两阶段提交：角色包括事务管理器和本地资源管理器</p>
+<ul>
+<li>第一阶段：事务管理器询问各个本地资源管理器是否提交就绪，如果任意一个本地资源管理器为no，则回滚</li>
+<li>第二阶段：事务管理器向本地资源管理器发送commit或roolback消息，本地资源管理器收到消息后进行提交或回滚操作。</li>
+</ul>
+<p>两阶段提交存在的问题：</p>
+<ul>
+<li>同步阻塞：资源管理器A占用某资源，资源管理器B也需要该资源</li>
+<li>单点故障：事务管理器挂了</li>
+<li>数据不一致：不能保证所有资源管理器都提交</li>
+</ul>
+<p>三阶段提交（TCC）：</p>
+<ul>
+<li>第一阶段：和两阶段提交的第一阶段相同</li>
+<li>第二阶段（缓冲阶段）：precommit 预提交，保证各节点状态相同</li>
+<li>第三阶段：和两阶段提交的第二阶段相同</li>
+</ul>
+<p>三阶段提交（TCC）的优点：</p>
+<ul>
+<li>引入超时机制，减少阻塞：如果超时，默认abort，但如果是第三阶段，超时则自动提交，两阶段提交无法这么做，因为不存在缓冲阶段</li>
+<li>事务管理器集群：幂等操作</li>
+</ul>
+<h3 id="redis">Redis</h3>
+<h4 id="3种集群模式主从-哨兵-集群">3种集群模式：主从、哨兵、集群</h4>
+<ul>
+<li>主从模式：
+<ul>
+<li>1个主节点，N个从节点</li>
+<li>主节点负责写操作，从节点负责读操作</li>
+<li>数据同步</li>
+<li>一旦主节点挂了，集群就丧失写功能</li>
+</ul>
+</li>
+<li>哨兵模式
+<ul>
+<li>主从模式的升级版，添加哨兵</li>
+<li>哨兵本质上是一个进程，sentinel进程，负责监控节点状态，如果主节点挂了，会从从节点总竞选得到新的主节点</li>
+</ul>
+</li>
+<li>集群模式
+<ul>
+<li>主从模式+分区</li>
+<li>每个主从集群负责一部分哈希槽</li>
+</ul>
+</li>
+</ul>
+<h2 id="并发">并发</h2>
+<h3 id="synchronized-和-reentrantlock-的实现及区别">synchronized 和 Reentrantlock 的实现及区别</h3>
+<ul>
+<li>sychronized 是一个关键字，ReentrantLock 是一个类</li>
+<li>sychronized 会自动的加锁与释放锁，ReentrantLock 需要程序员手动加锁与释放锁，因此更灵活，可以根据业务场景进行相应操作</li>
+<li>sychronized是非公平锁，ReentrantLock可以选择公平锁或非公平锁</li>
+<li>sychronized底层有一个锁升级的过程
+<ul>
+<li>偏向锁：偏向第一次持有锁的线程，该线程无需进行同步操作</li>
+<li>轻量级锁：自旋，CAS</li>
+<li>重量级锁：线程阻塞时，需要将用户态转到内核态</li>
+</ul>
+</li>
+<li>实现
+<ul>
+<li>synchronized：锁的是对象，锁信息保存在对象头中，可以是实例对象也可以是类对象<br>
+6. 对象：使用汇编指令monitorenter和monitorexit<br>
+6. 方法：使用ACC_SYNCHRONIZED标识符，本质上也是monitor的操作</li>
+</ul>
+<ol start="6">
+<li>ReentrantLock：通过代码中的state标识来标识锁的状态</li>
+</ol>
+</li>
+</ul>
+<h3 id="cas的缺点">CAS的缺点</h3>
+<ul>
+<li>ABA问题、CPU空转问题</li>
+</ul>
+<h3 id="线程池实现机制-配置参数-使用注意点">线程池实现机制、配置参数、使用注意点</h3>
+<p>线程池内部是通过队列+线程实现的，当我们利用线程池执行任务时：</p>
+<ul>
+<li>如果此时线程池中的线程数量小于corePoolSize，即使线程池中的线程都处于空闲状态，也要创建<br>
+新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的线程数量等于corePoolSize，但是缓冲队列workQueue未满，那么任务被放入<br>
+缓冲队列。</li>
+<li>如果此时线程池中的线程数量大于等于corePoolSize，缓冲队列workQueue满，并且线程池中的数量小于maximumPoolSize，建新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的线程数量大于corePoolSize，缓冲队列workQueue满，并且线程池中的数量等<br>
+于maximumPoolSize，那么通过handler所指定的策略来处理此任务。</li>
+<li>当线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止。这样，线程池可以动态的调整池中的线程数</li>
+</ul>
+<p>配置参数：</p>
+<ul>
+<li>corePoolSize：目的是更有效地利用CPU资源
+<ul>
+<li>CPU密集型：CPU核数+1，之所以+1，是为了更优的利用率</li>
+<li>IO密集型：CPU 核心数 * (1 + IO 耗时/ CPU 耗时)</li>
+</ul>
+</li>
+<li>MaximumPoolSize、workQueueSize、handler拒绝策略、keepAliveTime</li>
+</ul>
+<p>注意点：</p>
+<ul>
+<li>线程池预热方法：prestartAllCoreThreads()</li>
+</ul>
+<h3 id="如何防止超卖现象">如何防止超卖现象</h3>
+<ul>
+<li>redis缓存和mysql同步更新</li>
+<li>减库存排队，使用窗口进行合并</li>
+</ul>
+<h2 id="jvm">JVM</h2>
+<h3 id="gc">GC</h3>
+<h4 id="cms-g1的优缺点">CMS、G1的优缺点</h4>
+<p>CMS是老年代的垃圾回收器，用的是标记清除算法，所以会产生内存碎片，但是因为它的回收原理是并发回收，因此STW时间较短。</p>
+<p>G1是面向整个堆的垃圾回收器，同时将分区的思想与分代相结合，每次回收时，都会去挑选需要回收的分区，使用的算法是标记整理算法，是jdk9默认的收集器，同时G1可以控制STW的时间，如果到达指定的STW时间，对于剩下的分区，就不进行回收，从而可以控制STW的时间。</p>
+<h3 id="如何处理线上的oom">如何处理线上的OOM</h3>
+<p>-Xms表示初始堆内存大小，memory startup</p>
+<p>-XmX表示最大堆内存大小，memory maximum</p>
+<p>-Xmn表示新生代内存大小，包括初始值和最大值，memory nursery/new</p>
+<p>示例：-Xms16m -Xmx32m</p>
+<p>通过参数配置，让java进程在OOM时自动产生dump文件，-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp</p>
+<p>通过命令行导出dump文件，jmap -dump:live, file=jmap.hprof [PID]</p>
+<p>通过jvisualvm分析dump文件，分析哪些对象比较占内存</p>
+<p>两种可能</p>
+<ul>
+<li>对象确实太大了</li>
+<li>内存泄漏：各种连接，如果不手动关闭，则会被GC认为是不可回收的对象，导致内存泄漏</li>
+</ul>
+<h2 id="网络编程">网络编程</h2>
+<h3 id="netty">Netty</h3>
+<h4 id="了解reactor模型吗">了解Reactor模型吗？</h4>
+<p>问题拆解：与Netty是什么关系，有几种类型，各自的优势是什么</p>
+<p>Netty 是一个广泛使用的 Java 网络编程框架</p>
+<p>Reactor是1995年由道格拉斯提出的一种高性能网络编程模式，一共有3种形式，单线程Reactor、多线程Reactor和主从多线程Reactor。</p>
+<ul>
+<li>
+<p>单线程Reactor：由一个线程处理连接请求、读写操作</p>
+</li>
+<li>
+<p>多线程Reactor：由一个线程处理连接请求，由线程池处理读写操作。但一个线程依旧可以处理多个读写操作。</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/6463324-1f7a2d77cfa17720.png" alt="img" loading="lazy"></figure>
+</li>
+<li>
+<p>主从Reactor：由一个线程池处理连接请求，并将连接好的请求发送给读写线程池进行处理。</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/6463324-a94066924053c037.png" alt="img" loading="lazy"></figure>
+</li>
+<li>
+<p>优势：不同形式适应不同的场景</p>
+</li>
+</ul>
+<h4 id="bytebuf实现原理">ByteBuf实现原理</h4>
+<p>在java nio中提供了ByteBuffer作为字节容器，包括4个属性</p>
+<ul>
+<li>mark：调用mark()方法时，将position的值赋值给mark；调用reset()方法时，将mark的值赋值给position</li>
+<li>position：下一个要被读写的元素的数组下标索引，该值会随get()和put()的调用自动更新</li>
+<li>limit：缓冲区中第一个不能读写的元素的数组下标索引，也可以认为是缓冲区中实际元素的数量</li>
+<li>capacity：缓冲区能够容纳元素的最大数量，这个值在缓冲区创建时被设定，而且不能够改变</li>
+<li>读写模式切换：flip()方法</li>
+</ul>
+<p>netty提供了ByteBuf作为字节容器，包括3个属性</p>
+<ul>
+<li>readIndex、writerIndex、capacity：字面意思</li>
+<li>discardReadBytes()：清空已读部分，利用System.arraycopy()方法</li>
+</ul>
+<h2 id="rpc">RPC</h2>
+<h3 id="dubbo">Dubbo</h3>
+<h4 id="spi机制了解吗">SPI机制了解吗</h4>
+<p>Java SPI：全称 Service Provider Interface，为接口指定实现类，放在 META-INF/services/ 目录里</p>
+<p>Java SPI的缺点：无法按需加载实现类，只能逐个进行加载，可能存在某个实现类，很耗资源，但又用不上</p>
+<p>Dubbo SPI的优点：</p>
+<ul>
+<li>可以根据名称，按需加载。原理：在配置文件中由用户提供 名称-类全限定名 的键值对</li>
+</ul>
+<h4 id="负载均衡算法">负载均衡算法</h4>
+<ul>
+<li>权重随机算法：获取随机数，然后依次减去每个invorker的权重，直到小于0；如果权重相同，则直接随机</li>
+<li>权重轮询算法：每次增加当前权重，选出大于当前权重的invorkers，然后从中按顺序选择</li>
+<li>最少活跃调用数算法：每次选出最小活跃的invorker，活跃数为invorker正在处理的请求数，如果不止一个，则对于这些invorkers，使用权重随机算法。</li>
+<li>一致性Hash算法：环形Hash空间，虚拟节点，对象迁移，寻找最近节点</li>
+</ul>
+<h2 id="设计思想">设计思想</h2>
+<h3 id="api的设计原则">API的设计原则</h3>
+<ul>
+<li>单一原则</li>
+<li>升级兼容性</li>
+<li>幂等设计</li>
+</ul>
+<h3 id="领域建模">领域建模</h3>
+<p>DDD 领域驱动设计</p>
+<p>建模：对业务的抽象</p>
+<p>领域建模：将建模过程划分成4层：UI 层、应用层、领域层、基建层</p>
+<ul>
+<li>UI层：负责展示</li>
+<li>基建层：负责存储</li>
+<li>领域层：负责存储过程中的业务逻辑，只关心是否合法，不管是否合理，例如下订单的操作，设计创建订单和减库存，应该在领域层，而不是应用层</li>
+<li>应用层：负责核心业务逻辑，例如，黑名单的业务，应该在应用层，而不应该在领域层</li>
+</ul>
+<p>参考：https://www.zhihu.com/question/25089273</p>
+<h2 id="实战">实战</h2>
+<h3 id="做的项目遇到什么问题如何解决">做的项目，遇到什么问题，如何解决</h3>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://xiaomi-info.github.io/2020/01/02/distributed-transaction/">分布式事务，这一篇就够了</a></li>
+<li><a href="https://www.cnblogs.com/paddix/p/5367116.html">Java并发编程：Synchronized及其实现原理</a></li>
+<li><a href="https://blog.csdn.net/kusedexingfu/article/details/103744202">JVM的GC 参数为什么要这么命名：xms、xss、xmn和xmn?</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1578846">未关闭的文件流会引起内存泄露么？</a></li>
+<li><a href="https://www.cnblogs.com/duanxz/p/3696849.html">Netty中的三种Reactor（反应堆）</a></li>
+<li><a href="https://www.jianshu.com/p/3930150bf7f0">Netty系列-一分钟了解ByteBuffer和ByteBuf结构</a></li>
+<li><a href="https://blog.csdn.net/qq_35190492/article/details/108256452">阿里面试真题：Dubbo的SPI机制 敖丙</a></li>
+<li><a href="https://www.jianshu.com/p/60c10eabdfaf">Dubbo负载均衡算法实现</a></li>
+<li><a href="https://www.cnblogs.com/twoheads/p/10135896.html">一致性哈希算法(consistent hashing)</a></li>
+<li><a href="https://www.bilibili.com/video/BV1Lq4y1S7Rc?p=1&amp;share_medium=android&amp;share_plat=android&amp;share_source=COPY&amp;share_tag=s_i&amp;timestamp=1632973331&amp;unique_k=BEotpJ">朋友投稿！与面试官死磕中间件与库存设计！顺利斩获大厂Offer！</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[限流算法学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-27-限流算法学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-27-限流算法学习笔记/">
+        </link>
+        <updated>2021-09-27T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习限流算法过程中的笔记。</p>
+<hr>
+<h2 id="计数器">计数器</h2>
+<p>设置一个计数器counter，其有效时间为1分钟（即每分钟计数器会被重置为0）</p>
+<p>存在临界问题</p>
+<h2 id="漏桶-leaky-bucket">漏桶 Leaky Bucket</h2>
+<p>漏桶算法思路很简单，水(请求)先进入到漏桶里，漏桶以一定的速度出水(接口有响应速率)，当水流入速度过大会直接溢出(访问频率超过接口响应速率)，然后就拒绝请求，而当入小于出的情况下，漏桶不起任何作用。</p>
+<p>流入：以任意速率往桶中放入水滴。<br>
+流出：以固定速率从桶中流出水滴。</p>
+<p>存在效率较低的问题</p>
+<h2 id="令牌桶-token-bucket">令牌桶 Token Bucket</h2>
+<p>系统会按恒定 1/QPS 时间间隔(如果QPS=100,则间隔是10ms)往桶里加入Token(想象和漏洞漏水相反,有个水龙头在不断的加水)，如果桶已经满了，令牌就溢出了。如果桶未满，令牌可以积累。新请求来临时,会各自拿走一个Token,如果没有Token可拿了就阻塞或者拒绝服务。</p>
+<p>流入：以固定速率从桶中流入水滴<br>
+流出：按照任意速率从桶中流出水滴</p>
+<h2 id="滑动窗口-rolling-window">滑动窗口 Rolling Window</h2>
+<p>滑动窗口代表一段时间，将滑动窗口段划分成多个小格，通过统计滑动窗口中的总请求数，判断是否触发限流。每过一段时间，都将窗口往前移动。</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/v2-b2fca280cb01069bc3b30c8b55f9d973_1440w.jpg" alt="img" loading="lazy"></figure>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/duanxz/p/4123068.html">常见限流算法介绍（漏桶算法、令牌桶算法）及实现--待整理</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/122431276">精度不够，滑动时间来凑「限流算法第二把法器：滑动时间窗口算法」- 第301篇</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java垃圾回收（GC）]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-23-Java垃圾回收（GC）/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-23-Java垃圾回收（GC）/">
+        </link>
+        <updated>2021-09-23T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习JVM垃圾回收过程中的笔记，学习资料如下：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1T34y1X7xx?p=2&amp;spm_id_from=pageDriver">一节课掌握ZGC垃圾回收器</a></li>
+</ul>
+<hr>
+<h2 id="基础知识">基础知识</h2>
+<p>手动回收的问题：</p>
+<ul>
+<li>内存泄漏</li>
+<li>重复回收（多线程）</li>
+</ul>
+<p>引用计数的问题：</p>
+<ul>
+<li>
+<p>循环引用</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210923134958252.png" alt="image-20210923134958252" loading="lazy"></figure>
+</li>
+</ul>
+<h2 id="gc工作原理">GC工作原理</h2>
+<h3 id="minor-gc新生代gc">Minor GC（新生代GC）</h3>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727152911187.png" alt="image-20210727152911187" style="zoom:80%;" />
+<ul>
+<li>GC Roots根节点：线程栈的本地变量、静态变量、本地方法栈的变量等等</li>
+<li>根可达算法：将“GC Roots”对象作为起点，从这些节点开始向下搜索引用的对象，找到的对象都标记为<strong>非垃圾对象</strong>，其余未标记的对象都是垃圾对象。</li>
+<li>每次回收，都会将非垃圾对象放到s0(s1)中，然后杀死Eden和s1(s0)中的对象，并将非垃圾对象的分代年龄加一，当对象的分代年龄变成15时，会被移动到老年代中。</li>
+<li>如果非垃圾对象过多，s0(s1)中放不下，则会被放到老年代中。</li>
+</ul>
+<h3 id="minor-gc-vs-full-gc">Minor GC VS Full GC</h3>
+<ul>
+<li>Minor GC会跳过处于老年代中的对象，但这样可能会使得部分被老年代中对象所引用的对象被标记成垃圾对象，因此，在Dirty cards中会存储所有老年代对象引用的对象。</li>
+<li>Minor GC与Full GC相比，非垃圾对象较少，因此拷贝时间较短</li>
+<li>算法不同：
+<ul>
+<li>Mnior GC用空间换时间，需要两个内存空间，直接Copy</li>
+<li>Full GC用时间换空间，需要Mark+Compact</li>
+</ul>
+</li>
+</ul>
+<h2 id="zgc垃圾回收器">ZGC垃圾回收器</h2>
+<p>将堆划分成3部分：</p>
+<ul>
+<li>小页面（2M）：对象小于256KB</li>
+<li>中页面（32M）：对象在256KM~4MB</li>
+<li>大页面（&gt;32M）：对象大于4M</li>
+</ul>
+<p>指针着色：</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210923143727759.png" alt="image-20210923143727759" loading="lazy"></figure>
+<p>流程：</p>
+<ul>
+<li>初始标记：只标记与GC Roots直接关联的对象，将指针标记成绿色，会STW，但耗时很短，不会对堆空间进行修改。</li>
+<li>并发标记：核心算法，三色标记（黑、白、灰：存活对象、垃圾对象、未扫描完对象）</li>
+<li>再标记：处理漏标对象。利用AOP，记录在并发标记阶段所被访问的对象。</li>
+<li>并发转移准备：筛选需要转移的分区</li>
+<li>初始转移：转移与GC Roots直接关联的对象</li>
+<li>并发转移：转发表</li>
+</ul>
+<h3 id="思考">思考</h3>
+<ul>
+<li>
+<p>为什么初始标记阶段，不标记所有对象？</p>
+<p>因为耗时少！</p>
+</li>
+<li>
+<p>为什么不直接进行并发标记？即，初始标记的意义是什么？</p>
+<p>初始标记的意义：找根对象</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210924093232733.png" alt="image-20210924093232733" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="z的含义">Z的含义</h3>
+<blockquote>
+<p>可能大伙还惦记这标题吧？<strong>ZGC 的 Z 是什么意思？</strong></p>
+<p>其实没啥意思，就是个名字而已。</p>
+<p>https://blog.csdn.net/yessimida/article/details/109763732</p>
+</blockquote>
+<figure data-type="image" tabindex="4"><img src="https://gitee.com/Bule-Zst/picture/raw/master/d01944130bba017f5ec46f909b629435.png" alt="img" loading="lazy"></figure>
+<h2 id="其他垃圾回收器">其他垃圾回收器</h2>
+<figure data-type="image" tabindex="5"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210923142511010.png" alt="image-20210923142511010" loading="lazy"></figure>
+<ul>
+<li>
+<p>新生代垃圾回收器</p>
+<ul>
+<li>Serial：标记-复制算法</li>
+<li>ParNew：标记-复制算法+多线程+STW尽量短</li>
+<li>Parallel Scavenge：标记-复制算法+多线程+吞吐量可控</li>
+</ul>
+</li>
+<li>
+<p>老年代垃圾回收器</p>
+<ul>
+<li>Serial Old：标记-整理算法</li>
+<li>Parallel Old：标记-整理算法+多线程</li>
+<li>CMS：标记-清除算法+STW尽量短
+<ul>
+<li>初始标记、并发标记、重新标记、并发清除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>G1</p>
+<ul>
+<li>
+<p>jdk9 默认的收集器</p>
+</li>
+<li>
+<p>标记-整理算法</p>
+</li>
+<li>
+<p>分区+分代</p>
+<blockquote>
+<p>G1回收器的内存与CMS回收器要求的内存模型有极大的不同。G1将内存划分一个个固定大小的region，每个region可以是年轻代、老年代的一个。内存的回收是以region作为基本单位的；</p>
+<p>https://www.jianshu.com/p/aef0f4765098</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>ZGC</p>
+<ul>
+<li>STW极短</li>
+<li>分区思想</li>
+<li>染色指针</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/kevin7234/p/10644654.html">jvm minor gc 为什么比 full gc 快很多</a></li>
+<li><a href="https://www.zhihu.com/question/35172533">为什么minor gc比full gc/major gc快？</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Zookeeper学习笔记]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-16-Zookeeper学习笔记/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-16-Zookeeper学习笔记/">
+        </link>
+        <updated>2021-09-16T07:13:53.000Z</updated>
+        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习Zookeeper过程中的笔记，学习资料如下：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1av411w7hp?from=search&amp;seid=1946340734056821588&amp;spm_id_from=333.337.0.0">分布式架构Zookeeper入门实战到底层原理剖析</a></li>
+</ul>
+<hr>
+<h2 id="一致性">一致性</h2>
+<ul>
+<li>强一致性：当更新操作完成之后，在任何时刻所有的用户或者进程查询到的都是最近一次成功更新的数据。
+<ul>
+<li>分布式锁</li>
+</ul>
+</li>
+<li>最终一致性：在某一时刻用户或者进程查询到的数据可能都不同，但是最终成功更新的数据都会被所有用户或者进程查询到。</li>
+<li>弱一致性：当数据更新后，后续对该数据的读取操作可能得到更新后的值，也可能是更改前的值。</li>
+</ul>
+<p>zookeeper只保证最终一致性</p>
+<h2 id="zookeeper-最终一致性-实现原理">zookeeper 最终一致性 实现原理</h2>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210916135047212.png" alt="image-20210916135047212" loading="lazy"></figure>
+<ul>
+<li>Zab协议
+<ul>
+<li>领导者选举机制
+<ul>
+<li>比较两个节点谁的数据更<strong>新</strong> (zxid)，如果zxid相等，则比较myid，myid越大越好。zxid为请求id，对应每一个请求，且越靠后的请求，zxid越大。myid对应node节点，每个节点都有一个互不相等的myid，由配置文件指定。</li>
+</ul>
+</li>
+<li>过半机制</li>
+<li>两阶段提交机制
+<ul>
+<li>预提交</li>
+<li>ACK（过半机制）</li>
+<li>提交</li>
+</ul>
+</li>
+<li>同步机制</li>
+</ul>
+</li>
+<li>Zab协议的问题：
+<ul>
+<li>节点越多，写请求处理越慢，因为需要等待半数节点返回ACK</li>
+<li>解决方案：
+<ul>
+<li>新增观察者，不参与两阶段提交</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://www.jianshu.com/p/546b9dd86c91">弱一致性、强一致性、最终一致性、顺序一致性</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[秒杀系统-实战]]></title>
         <id>http://Bule-Zst.gitee.io/2021-09-14-秒杀系统-实战/</id>
         <link href="http://Bule-Zst.gitee.io/2021-09-14-秒杀系统-实战/">
         </link>
@@ -35,8 +917,6 @@
 <li>内部调用：事务基于AOP，会对事务对象包装一个代理对象，因此不能直接调用事务对象的方法，应该使用Springboot的依赖注入，使用注入对象的方法。</li>
 <li>数据库存储引擎不支持：MyISAM是不支持事务的，所以可以检查一下数据库表的存储引擎，如果是MyISAM，需要改成InnoDB。</li>
 </ul>
-<p>性能：</p>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914151845646.png" alt="image-20210914151845646" loading="lazy"></figure>
 <p>吞吐量为130/s</p>
 <h2 id="优化">优化</h2>
 <h3 id="redis缓存">Redis缓存</h3>
@@ -51,8 +931,6 @@ try {
     productService.seckill( id );
 } catch ( Exception e ) {}
 </code></pre>
-<p>性能：</p>
-<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914154013003.png" alt="image-20210914154013003" loading="lazy"></figure>
 <p>吞吐量为1400/s</p>
 <h4 id="存在的问题">存在的问题</h4>
 <p>缓存不一致问题：一旦秒杀业务过程中发生错误导致事务回滚，那么redis中的库存信息就和数据库中的不一致了。</p>
@@ -72,8 +950,6 @@ try {
 <p>使用ConcurrentHashMap在JVM级别做缓存，当发现redis中库存为零后，使用ConcurrentHashMap标记当前商品为False。</p>
 <p>当收到秒杀请求时，首先判断ConcurrentHashMap中当前商品是否被标记，如果被标记了，说明库存为零，直接return。</p>
 <p>使用JVM级别的缓存能更好地提高系统性能，因为redis缓存是需要和redis服务做交互的，伴随网络请求，因此性能没有JVM级别快。</p>
-<p>性能：</p>
-<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210914164139365.png" alt="image-20210914164139365" loading="lazy"></figure>
 <p>吞吐量为：1815/s</p>
 <pre><code class="language-java">if( concurrentHashMap.get(id) != null ) {
     return &quot;fail&quot;;
@@ -107,9 +983,33 @@ try {
 </ul>
 <p>解决方案：</p>
 <ul>
-<li>如果是分布式导致的不一致问题，可以使用zookeeper解决。当zookeeper中节点的数据发生改变后，zookeeper会主动通知监听该节点的进程，从而实现分布式下JVM级的缓存同步。</li>
-<li>如果是单机不一致问题，暂时没想好如何解决。</li>
+<li>如果是分布式导致的不一致问题，可以使用zookeeper解决。当zookeeper中节点的数据发生改变后，zookeeper会主动通知监听该节点的进程，从而实现分布式下JVM级的缓存同步。之所以使用zookeeper，是因为zookeeper是CP的模型，能较好保证各节点之间的一致性。</li>
+<li>如果是单机不一致问题，则借助lua脚本，让redis的减一操作和恢复操作原子化，因为之前出问题的原因就是decr和incr二者之间不具有原子性。</li>
 </ul>
+<h4 id="修复-lua">修复-lua</h4>
+<pre><code class="language-java">if( concurrentHashMap.get(id) != null ) {
+    return &quot;fail&quot;;
+}
+
+String RELEASE_LOCK_LUA_SCRIPT = &quot;if redis.call('decr', KEYS[1]) == -1 then redis.call('incr', KEYS[1]) return '-1' else return redis.call('get', KEYS[1]) end&quot;;
+DefaultRedisScript&lt;String&gt; redisScript = new DefaultRedisScript&lt;&gt;(RELEASE_LOCK_LUA_SCRIPT,String.class);
+String result = stringRedisTemplate.execute(redisScript, Collections.singletonList(id+&quot;&quot;) );
+if( result.equals(&quot;-1&quot;) ) {
+    concurrentHashMap.put( id, true );
+    return &quot;fail&quot;;
+}
+
+try {
+    productService.seckill( id );
+} catch ( Exception e ) {
+    stringRedisTemplate.opsForValue().increment( id+&quot;&quot; );
+    if( concurrentHashMap.get(id) != null ) {
+        concurrentHashMap.remove( id );
+    }
+}
+return &quot;ok&quot;;
+</code></pre>
+<p>吞吐量：1700/s</p>
 <h3 id="其他优化手段">其他优化手段</h3>
 <ul>
 <li>
@@ -210,577 +1110,646 @@ try {
 <h2 id="hashtable">Hashtable</h2>
 <p>线程安全：对put方法加synchronized锁</p>
 <p>缺点：性能差</p>
-<h2 id="concurrenthashmap">ConcurrentHashMap</h2>
+<h2 id="concurrenthashmap-jdk17">ConcurrentHashMap jdk1.7</h2>
 <p>class Segment extends Reentralock</p>
 <figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210901141125962.png" alt="image-20210901141125962" loading="lazy"></figure>
-<h3 id="扩容">扩容</h3>
-<p>segments数组大小不变，与扩增级别（concurrencyLevel）相同</p>
-<p>触发扩容后，只会在Segment对象内部进行扩容，不会整体扩容</p>
-<h3 id="源码">源码</h3>
-<h4 id="初始化">初始化</h4>
+<h3 id="构造方法">构造方法</h3>
 <p>segments数组长度为2的幂，为什么？因为计算下标时需要 <code>h &amp; (length-1)</code>，因此，必须是2的幂。</p>
-<p>同时，Segment对象内部的数组，长度也是2的幂</p>
-<h4 id="put">put</h4>
-<p>在put时会对Segment对象进行初始化，使用了CAS</p>
-<p>在等待锁的过程中，提前生成entry对象</p>
-<figure data-type="image" tabindex="3"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210901160244226.png" alt="image-20210901160244226" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[微服务架构与Spring Cloud Alibaba框架学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-08-28-微服务架构与Spring Cloud Alibaba框架学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-08-28-微服务架构与Spring Cloud Alibaba框架学习笔记/">
-        </link>
-        <updated>2021-08-28T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习微服务架构与Spring Cloud Alibaba框架过程中的学习笔记，学习资料如下：</p>
+<p>同时，Segment对象内部的数组，长度也是2的幂，大小为 <code>initialCapacity / concurrencyLevel</code></p>
+<p>流程：</p>
 <ul>
-<li><a href="https://www.aliyundrive.com/s/bJKCoGeUWY7">微服务Spring Cloud Alibaba三高架构实战视频.mp4</a></li>
-<li><a href="https://www.aliyundrive.com/s/1TgXEyrFN2p">阿里微服务架构Spring Cloud Alibaba源码深度剖析视频.mp4</a></li>
+<li>首先，根据initialCapacity、loadFactor和concurrencyLevel，计算segments数组的大小、segment对象内部table的大小和threshold</li>
+<li>然后，初始化Segment对象，并放到segments[0]</li>
 </ul>
-<hr>
-<h2 id="微服务架构的优势劣势">微服务架构的优势劣势</h2>
-<ul>
-<li>优势
-<ul>
-<li>单一服务崩溃，不会影响其他服务的正常运行</li>
-<li>方便大型团队的开发和管理</li>
-<li>方便对特定服务的扩容</li>
-<li>不同服务使用不同的数据库，便于数据库的管理</li>
-</ul>
-</li>
-<li>劣势
-<ul>
-<li>增加运维难度</li>
-<li>引发分布式事务问题</li>
-<li>bug定位困难</li>
-</ul>
-</li>
-</ul>
-<h2 id="服务扩容方案">服务扩容方案</h2>
-<h3 id="nginx负载均衡">nginx负载均衡</h3>
-<p>需要手动修改nginx配置，对运维要求较高</p>
-<h3 id="spring-cloud-alibaba">Spring Cloud Alibaba</h3>
-<p>使用注册中心组件-nacos</p>
-<h4 id="实现原理">实现原理</h4>
-<p>客户端：默认集成Ribbon，Ribbon定时从Nacos上拉取相关信息。当客户端通过rest调用服务时，会被Ribbon拦截，Ribbon会根据本地的服务信息替换链接。Ribbon默认使用的是轮询负载均衡。</p>
-<p>服务端：服务端启动后，会向Nacos注册服务，并开启心跳任务，定时向Nacos发送消息以证明自身存活。</p>
-<h2 id="高可用">高可用</h2>
-<p>核心链路中，某些服务未调用成功，则触发服务降级。服务降级可通过 sentinel组件 实现。</p>
-<p>sentinel组件还可以帮我们实现限流、熔断功能。</p>
-<p>限流：限制访问量。</p>
-<p>熔断：对于大概率失败的请求调用，直接调用降级服务。</p>
-<h3 id="限流算法">限流算法</h3>
-<p>滑动时间窗、漏桶、令牌桶</p>
-<h2 id="高并发">高并发</h2>
-<h3 id="nacos">nacos</h3>
-<p>如何解决读写冲突问题：读写分离，在副本上进行写，写完之后再覆盖掉原有数据。</p>
-<h2 id="高扩展">高扩展</h2>
-<h3 id="nacos-2">nacos</h3>
-<p>namespace -&gt; group -&gt; cluster -&gt; instance</p>
-<p>namespace: test, dev...</p>
-<p>group: 交易微服务分组、仓储微服务分组</p>
-<p>cluster: 多地部署，深圳、杭州、北京、成都</p>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210830082845291.png" alt="image-20210830082845291" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210830082920845.png" alt="image-20210830082920845" loading="lazy"></figure>
-<h2 id="分布式事务">分布式事务</h2>
-<p>借助 seata组件 完成</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[HashMap详解]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-08-26-ConcurrentHashMap扩容机制/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-08-26-ConcurrentHashMap扩容机制/">
-        </link>
-        <updated>2021-08-26T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要用于记录学习 HashMap 过程中的笔记。</p>
-<hr>
-<h2 id="扩容机制">扩容机制</h2>
-<p>首先要了解 HashMap 的底层结构，如图所示，数组+单向链表（红黑树）。</p>
-<p>当单链表长度大于8时，~~数组长度达到64时，~~会由链表转换成红黑树。（依据：源码）</p>
-<pre><code class="language-java">for (int binCount = 0; ; ++binCount) {
-    if ((e = p.next) == null) {
-        p.next = newNode(hash, key, value, null);
-        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-            treeifyBin(tab, hash);
-        break;
+<pre><code class="language-java">public ConcurrentHashMap(int initialCapacity,
+                         float loadFactor, int concurrencyLevel) {
+    if (!(loadFactor &gt; 0) || initialCapacity &lt; 0 || concurrencyLevel &lt;= 0)
+        throw new IllegalArgumentException();
+    if (concurrencyLevel &gt; MAX_SEGMENTS)
+        concurrencyLevel = MAX_SEGMENTS;
+    // Find power-of-two sizes best matching arguments
+    int sshift = 0;
+    int ssize = 1;
+    while (ssize &lt; concurrencyLevel) {
+        ++sshift;
+        ssize &lt;&lt;= 1;
     }
-    if (e.hash == hash &amp;&amp;
-        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-        break;
-    p = e;
+    this.segmentShift = 32 - sshift;
+    this.segmentMask = ssize - 1;
+    if (initialCapacity &gt; MAXIMUM_CAPACITY)
+        initialCapacity = MAXIMUM_CAPACITY;
+    int c = initialCapacity / ssize;
+    if (c * ssize &lt; initialCapacity)
+        ++c;
+    int cap = MIN_SEGMENT_TABLE_CAPACITY;
+    while (cap &lt; c)
+        cap &lt;&lt;= 1;
+    // create segments and segments[0]
+    Segment&lt;K,V&gt; s0 =
+        new Segment&lt;K,V&gt;(loadFactor, (int)(cap * loadFactor),
+                         (HashEntry&lt;K,V&gt;[])new HashEntry[cap]);
+    Segment&lt;K,V&gt;[] ss = (Segment&lt;K,V&gt;[])new Segment[ssize];
+    UNSAFE.putOrderedObject(ss, SBASE, s0); // ordered write of segments[0]
+    this.segments = ss;
 }
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210826131403378.png" alt="image-20210826131403378" loading="lazy"></figure>
-<p>初始时，数组长度为16，当数组中超过16*0.75=12个位置被使用后，数组会被扩容到32，之后会扩容到64。</p>
-<p>这里需要注意的是，必须是数组中12个位置被使用过，并不是说HashMap中存放12个元素，这里容易混淆。</p>
-<p>同样，附上代码：</p>
-<pre><code class="language-java">if (++size &gt; threshold)
-    resize();
-</code></pre>
-<p>比例因子：</p>
-<p>默认为0.75，也就是说，虽然数组长度为16，但只能存放16*0.75=12个元素。</p>
-<h2 id="看源码梳理put方法逻辑">看源码，梳理put方法逻辑</h2>
-<p>源码如下：</p>
-<pre><code class="language-java">final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)
-        n = (tab = resize()).length;
-    
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
+<h3 id="put">put</h3>
+<p>流程：</p>
+<ul>
+<li>首先，根据key获取Segment对象，如果不存在，则初始化，使用CAS赋值给segments数组</li>
+<li>尝试对Segment对象进行加锁
+<ul>
+<li>如果加锁失败，则边尝试加锁，边遍历table[key]</li>
+<li>如果遍历过程中，找到了对应的entry对象，则<strong>停止遍历</strong>。如果遍历完，依旧没有找到entry对象，则新建entry对象，然后<strong>停止遍历</strong>。</li>
+<li>停止遍历后
+<ul>
+<li>继续尝试加锁，如果尝试次数超过 <code>MAX_SCAN_RETRIES</code>，则调用lock方法，阻塞加锁</li>
+<li>如果在尝试加锁过程中，发现table[key]被修改（first != table[key]），则重新开始遍历</li>
+</ul>
+</li>
+<li>只有当新建entry对象时，才会在加锁后获取到entry对象，其余情况下，获取到的都为null</li>
+</ul>
+</li>
+<li>加锁成功后，开始遍历table[key]
+<ul>
+<li>如果找到对应entry对象，则修改其value值</li>
+<li>如果没有找到entry对象，则判断之前是否已经新建过entry对象，如果没有，则新建。将新建的entry对象加入到table[key]的头结点之前，然后判断是否需要进行扩容操作。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">public V put(K key, V value) {
+    Segment&lt;K,V&gt; s;
+    if (value == null)
+        throw new NullPointerException();
+    int hash = hash(key);
+    int j = (hash &gt;&gt;&gt; segmentShift) &amp; segmentMask;
+    if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObject          // nonvolatile; recheck
+         (segments, (j &lt;&lt; SSHIFT) + SBASE)) == null) //  in ensureSegment
+        s = ensureSegment(j);
+    return s.put(key, hash, value, false);
+}
+
+final V put(K key, int hash, V value, boolean onlyIfAbsent) {
+    HashEntry&lt;K,V&gt; node = tryLock() ? null :
+        scanAndLockForPut(key, hash, value);
+    V oldValue;
+    try {
+        HashEntry&lt;K,V&gt;[] tab = table;
+        int index = (tab.length - 1) &amp; hash;
+        HashEntry&lt;K,V&gt; first = entryAt(tab, index);
+        for (HashEntry&lt;K,V&gt; e = first;;) {
+            if (e != null) {
+                K k;
+                if ((k = e.key) == key ||
+                    (e.hash == hash &amp;&amp; key.equals(k))) {
+                    oldValue = e.value;
+                    if (!onlyIfAbsent) {
+                        e.value = value;
+                        ++modCount;
+                    }
                     break;
                 }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
+                e = e.next;
+            }
+            else {
+                if (node != null)
+                    node.setNext(first);
+                else
+                    node = new HashEntry&lt;K,V&gt;(hash, key, value, first);
+                int c = count + 1;
+                if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)
+                    rehash(node);
+                else
+                    setEntryAt(tab, index, node);
+                ++modCount;
+                count = c;
+                oldValue = null;
+                break;
             }
         }
-        
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
+    } finally {
+        unlock();
+    }
+    return oldValue;
+}
+
+private HashEntry&lt;K,V&gt; scanAndLockForPut(K key, int hash, V value) {
+    HashEntry&lt;K,V&gt; first = entryForHash(this, hash);
+    HashEntry&lt;K,V&gt; e = first;
+    HashEntry&lt;K,V&gt; node = null;
+    int retries = -1; // negative while locating node
+    while (!tryLock()) {
+        HashEntry&lt;K,V&gt; f; // to recheck first below
+        if (retries &lt; 0) {
+            if (e == null) {
+                if (node == null) // speculatively create node
+                    node = new HashEntry&lt;K,V&gt;(hash, key, value, null);
+                retries = 0;
+            }
+            else if (key.equals(e.key))
+                retries = 0;
+            else
+                e = e.next;
+        }
+        else if (++retries &gt; MAX_SCAN_RETRIES) {
+            lock();
+            break;
+        }
+        else if ((retries &amp; 1) == 0 &amp;&amp;
+                 (f = entryForHash(this, hash)) != first) {
+            e = first = f; // re-traverse if entry changed
+            retries = -1;
         }
     }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
+    return node;
+}
+</code></pre>
+<h3 id="扩容">扩容</h3>
+<ul>
+<li>首先，segment数组的长度是不会变的，与并发级别（concurrencyLevel）相同，扩容只在segment对象内部进行</li>
+<li>在put方法中，若segment中元素个数超过threshold，则进行rehash。
+<ul>
+<li>将table大小扩展一倍，并对所有元素放到新table中，同时根据比例因子更新threshold</li>
+<li>这里有一个需要说明的地方，在转移中，会去寻找最后一节不需要改动的链表，然后将其整个移动到新table中。怎么理解呢？因为在移动过程中，需要重复创建Entry，比较耗费资源，所以能尽量不创建就不创建。因此，转移过程中，会先找到 lastRun 节点，该节点后面的节点对应的hash值和该节点都一样，所以可以一起移动到新table中。然后再对lastRun节点之前的节点一个一个进行转移。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">//扩容，Segment中，只对Segment中的HashEntry[]扩容
+@SuppressWarnings(&quot;unchecked&quot;)
+private void rehash(HashEntry&lt;K,V&gt; node) {
+	HashEntry&lt;K,V&gt;[] oldTable = table;//保存老的HashEntry[]
+	int oldCapacity = oldTable.length;
+	int newCapacity = oldCapacity &lt;&lt; 1;//扩容为原来的2倍
+	threshold = (int)(newCapacity * loadFactor);//计算新的阈值
+	HashEntry&lt;K,V&gt;[] newTable =
+		(HashEntry&lt;K,V&gt;[]) new HashEntry[newCapacity];//创建新的HashEntry[]
+	int sizeMask = newCapacity - 1;
+	for (int i = 0; i &lt; oldCapacity ; i++) {//循环移动老的数组中的元素
+		HashEntry&lt;K,V&gt; e = oldTable[i];
+		if (e != null) {
+			HashEntry&lt;K,V&gt; next = e.next;
+			int idx = e.hash &amp; sizeMask;//计算在HashEntry[]中存放的位置
+			if (next == null)   //当前节点的下一个节点为null，说明当前链表就一个节点
+				newTable[idx] = e;//直接赋值
+			else { //存在链表
+				HashEntry&lt;K,V&gt; lastRun = e;
+				int lastIdx = idx;
+				//循环找到一个 lastRun 节点，这个节点之后的所有元素是将要放到一起的
+				for (HashEntry&lt;K,V&gt; last = next;
+					 last != null;
+					 last = last.next) {
+					int k = last.hash &amp; sizeMask;
+					if (k != lastIdx) {
+						lastIdx = k;
+						lastRun = last;
+					}
+				}
+				newTable[lastIdx] = lastRun;//复制链表
+				//处理lastRun之前的节点，这些节点可能分配在另一个链表中，也可能分配到上面的那个链表中
+				for (HashEntry&lt;K,V&gt; p = e; p != lastRun; p = p.next) {
+					V v = p.value;
+					int h = p.hash;
+					int k = h &amp; sizeMask;
+					HashEntry&lt;K,V&gt; n = newTable[k];
+					newTable[k] = new HashEntry&lt;K,V&gt;(h, p.key, v, n);
+				}
+			}
+		}
+	}
+	 // 将新加的 node 放到新数组中刚刚的两个链表之一的头部
+	int nodeIndex = node.hash &amp; sizeMask;
+	node.setNext(newTable[nodeIndex]);
+	newTable[nodeIndex] = node;
+	table = newTable;
+}
+</code></pre>
+<h2 id="concurrenthashmap-jdk18">ConcurrentHashMap jdk1.8</h2>
+<h3 id="sizectl">sizeCtl</h3>
+<ul>
+<li>-1：正在初始化</li>
+<li>0：未进行初始化</li>
+<li>&gt;0：
+<ul>
+<li>若还未进行初始化，则为初始化时 <code>tabel</code> 的容量</li>
+<li>else，为触发下一次扩容的阈值</li>
+</ul>
+</li>
+</ul>
+<h3 id="初始化">初始化</h3>
+<ul>
+<li>如果sizeCtl小于0，则说明正在进行初始化，通过 <code>Thread.yield()</code> 让出CPU时间</li>
+<li>else
+<ul>
+<li>将 <code>sizeCtl</code> 的值赋值为 <code>sc</code>，作为备份，然后将sizeCtl赋值为-1
+<ul>
+<li>如果sc大于0，初始化长度为sc的table</li>
+<li>else，初始化长度为 <code>DEFAULT_CAPACITY</code> 的table</li>
+</ul>
+</li>
+<li>将 <code>n-(n&gt;&gt;&gt;2)</code> 的值赋值给sizeCtl，<code>n-(n&gt;&gt;&gt;2)</code> 表示 <code>0.75*n</code> ，所以sizeCtl为触发下一次扩容的阈值</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">private final Node&lt;K,V&gt;[] initTable() {
+    Node&lt;K,V&gt;[] tab; int sc;
+    while ((tab = table) == null || tab.length == 0) {
+        if ((sc = sizeCtl) &lt; 0)
+            Thread.yield(); // lost initialization race; just spin
+        else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) {
+            try {
+                if ((tab = table) == null || tab.length == 0) {
+                    int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;
+                    @SuppressWarnings(&quot;unchecked&quot;)
+                    Node&lt;K,V&gt;[] nt = (Node&lt;K,V&gt;[])new Node&lt;?,?&gt;[n];
+                    table = tab = nt;
+                    sc = n - (n &gt;&gt;&gt; 2);
+                }
+            } finally {
+                sizeCtl = sc;
+            }
+            break;
+        }
+    }
+    return tab;
+}
+</code></pre>
+<h3 id="put-2">put</h3>
+<ul>
+<li>
+<p>for循环</p>
+<ul>
+<li>
+<p>如果table为空，则初始化table，然后重新循环</p>
+</li>
+<li>
+<p>如果table[i]为空，则初始化node节点，然后放到table[i]中</p>
+<ul>
+<li>如果“放”操作成功，则结束循环</li>
+<li>因为存在并发，“放”的操作可能失败，如果失败，则重新循环。</li>
+</ul>
+</li>
+<li>
+<p>如果table[i]的状态是MOVED，说明当前正在扩容，则帮忙一起扩容，扩容结束后，重新循环。</p>
+</li>
+<li>
+<p>以上3个条件都不满足，则对table[i]加锁</p>
+<ul>
+<li>
+<p>如果table[i]为链表，则遍历链表，并维护binCount变量，寻找key是否存在</p>
+<ul>
+<li>如果存在，则更新value，结束遍历</li>
+<li>如果不存在，利用尾插法，插入新的node节点，结束遍历</li>
+</ul>
+</li>
+<li>
+<p>如果table[i]为红黑树，则向红黑树中插入node节点，将binCount设为2</p>
+</li>
+<li>
+<p>插入完成后，如果binCount大于等于TREEIFY_THRESHOLD（默认为8），则将table[i]由链表转换成红黑树。</p>
+</li>
+<li>
+<p>退出循环</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>如果key在原先链表、红黑树中不存在（即，需要插入新节点），则调用 <code>addCount(1L, binCount)</code> 将count加1。</p>
+</li>
+</ul>
+<pre><code class="language-java">final V putVal(K key, V value, boolean onlyIfAbsent) {
+    if (key == null || value == null) throw new NullPointerException();
+    int hash = spread(key.hashCode());
+    int binCount = 0;
+    
+    for (Node&lt;K,V&gt;[] tab = table;;) {
+        Node&lt;K,V&gt; f; int n, i, fh;
+        if (tab == null || (n = tab.length) == 0)
+            tab = initTable();
+        else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) {
+            if (casTabAt(tab, i, null,
+                         new Node&lt;K,V&gt;(hash, key, value, null)))
+                break;                   // no lock when adding to empty bin
+        }
+        else if ((fh = f.hash) == MOVED)
+            tab = helpTransfer(tab, f);
+        else {
+            V oldVal = null;
+            synchronized (f) {
+                if (tabAt(tab, i) == f) {
+                    if (fh &gt;= 0) {
+                        binCount = 1;
+                        for (Node&lt;K,V&gt; e = f;; ++binCount) {
+                            K ek;
+                            if (e.hash == hash &amp;&amp;
+                                ((ek = e.key) == key ||
+                                 (ek != null &amp;&amp; key.equals(ek)))) {
+                                oldVal = e.val;
+                                if (!onlyIfAbsent)
+                                    e.val = value;
+                                break;
+                            }
+                            Node&lt;K,V&gt; pred = e;
+                            if ((e = e.next) == null) {
+                                pred.next = new Node&lt;K,V&gt;(hash, key,
+                                                          value, null);
+                                break;
+                            }
+                        }
+                    }
+                    else if (f instanceof TreeBin) {
+                        Node&lt;K,V&gt; p;
+                        binCount = 2;
+                        if ((p = ((TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,
+                                                       value)) != null) {
+                            oldVal = p.val;
+                            if (!onlyIfAbsent)
+                                p.val = value;
+                        }
+                    }
+                }
+            }
+            if (binCount != 0) {
+                if (binCount &gt;= TREEIFY_THRESHOLD)
+                    treeifyBin(tab, i);
+                if (oldVal != null)
+                    return oldVal;
+                break;
+            }
+        }
+    }
+    addCount(1L, binCount);
     return null;
 }
 </code></pre>
+<h4 id="链表转红黑树">链表转红黑树</h4>
 <ul>
-<li>首先根据key计算hash值</li>
-<li>根据hash值，从table中取出node
-<ul>
-<li>如果node为空，则根据key-value构造node，放到table相应位置中，并将size++，如果size超过阈值（容量*比例因子），则会进行扩容操作。</li>
-<li>如果node不为空
-<ul>
-<li>如果node为红黑树，则会调用putTreeVal，向树中添加元素</li>
-<li>如果node为单链表，则会遍历单链表
-<ul>
-<li>如果找到与key-value相等的元素，则直接返回。如果没找到，则新建</li>
-<li>在遍历的过程中，如果发现链表长度大于TREEIFY_THRESHOLD（默认为8），则会将单链表转为红黑树。</li>
-<li>分支逻辑：在转换过程中，如果发现当前table数组的大小小于MIN_TREEIFY_CAPACITY（默认为64），则不会进行转换，而是进行扩容操作。</li>
+<li>根据链表，生成新的TreeNode类型的双向链表，hd为头结点</li>
+<li>利用 <code>TreeBin(TreeNode&lt;K,V&gt; b)</code> 构造函数，由双向链表转成红黑树</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><a href="https://blog.csdn.net/xpsallwell/article/details/88071038">ConcurrentHashMap扩容原理</a></li>
-<li><a href="https://blog.csdn.net/zuokaopuqingnian/article/details/79508730">ArrayList HashMap ConcurrentHashMap扩容机制</a></li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[AQS、CAS学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-08-23-AQS、CAS学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-08-23-AQS、CAS学习笔记/">
-        </link>
-        <updated>2021-08-23T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习AQS、CAS过程中的笔记。</p>
-<hr>
-<h2 id="cas的应用">CAS的应用</h2>
-<p>保证原子性</p>
-<blockquote>
-<p>上面我们了解了cas是什么了，那么它能解决什么问题呢？它可以解决多线程并发安全的问题，以前我们对一些多线程操作的代码都是使用synchronize关键字，来保证线程安全的问题；现在我们将cas放入到多线程环境里我们看一下它是怎么解决的，我们假设有A、B两个线程同时执行一个int值value自增的代码，并且同时获取了当前的value，我们还要假设线程B比A快了那么0.00000001s，所以B先执行，线程B执行了cas操作之后，发现当前值和预期值相符，就执行了自增操作，此时这个value = value + 1;然后A开始执行，A也执行了cas操作，但是此时value的值和它当时取到的值已经不一样了，所以此次操作失败，重新取值然后比较成功，然后将value值更新，这样两个线程进入，value值自增了两次，符合我们的预期。</p>
-<p>https://blog.csdn.net/ln_6am/article/details/85642853</p>
-</blockquote>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li>
-<p><a href="https://blog.csdn.net/mulinsen77/article/details/84583716">AQS详解（面试）</a></p>
-</li>
-<li>
-<p><a href="https://zhuanlan.zhihu.com/p/40025595">AQS 如何使用</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/u011506543/article/details/82392338">JAVA CAS实现原理与使用</a></p>
-</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Spring中Bean、AOP、事务学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-08-10-Spring中Bean、AOP、事务学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-08-10-Spring中Bean、AOP、事务学习笔记/">
-        </link>
-        <updated>2021-08-10T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习Spring Bean、AOP、事务过程中的笔记，学习资料为视频，链接如下：</p>
-<ul>
-<li><a href="https://www.aliyundrive.com/s/JBxJZYEJADm">Spring之IOC、AOP、事务底层原理详解</a></li>
-</ul>
-<hr>
-<h2 id="bean">Bean</h2>
-<p>Bean对象默认为单例Bean，即根据Bean的name获取对象，相同name对应相同的对象。如果是独立Bean，就算name相同，也依旧是不同的对象。</p>
-<h3 id="bean-vs-对象">Bean VS 对象</h3>
-<ul>
-<li>定义：Bean一定是对象，但对象不一定是Bean，只有被Spring管理的对象才是Bean对象。</li>
-<li>特性：Bean对象中的Bean<strong>子</strong>对象，会被Spring自动注入。</li>
-</ul>
-<h3 id="bean创建流程">Bean创建流程</h3>
-<ol>
-<li>实例化（无参构造方法）</li>
-<li>依赖注入
-<ol>
-<li>初始化前：@PostConstruct</li>
-<li>初始化：InitializingBean</li>
-<li>初始化后：AOP，生成代理对象</li>
-</ol>
-</li>
-</ol>
-<h2 id="spring容器">Spring容器</h2>
-<p>本质上是Map，先根据.class进行寻找，如果找到的结果不唯一，则继续根据name进行寻找</p>
-<pre><code class="language-java">class AppConfig {
-	@Bean
-	public OrderService orderService1() {
-		return new OrderService();
-	}
-	@Bean
-	public OrderService orderService2() {
-		return new OrderService();
-	}
-}
-
-public UserService( OrderService orderService1, OrderService orderService2 ) {
-	不报错
-}
----------------------------------------------------------
-class AppConfig {
-	@Bean
-	public OrderService orderService1() {
-		return new OrderService();
-	}
-	@Bean
-	public OrderService orderService2() {
-		return new OrderService();
-	}
-}
-
-public UserService( OrderService orderService1, OrderService orderService123 ) {
-	报错
-}
----------------------------------------------------------
-class AppConfig {
-	@Bean
-	public OrderService orderService1() {
-		return new OrderService();
-	}
-}
-
-public UserService( OrderService orderService1, OrderService orderService123 ) {
-	不报错
-}
-</code></pre>
-<h2 id="aop">AOP</h2>
-<h2 id="事务">事务</h2>
-<p>具有事务的对象为代理对象，切面逻辑为“开启事务”。</p>
-<h3 id="事务失效">事务失效</h3>
-<h4 id="存储引擎">存储引擎</h4>
-<p>MySQL默认存储引擎是MyISAM，该存储引擎不知道事务，需要切换成InnoDB。</p>
-<h4 id="内部调用">内部调用</h4>
-<pre><code class="language-java">@Transactional
-public void test() {
-	jdbcTemplate.execute(&quot;insert t1 values(1,1,1)&quot;);
-	a();
-}
-
-// Propagation.NEVER: throw an exception if a transaction exists
-@Transactional(propagation=Propagation.NEVER)
-public void a() {}
-</code></pre>
-<p>以上代码不会报错，原因是：</p>
-<p>事务开启的逻辑是在代理对象中进行的，上述代码中a()方法的调用是在target对象中进行的，因此在调用a()方法时，不会触发事务相关的逻辑，因此事务失效。</p>
-<p>解决方案：</p>
-<pre><code class="language-java">@Autowired
-private UserService userService;
-
-@Transactional
-public void test() {
-	jdbcTemplate.execute(&quot;insert t1 values(1,1,1)&quot;);
-	userService.a();
-}
-
-// Propagation.NEVER: throw an exception if a transaction exists
-@Transactional(propagation=Propagation.NEVER)
-public void a() {}
-</code></pre>
-<h2 id="问题">问题</h2>
-<ul>
-<li>Bean初始化，为什么有了initializingBean，还要PostConstructor</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[JMM学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-07-28-JMM学习笔记/">
-        </link>
-        <updated>2021-07-28T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习JMM过程中的笔记，学习资料为视频，链接如下：</p>
-<ul>
-<li><a href="https://www.aliyundrive.com/s/B67o2UcNvG8">深入理解并发内存模型JMM与内存屏障</a></li>
-</ul>
-<hr>
-<h2 id="java内存模型">Java内存模型</h2>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210728151840865.png" alt="image-20210728151840865" style="zoom:60%;" />
-<p>对于静态变量，每个线程中会存储变量副本。</p>
-<blockquote>
-<p>只要不影响到变量的值、变量不参与运算，则不会从主内存中拉取，比如while、if、赋值给其他变量、作为方法参数等</p>
-<p>https://blog.csdn.net/ren421259121/article/details/90447853</p>
-</blockquote>
-<p>以下程序会死循环：</p>
-<pre><code class="language-java">public class Main {
-    static boolean exit = false;
-    public static void main(String[] args) throws InterruptedException {
-        new Thread() {
-            @Override
-            public void run() {
-                while( !exit ) {
-
+<pre><code class="language-java">private final void treeifyBin(Node&lt;K,V&gt;[] tab, int index) {
+    Node&lt;K,V&gt; b; int n, sc;
+    if (tab != null) {
+        if ((n = tab.length) &lt; MIN_TREEIFY_CAPACITY)
+            tryPresize(n &lt;&lt; 1);
+        else if ((b = tabAt(tab, index)) != null &amp;&amp; b.hash &gt;= 0) {
+            synchronized (b) {
+                if (tabAt(tab, index) == b) {
+                    TreeNode&lt;K,V&gt; hd = null, tl = null;
+                    for (Node&lt;K,V&gt; e = b; e != null; e = e.next) {
+                        TreeNode&lt;K,V&gt; p =
+                            new TreeNode&lt;K,V&gt;(e.hash, e.key, e.val,
+                                              null, null);
+                        if ((p.prev = tl) == null)
+                            hd = p;
+                        else
+                            tl.next = p;
+                        tl = p;
+                    }
+                    setTabAt(tab, index, new TreeBin&lt;K,V&gt;(hd));
                 }
-                System.out.println( &quot;end&quot; );
             }
-        }.start();
-        Thread.sleep(2000);
-        exit = true;
+        }
     }
 }
 </code></pre>
-<h2 id="jmm的原子操作">JMM的原子操作</h2>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210729144205406.png" alt="image-20210729144205406" style="zoom:80%;" />
-<h2 id="volatile">volatile</h2>
-<p>作用：保证多线程间共享变量的可见性、有序性。不保证原子性，原子性需通过synchronized保证。</p>
-<p>实现原理：</p>
+<h6 id="treebin与treenode">TreeBin与TreeNode</h6>
+<p>在jdk1.8的HashMap中，没有使用TreeBin，为什么ConcurrentHashMap中使用了TreeBin？</p>
 <ul>
-<li>JVM级：禁止JVM优化：指令重排、使用寄存器</li>
-<li>CPU级：利用CPU lock指令为总线加锁</li>
-</ul>
-<h3 id="可见性">可见性</h3>
-<h4 id="缓存一致性协议-vs-volatile">缓存一致性协议 VS volatile</h4>
-<h5 id="缓存一致性协议mesi">缓存一致性协议（MESI）</h5>
-<p>四种状态：</p>
+<li>避免红黑树头结点发生变化：
 <ul>
-<li>M（Modified）：在缓存行中被标记为Modified的值，与主存中的值不同，这个值将会在它被读取之前写入内存，并且状态置为Shared。</li>
-<li>E（Exclusive）：在缓存行中被标记为Exclusive的值与主存中的值一致，被读取时置为Shared状态，被写时置为Modified状态。</li>
-<li>S（Shared）：值也可能存在于其他缓存中，但是它的值和主存中的值一致。</li>
-<li>I（Invalid）：缓存行无效。</li>
+<li>在节点插入到红黑树的过程中，头结点可能会因为左移而改变，但是在ConcurrentHashMap中，是需要对头结点进行加锁操作的，一旦头结点发生改变，那么别的线程，就不会受到锁的限制，从而造成错误。</li>
 </ul>
-<p>关于状态之间的转换以及更详细介绍MESI的内容，可以看这篇博客：https://www.cnblogs.com/igoodful/p/9493156.html</p>
-<p>做个总结，MESI协议，保证了各CPU缓存之间的一致性。</p>
-<h5 id="volatile是否多余">volatile是否多余</h5>
-<p>既然MESI协议可以保证各CPU缓存之间数据的一致性（可见性），那么为什么还需要volatile关键词来保证各线程之间数据的一致性（可见性）呢？volatile关键字是否多余？</p>
-<p>答：不多余</p>
-<p>理由：</p>
+</li>
+</ul>
+<h4 id="addcount">addCount</h4>
+<p>功能梳理：</p>
+<ul>
+<li>让ConcurrentHashMap的size加x</li>
+<li>在满足一定条件的情况下，对ConcurrentHashMap进行扩容</li>
+</ul>
+<p>流程梳理：</p>
 <ul>
 <li>
-<p>出发点不同：</p>
+<p>加x部分：</p>
 <ul>
-<li>MESI协议保证了主内存和各CPU缓存的一致，而volatile保证了java进程中各线程之间的一致性。如果没有MESI，那么各线程之间一定是不一致的，但只有MESI，也不能完全保证各线程间的一致性。</li>
+<li>
+<p>对ConcurrentHashMap的size进行加x操作有两种选择：</p>
+<ul>
+<li>对counterCells加x（可以先看size方法，加深对counterCells的理解）</li>
+<li>对baseCount加x</li>
 </ul>
 </li>
 <li>
-<p>实现的功能不同：</p>
-<ul>
-<li>
-<p>MESI的功能上文已经说过了，即，保证了各CPU缓存之间的一致性</p>
+<p>首先判断counterCells是否为空，如果不为空，则进入if内部，对counterCells加x</p>
 </li>
 <li>
-<p>volatile的功能：</p>
+<p>如果counterCells为空，则尝试对baseCount进行加x操作</p>
 <ul>
-<li>
-<p>防止JVM优化</p>
+<li>如果成功，则结束，进入后续扩容部分</li>
+<li>如果失败，则同样进入if内部，对counterCells加x</li>
+</ul>
 </li>
 <li>
-<p>防止数据从CPU cache以外的地方读取，这里做一下说明，MESI只能保证主内存和CPU缓存（CPU cache）的一致性，但CPU中还有很多额外的组件用于数据存储，这些组件可以提高CPU数据读写的效率，而这些组件的一致性MESI是不保证的。</p>
-<blockquote>
-<p>因为 MESI只是保证了多核cpu的独占cache之间的一致性，但是cpu的并不是直接把数据写入L1 cache的，中间还可能有store buffer。有些arm和power架构的cpu还可能有load buffer或者invalid queue等等。</p>
-<p>https://www.zhihu.com/question/296949412</p>
-</blockquote>
+<p>对counterCells加x的操作流程：</p>
+<ul>
+<li>如果counterCells为空，则①</li>
+<li>如果counterCells不为空，但是length小于等于0，则①
+<ul>
+<li>这里补充一点，代码里的写法是 <code>(m = as.length - 1) &lt; 0</code> ，为什么要这么做呢，因为后续需要使用m进行与操作获取数组下标位置，与的时候是需要用 <code>length-1</code> 的，所以直接在上面的判断中进行赋值。</li>
+</ul>
+</li>
+<li>如果counterCells不为空，且length也大于0，则判断对应下标位置的元素 <code>as[ThreadLocalRandom.getProbe() &amp; m]</code> 是否为空，如果为空，则①</li>
+<li>如果对应下标位置的元素也不为空，则尝试直接对该元素进行加x操作，如果失败，则①</li>
+<li>①：调用 <code>fullAddCount(x, uncontended)</code> 对counterCells加x，addCount方法结束</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p>保证多个变量的顺序一致，即，consistency。因为volatile会对总线加锁，且防止指令重排，所以可以保证用volatile修饰的多个变量之间的操作顺序。而MESI只能保证单个变量的操作顺序，即coherence。</p>
-<blockquote>
-<p>Coherence deals with maintaining a global order in which writes to a single location or single variable are seen by all processors.</p>
-<p>Consistency deals with the ordering of operations to multiple locations with respect to all processors.</p>
-<p>https://www.zhihu.com/question/296949412</p>
-</blockquote>
+<p>扩容部分：</p>
+<ul>
+<li>不进行扩容的情况
+<ul>
+<li>check小于0</li>
+<li>对counterCells进行加x操作，并且check小于等于1</li>
+<li>调用fullAddCount对counterCells进行加x操作</li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
+<pre><code class="language-java">private final void addCount(long x, int check) {
+    CounterCell[] as; long b, s;
+    if ((as = counterCells) != null ||
+        !U.compareAndSwapLong(this, BASECOUNT, b = baseCount, s = b + x)) {
+        
+        CounterCell a; long v; int m;
+        boolean uncontended = true;
+        if (as == null || (m = as.length - 1) &lt; 0 ||
+            (a = as[ThreadLocalRandom.getProbe() &amp; m]) == null ||
+            !(uncontended =
+              U.compareAndSwapLong(a, CELLVALUE, v = a.value, v + x))) {
+            fullAddCount(x, uncontended);
+            return;
+        }
+        if (check &lt;= 1)
+            return;
+        s = sumCount();
+    }
+    if (check &gt;= 0) {
+        Node&lt;K,V&gt;[] tab, nt; int n, sc;
+        while (s &gt;= (long)(sc = sizeCtl) &amp;&amp; (tab = table) != null &amp;&amp;
+               (n = tab.length) &lt; MAXIMUM_CAPACITY) {
+            int rs = resizeStamp(n);
+            if (sc &lt; 0) {
+                if ((sc &gt;&gt;&gt; RESIZE_STAMP_SHIFT) != rs || sc == rs + 1 ||
+                    sc == rs + MAX_RESIZERS || (nt = nextTable) == null ||
+                    transferIndex &lt;= 0)
+                    break;
+                if (U.compareAndSwapInt(this, SIZECTL, sc, sc + 1))
+                    transfer(tab, nt);
+            }
+            else if (U.compareAndSwapInt(this, SIZECTL, sc,
+                                         (rs &lt;&lt; RESIZE_STAMP_SHIFT) + 2))
+                transfer(tab, null);
+            s = sumCount();
+        }
+    }
+}
+</code></pre>
+<h5 id="fulladdcount">fullAddCount</h5>
+<ul>
+<li>使用线程的探针值对h进行赋值</li>
+<li>for循环
+<ul>
+<li>如果counterCells不为空，且长度等于0
+<ul>
+<li>如果counterCells数组对应下标位置元素为空
+<ul>
+<li>将collide赋值为false</li>
+<li>如果counterCells未被其他线程占用，则尝试使用x为对应位置进行初始化，如果初始化成功，则退出循环</li>
+</ul>
 </li>
-</ul>
-<p><s>### CPU lock指令</s></p>
-<p><s>CPU lock指令会将对应缓存行的状态改成E，并立即修改主内存中的数据。其他CPU通过总线嗅探机制，监听到数据的修改，将自己工作内存中的缓存行状态改成I。</s></p>
-<p><s>如果不使用volatile关键字，JVM则不会使用lock指令，此时，对变量的修改会导致缓存行的状态变成M，并不会修改主内存的数据，因此会导致不同线程中共享变量数据不一致。</s></p>
-<p><s>之所以不修改主内存，是因为对主内存的操作相对于CPU操作来说过于耗时，因此不会频繁操作主内存。</s></p>
-<h4 id="reference">Reference</h4>
+<li>如果wasUncontended为false，则将wasUncontended改为true。
 <ul>
-<li><a href="https://www.cnblogs.com/xrq730/p/7048693.html">就是要你懂Java中volatile关键字实现原理</a></li>
-<li><a href="https://www.zhihu.com/question/63120810">java多线程在单核CPU上，还是需要volatile synchronized吗？</a></li>
-</ul>
-<h3 id="有序性">有序性</h3>
-<h4 id="重排序原则">重排序原则</h4>
-<ul>
-<li>as-if-serial：不管怎么重排序 (编译器和处理器为了提高并行度)，(单线程) 程序的执行结果不能被改变。</li>
-<li>happens-before：本质上其实和第一点类似，就是保证单线程程序的语义不被改变。</li>
-</ul>
-<p>面试题：单例模式下对象半初始化问题</p>
-<h4 id="内存屏障">内存屏障</h4>
-<p>JVM内存屏障指令：LoadLoad, LoadStore, StoreLoad, StoreStore</p>
-<p>对于volatile修饰的变量，在JVM级，会在该操作前后添加内存屏障指令，在CPU级，会通过lock指令实现内存屏障。</p>
-<h2 id="面试题">面试题</h2>
-<h3 id="volatile有什么特点和synchornized相比有什么区别">volatile有什么特点，和synchornized相比有什么区别？</h3>
-<ul>
-<li>volatile的特点：保证可见性和有序性，不保证原子性</li>
-<li>volatile VS synchronized
-<ul>
-<li>修饰对象不同：volatile修饰变量，synchronized修饰方法和代码块</li>
-<li>原子性：volatile不保证，synchronized保证</li>
-<li>是否造成阻塞：volatile不会，synchronized会</li>
-<li>volatile为轻量级锁，synchronized为重量级锁</li>
-<li>都保证原子性和有序性</li>
+<li>wasUncontended：表示上一次没有冲突</li>
+<li>如果为false，则说明有冲突，所以直接跳到最后一条语句，更新h的值</li>
 </ul>
 </li>
+<li>尝试使用CAS对数组对应下标位置的元素加x
+<ul>
+<li>如果成功，则退出循环</li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[K8S-Scheduler学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-07-28-K8S-Scheduler学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-07-28-K8S-Scheduler学习笔记/">
-        </link>
-        <updated>2021-07-28T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习K8S-Scheduler过程中的笔记，学习资料为视频，链接如下：</p>
-<ul>
-<li><a href="https://www.bilibili.com/video/BV12J411q7k4?from=search&amp;seid=1977024601217253447">阿里技术大牛 30 分钟讲透 Kubernetes : 调度器的调度流程和算法介绍</a></li>
+</li>
+<li></li>
+<li></li>
+<li>更新h的值</li>
 </ul>
-<hr>
-<p>调度器功能：负责整个集群资源的调度功能，根据特定的调度算法和策略，将 Pod 调度到最优的工作节点上面去，从而更加合理、更加充分的利用集群的资源。</p>
-<p>什么是Pod：Pod是K8S中最小的调度单元，Pod和docker容器的关系就相当于docker容器和进程，在目前的技术环境下，往往一个服务依赖于多个docker容器，因此，k8s中提出了Pod的概念，使用Pod对docker容器进行打包，统一进行调度。</p>
-<h2 id="对pod进行自定义排序">对Pod进行自定义排序</h2>
+</li>
+<li>else，如果cellsBusy为0（说明counterCells没有被其他线程占用）
 <ul>
-<li>按名称排序：kubectl get pods --sort-by=.metadata.name</li>
-<li>按创建时间进行排序：kubectl get pods --sort-by=.metadata.creationTimestamp</li>
-<li>按启动时间进行排序：kubectl get pods --sort-by=.status.startTime</li>
+<li>则对counterCells进行初始化，初始化为长度为2的数组，并将x的值添加到数组中</li>
+<li>如果成功，则退出循环</li>
 </ul>
-<h2 id="reference">Reference</h2>
+</li>
+<li>else，尝试对baseCount进行加x操作
 <ul>
-<li><a href="https://blog.csdn.net/m0_50434960/article/details/114851074">k8s:Kubernetes 调度器介绍</a></li>
-<li><a href="https://www.jianshu.com/p/bfaa566f17fe">细说kubernetes - 为什么是pod？</a></li>
-<li><a href="https://www.cnblogs.com/yangyuliufeng/p/14257928.html">k8s调度器扩展机制</a></li>
-<li><a href="https://www.bilibili.com/video/BV12J411q7k4?from=search&amp;seid=1977024601217253447">阿里技术大牛 30 分钟讲透 Kubernetes : 调度器的调度流程和算法介绍</a></li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[JVM性能调优学习笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-07-27-JVM性能调优学习笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-07-27-JVM性能调优学习笔记/">
-        </link>
-        <updated>2021-07-27T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要记录了学习JVM性能调优过程中的笔记，学习资料为视频，链接如下：</p>
-<ul>
-<li><a href="https://www.aliyundrive.com/s/mmv27Dfr291">双十一亿级电商系统JVM性能调优实战</a></li>
-</ul>
-<hr>
-<h2 id="java虚拟机组成">Java虚拟机组成</h2>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727153842086.png" alt="image-20210727153842086" style="zoom:67%;" />
-<ul>
-<li>类装载子系统</li>
-<li>字节码执行引擎</li>
-<li>运行时数据区（内存模型）
-<ul>
-<li>栈（线程）
-<ul>
-<li>存放程序运行过程中的数据</li>
-<li>栈 -&gt; 线程 -&gt; 方法
-<ul>
-<li>从栈中划分一块区域给线程，再从这块区域中划分一块给方法</li>
-<li>方法中的局部变量就存在对应区域内</li>
+<li>如果成功，则退出循环</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>程序计数器：记录每个线程当前运行的代码在方法区中的位置</li>
-<li>堆：存放程序运行过程中产生的对象</li>
-<li>方法区（元空间）：常量+静态变量+类信息</li>
 </ul>
-</li>
-</ul>
-<h2 id="gc工作原理">GC工作原理</h2>
-<h3 id="minor-gc新生代gc">Minor GC（新生代GC）</h3>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727152911187.png" alt="image-20210727152911187" style="zoom:80%;" />
+<pre><code class="language-java">private final void fullAddCount(long x, boolean wasUncontended) {
+    int h;
+    if ((h = ThreadLocalRandom.getProbe()) == 0) {
+        ThreadLocalRandom.localInit();      // force initialization
+        h = ThreadLocalRandom.getProbe();
+        wasUncontended = true;
+    }
+    
+    boolean collide = false;                // True if last slot nonempty
+    for (;;) {
+        CounterCell[] as; CounterCell a; int n; long v;
+        if ((as = counterCells) != null &amp;&amp; (n = as.length) &gt; 0) {
+            if ((a = as[(n - 1) &amp; h]) == null) {
+                if (cellsBusy == 0) {            // Try to attach new Cell
+                    CounterCell r = new CounterCell(x); // Optimistic create
+                    if (cellsBusy == 0 &amp;&amp;
+                        U.compareAndSwapInt(this, CELLSBUSY, 0, 1)) {
+                        boolean created = false;
+                        try {               // Recheck under lock
+                            CounterCell[] rs; int m, j;
+                            if ((rs = counterCells) != null &amp;&amp;
+                                (m = rs.length) &gt; 0 &amp;&amp;
+                                rs[j = (m - 1) &amp; h] == null) {
+                                rs[j] = r;
+                                created = true;
+                            }
+                        } finally {
+                            cellsBusy = 0;
+                        }
+                        if (created)
+                            break;
+                        continue;           // Slot is now non-empty
+                    }
+                }
+                collide = false;
+            }
+            else if (!wasUncontended)       // CAS already known to fail
+                wasUncontended = true;      // Continue after rehash
+            else if (U.compareAndSwapLong(a, CELLVALUE, v = a.value, v + x))
+                break;
+            else if (counterCells != as || n &gt;= NCPU)
+                collide = false;            // At max size or stale
+            else if (!collide)
+                collide = true;
+            else if (cellsBusy == 0 &amp;&amp;
+                     U.compareAndSwapInt(this, CELLSBUSY, 0, 1)) {
+                try {
+                    if (counterCells == as) {// Expand table unless stale
+                        CounterCell[] rs = new CounterCell[n &lt;&lt; 1];
+                        for (int i = 0; i &lt; n; ++i)
+                            rs[i] = as[i];
+                        counterCells = rs;
+                    }
+                } finally {
+                    cellsBusy = 0;
+                }
+                collide = false;
+                continue;                   // Retry with expanded table
+            }
+            h = ThreadLocalRandom.advanceProbe(h);
+        }
+        else if (cellsBusy == 0 &amp;&amp; counterCells == as &amp;&amp;
+                 U.compareAndSwapInt(this, CELLSBUSY, 0, 1)) {
+            boolean init = false;
+            try {                           // Initialize table
+                if (counterCells == as) {
+                    CounterCell[] rs = new CounterCell[2];
+                    rs[h &amp; 1] = new CounterCell(x);
+                    counterCells = rs;
+                    init = true;
+                }
+            } finally {
+                cellsBusy = 0;
+            }
+            if (init)
+                break;
+        }
+        else if (U.compareAndSwapLong(this, BASECOUNT, v = baseCount, v + x))
+            break;                          // Fall back on using base
+    }
+}
+</code></pre>
+<h3 id="size">size</h3>
+<h2 id="参考资料">参考资料</h2>
 <ul>
-<li>GC Roots根节点：线程栈的本地变量、静态变量、本地方法栈的变量等等</li>
-<li>将“GC Roots”对象作为起点，从这些节点开始向下搜索引用的对象，找到的对象都标记为<strong>非垃圾对象</strong>，其余未标记的对象都是垃圾对象。</li>
-<li>每次回收，都会将非垃圾对象放到s0(s1)中，然后杀死Eden和s1(s0)中的对象，并将非垃圾对象的分代年龄加一，当对象的分代年龄变成15时，会被移动到老年代中。</li>
-<li>如果非垃圾对象过多，s0(s1)中放不下，则会被放到老年代中。</li>
+<li><a href="https://blog.csdn.net/qq_36625757/article/details/90074355">JDK1.7&amp;1.8中ConcurrentHashMap解析</a></li>
+<li><a href="https://www.bilibili.com/video/BV1H64y1X7yM?p=6">我敢说这是B站最详细的hashmap及ConcurrentHashMap底层原理解析，16个小时带你吃透所有知识</a></li>
 </ul>
-<h3 id="minor-gc-vs-full-gc">Minor GC VS Full GC</h3>
-<ul>
-<li>Minor GC会跳过处于老年代中的对象，但这样可能会使得部分被老年代中对象所引用的对象被标记成垃圾对象，因此，在Dirty cards中会存储所有老年代对象引用的对象。</li>
-<li>Minor GC与Full GC相比，非垃圾对象较少，因此拷贝时间较短</li>
-<li>算法不同：
-<ul>
-<li>Mnior GC用空间换时间，需要两个内存空间，直接Copy</li>
-<li>Full GC用时间换空间，需要Mark+Compact</li>
-</ul>
-</li>
-</ul>
-<h3 id="reference">Reference</h3>
-<ul>
-<li><a href="https://www.cnblogs.com/kevin7234/p/10644654.html">jvm minor gc 为什么比 full gc 快很多</a></li>
-<li><a href="https://www.zhihu.com/question/35172533">为什么minor gc比full gc/major gc快？</a></li>
-</ul>
-<h2 id="arthas工具">Arthas工具</h2>
-<p>阿里JVM性能调优工具</p>
-<ul>
-<li>
-<p>dashboard：显示监控仪表盘</p>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155106380.png" alt="image-20210727155106380" style="zoom:50%;" />
-</li>
-<li>
-<p>thread thread_id：显示占用CPU较多的代码行数</p>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155209073.png" alt="image-20210727155209073" style="zoom:70%;" />
-</li>
-<li>
-<p>jad：反编译运行中的代码</p>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727155320962.png" alt="image-20210727155320962" style="zoom:80%;" />
-</li>
-</ul>
-<h2 id="性能调优">性能调优</h2>
-<p>目的：减少 STW 的次数。</p>
-<p>STW: Stop-The-World，在执行垃圾收集算法时，Java应用程序的其他所有线程都被挂起（除了垃圾收集帮助器之外）。</p>
-<p>Full GC的SWT时间远大于Minor GC。</p>
-<p>调优方法：</p>
-<ul>
-<li>对业务场景进行分析，为年轻代和老年代分配适当的空间，减少Full GC的频率。</li>
-<li>对于“朝花夕拾”的对象，通过参数调优防止其进入老年代。</li>
-<li>使用不同的垃圾收集器，不同收集器，适用于不同的场景。</li>
-</ul>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20210727162355407.png" alt="image-20210727162355407" style="zoom:55%;" />
 ]]></content>
     </entry>
 </feed>
