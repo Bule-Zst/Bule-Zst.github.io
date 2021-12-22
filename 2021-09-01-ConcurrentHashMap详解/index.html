@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
 <title>ConcurrentHashMap详解 | Bule-Zst</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1639725092840">
+<link rel="shortcut icon" href="/favicon.ico?v=1640141501661">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -2342,22 +2342,51 @@ private void rehash(HashEntry&lt;K,V&gt; node) {
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;备战阶段&#34;&gt;备战阶段&lt;/h2&gt;
+&lt;h3 id=&#34;前言&#34;&gt;前言&lt;/h3&gt;
 &lt;p&gt;Java技术栈+计算机基础+算法+项目+加分项（竞赛/开源项目/博客）&lt;/p&gt;
+&lt;p&gt;大公司更看重基础知识（八股文），小公司更看中现有能力&lt;/p&gt;
+&lt;p&gt;边面试边准备，不要等完全准备好再去面试&lt;/p&gt;
 &lt;h3 id=&#34;笔试算法&#34;&gt;笔试（算法）&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.lintcode.com/cat/&#34;&gt;lintcode CAT模式 天梯上分&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/study/live/489/1/1&#34;&gt;左神算法笔面试真题精讲&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/exam-bytedance&#34;&gt;牛客网 名企编程真题&lt;/a&gt;（企业真题可以多刷刷头条 网易 拼多多）&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/coding-interviews&#34;&gt;牛客网 剑指offer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/leetcode&#34;&gt;牛客网 经典必刷编程题库&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/job-code-high&#34;&gt;牛客网 名企高频面试题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://codetop.cc/home&#34;&gt;CodeTop 汇总互联网大厂面试的高频考题 帮助面试者更有针对性地准备面试&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/158977583&#34;&gt;leetcode 精选 by sergio&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.yuque.com/office/yuque/0/2020/pdf/619289/1605766958275-87ed48a3-0a68-4433-9d3c-b4ea9c829ccb.pdf?from=https%3A%2F%2Fwww.yuque.com%2Fshenjingwa-o51xg%2Fyh6opc%2Fsqqfew%2Fedit&#34;&gt;leetcode 精选&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/24964987/answer/182447205&#34;&gt;lintcode 精选&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://javaguide.cn/cs-basics/algorithms/%E5%87%A0%E9%81%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E9%A2%98/&#34;&gt;JavaGuide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.cyc2018.xyz/#%E7%AE%97%E6%B3%95&#34;&gt;JavaCyc&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20211216111608197.png&#34; alt=&#34;image-20211216111608197&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.lintcode.com/cat/&#34;&gt;lintcode CAT模式 天梯上分&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/study/live/489/1/1&#34;&gt;左神算法笔面试真题精讲&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/exam-bytedance&#34;&gt;牛客网 名企编程真题&lt;/a&gt;（企业真题可以多刷刷头条 网易 拼多多）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/coding-interviews&#34;&gt;牛客网 剑指offer&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/leetcode&#34;&gt;牛客网 经典必刷编程题库&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/ta/job-code-high&#34;&gt;牛客网 名企高频面试题&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://codetop.cc/home&#34;&gt;CodeTop 汇总互联网大厂面试的高频考题 帮助面试者更有针对性地准备面试&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可直接定位特定公司、部门的面试题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/158977583&#34;&gt;leetcode 精选 by sergio&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.yuque.com/office/yuque/0/2020/pdf/619289/1605766958275-87ed48a3-0a68-4433-9d3c-b4ea9c829ccb.pdf?from=https%3A%2F%2Fwww.yuque.com%2Fshenjingwa-o51xg%2Fyh6opc%2Fsqqfew%2Fedit&#34;&gt;leetcode 精选&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zhihu.com/question/24964987/answer/182447205&#34;&gt;lintcode 精选&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://javaguide.cn/cs-basics/algorithms/%E5%87%A0%E9%81%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E9%A2%98/&#34;&gt;JavaGuide&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.cyc2018.xyz/#%E7%AE%97%E6%B3%95&#34;&gt;JavaCyc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;面试java技术栈计算机基础项目&#34;&gt;面试（Java技术栈+计算机基础+项目）&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;刷面经！&lt;/strong&gt;&lt;/p&gt;
@@ -2382,17 +2411,43 @@ private void rehash(HashEntry&lt;K,V&gt; node) {
 &lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/discuss/762719?type=all&amp;amp;order=recall&amp;amp;pos=&amp;amp;page=1&amp;amp;ncTraceId=&amp;amp;channel=-1&amp;amp;source_id=search_all_nctrack&amp;amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652&#34;&gt;南大 22届 硕 Java后端&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;八股文&#34;&gt;八股文&lt;/h4&gt;
+&lt;p&gt;第一遍刷，抓大放小&lt;/p&gt;
+&lt;p&gt;要形成自己的八股文文档，方便后期复习&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://javaguide.cn/&#34;&gt;JavaGuide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://cyc2018.github.io/CS-Notes/#/&#34;&gt;JavaCyc&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://passjava.cn/#/88.Interview/01.Redis/Redis1&#34;&gt;PassJava-面试必备&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/cosen1024/Java-Interview&#34;&gt;「Java面试小抄」一份通向理想互联网公司的面试指南，包括 Java基础、集合、Java并发、JVM、MySQL、Redis、Spring、MyBatis、Kafka、操作系统、计算机网络、系统设计、分布式、Java 项目实战等 by 库森&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/column/c_1339954942191271936&#34;&gt;大厂面试 by 程序员库森&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/discuss/820419?type=all&amp;amp;order=recall&amp;amp;pos=&amp;amp;page=1&amp;amp;ncTraceId=&amp;amp;channel=-1&amp;amp;source_id=search_all_nctrack&amp;amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652&#34;&gt;对线面试官系列之Java集合--面试官看了都说好&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://javaguide.cn/&#34;&gt;JavaGuide&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cyc2018.github.io/CS-Notes/#/&#34;&gt;JavaCyc&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;整理了&lt;a href=&#34;http://www.cyc2018.xyz/&#34;&gt;cyc2018&lt;/a&gt;各部分内容pdf版的页数，方便做计划&lt;/p&gt;
+  &lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20211221102750329.png&#34; style=&#34;zoom:60%;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://passjava.cn/#/88.Interview/01.Redis/Redis1&#34;&gt;PassJava-面试必备&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/cosen1024/Java-Interview&#34;&gt;「Java面试小抄」一份通向理想互联网公司的面试指南，包括 Java基础、集合、Java并发、JVM、MySQL、Redis、Spring、MyBatis、Kafka、操作系统、计算机网络、系统设计、分布式、Java 项目实战等 by 库森&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zhihu.com/column/c_1339954942191271936&#34;&gt;大厂面试 by 程序员库森&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/discuss/820419?type=all&amp;amp;order=recall&amp;amp;pos=&amp;amp;page=1&amp;amp;ncTraceId=&amp;amp;channel=-1&amp;amp;source_id=search_all_nctrack&amp;amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652&#34;&gt;对线面试官系列之Java集合--面试官看了都说好&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
-&lt;li&gt;下面内容主要整理了需要掌握的知识点，但是没有答案，可以先看上面的内容，下面的查缺补漏时用&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nowcoder.com/discuss/61438?from=zhnkw&#34;&gt;JAVA后端秋招/春招准备方向&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/359264954&#34;&gt;2021春招Java后端开发面试总结【25个技术专题】超详细！&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下面内容主要整理了需要掌握的知识点，但是没有答案，可以先看上面的内容，下面的查缺补漏时用&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nowcoder.com/discuss/61438?from=zhnkw&#34;&gt;JAVA后端秋招/春招准备方向&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/359264954&#34;&gt;2021春招Java后端开发面试总结【25个技术专题】超详细！&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;项目&#34;&gt;项目&lt;/h3&gt;
 &lt;ul&gt;
@@ -2481,6 +2536,13 @@ private void rehash(HashEntry&lt;K,V&gt; node) {
 &lt;li&gt;
 &lt;p&gt;https://zhuanlan.zhihu.com/p/121136858&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;要素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基本信息：项目背景、项目功能、技术点&lt;/li&gt;
+&lt;li&gt;重点：干了什么（负责的模块、角色、职责）、结果是什么（项目性能、项目结果）、难点是什么&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2522,21 +2584,21 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;部门信息整理&#34;&gt;部门信息整理&lt;/h4&gt;
+&lt;p&gt;事业群 &amp;gt; 部门 &amp;gt; 中心 &amp;gt; 小组&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;微众：&lt;/p&gt;
+&lt;li&gt;微众：
 &lt;ul&gt;
 &lt;li&gt;贷款科技部：&lt;strong&gt;很核心&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;阿里系：&lt;/p&gt;
+&lt;li&gt;阿里系：
 &lt;ul&gt;
 &lt;li&gt;阿里集团（简称集团）
 &lt;ul&gt;
 &lt;li&gt;阿里云：很香&lt;/li&gt;
 &lt;li&gt;天猫精灵团队：&lt;/li&gt;
 &lt;li&gt;一面、二面、总监面、交叉部门主管面、HR面；每一面都有一票否决权（包括HR面）&lt;/li&gt;
+&lt;li&gt;转正是否成功，很大程度上取决于HR&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;蚂蚁
@@ -2551,15 +2613,13 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;li&gt;听同学群里讨论，集团没有蚂蚁好，至少薪资福利这块，没有蚂蚁好&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;百度：&lt;/p&gt;
+&lt;li&gt;百度：
 &lt;ul&gt;
 &lt;li&gt;工程效率部门：做内部工具的，对个人成长并不好&lt;/li&gt;
 &lt;li&gt;企业智能平台：主要是内部系统，虽然会接触到机器学习和大数据，不太好&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;字节：&lt;/p&gt;
+&lt;li&gt;字节：
 &lt;ul&gt;
 &lt;li&gt;基础架构&lt;/li&gt;
 &lt;li&gt;今日头条：薪资很诱人
@@ -2570,8 +2630,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;li&gt;一面、二面、三面，就可以offer了&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;华为：&lt;/p&gt;
+&lt;li&gt;华为：
 &lt;ul&gt;
 &lt;li&gt;Cloud Bu：不错&lt;/li&gt;
 &lt;li&gt;车BU智能座舱产品部&lt;/li&gt;
@@ -2579,8 +2638,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;li&gt;不怎么问技术&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;微软&lt;/p&gt;
+&lt;li&gt;微软
 &lt;ul&gt;
 &lt;li&gt;STCA-M365
 &lt;ul&gt;
@@ -2589,21 +2647,27 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;华泰证券&lt;/p&gt;
+&lt;li&gt;华泰证券
 &lt;ul&gt;
 &lt;li&gt;信息技术部：base南京&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;网易&lt;/p&gt;
+&lt;li&gt;网易
 &lt;ul&gt;
 &lt;li&gt;杭研院&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;TP-Link&lt;/p&gt;
+&lt;li&gt;TP-Link&lt;/li&gt;
+&lt;li&gt;腾讯
+&lt;ul&gt;
+&lt;li&gt;微信事业群：gc学长说 挺好的&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;待投&#34;&gt;待投&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzU1MTU2NjcxMQ==&amp;amp;mid=2247504396&amp;amp;idx=1&amp;amp;sn=200877c58bd016dbd5d66aefbee154a3&amp;amp;chksm=fb8dfe14ccfa770246c8c5ffd15eb455fea3c1e307ecb0f16ef8365c61463f6bde033c40850d&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=1216AelYAleMD4XYJuv0n2FJ&amp;amp;sharer_sharetime=1639639282713&amp;amp;sharer_shareid=02cdcbb08350c969c2db9d032c863a6d#rd&#34;&gt;微软 22.1.1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;字节 日常实习&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;面试中&#34;&gt;面试中&lt;/h3&gt;
 &lt;ul&gt;
@@ -2697,7 +2761,15 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把所有面试中的不顺利都当作是压力面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;面试难的部门，不一定就是好部门&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一般是部门HR会先打电话联系我，然后再安排面试官进行面试&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;内推&#34;&gt;内推&lt;/h3&gt;
 &lt;ul&gt;
@@ -2742,6 +2814,11 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;h2 id=&#34;暑期实习&#34;&gt;暑期实习&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;实习时，可以利用晚上和周末时间来自我提升，因为还需要为秋招做准备&lt;/li&gt;
+&lt;li&gt;不要相信实习单位所谓的“一定可以转正成功”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;秋招后&#34;&gt;秋招后&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;秋招结束也不要放弃机会，有一些补录以及春招的机会，说不定比秋招的offer更好&lt;/li&gt;
 &lt;/ul&gt;
 ">春招保卫战</a>
       </div>
@@ -2820,13 +2897,127 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-09-30-面试笔记/"" data-c="
-          &lt;p&gt;这篇文章主要用于记录：&lt;/p&gt;
+        <a class="result-title" style="opacity: 0;" href="http://Bule-Zst.gitee.io/2021-09-30-JavaHan/"" data-c="
+          &lt;p&gt;本人的面试八股文（面试小抄），供大家参考。&lt;/p&gt;
+&lt;p&gt;JavaHan，致敬 JavaGuide，Han指的是憨，并且感觉读起来比较顺口。&lt;/p&gt;
+&lt;p&gt;为了方便检索，我把所有内容都放在一个文档中的。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;计算机网络&#34;&gt;计算机网络&lt;/h2&gt;
+&lt;h3 id=&#34;概述&#34;&gt;概述&lt;/h3&gt;
+&lt;h4 id=&#34;isp&#34;&gt;ISP&lt;/h4&gt;
+&lt;p&gt;互联网服务提供商&lt;/p&gt;
+&lt;p&gt;ISP 可以从 互联网管理机构 获得许多 IP 地址，个人或机构向 ISP 缴纳一定的费用就可以接入互联网&lt;/p&gt;
+&lt;h4 id=&#34;osi模型-五层模型与-tcpip-模型&#34;&gt;OSI模型、五层模型与 TCP/IP 模型&lt;/h4&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20211217120543019.png&#34; alt=&#34;image-20211217120543019&#34; style=&#34;zoom:45%;&#34; /&gt;
+&lt;p&gt;五层模型：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;面试过程中可能会被问到的常见面试题&lt;/li&gt;
-&lt;li&gt;一些辅助面试时回答的资料&lt;/li&gt;
+&lt;li&gt;物理层：负责在&lt;strong&gt;具体媒体&lt;/strong&gt;上传输数据&lt;strong&gt;比特流&lt;/strong&gt;，为 数据链路层 屏蔽具体的媒体特性。&lt;/li&gt;
+&lt;li&gt;数据链路层：负责在&lt;strong&gt;具体链路&lt;/strong&gt;上传输&lt;strong&gt;数据帧&lt;/strong&gt;，为 网络层 屏蔽具体链路信息。&lt;/li&gt;
+&lt;li&gt;网络层：负责在&lt;strong&gt;主机间&lt;/strong&gt;传输&lt;strong&gt;数据分组&lt;/strong&gt;，为 传输层 屏蔽主机信息。&lt;/li&gt;
+&lt;li&gt;传输层：负责在&lt;strong&gt;进程间&lt;/strong&gt;传输数据，为 应用层 屏蔽进程信息。
+&lt;ul&gt;
+&lt;li&gt;TCP：传输控制协议，面向连接、可靠的数据传输服务，数据单位为&lt;strong&gt;报文段&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;UDP：用户数据报协议，无连接、尽最大努力的数据传输服务，数据单位是&lt;strong&gt;用户数据报&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;应用层：负责在&lt;strong&gt;应用间&lt;/strong&gt;传输&lt;strong&gt;报文&lt;/strong&gt;，例如HTTP、DNS协议。&lt;/li&gt;
+&lt;li&gt;越底层，数据量越大，逐层封装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;OSI模型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;表示层：负责数据处理，比如，压缩、加密等，使 应用层 无需关心数据内部格式方面的问题。&lt;/li&gt;
+&lt;li&gt;会话层：负责会话的连接、维护、断开等。当应用间需要传输数据时，首先需要建立会话；当数据传输完时，会话层会有选择地进行会话的维护；最终，会话层会断开会话。&lt;/li&gt;
+&lt;li&gt;五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;TCP/IP 模型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将五层模型中的数据链路层和物理层合并为网络接口层&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;五层模型&#34;&gt;五层模型&lt;/h3&gt;
+&lt;h4 id=&#34;物理层&#34;&gt;物理层&lt;/h4&gt;
+&lt;h4 id=&#34;链路层&#34;&gt;链路层&lt;/h4&gt;
+&lt;h5 id=&#34;信道复用技术41种&#34;&gt;信道复用技术（4+1种）&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;频分复用&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;时分复用（TDM）：为每个用户分配固定位置的时隙&lt;/p&gt;
+  &lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/67582ade-d44a-46a6-8757-3c1296cc1ef9.png&#34; alt=&#34;img&#34; style=&#34;zoom:37%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;统计时分复用（异步时分复用，STDM）：不固定每个用户在时分复用帧中的位置，只要有数据，就为其分配时隙，用户拿到时隙后，就可以发送数据（注意区分两张图中字母的顺序）&lt;/p&gt;
+  &lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/6283be2a-814a-4a10-84bf-9592533fe6bc.png&#34; alt=&#34;img&#34; style=&#34;zoom:37%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;波分复用：光的频分复用。由于光的频率很高，因此习惯上用波长而不是频率来表示所使用的光载波。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;码分复用&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;ppp-协议&#34;&gt;PPP 协议&lt;/h5&gt;
+&lt;p&gt;互联网用户通常需要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。&lt;/p&gt;
+&lt;h5 id=&#34;mac-地址&#34;&gt;MAC 地址&lt;/h5&gt;
+&lt;p&gt;MAC 地址是链路层地址，长度为 6 字节（6*8=48 位），用于唯一标识网络适配器（网卡）。&lt;/p&gt;
+&lt;p&gt;一台主机拥有多少个网络适配器就有多少个 MAC 地址。例如笔记本电脑普遍存在无线网络适配器和有线网络适配器，因此就有两个 MAC 地址。&lt;/p&gt;
+&lt;h5 id=&#34;网络设备&#34;&gt;网络设备&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;集线器：
+&lt;ul&gt;
+&lt;li&gt;物理层设备，作用于 比特&lt;/li&gt;
+&lt;li&gt;当一个比特到达接口时，集线器重新生成这个比特，并将其能量强度放大，从而扩大网络的传输距离，之后再将这个比特发送到其它所有接口&lt;/li&gt;
+&lt;li&gt;如果集线器同时收到两个不同接口的帧，那么就发生了碰撞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;交换机：
+&lt;ul&gt;
+&lt;li&gt;链路层设备，作用于 帧&lt;/li&gt;
+&lt;li&gt;不会发生碰撞&lt;/li&gt;
+&lt;li&gt;能根据 MAC 地址进行存储转发&lt;/li&gt;
+&lt;li&gt;具有自学习能力，能自动生成 交换表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;网络层&#34;&gt;网络层&lt;/h4&gt;
+&lt;h5 id=&#34;概述-2&#34;&gt;概述&lt;/h5&gt;
+&lt;p&gt;网络层的作用：使用 IP 协议，将异构的物理网络连接起来，使得其看起来好像是一个统一的网络&lt;/p&gt;
+&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/8d779ab7-ffcc-47c6-90ec-ede8260b2368.png&#34; alt=&#34;img&#34; style=&#34;zoom:37%;&#34; /&gt;
+&lt;p&gt;与 IP 协议配套使用的还有三个协议：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;地址解析协议 ARP（Address Resolution Protocol）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网际控制报文协议 ICMP（Internet Control Message Protocol）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;网际组管理协议 IGMP（Internet Group Management Protocol）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;ip-协议&#34;&gt;IP 协议&lt;/h5&gt;
+&lt;p&gt;IP 地址能够在网络世界唯一标识一台电脑。&lt;/p&gt;
+&lt;p&gt;IP 地址的编址方式的三个历史阶段：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分类：
+&lt;ul&gt;
+&lt;li&gt;网络地址+主机地址&lt;/li&gt;
+&lt;li&gt;网络地址：类似于电话号码的区号&lt;/li&gt;
+&lt;li&gt;要达到 Internet 上的某个主机，先利用 IP 地址的高位部分（网络地址）找到该主机所在的网络，再利用 IP 地址的低位部分（主机地址）找到该网络中的主机。&lt;/li&gt;
+&lt;li&gt;子网掩码，又叫网络掩码、地址掩码。它的作用是，用来指明某个 IP 地址哪些标识位是网络地址，哪些标识位是主机地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;子网划分：&lt;/li&gt;
+&lt;li&gt;无分类：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;插播：路由器位于网络层，只负责主机的数据传输&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://javaguide.cn/&#34;&gt;JavaGuide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cyc2018.xyz/&#34;&gt;CyC2018&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
+&lt;h2 id=&#34;过往内容&#34;&gt;过往内容&lt;/h2&gt;
 &lt;h2 id=&#34;数据库&#34;&gt;数据库&lt;/h2&gt;
 &lt;h3 id=&#34;事务&#34;&gt;事务&lt;/h3&gt;
 &lt;h4 id=&#34;什么是事务&#34;&gt;什么是事务&lt;/h4&gt;
@@ -3042,34 +3233,6 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;li&gt;readIndex、writerIndex、capacity：字面意思&lt;/li&gt;
 &lt;li&gt;discardReadBytes()：清空已读部分，利用System.arraycopy()方法&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;计算机网络&#34;&gt;计算机网络&lt;/h2&gt;
-&lt;h3 id=&#34;osi模型-五层模型与-tcpip-模型&#34;&gt;OSI模型、五层模型与 TCP/IP 模型&lt;/h3&gt;
-&lt;img src=&#34;https://gitee.com/Bule-Zst/picture/raw/master/image-20211217120543019.png&#34; alt=&#34;image-20211217120543019&#34; style=&#34;zoom:45%;&#34; /&gt;
-&lt;p&gt;五层模型：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;物理层：负责在&lt;strong&gt;具体媒体&lt;/strong&gt;上传输数据&lt;strong&gt;比特流&lt;/strong&gt;，为 数据链路层 屏蔽具体的媒体特性。&lt;/li&gt;
-&lt;li&gt;数据链路层：负责在&lt;strong&gt;具体链路&lt;/strong&gt;上传输&lt;strong&gt;数据帧&lt;/strong&gt;，为 网络层 屏蔽具体链路信息。&lt;/li&gt;
-&lt;li&gt;网络层：负责在&lt;strong&gt;主机间&lt;/strong&gt;传输&lt;strong&gt;数据分组&lt;/strong&gt;，为 传输层 屏蔽主机信息。&lt;/li&gt;
-&lt;li&gt;传输层：负责在&lt;strong&gt;进程间&lt;/strong&gt;传输数据，为 应用层 屏蔽进程信息。
-&lt;ul&gt;
-&lt;li&gt;TCP：传输控制协议，面向连接、可靠的数据传输服务，数据单位为&lt;strong&gt;报文段&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;UDP：用户数据报协议，无连接、尽最大努力的数据传输服务，数据单位是&lt;strong&gt;用户数据报&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;应用层：负责在&lt;strong&gt;应用间&lt;/strong&gt;传输&lt;strong&gt;报文&lt;/strong&gt;，例如HTTP、DNS协议。&lt;/li&gt;
-&lt;li&gt;越底层，数据量越大，逐层封装。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;OSI模型：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;表示层：负责数据处理，比如，压缩、加密等，使 应用层 无需关心数据内部格式方面的问题。&lt;/li&gt;
-&lt;li&gt;会话层：负责会话的连接、维护、断开等。当应用间需要传输数据时，首先需要建立会话；当数据传输完时，会话层会有选择地进行会话的维护；最终，会话层会断开会话。&lt;/li&gt;
-&lt;li&gt;五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;TCP/IP 模型：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;将五层模型中的数据链路层和物理层合并为网络接口层&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;插播：路由器位于网络层，只负责主机的数据传输&lt;/p&gt;
 &lt;h2 id=&#34;rpc&#34;&gt;RPC&lt;/h2&gt;
 &lt;h3 id=&#34;dubbo&#34;&gt;Dubbo&lt;/h3&gt;
 &lt;h4 id=&#34;spi机制了解吗&#34;&gt;SPI机制了解吗&lt;/h4&gt;
@@ -3106,7 +3269,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;p&gt;参考：https://www.zhihu.com/question/25089273&lt;/p&gt;
 &lt;h2 id=&#34;实战&#34;&gt;实战&lt;/h2&gt;
 &lt;h3 id=&#34;做的项目遇到什么问题如何解决&#34;&gt;做的项目，遇到什么问题，如何解决&lt;/h3&gt;
-&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;h2 id=&#34;参考资料-2&#34;&gt;参考资料&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://xiaomi-info.github.io/2020/01/02/distributed-transaction/&#34;&gt;分布式事务，这一篇就够了&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/paddix/p/5367116.html&#34;&gt;Java并发编程：Synchronized及其实现原理&lt;/a&gt;&lt;/li&gt;
@@ -3119,7 +3282,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;amp;order=time&amp;amp;pos=
 &lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/twoheads/p/10135896.html&#34;&gt;一致性哈希算法(consistent hashing)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1Lq4y1S7Rc?p=1&amp;amp;share_medium=android&amp;amp;share_plat=android&amp;amp;share_source=COPY&amp;amp;share_tag=s_i&amp;amp;timestamp=1632973331&amp;amp;unique_k=BEotpJ&#34;&gt;朋友投稿！与面试官死磕中间件与库存设计！顺利斩获大厂Offer！&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-">面试笔记</a>
+">JavaHan</a>
       </div>
       
       <div class="item">
@@ -7313,18 +7476,11 @@ public:
 &lt;/ul&gt;
 &lt;h1 id=&#34;思维&#34;&gt;思维&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/word-subsets/&#34;&gt;916. 单词子集&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/pairs-with-same-manhattan-and-euclidean-distance/&#34;&gt;Pairs with same Manhattan and Euclidean distance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://practice.geeksforgeeks.org/problems/geek-collects-the-balls5515/1&#34;&gt;Geek collects the balls&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/&#34;&gt;581. 最短无序连续子数组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/word-subsets/&#34;&gt;916. 单词子集&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/iterator-for-combination/&#34;&gt;1286. 字母组合迭代器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;多数投票算法&#34;&gt;多数投票算法&lt;/h2&gt;
 &lt;ul&gt;

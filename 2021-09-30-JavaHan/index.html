@@ -8,7 +8,7 @@
 <meta name="keywords" content="Bule-Zst个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#000">
-<title>Bule-Zst</title>
+<title>JavaHan | Bule-Zst</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1640141501661">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -62,6 +62,8 @@
 </script>
 
 
+  <meta name="description" content="JavaHan" />
+  <meta name="keywords" content="找工作" />
 </head>
 
 <body>
@@ -168,10 +170,26 @@
   <div class="main-continer">
     
     <div
-      class="section-layout  gemini">
+      class="section-layout gemini ">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -235,264 +253,908 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number no_compress"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C">计算机网络</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a>
+<ul>
+<li><a href="#isp">ISP</a></li>
+<li><a href="#osi%E6%A8%A1%E5%9E%8B-%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B%E4%B8%8E-tcpip-%E6%A8%A1%E5%9E%8B">OSI模型、五层模型与 TCP/IP 模型</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B">五层模型</a>
+<ul>
+<li><a href="#%E7%89%A9%E7%90%86%E5%B1%82">物理层</a></li>
+<li><a href="#%E9%93%BE%E8%B7%AF%E5%B1%82">链路层</a>
+<ul>
+<li><a href="#%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF41%E7%A7%8D">信道复用技术（4+1种）</a></li>
+<li><a href="#ppp-%E5%8D%8F%E8%AE%AE">PPP 协议</a></li>
+<li><a href="#mac-%E5%9C%B0%E5%9D%80">MAC 地址</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87">网络设备</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%B1%82">网络层</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0-2">概述</a></li>
+<li><a href="#ip-%E5%8D%8F%E8%AE%AE">IP 协议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+<li><a href="#%E8%BF%87%E5%BE%80%E5%86%85%E5%AE%B9">过往内容</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+<ul>
+<li><a href="#%E4%BA%8B%E5%8A%A1">事务</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1">什么是事务</a></li>
+<li><a href="#acid">ACID</a></li>
+<li><a href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E8%84%8F%E8%AF%BB-vs-%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB-vs-%E5%B9%BB%E8%AF%BB">隔离级别？脏读 VS 不可重复读 VS 幻读？</a></li>
+<li><a href="#mvcc">MVCC</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1">分布式事务</a>
+<ul>
+<li><a href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E4%B8%8E%E4%B8%89%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4">两阶段提交与三阶段提交</a></li>
+</ul>
+</li>
+<li><a href="#redis">Redis</a>
+<ul>
+<li><a href="#3%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%E4%B8%BB%E4%BB%8E-%E5%93%A8%E5%85%B5-%E9%9B%86%E7%BE%A4">3种集群模式：主从、哨兵、集群</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%B9%B6%E5%8F%91">并发</a>
+<ul>
+<li><a href="#synchronized-%E5%92%8C-reentrantlock-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%8C%BA%E5%88%AB">synchronized 和 Reentrantlock 的实现及区别</a></li>
+<li><a href="#cas%E7%9A%84%E7%BC%BA%E7%82%B9">CAS的缺点</a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6-%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0-%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9">线程池实现机制、配置参数、使用注意点</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%B6%85%E5%8D%96%E7%8E%B0%E8%B1%A1">如何防止超卖现象</a></li>
+</ul>
+</li>
+<li><a href="#jvm">JVM</a>
+<ul>
+<li><a href="#gc">GC</a>
+<ul>
+<li><a href="#cms-g1%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9">CMS、G1的优缺点</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%BA%BF%E4%B8%8A%E7%9A%84oom">如何处理线上的OOM</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B">网络编程</a>
+<ul>
+<li><a href="#netty">Netty</a>
+<ul>
+<li><a href="#%E4%BA%86%E8%A7%A3reactor%E6%A8%A1%E5%9E%8B%E5%90%97">了解Reactor模型吗？</a></li>
+<li><a href="#bytebuf%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86">ByteBuf实现原理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#rpc">RPC</a>
+<ul>
+<li><a href="#dubbo">Dubbo</a>
+<ul>
+<li><a href="#spi%E6%9C%BA%E5%88%B6%E4%BA%86%E8%A7%A3%E5%90%97">SPI机制了解吗</a></li>
+<li><a href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95">负载均衡算法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3">设计思想</a>
+<ul>
+<li><a href="#api%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99">API的设计原则</a></li>
+<li><a href="#%E9%A2%86%E5%9F%9F%E5%BB%BA%E6%A8%A1">领域建模</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%88%98">实战</a>
+<ul>
+<li><a href="#%E5%81%9A%E7%9A%84%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3">做的项目，遇到什么问题，如何解决</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-2">参考资料</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
 </div>
+
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'gemini';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
       }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
     });
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          PHP
-          <small class="language" data-lan="tag">标签</small>
-        </h2>
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
       </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="http://Bule-Zst.gitee.io/2021-09-30-JavaHan/">
+      JavaHan
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2021-09-30 15:13:53">2021-09-30</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <a href="http://Bule-Zst.gitee.io/2021-04-25-NOJ优化-PHP-Laravel/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              04-25
-              <small>NOJ优化-PHP-Laravel</small>
-            </h1>
-          </div>
-        </div>
+      <a href="http://Bule-Zst.gitee.io/nwh3h0eXB/">
+        <span>找工作</span>
       </a>
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>16<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>4307<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+    
+    
+    <span id="/2021-09-30-JavaHan/" data-flag-title="JavaHan" class="meta-item pc-show leancloud_visitors">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
+    </span>
+    
+  </div>
+</section>
+            <div class="post-body next-md-body" id="post_body">
+              <p>本人的面试八股文（面试小抄），供大家参考。</p>
+<p>JavaHan，致敬 JavaGuide，Han指的是憨，并且感觉读起来比较顺口。</p>
+<p>为了方便检索，我把所有内容都放在一个文档中的。</p>
+<hr>
+<h2 id="计算机网络">计算机网络</h2>
+<h3 id="概述">概述</h3>
+<h4 id="isp">ISP</h4>
+<p>互联网服务提供商</p>
+<p>ISP 可以从 互联网管理机构 获得许多 IP 地址，个人或机构向 ISP 缴纳一定的费用就可以接入互联网</p>
+<h4 id="osi模型-五层模型与-tcpip-模型">OSI模型、五层模型与 TCP/IP 模型</h4>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20211217120543019.png" alt="image-20211217120543019" style="zoom:45%;" />
+<p>五层模型：</p>
+<ul>
+<li>物理层：负责在<strong>具体媒体</strong>上传输数据<strong>比特流</strong>，为 数据链路层 屏蔽具体的媒体特性。</li>
+<li>数据链路层：负责在<strong>具体链路</strong>上传输<strong>数据帧</strong>，为 网络层 屏蔽具体链路信息。</li>
+<li>网络层：负责在<strong>主机间</strong>传输<strong>数据分组</strong>，为 传输层 屏蔽主机信息。</li>
+<li>传输层：负责在<strong>进程间</strong>传输数据，为 应用层 屏蔽进程信息。
+<ul>
+<li>TCP：传输控制协议，面向连接、可靠的数据传输服务，数据单位为<strong>报文段</strong></li>
+<li>UDP：用户数据报协议，无连接、尽最大努力的数据传输服务，数据单位是<strong>用户数据报</strong></li>
+</ul>
+</li>
+<li>应用层：负责在<strong>应用间</strong>传输<strong>报文</strong>，例如HTTP、DNS协议。</li>
+<li>越底层，数据量越大，逐层封装。</li>
+</ul>
+<p>OSI模型：</p>
+<ul>
+<li>表示层：负责数据处理，比如，压缩、加密等，使 应用层 无需关心数据内部格式方面的问题。</li>
+<li>会话层：负责会话的连接、维护、断开等。当应用间需要传输数据时，首先需要建立会话；当数据传输完时，会话层会有选择地进行会话的维护；最终，会话层会断开会话。</li>
+<li>五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理。</li>
+</ul>
+<p>TCP/IP 模型：</p>
+<ul>
+<li>将五层模型中的数据链路层和物理层合并为网络接口层</li>
+</ul>
+<h3 id="五层模型">五层模型</h3>
+<h4 id="物理层">物理层</h4>
+<h4 id="链路层">链路层</h4>
+<h5 id="信道复用技术41种">信道复用技术（4+1种）</h5>
+<ul>
+<li>
+<p>频分复用</p>
+</li>
+<li>
+<p>时分复用（TDM）：为每个用户分配固定位置的时隙</p>
+  <img src="https://gitee.com/Bule-Zst/picture/raw/master/67582ade-d44a-46a6-8757-3c1296cc1ef9.png" alt="img" style="zoom:37%;" />
+</li>
+<li>
+<p>统计时分复用（异步时分复用，STDM）：不固定每个用户在时分复用帧中的位置，只要有数据，就为其分配时隙，用户拿到时隙后，就可以发送数据（注意区分两张图中字母的顺序）</p>
+  <img src="https://gitee.com/Bule-Zst/picture/raw/master/6283be2a-814a-4a10-84bf-9592533fe6bc.png" alt="img" style="zoom:37%;" />
+</li>
+<li>
+<p>波分复用：光的频分复用。由于光的频率很高，因此习惯上用波长而不是频率来表示所使用的光载波。</p>
+</li>
+<li>
+<p>码分复用</p>
+</li>
+</ul>
+<h5 id="ppp-协议">PPP 协议</h5>
+<p>互联网用户通常需要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。</p>
+<h5 id="mac-地址">MAC 地址</h5>
+<p>MAC 地址是链路层地址，长度为 6 字节（6*8=48 位），用于唯一标识网络适配器（网卡）。</p>
+<p>一台主机拥有多少个网络适配器就有多少个 MAC 地址。例如笔记本电脑普遍存在无线网络适配器和有线网络适配器，因此就有两个 MAC 地址。</p>
+<h5 id="网络设备">网络设备</h5>
+<ul>
+<li>集线器：
+<ul>
+<li>物理层设备，作用于 比特</li>
+<li>当一个比特到达接口时，集线器重新生成这个比特，并将其能量强度放大，从而扩大网络的传输距离，之后再将这个比特发送到其它所有接口</li>
+<li>如果集线器同时收到两个不同接口的帧，那么就发生了碰撞</li>
+</ul>
+</li>
+<li>交换机：
+<ul>
+<li>链路层设备，作用于 帧</li>
+<li>不会发生碰撞</li>
+<li>能根据 MAC 地址进行存储转发</li>
+<li>具有自学习能力，能自动生成 交换表</li>
+</ul>
+</li>
+</ul>
+<h4 id="网络层">网络层</h4>
+<h5 id="概述-2">概述</h5>
+<p>网络层的作用：使用 IP 协议，将异构的物理网络连接起来，使得其看起来好像是一个统一的网络</p>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/8d779ab7-ffcc-47c6-90ec-ede8260b2368.png" alt="img" style="zoom:37%;" />
+<p>与 IP 协议配套使用的还有三个协议：</p>
+<ul>
+<li>
+<p>地址解析协议 ARP（Address Resolution Protocol）</p>
+</li>
+<li>
+<p>网际控制报文协议 ICMP（Internet Control Message Protocol）</p>
+</li>
+<li>
+<p>网际组管理协议 IGMP（Internet Group Management Protocol）</p>
+</li>
+</ul>
+<h5 id="ip-协议">IP 协议</h5>
+<p>IP 地址能够在网络世界唯一标识一台电脑。</p>
+<p>IP 地址的编址方式的三个历史阶段：</p>
+<ul>
+<li>分类：
+<ul>
+<li>网络地址+主机地址</li>
+<li>网络地址：类似于电话号码的区号</li>
+<li>要达到 Internet 上的某个主机，先利用 IP 地址的高位部分（网络地址）找到该主机所在的网络，再利用 IP 地址的低位部分（主机地址）找到该网络中的主机。</li>
+<li>子网掩码，又叫网络掩码、地址掩码。它的作用是，用来指明某个 IP 地址哪些标识位是网络地址，哪些标识位是主机地址</li>
+</ul>
+</li>
+<li>子网划分：</li>
+<li>无分类：</li>
+</ul>
+<p>插播：路由器位于网络层，只负责主机的数据传输</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://javaguide.cn/">JavaGuide</a></li>
+<li><a href="http://www.cyc2018.xyz/">CyC2018</a></li>
+</ul>
+<hr>
+<h2 id="过往内容">过往内容</h2>
+<h2 id="数据库">数据库</h2>
+<h3 id="事务">事务</h3>
+<h4 id="什么是事务">什么是事务</h4>
+<p>事务是属于数据库中的一个概念，本质上指的是一系列的操作，但是这些操作会满足一些性质，ACID。</p>
+<h4 id="acid">ACID</h4>
+<ul>
+<li>原子性 Atomicity：所有操作，要么全部执行，要么全部回滚。</li>
+<li>一致性 Consistency：强调数据库在逻辑上的一致性状态，依赖于原子性。比如，转账操作，要求多账户余额总和保持一致；扣款操作，要求账户余额变化与扣款金额一致。</li>
+<li>隔离性 Isolation：事务之间，不会因为中间操作产生相互影响。</li>
+<li>持久性 Durability：当事务提交后，该事务中的一系列操作需要能被持久化到数据库中。</li>
+</ul>
+<h4 id="隔离级别脏读-vs-不可重复读-vs-幻读">隔离级别？脏读 VS 不可重复读 VS 幻读？</h4>
+<ul>
+<li>READ UNCOMMITTED (未提交读）：
+<ul>
+<li>事务未提交时，依旧可以读取到其所做的修改</li>
+<li>也被叫做“脏读”</li>
+<li>该隔离级别在性能上并不会比其他的好太多，但却缺乏其他隔离级别所拥有的好处，因此在实际应用中，一般不使用。</li>
+</ul>
+</li>
+<li>READ COMMITTED (提交读）
+<ul>
+<li>大部分数据库系统默认的隔离级别，但MySQL不是。</li>
+<li>又被称为“不可重复读”，因为同样的查询，在事务提交前和提交后，读取到的数据可能不同。</li>
+</ul>
+</li>
+<li>REPEATABLE READ (可重复读）
+<ul>
+<li>MySQL默认的隔离级别</li>
+<li>保证了在一个事务中的多次查询结果一致</li>
+<li>存在幻读：在事务执行过程中，另一事务修改了数据，从而产生“幻行”。两次查询读取到的数据总行数不一样。</li>
+<li>InnoDB 和XtraDB 存储引擎通过多版本并发控制 (MVCC, Multiversion Concurrency Control) 解决了幻读的问题。</li>
+</ul>
+</li>
+<li>SERIALIZABLE (可串行化）
+<ul>
+<li>最高级别的隔离级别</li>
+<li>强制事务串行执行，不存在并发</li>
+<li>具体实现：为读取的每一行数据加锁</li>
+</ul>
+</li>
+</ul>
+<h4 id="mvcc">MVCC</h4>
+<p>多版本并发控制，每个版本对应一个事务id，当事务提交后，会生成对应的版本，多个版本之间构成链表，从最新的版本开始寻找，知道找到满足要求的版本。</p>
+<p>ReadView会在执行查询语句时生成，对于提交读，每次查询都会生成一次，对于可重复度，只在第一次查询时生成。</p>
+<p>可重复读：ReadView只会生成一次</p>
+<p>ReadView：</p>
+<ul>
+<li>未提交事务列表：[51, 59, 61]</li>
+<li>最小事务id：51</li>
+<li>下次要生成的事务（最大事务）id：60</li>
+<li>当前事务id：51</li>
+</ul>
+<p>版本链-&gt;62, 61</p>
+<h3 id="分布式事务">分布式事务</h3>
+<h4 id="两阶段提交与三阶段提交">两阶段提交与三阶段提交</h4>
+<p>两阶段提交：角色包括事务管理器和本地资源管理器</p>
+<ul>
+<li>第一阶段：事务管理器询问各个本地资源管理器是否提交就绪，如果任意一个本地资源管理器为no，则回滚</li>
+<li>第二阶段：事务管理器向本地资源管理器发送commit或roolback消息，本地资源管理器收到消息后进行提交或回滚操作。</li>
+</ul>
+<p>两阶段提交存在的问题：</p>
+<ul>
+<li>同步阻塞：资源管理器A占用某资源，资源管理器B也需要该资源</li>
+<li>单点故障：事务管理器挂了</li>
+<li>数据不一致：不能保证所有资源管理器都提交</li>
+</ul>
+<p>三阶段提交（TCC）：</p>
+<ul>
+<li>第一阶段：和两阶段提交的第一阶段相同</li>
+<li>第二阶段（缓冲阶段）：precommit 预提交，保证各节点状态相同</li>
+<li>第三阶段：和两阶段提交的第二阶段相同</li>
+</ul>
+<p>三阶段提交（TCC）的优点：</p>
+<ul>
+<li>引入超时机制，减少阻塞：如果超时，默认abort，但如果是第三阶段，超时则自动提交，两阶段提交无法这么做，因为不存在缓冲阶段</li>
+<li>事务管理器集群：幂等操作</li>
+</ul>
+<h3 id="redis">Redis</h3>
+<h4 id="3种集群模式主从-哨兵-集群">3种集群模式：主从、哨兵、集群</h4>
+<ul>
+<li>主从模式：
+<ul>
+<li>1个主节点，N个从节点</li>
+<li>主节点负责写操作，从节点负责读操作</li>
+<li>数据同步</li>
+<li>一旦主节点挂了，集群就丧失写功能</li>
+</ul>
+</li>
+<li>哨兵模式
+<ul>
+<li>主从模式的升级版，添加哨兵</li>
+<li>哨兵本质上是一个进程，sentinel进程，负责监控节点状态，如果主节点挂了，会从从节点总竞选得到新的主节点</li>
+</ul>
+</li>
+<li>集群模式
+<ul>
+<li>主从模式+分区</li>
+<li>每个主从集群负责一部分哈希槽</li>
+</ul>
+</li>
+</ul>
+<h2 id="并发">并发</h2>
+<h3 id="synchronized-和-reentrantlock-的实现及区别">synchronized 和 Reentrantlock 的实现及区别</h3>
+<ul>
+<li>sychronized 是一个关键字，ReentrantLock 是一个类</li>
+<li>sychronized 会自动的加锁与释放锁，ReentrantLock 需要程序员手动加锁与释放锁，因此更灵活，可以根据业务场景进行相应操作</li>
+<li>sychronized是非公平锁，ReentrantLock可以选择公平锁或非公平锁</li>
+<li>sychronized底层有一个锁升级的过程
+<ul>
+<li>偏向锁：偏向第一次持有锁的线程，该线程无需进行同步操作</li>
+<li>轻量级锁：自旋，CAS</li>
+<li>重量级锁：线程阻塞时，需要将用户态转到内核态</li>
+</ul>
+</li>
+<li>实现
+<ul>
+<li>synchronized：锁的是对象，锁信息保存在对象头中，可以是实例对象也可以是类对象<br>
+6. 对象：使用汇编指令monitorenter和monitorexit<br>
+6. 方法：使用ACC_SYNCHRONIZED标识符，本质上也是monitor的操作</li>
+</ul>
+<ol start="6">
+<li>ReentrantLock：通过代码中的state标识来标识锁的状态</li>
+</ol>
+</li>
+</ul>
+<h3 id="cas的缺点">CAS的缺点</h3>
+<ul>
+<li>ABA问题、CPU空转问题</li>
+</ul>
+<h3 id="线程池实现机制-配置参数-使用注意点">线程池实现机制、配置参数、使用注意点</h3>
+<p>线程池内部是通过队列+线程实现的，当我们利用线程池执行任务时：</p>
+<ul>
+<li>如果此时线程池中的线程数量小于corePoolSize，即使线程池中的线程都处于空闲状态，也要创建<br>
+新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的线程数量等于corePoolSize，但是缓冲队列workQueue未满，那么任务被放入<br>
+缓冲队列。</li>
+<li>如果此时线程池中的线程数量大于等于corePoolSize，缓冲队列workQueue满，并且线程池中的数量小于maximumPoolSize，建新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的线程数量大于corePoolSize，缓冲队列workQueue满，并且线程池中的数量等<br>
+于maximumPoolSize，那么通过handler所指定的策略来处理此任务。</li>
+<li>当线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止。这样，线程池可以动态的调整池中的线程数</li>
+</ul>
+<p>配置参数：</p>
+<ul>
+<li>corePoolSize：目的是更有效地利用CPU资源
+<ul>
+<li>CPU密集型：CPU核数+1，之所以+1，是为了更优的利用率</li>
+<li>IO密集型：CPU 核心数 * (1 + IO 耗时/ CPU 耗时)</li>
+</ul>
+</li>
+<li>MaximumPoolSize、workQueueSize、handler拒绝策略、keepAliveTime</li>
+</ul>
+<p>注意点：</p>
+<ul>
+<li>线程池预热方法：prestartAllCoreThreads()</li>
+</ul>
+<h3 id="如何防止超卖现象">如何防止超卖现象</h3>
+<ul>
+<li>redis缓存和mysql同步更新</li>
+<li>减库存排队，使用窗口进行合并</li>
+</ul>
+<h2 id="jvm">JVM</h2>
+<h3 id="gc">GC</h3>
+<h4 id="cms-g1的优缺点">CMS、G1的优缺点</h4>
+<p>CMS是老年代的垃圾回收器，用的是标记清除算法，所以会产生内存碎片，但是因为它的回收原理是并发回收，因此STW时间较短。</p>
+<p>G1是面向整个堆的垃圾回收器，同时将分区的思想与分代相结合，每次回收时，都会去挑选需要回收的分区，使用的算法是标记整理算法，是jdk9默认的收集器，同时G1可以控制STW的时间，如果到达指定的STW时间，对于剩下的分区，就不进行回收，从而可以控制STW的时间。</p>
+<h3 id="如何处理线上的oom">如何处理线上的OOM</h3>
+<p>-Xms表示初始堆内存大小，memory startup</p>
+<p>-XmX表示最大堆内存大小，memory maximum</p>
+<p>-Xmn表示新生代内存大小，包括初始值和最大值，memory nursery/new</p>
+<p>示例：-Xms16m -Xmx32m</p>
+<p>通过参数配置，让java进程在OOM时自动产生dump文件，-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp</p>
+<p>通过命令行导出dump文件，jmap -dump:live, file=jmap.hprof [PID]</p>
+<p>通过jvisualvm分析dump文件，分析哪些对象比较占内存</p>
+<p>两种可能</p>
+<ul>
+<li>对象确实太大了</li>
+<li>内存泄漏：各种连接，如果不手动关闭，则会被GC认为是不可回收的对象，导致内存泄漏</li>
+</ul>
+<h2 id="网络编程">网络编程</h2>
+<h3 id="netty">Netty</h3>
+<h4 id="了解reactor模型吗">了解Reactor模型吗？</h4>
+<p>问题拆解：与Netty是什么关系，有几种类型，各自的优势是什么</p>
+<p>Netty 是一个广泛使用的 Java 网络编程框架</p>
+<p>Reactor是1995年由道格拉斯提出的一种高性能网络编程模式，一共有3种形式，单线程Reactor、多线程Reactor和主从多线程Reactor。</p>
+<ul>
+<li>
+<p>单线程Reactor：由一个线程处理连接请求、读写操作</p>
+</li>
+<li>
+<p>多线程Reactor：由一个线程处理连接请求，由线程池处理读写操作。但一个线程依旧可以处理多个读写操作。</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/Bule-Zst/picture/raw/master/6463324-1f7a2d77cfa17720.png" alt="img" loading="lazy"></figure>
+</li>
+<li>
+<p>主从Reactor：由一个线程池处理连接请求，并将连接好的请求发送给读写线程池进行处理。</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/Bule-Zst/picture/raw/master/6463324-a94066924053c037.png" alt="img" loading="lazy"></figure>
+</li>
+<li>
+<p>优势：不同形式适应不同的场景</p>
+</li>
+</ul>
+<h4 id="bytebuf实现原理">ByteBuf实现原理</h4>
+<p>在java nio中提供了ByteBuffer作为字节容器，包括4个属性</p>
+<ul>
+<li>mark：调用mark()方法时，将position的值赋值给mark；调用reset()方法时，将mark的值赋值给position</li>
+<li>position：下一个要被读写的元素的数组下标索引，该值会随get()和put()的调用自动更新</li>
+<li>limit：缓冲区中第一个不能读写的元素的数组下标索引，也可以认为是缓冲区中实际元素的数量</li>
+<li>capacity：缓冲区能够容纳元素的最大数量，这个值在缓冲区创建时被设定，而且不能够改变</li>
+<li>读写模式切换：flip()方法</li>
+</ul>
+<p>netty提供了ByteBuf作为字节容器，包括3个属性</p>
+<ul>
+<li>readIndex、writerIndex、capacity：字面意思</li>
+<li>discardReadBytes()：清空已读部分，利用System.arraycopy()方法</li>
+</ul>
+<h2 id="rpc">RPC</h2>
+<h3 id="dubbo">Dubbo</h3>
+<h4 id="spi机制了解吗">SPI机制了解吗</h4>
+<p>Java SPI：全称 Service Provider Interface，为接口指定实现类，放在 META-INF/services/ 目录里</p>
+<p>Java SPI的缺点：无法按需加载实现类，只能逐个进行加载，可能存在某个实现类，很耗资源，但又用不上</p>
+<p>Dubbo SPI的优点：</p>
+<ul>
+<li>可以根据名称，按需加载。原理：在配置文件中由用户提供 名称-类全限定名 的键值对</li>
+</ul>
+<h4 id="负载均衡算法">负载均衡算法</h4>
+<ul>
+<li>权重随机算法：获取随机数，然后依次减去每个invorker的权重，直到小于0；如果权重相同，则直接随机</li>
+<li>权重轮询算法：每次增加当前权重，选出大于当前权重的invorkers，然后从中按顺序选择</li>
+<li>最少活跃调用数算法：每次选出最小活跃的invorker，活跃数为invorker正在处理的请求数，如果不止一个，则对于这些invorkers，使用权重随机算法。</li>
+<li>一致性Hash算法：环形Hash空间，虚拟节点，对象迁移，寻找最近节点</li>
+</ul>
+<h2 id="设计思想">设计思想</h2>
+<h3 id="api的设计原则">API的设计原则</h3>
+<ul>
+<li>单一原则</li>
+<li>升级兼容性</li>
+<li>幂等设计</li>
+</ul>
+<h3 id="领域建模">领域建模</h3>
+<p>DDD 领域驱动设计</p>
+<p>建模：对业务的抽象</p>
+<p>领域建模：将建模过程划分成4层：UI 层、应用层、领域层、基建层</p>
+<ul>
+<li>UI层：负责展示</li>
+<li>基建层：负责存储</li>
+<li>领域层：负责存储过程中的业务逻辑，只关心是否合法，不管是否合理，例如下订单的操作，设计创建订单和减库存，应该在领域层，而不是应用层</li>
+<li>应用层：负责核心业务逻辑，例如，黑名单的业务，应该在应用层，而不应该在领域层</li>
+</ul>
+<p>参考：https://www.zhihu.com/question/25089273</p>
+<h2 id="实战">实战</h2>
+<h3 id="做的项目遇到什么问题如何解决">做的项目，遇到什么问题，如何解决</h3>
+<h2 id="参考资料-2">参考资料</h2>
+<ul>
+<li><a href="https://xiaomi-info.github.io/2020/01/02/distributed-transaction/">分布式事务，这一篇就够了</a></li>
+<li><a href="https://www.cnblogs.com/paddix/p/5367116.html">Java并发编程：Synchronized及其实现原理</a></li>
+<li><a href="https://blog.csdn.net/kusedexingfu/article/details/103744202">JVM的GC 参数为什么要这么命名：xms、xss、xmn和xmn?</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1578846">未关闭的文件流会引起内存泄露么？</a></li>
+<li><a href="https://www.cnblogs.com/duanxz/p/3696849.html">Netty中的三种Reactor（反应堆）</a></li>
+<li><a href="https://www.jianshu.com/p/3930150bf7f0">Netty系列-一分钟了解ByteBuffer和ByteBuf结构</a></li>
+<li><a href="https://blog.csdn.net/qq_35190492/article/details/108256452">阿里面试真题：Dubbo的SPI机制 敖丙</a></li>
+<li><a href="https://www.jianshu.com/p/60c10eabdfaf">Dubbo负载均衡算法实现</a></li>
+<li><a href="https://www.cnblogs.com/twoheads/p/10135896.html">一致性哈希算法(consistent hashing)</a></li>
+<li><a href="https://www.bilibili.com/video/BV1Lq4y1S7Rc?p=1&amp;share_medium=android&amp;share_plat=android&amp;share_source=COPY&amp;share_tag=s_i&amp;timestamp=1632973331&amp;unique_k=BEotpJ">朋友投稿！与面试官死磕中间件与库存设计！顺利斩获大厂Offer！</a></li>
+</ul>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Bule-Zst
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="http://Bule-Zst.gitee.io/2021-09-30-JavaHan/" title="JavaHan">http://Bule-Zst.gitee.io/2021-09-30-JavaHan/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="http://Bule-Zst.gitee.io/nwh3h0eXB/"># 找工作</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="脑裂问题" href="http://Bule-Zst.gitee.io/2021-11-06-脑裂问题/">脑裂问题</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="脑裂问题" href="http://Bule-Zst.gitee.io/2021-11-06-脑裂问题/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="限流算法学习笔记" href="http://Bule-Zst.gitee.io/2021-09-27-限流算法学习笔记/">限流算法学习笔记</a>
+        <a class="nav-mobile-next" title="限流算法学习笔记" href="http://Bule-Zst.gitee.io/2021-09-27-限流算法学习笔记/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+            
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'icyVx6by4LtMh3OUkAxAV9Td-gzGzoHsz',
+    appKey: 'BjJojXprANUbtBlAXlKTqVD6',
+    avatar: 'mp',
+    placeholder: '填上邮箱可以收到我的回复哦 (*^ω^*)~~\n请尽量7点-23点给我评论哦~',
+    pageSize: '',
+    lang: 'zh-cn',
+    enableQQ: 'true' === 'false',
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+  });
+</script>
+
+          </div>
         </div>
       </div>
     </div>
@@ -1239,6 +1901,223 @@
     parent.insertBefore(aelem, next);
   })
 </script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        window.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        window.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        window.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        window.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      window.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
   </div>
 </body>
 
@@ -7969,6 +8848,5 @@ tag db=dbName
 
 
 <script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script>
-
 
 </html>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://Bule-Zst.gitee.io</id>
     <title>Bule-Zst</title>
-    <updated>2021-12-17T07:11:55.707Z</updated>
+    <updated>2021-12-22T02:53:18.579Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://Bule-Zst.gitee.io"/>
     <link rel="self" href="http://Bule-Zst.gitee.io/atom.xml"/>
@@ -22,22 +22,51 @@
 </ul>
 <hr>
 <h2 id="备战阶段">备战阶段</h2>
+<h3 id="前言">前言</h3>
 <p>Java技术栈+计算机基础+算法+项目+加分项（竞赛/开源项目/博客）</p>
+<p>大公司更看重基础知识（八股文），小公司更看中现有能力</p>
+<p>边面试边准备，不要等完全准备好再去面试</p>
 <h3 id="笔试算法">笔试（算法）</h3>
 <ul>
-<li><a href="https://www.lintcode.com/cat/">lintcode CAT模式 天梯上分</a></li>
-<li><a href="https://www.nowcoder.com/study/live/489/1/1">左神算法笔面试真题精讲</a></li>
-<li><a href="https://www.nowcoder.com/ta/exam-bytedance">牛客网 名企编程真题</a>（企业真题可以多刷刷头条 网易 拼多多）</li>
-<li><a href="https://www.nowcoder.com/ta/coding-interviews">牛客网 剑指offer</a></li>
-<li><a href="https://www.nowcoder.com/ta/leetcode">牛客网 经典必刷编程题库</a></li>
-<li><a href="https://www.nowcoder.com/ta/job-code-high">牛客网 名企高频面试题</a></li>
-<li><a href="https://codetop.cc/home">CodeTop 汇总互联网大厂面试的高频考题 帮助面试者更有针对性地准备面试</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/158977583">leetcode 精选 by sergio</a></li>
-<li><a href="https://www.yuque.com/office/yuque/0/2020/pdf/619289/1605766958275-87ed48a3-0a68-4433-9d3c-b4ea9c829ccb.pdf?from=https%3A%2F%2Fwww.yuque.com%2Fshenjingwa-o51xg%2Fyh6opc%2Fsqqfew%2Fedit">leetcode 精选</a></li>
-<li><a href="https://www.zhihu.com/question/24964987/answer/182447205">lintcode 精选</a></li>
-<li><a href="https://javaguide.cn/cs-basics/algorithms/%E5%87%A0%E9%81%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E9%A2%98/">JavaGuide</a></li>
-<li><a href="http://www.cyc2018.xyz/#%E7%AE%97%E6%B3%95">JavaCyc</a></li>
-<li><img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20211216111608197.png" alt="image-20211216111608197" loading="lazy"></li>
+<li>
+<p><a href="https://www.lintcode.com/cat/">lintcode CAT模式 天梯上分</a></p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/study/live/489/1/1">左神算法笔面试真题精讲</a></p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/ta/exam-bytedance">牛客网 名企编程真题</a>（企业真题可以多刷刷头条 网易 拼多多）</p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/ta/coding-interviews">牛客网 剑指offer</a></p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/ta/leetcode">牛客网 经典必刷编程题库</a></p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/ta/job-code-high">牛客网 名企高频面试题</a></p>
+</li>
+<li>
+<p><a href="https://codetop.cc/home">CodeTop 汇总互联网大厂面试的高频考题 帮助面试者更有针对性地准备面试</a></p>
+<ul>
+<li>可直接定位特定公司、部门的面试题</li>
+</ul>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/158977583">leetcode 精选 by sergio</a></p>
+</li>
+<li>
+<p><a href="https://www.yuque.com/office/yuque/0/2020/pdf/619289/1605766958275-87ed48a3-0a68-4433-9d3c-b4ea9c829ccb.pdf?from=https%3A%2F%2Fwww.yuque.com%2Fshenjingwa-o51xg%2Fyh6opc%2Fsqqfew%2Fedit">leetcode 精选</a></p>
+</li>
+<li>
+<p><a href="https://www.zhihu.com/question/24964987/answer/182447205">lintcode 精选</a></p>
+</li>
+<li>
+<p><a href="https://javaguide.cn/cs-basics/algorithms/%E5%87%A0%E9%81%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95%E9%A2%98/">JavaGuide</a></p>
+</li>
+<li>
+<p><a href="http://www.cyc2018.xyz/#%E7%AE%97%E6%B3%95">JavaCyc</a></p>
+</li>
 </ul>
 <h3 id="面试java技术栈计算机基础项目">面试（Java技术栈+计算机基础+项目）</h3>
 <p><strong>刷面经！</strong></p>
@@ -62,17 +91,43 @@
 <li><a href="https://www.nowcoder.com/discuss/762719?type=all&amp;order=recall&amp;pos=&amp;page=1&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">南大 22届 硕 Java后端</a></li>
 </ul>
 <h4 id="八股文">八股文</h4>
+<p>第一遍刷，抓大放小</p>
+<p>要形成自己的八股文文档，方便后期复习</p>
 <ul>
-<li><a href="https://javaguide.cn/">JavaGuide</a></li>
-<li><a href="https://cyc2018.github.io/CS-Notes/#/">JavaCyc</a></li>
-<li><a href="http://passjava.cn/#/88.Interview/01.Redis/Redis1">PassJava-面试必备</a></li>
-<li><a href="https://github.com/cosen1024/Java-Interview">「Java面试小抄」一份通向理想互联网公司的面试指南，包括 Java基础、集合、Java并发、JVM、MySQL、Redis、Spring、MyBatis、Kafka、操作系统、计算机网络、系统设计、分布式、Java 项目实战等 by 库森</a></li>
-<li><a href="https://www.zhihu.com/column/c_1339954942191271936">大厂面试 by 程序员库森</a></li>
-<li><a href="https://www.nowcoder.com/discuss/820419?type=all&amp;order=recall&amp;pos=&amp;page=1&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">对线面试官系列之Java集合--面试官看了都说好</a></li>
+<li>
+<p><a href="https://javaguide.cn/">JavaGuide</a></p>
+</li>
+<li>
+<p><a href="https://cyc2018.github.io/CS-Notes/#/">JavaCyc</a></p>
+<ul>
+<li>
+<p>整理了<a href="http://www.cyc2018.xyz/">cyc2018</a>各部分内容pdf版的页数，方便做计划</p>
+  <img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20211221102750329.png" style="zoom:60%;" />
+</li>
+</ul>
+</li>
+<li>
+<p><a href="http://passjava.cn/#/88.Interview/01.Redis/Redis1">PassJava-面试必备</a></p>
+</li>
+<li>
+<p><a href="https://github.com/cosen1024/Java-Interview">「Java面试小抄」一份通向理想互联网公司的面试指南，包括 Java基础、集合、Java并发、JVM、MySQL、Redis、Spring、MyBatis、Kafka、操作系统、计算机网络、系统设计、分布式、Java 项目实战等 by 库森</a></p>
+</li>
+<li>
+<p><a href="https://www.zhihu.com/column/c_1339954942191271936">大厂面试 by 程序员库森</a></p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/discuss/820419?type=all&amp;order=recall&amp;pos=&amp;page=1&amp;ncTraceId=&amp;channel=-1&amp;source_id=search_all_nctrack&amp;gio_id=AAA94FB88430FBA90598250546CE372D-1639365563652">对线面试官系列之Java集合--面试官看了都说好</a></p>
+</li>
 <li></li>
-<li>下面内容主要整理了需要掌握的知识点，但是没有答案，可以先看上面的内容，下面的查缺补漏时用</li>
-<li><a href="https://www.nowcoder.com/discuss/61438?from=zhnkw">JAVA后端秋招/春招准备方向</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/359264954">2021春招Java后端开发面试总结【25个技术专题】超详细！</a></li>
+<li>
+<p>下面内容主要整理了需要掌握的知识点，但是没有答案，可以先看上面的内容，下面的查缺补漏时用</p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/discuss/61438?from=zhnkw">JAVA后端秋招/春招准备方向</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/359264954">2021春招Java后端开发面试总结【25个技术专题】超详细！</a></p>
+</li>
 </ul>
 <h3 id="项目">项目</h3>
 <ul>
@@ -161,6 +216,13 @@
 <li>
 <p>https://zhuanlan.zhihu.com/p/121136858</p>
 </li>
+<li>
+<p>要素：</p>
+<ul>
+<li>基本信息：项目背景、项目功能、技术点</li>
+<li>重点：干了什么（负责的模块、角色、职责）、结果是什么（项目性能、项目结果）、难点是什么</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -202,21 +264,21 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 </li>
 </ul>
 <h4 id="部门信息整理">部门信息整理</h4>
+<p>事业群 &gt; 部门 &gt; 中心 &gt; 小组</p>
 <ul>
-<li>
-<p>微众：</p>
+<li>微众：
 <ul>
 <li>贷款科技部：<strong>很核心</strong></li>
 </ul>
 </li>
-<li>
-<p>阿里系：</p>
+<li>阿里系：
 <ul>
 <li>阿里集团（简称集团）
 <ul>
 <li>阿里云：很香</li>
 <li>天猫精灵团队：</li>
 <li>一面、二面、总监面、交叉部门主管面、HR面；每一面都有一票否决权（包括HR面）</li>
+<li>转正是否成功，很大程度上取决于HR</li>
 </ul>
 </li>
 <li>蚂蚁
@@ -231,15 +293,13 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 <li>听同学群里讨论，集团没有蚂蚁好，至少薪资福利这块，没有蚂蚁好</li>
 </ul>
 </li>
-<li>
-<p>百度：</p>
+<li>百度：
 <ul>
 <li>工程效率部门：做内部工具的，对个人成长并不好</li>
 <li>企业智能平台：主要是内部系统，虽然会接触到机器学习和大数据，不太好</li>
 </ul>
 </li>
-<li>
-<p>字节：</p>
+<li>字节：
 <ul>
 <li>基础架构</li>
 <li>今日头条：薪资很诱人
@@ -250,8 +310,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 <li>一面、二面、三面，就可以offer了</li>
 </ul>
 </li>
-<li>
-<p>华为：</p>
+<li>华为：
 <ul>
 <li>Cloud Bu：不错</li>
 <li>车BU智能座舱产品部</li>
@@ -259,8 +318,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 <li>不怎么问技术</li>
 </ul>
 </li>
-<li>
-<p>微软</p>
+<li>微软
 <ul>
 <li>STCA-M365
 <ul>
@@ -269,21 +327,27 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 </li>
 </ul>
 </li>
-<li>
-<p>华泰证券</p>
+<li>华泰证券
 <ul>
 <li>信息技术部：base南京</li>
 </ul>
 </li>
-<li>
-<p>网易</p>
+<li>网易
 <ul>
 <li>杭研院</li>
 </ul>
 </li>
-<li>
-<p>TP-Link</p>
+<li>TP-Link</li>
+<li>腾讯
+<ul>
+<li>微信事业群：gc学长说 挺好的</li>
+</ul>
 </li>
+</ul>
+<h4 id="待投">待投</h4>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1MTU2NjcxMQ==&amp;mid=2247504396&amp;idx=1&amp;sn=200877c58bd016dbd5d66aefbee154a3&amp;chksm=fb8dfe14ccfa770246c8c5ffd15eb455fea3c1e307ecb0f16ef8365c61463f6bde033c40850d&amp;mpshare=1&amp;scene=23&amp;srcid=1216AelYAleMD4XYJuv0n2FJ&amp;sharer_sharetime=1639639282713&amp;sharer_shareid=02cdcbb08350c969c2db9d032c863a6d#rd">微软 22.1.1</a></li>
+<li>字节 日常实习</li>
 </ul>
 <h3 id="面试中">面试中</h3>
 <ul>
@@ -377,7 +441,15 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 </ol>
 </blockquote>
 </li>
-<li></li>
+<li>
+<p>把所有面试中的不顺利都当作是压力面</p>
+</li>
+<li>
+<p>面试难的部门，不一定就是好部门</p>
+</li>
+<li>
+<p>一般是部门HR会先打电话联系我，然后再安排面试官进行面试</p>
+</li>
 </ul>
 <h3 id="内推">内推</h3>
 <ul>
@@ -422,6 +494,11 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 <h2 id="暑期实习">暑期实习</h2>
 <ul>
 <li>实习时，可以利用晚上和周末时间来自我提升，因为还需要为秋招做准备</li>
+<li>不要相信实习单位所谓的“一定可以转正成功”</li>
+</ul>
+<h2 id="秋招后">秋招后</h2>
+<ul>
+<li>秋招结束也不要放弃机会，有一些补录以及春招的机会，说不定比秋招的offer更好</li>
 </ul>
 ]]></content>
     </entry>
@@ -505,17 +582,131 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[面试笔记]]></title>
-        <id>http://Bule-Zst.gitee.io/2021-09-30-面试笔记/</id>
-        <link href="http://Bule-Zst.gitee.io/2021-09-30-面试笔记/">
+        <title type="html"><![CDATA[JavaHan]]></title>
+        <id>http://Bule-Zst.gitee.io/2021-09-30-JavaHan/</id>
+        <link href="http://Bule-Zst.gitee.io/2021-09-30-JavaHan/">
         </link>
         <updated>2021-09-30T07:13:53.000Z</updated>
-        <content type="html"><![CDATA[<p>这篇文章主要用于记录：</p>
+        <content type="html"><![CDATA[<p>本人的面试八股文（面试小抄），供大家参考。</p>
+<p>JavaHan，致敬 JavaGuide，Han指的是憨，并且感觉读起来比较顺口。</p>
+<p>为了方便检索，我把所有内容都放在一个文档中的。</p>
+<hr>
+<h2 id="计算机网络">计算机网络</h2>
+<h3 id="概述">概述</h3>
+<h4 id="isp">ISP</h4>
+<p>互联网服务提供商</p>
+<p>ISP 可以从 互联网管理机构 获得许多 IP 地址，个人或机构向 ISP 缴纳一定的费用就可以接入互联网</p>
+<h4 id="osi模型-五层模型与-tcpip-模型">OSI模型、五层模型与 TCP/IP 模型</h4>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20211217120543019.png" alt="image-20211217120543019" style="zoom:45%;" />
+<p>五层模型：</p>
 <ul>
-<li>面试过程中可能会被问到的常见面试题</li>
-<li>一些辅助面试时回答的资料</li>
+<li>物理层：负责在<strong>具体媒体</strong>上传输数据<strong>比特流</strong>，为 数据链路层 屏蔽具体的媒体特性。</li>
+<li>数据链路层：负责在<strong>具体链路</strong>上传输<strong>数据帧</strong>，为 网络层 屏蔽具体链路信息。</li>
+<li>网络层：负责在<strong>主机间</strong>传输<strong>数据分组</strong>，为 传输层 屏蔽主机信息。</li>
+<li>传输层：负责在<strong>进程间</strong>传输数据，为 应用层 屏蔽进程信息。
+<ul>
+<li>TCP：传输控制协议，面向连接、可靠的数据传输服务，数据单位为<strong>报文段</strong></li>
+<li>UDP：用户数据报协议，无连接、尽最大努力的数据传输服务，数据单位是<strong>用户数据报</strong></li>
+</ul>
+</li>
+<li>应用层：负责在<strong>应用间</strong>传输<strong>报文</strong>，例如HTTP、DNS协议。</li>
+<li>越底层，数据量越大，逐层封装。</li>
+</ul>
+<p>OSI模型：</p>
+<ul>
+<li>表示层：负责数据处理，比如，压缩、加密等，使 应用层 无需关心数据内部格式方面的问题。</li>
+<li>会话层：负责会话的连接、维护、断开等。当应用间需要传输数据时，首先需要建立会话；当数据传输完时，会话层会有选择地进行会话的维护；最终，会话层会断开会话。</li>
+<li>五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理。</li>
+</ul>
+<p>TCP/IP 模型：</p>
+<ul>
+<li>将五层模型中的数据链路层和物理层合并为网络接口层</li>
+</ul>
+<h3 id="五层模型">五层模型</h3>
+<h4 id="物理层">物理层</h4>
+<h4 id="链路层">链路层</h4>
+<h5 id="信道复用技术41种">信道复用技术（4+1种）</h5>
+<ul>
+<li>
+<p>频分复用</p>
+</li>
+<li>
+<p>时分复用（TDM）：为每个用户分配固定位置的时隙</p>
+  <img src="https://gitee.com/Bule-Zst/picture/raw/master/67582ade-d44a-46a6-8757-3c1296cc1ef9.png" alt="img" style="zoom:37%;" />
+</li>
+<li>
+<p>统计时分复用（异步时分复用，STDM）：不固定每个用户在时分复用帧中的位置，只要有数据，就为其分配时隙，用户拿到时隙后，就可以发送数据（注意区分两张图中字母的顺序）</p>
+  <img src="https://gitee.com/Bule-Zst/picture/raw/master/6283be2a-814a-4a10-84bf-9592533fe6bc.png" alt="img" style="zoom:37%;" />
+</li>
+<li>
+<p>波分复用：光的频分复用。由于光的频率很高，因此习惯上用波长而不是频率来表示所使用的光载波。</p>
+</li>
+<li>
+<p>码分复用</p>
+</li>
+</ul>
+<h5 id="ppp-协议">PPP 协议</h5>
+<p>互联网用户通常需要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。</p>
+<h5 id="mac-地址">MAC 地址</h5>
+<p>MAC 地址是链路层地址，长度为 6 字节（6*8=48 位），用于唯一标识网络适配器（网卡）。</p>
+<p>一台主机拥有多少个网络适配器就有多少个 MAC 地址。例如笔记本电脑普遍存在无线网络适配器和有线网络适配器，因此就有两个 MAC 地址。</p>
+<h5 id="网络设备">网络设备</h5>
+<ul>
+<li>集线器：
+<ul>
+<li>物理层设备，作用于 比特</li>
+<li>当一个比特到达接口时，集线器重新生成这个比特，并将其能量强度放大，从而扩大网络的传输距离，之后再将这个比特发送到其它所有接口</li>
+<li>如果集线器同时收到两个不同接口的帧，那么就发生了碰撞</li>
+</ul>
+</li>
+<li>交换机：
+<ul>
+<li>链路层设备，作用于 帧</li>
+<li>不会发生碰撞</li>
+<li>能根据 MAC 地址进行存储转发</li>
+<li>具有自学习能力，能自动生成 交换表</li>
+</ul>
+</li>
+</ul>
+<h4 id="网络层">网络层</h4>
+<h5 id="概述-2">概述</h5>
+<p>网络层的作用：使用 IP 协议，将异构的物理网络连接起来，使得其看起来好像是一个统一的网络</p>
+<img src="https://gitee.com/Bule-Zst/picture/raw/master/8d779ab7-ffcc-47c6-90ec-ede8260b2368.png" alt="img" style="zoom:37%;" />
+<p>与 IP 协议配套使用的还有三个协议：</p>
+<ul>
+<li>
+<p>地址解析协议 ARP（Address Resolution Protocol）</p>
+</li>
+<li>
+<p>网际控制报文协议 ICMP（Internet Control Message Protocol）</p>
+</li>
+<li>
+<p>网际组管理协议 IGMP（Internet Group Management Protocol）</p>
+</li>
+</ul>
+<h5 id="ip-协议">IP 协议</h5>
+<p>IP 地址能够在网络世界唯一标识一台电脑。</p>
+<p>IP 地址的编址方式的三个历史阶段：</p>
+<ul>
+<li>分类：
+<ul>
+<li>网络地址+主机地址</li>
+<li>网络地址：类似于电话号码的区号</li>
+<li>要达到 Internet 上的某个主机，先利用 IP 地址的高位部分（网络地址）找到该主机所在的网络，再利用 IP 地址的低位部分（主机地址）找到该网络中的主机。</li>
+<li>子网掩码，又叫网络掩码、地址掩码。它的作用是，用来指明某个 IP 地址哪些标识位是网络地址，哪些标识位是主机地址</li>
+</ul>
+</li>
+<li>子网划分：</li>
+<li>无分类：</li>
+</ul>
+<p>插播：路由器位于网络层，只负责主机的数据传输</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://javaguide.cn/">JavaGuide</a></li>
+<li><a href="http://www.cyc2018.xyz/">CyC2018</a></li>
 </ul>
 <hr>
+<h2 id="过往内容">过往内容</h2>
 <h2 id="数据库">数据库</h2>
 <h3 id="事务">事务</h3>
 <h4 id="什么是事务">什么是事务</h4>
@@ -731,34 +922,6 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 <li>readIndex、writerIndex、capacity：字面意思</li>
 <li>discardReadBytes()：清空已读部分，利用System.arraycopy()方法</li>
 </ul>
-<h2 id="计算机网络">计算机网络</h2>
-<h3 id="osi模型-五层模型与-tcpip-模型">OSI模型、五层模型与 TCP/IP 模型</h3>
-<img src="https://gitee.com/Bule-Zst/picture/raw/master/image-20211217120543019.png" alt="image-20211217120543019" style="zoom:45%;" />
-<p>五层模型：</p>
-<ul>
-<li>物理层：负责在<strong>具体媒体</strong>上传输数据<strong>比特流</strong>，为 数据链路层 屏蔽具体的媒体特性。</li>
-<li>数据链路层：负责在<strong>具体链路</strong>上传输<strong>数据帧</strong>，为 网络层 屏蔽具体链路信息。</li>
-<li>网络层：负责在<strong>主机间</strong>传输<strong>数据分组</strong>，为 传输层 屏蔽主机信息。</li>
-<li>传输层：负责在<strong>进程间</strong>传输数据，为 应用层 屏蔽进程信息。
-<ul>
-<li>TCP：传输控制协议，面向连接、可靠的数据传输服务，数据单位为<strong>报文段</strong></li>
-<li>UDP：用户数据报协议，无连接、尽最大努力的数据传输服务，数据单位是<strong>用户数据报</strong></li>
-</ul>
-</li>
-<li>应用层：负责在<strong>应用间</strong>传输<strong>报文</strong>，例如HTTP、DNS协议。</li>
-<li>越底层，数据量越大，逐层封装。</li>
-</ul>
-<p>OSI模型：</p>
-<ul>
-<li>表示层：负责数据处理，比如，压缩、加密等，使 应用层 无需关心数据内部格式方面的问题。</li>
-<li>会话层：负责会话的连接、维护、断开等。当应用间需要传输数据时，首先需要建立会话；当数据传输完时，会话层会有选择地进行会话的维护；最终，会话层会断开会话。</li>
-<li>五层协议没有表示层和会话层，而是将这些功能留给应用程序开发者处理。</li>
-</ul>
-<p>TCP/IP 模型：</p>
-<ul>
-<li>将五层模型中的数据链路层和物理层合并为网络接口层</li>
-</ul>
-<p>插播：路由器位于网络层，只负责主机的数据传输</p>
 <h2 id="rpc">RPC</h2>
 <h3 id="dubbo">Dubbo</h3>
 <h4 id="spi机制了解吗">SPI机制了解吗</h4>
@@ -795,7 +958,7 @@ https://www.nowcoder.com/discuss/188367?type=all&amp;order=time&amp;pos=&amp;pag
 <p>参考：https://www.zhihu.com/question/25089273</p>
 <h2 id="实战">实战</h2>
 <h3 id="做的项目遇到什么问题如何解决">做的项目，遇到什么问题，如何解决</h3>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料-2">参考资料</h2>
 <ul>
 <li><a href="https://xiaomi-info.github.io/2020/01/02/distributed-transaction/">分布式事务，这一篇就够了</a></li>
 <li><a href="https://www.cnblogs.com/paddix/p/5367116.html">Java并发编程：Synchronized及其实现原理</a></li>
